@@ -14,9 +14,12 @@ export default function Navbar() {
 
         {/* Logo */}
 
-        <a href="/" className="text-lg font-semibold tracking-wide hover:text-white">
-          Auctor Labs
-        </a>
+       <a href="/" className="flex items-center gap-2">
+  <img src="/logo.png" alt="Auctor Labs" className="h-8 w-auto" />
+  <span className="text-lg font-semibold tracking-wide hover:text-white">
+    Auctor Labs
+  </span>
+</a>
 
 
         {/* Desktop Links */}
