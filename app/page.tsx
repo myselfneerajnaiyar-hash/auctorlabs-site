@@ -31,7 +31,7 @@ master reading comprehension, reasoning and analytical thinking.
 </p>
 
           <a
-            href="https://rc.auctorlabs.in"
+            href="https://rc.auctorlabs.in/login"
             className="bg-gradient-to-r from-orange-500 to-red-500 hover:scale-105 transition px-6 py-3 rounded-lg font-semibold shadow-lg"
           >
           
@@ -225,7 +225,7 @@ for mastering Reading Comprehension in CAT.
 </ul>
 
 <a
-href="https://rc.auctorlabs.in"
+href="https://rc.auctorlabs.in/login"
 className="bg-gradient-to-r from-purple-500 to-indigo-500 hover:scale-105 transition px-6 py-3 rounded-lg font-semibold"
 > 
 StartTraining →
