@@ -582,12 +582,11 @@ Full access for 7 days
 </ul>
 
 <a
-href="https://rc.auctorlabs.in"
+href="https://rc.auctorlabs.in/login"
 className="bg-green-500 hover:bg-green-600 px-6 py-3 rounded-lg font-semibold inline-block"
 > 
-StartFree Trial
+Start Free Trial
 </a>
-
 </div>
 
 
@@ -684,10 +683,10 @@ Join Auctor RC and improve your reading ability every day.
 </p>
 
 <a
-href="/pricing"
-className="bg-orange-500 hover:bg-orange-600 px-8 py-4 rounded-lg font-semibold text-lg"
+href="https://rc.auctorlabs.in/login"
+className="bg-green-500 hover:bg-green-600 px-6 py-3 rounded-lg font-semibold inline-block"
 > 
-Start Free Trial →
+Start Free Trial
 </a>
 
 </section>
