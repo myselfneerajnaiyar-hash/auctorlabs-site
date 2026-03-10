@@ -12,14 +12,15 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 })
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Auctor Labs",
-  description:
-    "AI-powered training systems for CAT aspirants. Improve reading intelligence, reasoning and analytical skills with Auctor RC.",
+  description: "AI powered training systems for competitive exams",
   icons: {
-    icon: "/logo.png",
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
-}
+};
 
 export default function RootLayout({
   children,
