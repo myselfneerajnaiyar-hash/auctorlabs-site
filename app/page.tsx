@@ -7,7 +7,11 @@ import Footer from "./components/Footer"
 export default function Home() {
 
     return (
+      
   <>
+  <h1 style={{ display: "none" }}>
+  Auctor RC – CAT Reading Comprehension Practice Platform
+</h1>
     <Navbar />
    <main className="min-h-screen bg-[#0b0f2a] text-white bg-[radial-gradient(circle_at_top,#1a1f4d,#0b0f2a)]">
 
@@ -30,12 +34,19 @@ We build intelligent training systems that help aspirants
 master reading comprehension, reasoning and analytical thinking.
 </p>
 
+<a
+  href="/auctor-rc"
+  className="text-purple-400 underline"
+>
+  Learn more about Auctor RC CAT Practice Platform
+</a>
+
           <a
             href="https://rc.auctorlabs.in/login"
             className="bg-gradient-to-r from-orange-500 to-red-500 hover:scale-105 transition px-6 py-3 rounded-lg font-semibold shadow-lg"
           >
           
-            Explore Auctor RC →
+             Start CAT RC Practice on Auctor RC →
           </a>
 
         </div>
@@ -146,7 +157,7 @@ AI-driven reading comprehension training for CAT aspirants.
 href="https://rc.auctorlabs.in"
 className="text-purple-400"
 > 
-OpenPlatform →
+ Start CAT RC Practice on Auctor RC →
 </a>
 
 </div>
@@ -228,7 +239,7 @@ for mastering Reading Comprehension in CAT.
 href="https://rc.auctorlabs.in/login"
 className="bg-gradient-to-r from-purple-500 to-indigo-500 hover:scale-105 transition px-6 py-3 rounded-lg font-semibold"
 > 
-StartTraining →
+ Start CAT RC Practice on Auctor RC →
 </a>
 
 </div>

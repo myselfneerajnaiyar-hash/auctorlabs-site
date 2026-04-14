@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Auctor Labs",
-  description: "AI powered training systems for competitive exams",
+  title: "Auctor RC - CAT Reading Comprehension Practice Platform",
+  description:
+    "Practice CAT Reading Comprehension daily with Auctor RC. Improve speed, inference and accuracy using AI training.",
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",

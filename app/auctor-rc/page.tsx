@@ -544,6 +544,55 @@ within 30 days.
 
 </section>
 
+{/* WHO THIS IS FOR */}
+
+<section className="max-w-6xl mx-auto px-6 py-28">
+
+<h2 className="text-4xl font-bold text-center mb-16">
+Who Auctor RC Is Built For
+</h2>
+
+<div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+<div className="bg-[#0f1735] border border-white/10 rounded-xl p-8">
+<p className="text-xl font-semibold mb-3">
+CAT Aspirants
+</p>
+<p className="text-gray-400 text-sm">
+Students preparing for CAT who want to master reading comprehension.
+</p>
+</div>
+
+<div className="bg-[#0f1735] border border-white/10 rounded-xl p-8">
+<p className="text-xl font-semibold mb-3">
+Slow Readers
+</p>
+<p className="text-gray-400 text-sm">
+Students struggling with reading speed and passage comprehension.
+</p>
+</div>
+
+<div className="bg-[#0f1735] border border-white/10 rounded-xl p-8">
+<p className="text-xl font-semibold mb-3">
+60–80 Percentilers
+</p>
+<p className="text-gray-400 text-sm">
+Aspirants stuck in mid percentiles who need stronger RC reasoning.
+</p>
+</div>
+
+<div className="bg-[#0f1735] border border-white/10 rounded-xl p-8">
+<p className="text-xl font-semibold mb-3">
+GMAT & GRE Students
+</p>
+<p className="text-gray-400 text-sm">
+Students preparing for global exams that demand strong reading ability.
+</p>
+</div>
+
+</div>
+
+</section>
 
 
 {/* PRICING PREVIEW */}
