@@ -16,6 +16,10 @@ export const metadata: Metadata = {
   title: "Auctor RC - CAT Reading Comprehension Practice Platform",
   description:
     "Practice CAT Reading Comprehension daily with Auctor RC. Improve speed, inference and accuracy using AI training.",
+
+    verification: {
+  google: "O8712-gSjpOeakH0",
+},
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
