@@ -3,7 +3,16 @@
 import { useState } from "react";
 import Link from "next/link";
 
-export default function BlogClient({ blogs }) {
+type Blog = {
+  slug: string;
+  title: string;
+  description: string;
+  date: string;
+  image?: string;
+  category?: string;
+};
+
+export default function BlogClient({ blogs }: { blogs: Blog[] }) {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [page, setPage] = useState(1);
