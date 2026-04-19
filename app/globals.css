@@ -34,3 +34,93 @@ body {
 
   color: white;
 }
+
+.prose-custom h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.prose-custom h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+
+  background: linear-gradient(to right, #ffffff, #a5b4fc);
+
+  background-clip: text;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.prose-custom h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose-custom p {
+  color: #d1d5db;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+/* 👇 THIS IS THE MAGIC */
+.prose-custom p:has(br) {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border-left: 4px solid #a5b4fc;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 10px;
+  color: #e5e7eb;
+  font-weight: 500;
+}
+
+
+.prose-custom ul {
+  margin: 1.5rem 0;
+  padding-left: 1.5rem;
+  border-left: 2px solid rgba(255,255,255,0.08);
+}
+
+.prose-custom li {
+  margin-bottom: 0.6rem;
+  color: #e5e7eb;
+}
+.prose-custom strong {
+  color: white;
+}
+
+.prose-custom hr {
+  height: 1px;
+  background: linear-gradient(to right, transparent, #6366f1, transparent);
+  border: none;
+  margin: 3rem 0;
+}
+
+.prose-custom blockquote {
+  margin: 2.5rem 0;
+  padding: 1.5rem;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  background: rgba(168, 85, 247, 0.08);
+  border-radius: 12px;
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.highlight-box {
+  margin: 2rem 0;
+  padding: 1.5rem 1.75rem;
+  border-left: 4px solid #a5b4fc;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 10px;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #e5e7eb;
+}
+
+html {
+  scroll-behavior: smooth;
+}

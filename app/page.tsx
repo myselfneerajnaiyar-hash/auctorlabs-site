@@ -13,65 +13,61 @@ export default function Home() {
   Auctor RC – CAT Reading Comprehension Practice Platform
 </h1>
     <Navbar />
-   <main className="min-h-screen bg-[#0b0f2a] text-white bg-[radial-gradient(circle_at_top,#1a1f4d,#0b0f2a)]">
+   <main className="pt-24 min-h-screen bg-[#0b0f2a] text-white bg-[radial-gradient(circle_at_top,#1a1f4d,#0b0f2a)]">
 
       {/* HERO SECTION */}
 
-      <section className="max-w-6xl mx-auto px-6 py-28 grid md:grid-cols-2 gap-16 items-center">
+     <section className="max-w-6xl mx-auto px-6 py-28 grid md:grid-cols-2 gap-16 items-center">
 
-        <div>
-          <p className="text-purple-400 mb-4 font-semibold">
-AUCTOR LABS
-</p>
+  {/* LEFT SIDE */}
+  <div>
+    <p className="text-purple-400 mb-4 font-semibold">
+      AUCTOR LABS
+    </p>
 
-       <h1 className="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight leading-tight">
-Training Intelligence
-<br />
-for Competitive Exams
-</h1>
-         <p className="text-gray-400 text-lg mb-8 max-w-lg">
-We build intelligent training systems that help aspirants
-master reading comprehension, reasoning and analytical thinking.
-</p>
+    <h1 className="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight leading-tight">
+      Training Intelligence
+      <br />
+      for Competitive Exams
+    </h1>
 
-<a
-  href="/auctor-rc"
-  className="text-purple-400 underline"
->
-  Learn more about Auctor RC CAT Practice Platform
-</a>
+    <p className="text-gray-400 text-lg mb-8 max-w-lg">
+      We build intelligent training systems that help aspirants
+      master reading comprehension, reasoning and analytical thinking.
+    </p>
 
-          <a
-            href="https://rc.auctorlabs.in/login"
-            className="bg-gradient-to-r from-orange-500 to-red-500 hover:scale-105 transition px-6 py-3 rounded-lg font-semibold shadow-lg"
-          >
-          
-             Start CAT RC Practice on Auctor RC →
-          </a>
+    <div className="flex flex-wrap gap-4 items-center">
+      <a href="/auctor-rc" className="text-purple-400 underline">
+        Learn more about Auctor RC
+      </a>
 
-        </div>
+      <a
+        href="https://rc.auctorlabs.in/login"
+        className="bg-gradient-to-r from-orange-500 to-red-500 hover:scale-105 transition px-6 py-3 rounded-lg font-semibold shadow-lg"
+      >
+        Start CAT RC Practice →
+      </a>
+    </div>
+  </div>
 
-      <div className="relative">
+  {/* RIGHT SIDE */}
+  <div className="relative">
+    <div className="absolute -inset-6 bg-blue-500/10 blur-2xl"></div>
 
-<div className="absolute -inset-6 bg-blue-500/10 blur-2xl"></div>
+    <div className="relative bg-[#0f1735] border border-white/10 rounded-xl p-6 shadow-xl">
+      <p className="text-gray-400 mb-4 text-sm">
+        AuctorRC Performance Dashboard
+      </p>
 
-<div className="relative bg-[#0f1735] border border-white/10 rounded-xl p-6 shadow-xl">
+      <img
+        src="/dashboard.png"
+        alt="AuctorRC dashboard"
+        className="rounded-lg w-full"
+      />
+    </div>
+  </div>
 
-<p className="text-gray-400 mb-4 text-sm">
-AuctorRC Performance Dashboard
-</p>
-
-<img
-src="/dashboard.png"
-alt="AuctorRC dashboard"
-className="rounded-lg w-full"
-/>
-
-</div>
-
-</div>
-
-      </section>
+</section>
 
       {/* ABOUT AUCTOR LABS */}
 

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 
 export default function Navbar() {
 
@@ -26,6 +27,7 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center gap-8 text-sm text-gray-300">
 
+
           <a href="/auctor-rc" className="hover:text-white">
             Auctor RC
           </a>
@@ -42,9 +44,14 @@ export default function Navbar() {
   Products
 </a>
 
-          <a href="/contact" className="hover:text-white">
-            Contact
-          </a>
+{/* 👇 ADD THIS */}
+<a href="/blog" className="text-orange-400 font-semibold">
+  Blog
+</a>
+
+<a href="/contact" className="hover:text-white">
+  Contact
+</a>
 
         </div>
 
@@ -91,8 +98,10 @@ export default function Navbar() {
   Products
 </a>
 
+{/* 👇 ADD THIS */}
+<a href="/blog">Blog</a>
 
-          <a href="/contact">Contact</a>
+<a href="/contact">Contact</a>
 
           <a
             href="https://rc.auctorlabs.in"
