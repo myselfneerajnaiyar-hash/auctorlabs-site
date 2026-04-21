@@ -187,7 +187,7 @@ blockquote: (props) => (
   }}
 />
         </article>
-        <RelatedPosts currentSlug={params.slug} />
+        <RelatedPosts currentSlug={slug} />
 
         {/* CTA */}
         <div className="mt-16 p-8 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl text-center">

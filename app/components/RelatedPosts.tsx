@@ -79,9 +79,16 @@ export default function RelatedPosts({ currentSlug }: { currentSlug: string }) {
     },
   ];
 
+   // 🔥 DEBUG START HERE
+  console.log("CURRENT SLUG:", currentSlug);
+  console.log("ALL SLUGS:", allPosts.map(p => p.slug));
+  // 🔥 DEBUG END
+
  const currentIndex = allPosts.findIndex(
   (post) => post.slug === currentSlug
 );
+
+ console.log("INDEX:", currentIndex); // 🔥 THIS LINE
 
 const related = allPosts
   .slice(currentIndex + 1)
