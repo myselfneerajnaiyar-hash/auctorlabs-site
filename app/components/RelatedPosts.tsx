@@ -79,9 +79,14 @@ export default function RelatedPosts({ currentSlug }: { currentSlug: string }) {
     },
   ];
 
-  const related = allPosts
-    .filter((post) => post.slug !== currentSlug)
-    .slice(0, 3);
+ const currentIndex = allPosts.findIndex(
+  (post) => post.slug === currentSlug
+);
+
+const related = allPosts
+  .slice(currentIndex + 1)
+  .concat(allPosts.slice(0, currentIndex))
+  .slice(0, 3);
 
   return (
     <div className="mt-20">
