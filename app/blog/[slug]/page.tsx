@@ -84,15 +84,15 @@ export default async function BlogPage({ params }: any) {
   const headings = extractHeadings(content);
 
  return (
-  <div className="bg-[#0B0F1A] text-white min-h-screen">
+ <div className="bg-[#0B0F1A] text-white min-h-screen overflow-x-hidden">
 
     {/* 🔥 PROGRESS BAR */}
   <ProgressBar />
 
-    <div className="max-w-7xl mx-auto px-6 py-20 grid grid-cols-12 gap-10">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20 grid grid-cols-12 gap-6 sm:gap-10">
 
       {/* 📖 MAIN CONTENT */}
-     <div className="col-span-12 lg:col-span-8 max-w-2xl">
+     <div className="col-span-12 lg:col-span-8 max-w-full">
 
         <h1 className="text-5xl font-bold leading-tight mb-6">
           {data.title}
@@ -103,7 +103,7 @@ export default async function BlogPage({ params }: any) {
         </p>
 
 
-       <article className="prose-custom max-w-none">
+       <article className="prose-custom max-w-none w-full">
          
          <MDXRemote
   source={content}
@@ -133,10 +133,7 @@ h2: (props) => {
     ),
 
  img: (props) => (
-  <img
-    {...props}
-    className="my-10 rounded-xl shadow-xl border border-white/10"
-  />
+ <img {...props} className="my-10 rounded-xl shadow-xl border border-white/10 w-full h-auto" />
 ),
 video: (props) => (
   <video
