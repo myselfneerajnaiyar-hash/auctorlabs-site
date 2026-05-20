@@ -534,7 +534,31 @@ Return ONLY markdown.
     ],
   });
 
-  let content = res.choices[0].message.content;
+  function cleanUrls(text) {
+  return text.replace(
+    /https?:\/\/[^\s)]+/g,
+    (url) => {
+      try {
+        const u = new URL(url);
+
+        // remove all utm params
+        [...u.searchParams.keys()].forEach((key) => {
+          if (key.startsWith("utm_")) {
+            u.searchParams.delete(key);
+          }
+        });
+
+        return u.origin + u.pathname;
+      } catch {
+        return url.split("?")[0];
+      }
+    }
+  );
+}
+
+let content = cleanUrls(
+  res.choices[0].message.content
+);
 
   const slug = slugify(topic, { lower: true, strict: true });
   const images = await generateImages(topic, slug, category, Math.floor(Math.random() * 100));
