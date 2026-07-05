@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Home,
   BookOpen,
@@ -45,12 +45,59 @@ const tabs = [
 
 export default function DashboardPreview() {
   const [active, setActive] = useState("home");
+  const [startIndex, setStartIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+  const checkScreen = () => {
+    setIsMobile(window.innerWidth < 768);
+  };
+
+  checkScreen(); // Run once on mount
+
+  window.addEventListener("resize", checkScreen);
+
+  return () => window.removeEventListener("resize", checkScreen);
+}, []);
+
+ useEffect(() => {
+  if (!isMobile) return;
+
+  const timer = setInterval(() => {
+    setStartIndex((prev) => {
+      const next = (prev + 1) % tabs.length;
+
+      setActive(tabs[(next + 1) % tabs.length].id);
+
+      return next;
+    });
+  }, 3000);
+
+  return () => clearInterval(timer);
+}, [isMobile]);
 
   const current =
     tabs.find((tab) => tab.id === active) ?? tabs[0];
-
+  const visibleTabs = isMobile
+  ? [
+      tabs[startIndex],
+      tabs[(startIndex + 1) % tabs.length],
+      tabs[(startIndex + 2) % tabs.length],
+    ]
+  : tabs;
+   
   return (
-    <div className="rounded-3xl border border-white/10 bg-[#111827] shadow-2xl overflow-hidden">
+   <div className="
+w-full
+max-w-[650px]
+mx-auto
+rounded-3xl
+border
+border-white/10
+bg-[#111827]
+shadow-[0_30px_80px_rgba(0,0,0,0.55)]
+overflow-hidden
+">
 
       {/* Top */}
 
@@ -84,7 +131,7 @@ export default function DashboardPreview() {
 
       <div className="flex gap-2 overflow-x-auto border-b border-white/10 bg-[#111827] p-4">
 
-        {tabs.map((tab) => {
+        {visibleTabs.map((tab) => {
 
           const Icon = tab.icon;
 
@@ -93,7 +140,7 @@ export default function DashboardPreview() {
             <button
               key={tab.id}
               onClick={() => setActive(tab.id)}
-              className={`flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold transition-all ${
+              className={`flex-shrink-0 flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold transition-all ${
                 active === tab.id
                   ? "bg-orange-500 text-white"
                   : "bg-[#1b2435] text-slate-300 hover:bg-[#263248]"
@@ -113,15 +160,15 @@ export default function DashboardPreview() {
 
       {/* KPI */}
 
-      <div className="grid grid-cols-2 gap-4 p-5 lg:grid-cols-4">
+     <div className="grid grid-cols-2 gap-3 p-3 md:grid-cols-4 md:p-5">
 
-        <Card title="Students" value="1,248" />
+        <Card title="Students" value="128" />
 
-        <Card title="Engagement" value="93%" />
+        <Card title="Engagement" value="74%" />
 
         <Card title="Accuracy" value="78%" />
 
-        <Card title="AI Sessions" value="18.4K" />
+        <Card title="AI Sessions" value="5.4K" />
 
       </div>
 
@@ -129,11 +176,11 @@ export default function DashboardPreview() {
 
       <div className="border-t border-white/10 bg-black">
 
-        <img
-          src={current.image}
-          alt={current.label}
-          className="w-full object-cover"
-        />
+      <img
+  src={current.image}
+  alt={current.label}
+  className="block w-full h-auto object-contain"
+/>
 
       </div>
 
@@ -149,13 +196,13 @@ function Card({
   value: string;
 }) {
   return (
-    <div className="rounded-xl border border-white/10 bg-[#1b2435] p-4">
+   <div className="min-w-0 rounded-xl border border-white/10 bg-[#1b2435] p-3 md:p-4">
 
       <p className="text-xs text-slate-400">
         {title}
       </p>
 
-      <p className="mt-2 text-2xl font-bold text-white">
+    <p className="mt-2 text-lg sm:text-xl md:text-2xl font-bold text-white break-words">
         {value}
       </p>
 
