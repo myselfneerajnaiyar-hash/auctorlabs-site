@@ -6,8 +6,7 @@ import {
   BookOpen,
   Brain,
   Zap,
-  BarChart3,
-  GraduationCap,
+   GraduationCap,
 } from "lucide-react";
 
 const tabs = [
@@ -47,19 +46,21 @@ export default function DashboardPreview() {
   const [active, setActive] = useState("home");
   const [startIndex, setStartIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
+ useEffect(() => {
+  setMounted(true);
+
   const checkScreen = () => {
     setIsMobile(window.innerWidth < 768);
   };
 
-  checkScreen(); // Run once on mount
+  checkScreen();
 
   window.addEventListener("resize", checkScreen);
 
   return () => window.removeEventListener("resize", checkScreen);
 }, []);
-
  useEffect(() => {
   if (!isMobile) return;
 
@@ -75,6 +76,12 @@ export default function DashboardPreview() {
 
   return () => clearInterval(timer);
 }, [isMobile]);
+
+if (!mounted) {
+  return (
+    <div className="w-full max-w-[650px] h-[520px] rounded-3xl bg-[#111827] animate-pulse" />
+  );
+}
 
   const current =
     tabs.find((tab) => tab.id === active) ?? tabs[0];
@@ -176,10 +183,17 @@ overflow-hidden
 
       <div className="border-t border-white/10 bg-black">
 
-      <img
+    <img
   src={current.image}
   alt={current.label}
-  className="block w-full h-auto object-contain"
+  className="
+    block
+    w-full
+    h-[180px]
+    md:h-auto
+    object-cover
+    object-top
+  "
 />
 
       </div>

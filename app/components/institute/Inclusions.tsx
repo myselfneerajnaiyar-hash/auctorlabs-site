@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 
 import {
   Brain,
@@ -78,6 +79,7 @@ const inclusions = [
 ];
 
 export default function Inclusions() {
+  const [active, setActive] = useState(0);
   return (
     <section className="py-20">
 
@@ -106,74 +108,87 @@ export default function Inclusions() {
 
         {/* Cards */}
 
-        <div className="mt-20 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+        {/* Tabs */}
 
-          {inclusions.map((item) => {
+<div className="mt-10 grid grid-cols-2 gap-3 md:flex md:flex-wrap md:justify-center">
 
-            const Icon = item.icon;
+  {inclusions.map((item, index) => {
+    const Icon = item.icon;
 
-            return (
+    return (
+      <button
+        key={item.title}
+        onClick={() => setActive(index)}
+        className={`flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-medium transition-all
+        ${
+          index === inclusions.length - 1
+            ? "col-span-2 md:col-span-1"
+            : ""
+        }
+        ${
+          active === index
+            ? "bg-orange-500 text-white"
+            : "border border-white/10 bg-[#101828] text-slate-300 hover:bg-[#1b2435]"
+        }`}
+      >
+        <Icon size={18} />
+        <span>
+          {item.title.replace("Your Brand. Your Platform.", "Branding")}
+        </span>
+      </button>
+    );
+  })}
 
-              <div
-                key={item.title}
-                className="group rounded-3xl border border-white/10 bg-[#101828] p-8 transition-all duration-300 hover:-translate-y-2 hover:border-orange-500/40"
-              >
+</div>
 
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-orange-500/10">
+{/* Active Card */}
 
-                  <Icon className="h-8 w-8 text-orange-400" />
+<div className="mt-10 rounded-3xl border border-white/10 bg-[#101828] p-8">
 
-                </div>
+  {(() => {
+    const item = inclusions[active];
+    const Icon = item.icon;
 
-                <h3 className="mt-6 text-2xl font-bold text-white">
+    return (
+      <>
+        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-orange-500/10">
+          <Icon className="h-8 w-8 text-orange-400" />
+        </div>
 
-                  {item.title}
+        <h3 className="mt-6 text-3xl font-bold text-white">
+          {item.title}
+        </h3>
 
-                </h3>
+        <p className="mt-4 leading-7 text-slate-400">
+          {item.description}
+        </p>
 
-                <p className="mt-4 leading-7 text-slate-400">
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
 
-                  {item.description}
-
-                </p>
-
-                <div className="mt-8 space-y-4">
-
-                  {item.items.map((point) => (
-
-                    <div
-                      key={point}
-                      className="flex items-center gap-3"
-                    >
-
-                      <div className="rounded-full bg-green-500/15 p-1">
-
-                        <Check
-                          size={16}
-                          className="text-green-400"
-                        />
-
-                      </div>
-
-                      <span className="text-slate-300">
-
-                        {point}
-
-                      </span>
-
-                    </div>
-
-                  ))}
-
-                </div>
-
+          {item.items.map((point) => (
+            <div
+              key={point}
+              className="flex items-center gap-3"
+            >
+              <div className="rounded-full bg-green-500/15 p-1">
+                <Check
+                  size={16}
+                  className="text-green-400"
+                />
               </div>
 
-            );
-
-          })}
+              <span className="text-slate-300">
+                {point}
+              </span>
+            </div>
+          ))}
 
         </div>
+      </>
+    );
+  })()}
+
+</div>
 
       </div>
 

@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 
 import {
   GraduationCap,
@@ -48,6 +49,7 @@ const sections = [
 ];
 
 export default function WhyAuctor() {
+  const [active, setActive] = useState(0);
   return (
     <section className="py-20">
 
@@ -71,84 +73,101 @@ export default function WhyAuctor() {
 
         </div>
 
-        <div className="mt-20 space-y-8">
+       {/* Tabs */}
 
-          {sections.map((section) => {
-            const Icon = section.icon;
+<div className="mt-10 grid grid-cols-3 gap-3">
 
-            return (
+  {sections.map((section, index) => {
+    const Icon = section.icon;
 
-              <div
-                key={section.title}
-                className={`rounded-[32px] border border-white/10 bg-gradient-to-r ${section.gradient} p-[1px]`}
-              >
+    return (
+      <button
+        key={section.title}
+        onClick={() => setActive(index)}
+        className={`flex flex-col items-center rounded-xl px-4 py-4 transition-all
+        ${
+          active === index
+            ? "bg-orange-500 text-white"
+            : "border border-white/10 bg-[#101828] text-slate-300"
+        }`}
+      >
+        <Icon size={26} />
 
-                <div className="rounded-[31px] bg-[#0f172a] p-8 lg:p-12">
+        <span className="mt-2 text-sm font-semibold text-center">
+          {section.title.replace("Improve ", "").replace("Empower ", "").replace("Grow Your ", "")}
+        </span>
 
-                  <div className="grid items-center gap-10 lg:grid-cols-[90px_1fr_320px]">
-
-                    {/* Icon */}
-
-                    <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-orange-500/10">
-
-                      <Icon className="h-10 w-10 text-orange-400" />
-
-                    </div>
-
-                    {/* Content */}
-
-                    <div>
-
-                      <h3 className="text-3xl font-bold text-white">
-                        {section.title}
-                      </h3>
-
-                      <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-300">
-                        {section.description}
-                      </p>
-
-                    </div>
-
-                    {/* Benefits */}
-
-<div className="flex flex-col gap-3 lg:w-80">
-
-  {section.points.map((point) => (
-
-    <div
-      key={point}
-      className="flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-3"
-    >
-
-      <CheckCircle2
-        size={18}
-        className="text-green-400 flex-shrink-0"
-      />
-
-      <span className="text-sm font-medium text-white">
-        {point}
-      </span>
-
-    </div>
-
-  ))}
+      </button>
+    );
+  })}
 
 </div>
 
-                  </div>
+{/* Active Card */}
 
-                </div>
+<div className="mt-10 rounded-3xl border border-white/10 bg-[#101828] p-8">
 
-              </div>
+  {(() => {
 
-            );
-          })}
+    const section = sections[active];
+    const Icon = section.icon;
+
+    return (
+      <>
+        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-orange-500/10">
+
+          <Icon className="h-8 w-8 text-orange-400" />
 
         </div>
 
+        <h3 className="mt-6 text-3xl font-bold text-white">
+
+          {section.title}
+
+        </h3>
+
+        <p className="mt-5 text-lg leading-8 text-slate-300">
+
+          {section.description}
+
+        </p>
+
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
+
+          {section.points.map((point) => (
+
+            <div
+              key={point}
+              className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3"
+            >
+
+              <CheckCircle2
+                size={18}
+                className="text-green-400"
+              />
+
+              <span className="text-white">
+
+                {point}
+
+              </span>
+
+            </div>
+
+          ))}
+
+        </div>
+
+      </>
+    );
+
+  })()}
+
+</div>
+
         {/* Closing Banner */}
 
-        <div className="mt-20 rounded-[32px] border border-orange-500/20 bg-gradient-to-br from-orange-500/10 to-transparent p-12 text-center">
+        <div className="mt-10 rounded-[32px] border border-orange-500/20 bg-gradient-to-br from-orange-500/10 to-transparent p-12 text-center">
 
           <h3 className="text-3xl md:text-5xl font-black text-white leading-tight">
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import useEmblaCarousel from "embla-carousel-react"
 import { Play, Star, X } from "lucide-react";
 
 const videos = [
@@ -44,6 +45,17 @@ const reviews = [
 
 export default function Testimonials() {
     const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+    const [videoRef] = useEmblaCarousel({
+  loop: true,
+  align: "start",
+  dragFree: true,
+});
+
+const [reviewRef] = useEmblaCarousel({
+  loop: true,
+  align: "start",
+  dragFree: true,
+});
   return (
     <section className="py-20">
 
@@ -72,15 +84,20 @@ export default function Testimonials() {
 
         {/* VIDEO TESTIMONIALS */}
 
-        <div className="mt-20 grid gap-8 lg:grid-cols-3">
+     <div
+  className="mt-20 overflow-hidden touch-pan-y"
+  ref={videoRef}
+>
+  <div className="flex">
 
           {videos.map((video) => (
 
-            <div
-              key={video.name}
-              className="group overflow-hidden rounded-3xl border border-white/10 bg-[#101828]"
-            >
+           <div
+  key={video.name}
+  className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] px-3"
+>
 
+<div className="group overflow-hidden rounded-3xl border border-white/10 bg-[#101828]">
               <div className="relative">
 
                 <img
@@ -121,10 +138,13 @@ export default function Testimonials() {
               </div>
 
             </div>
+            </div>
 
           ))}
 
         </div>
+        </div>
+        
 
         {/* WRITTEN TESTIMONIALS */}
 
@@ -134,14 +154,17 @@ export default function Testimonials() {
             What Students Say
           </h3>
 
-          <div className="grid gap-8 lg:grid-cols-3">
+          <div className="overflow-hidden mt-10 touch-pan-y" ref={reviewRef}>
+  <div className="flex">
 
             {reviews.map((review) => (
 
               <div
-                key={review.name}
-                className="rounded-3xl border border-white/10 bg-[#101828] p-8"
-              >
+  key={review.name}
+ className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] px-3"
+>
+
+<div className="rounded-3xl border border-white/10 bg-[#101828] p-8 h-full">
 
                 <div className="flex gap-1">
 
@@ -153,6 +176,8 @@ export default function Testimonials() {
                       fill="#f59e0b"
                       className="text-yellow-400"
                     />
+
+                  
 
                   ))}
 
@@ -181,8 +206,10 @@ export default function Testimonials() {
                 </div>
 
               </div>
+              </div>
 
             ))}
+            </div>
 
           </div>
 

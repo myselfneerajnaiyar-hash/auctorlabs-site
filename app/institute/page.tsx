@@ -18,12 +18,17 @@ export default function InstitutePage() {
       <main className="bg-[#07152D] text-white">
 
         <Hero />
+         <PlatformFeatures />
+          <Inclusions />
+          <WhyAuctor />
+          <DemoForm />
+          <Testimonials />
         <WhyNow />
-        <PlatformFeatures />
-         <WhyAuctor />
-         <Inclusions />
-        <DemoForm />
-        <Testimonials />
+       
+         
+        
+        
+        
         <FAQ />
        
 

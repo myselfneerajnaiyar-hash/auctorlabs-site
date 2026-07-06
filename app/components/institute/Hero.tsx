@@ -12,7 +12,7 @@ export default function Hero() {
 
       <div className="absolute right-[-150px] top-[100px] h-[500px] w-[500px] rounded-full bg-orange-500/10 blur-[180px]" />
 
-      <div className="relative mx-auto max-w-7xl px-6 pt-24 lg:pt-28 pb-20">
+     <div className="relative mx-auto max-w-7xl px-6 pt-16 lg:pt-28 pb-4 lg:pb-20">
 
        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
@@ -21,43 +21,43 @@ export default function Hero() {
         <div className="max-w-xl mx-auto lg:mx-0">
 
             <div className="inline-flex rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-2 text-sm font-semibold tracking-wider text-orange-400">
-              AI IS TRANSFORMING EDUCATION
+              Trusted AI Platform for Reading Comprehension
             </div>
 
           <h1 className="mt-8 max-w-[12ch] text-[2.8rem] sm:text-[3.3rem] lg:text-[4.3rem] font-bold leading-[1.02] tracking-tight text-white">
-  The Next Generation
+  The Complete
   <br />
-  of Coaching
+  Reading
   <br />
-  Institutes
+ Comprehension 
   <br />
- Will Be
+ Platform For 
 <br />
 <span className="text-orange-400">
-AI-Powered.
+Coaching Institutes.
 </span>
 </h1>
 
 <p className="mt-5 text-3xl font-bold text-orange-400">
-  Will Yours Be One Of Them?
+  Increase VARC scores, reduce faculty workload and give every student personalized practice.
 </p>
 
            <p className="mt-8 max-w-xl text-lg leading-8 text-slate-300">
 
-  Students now expect personalised learning, instant feedback and AI-powered guidance. Institutes that embrace AI today will improve learning outcomes, strengthen their brand and stay ahead of the competition.
+ Auctor RC combines AI-powered practice, daily challenges, detailed analytics, editorial decoding, vocabulary building and faculty dashboards into one platform that helps institutes deliver better learning outcomes.
 
 </p>
 <div className="mt-12 flex flex-col sm:flex-row gap-4">
 
   <button className="rounded-xl bg-orange-500 px-8 py-4 font-semibold text-white transition hover:bg-orange-600">
 
-    Book Free Demo
+    Book a Live Demo
 
   </button>
 
   <button className="rounded-xl border border-white/10 bg-white/5 px-8 py-4 font-semibold text-white hover:bg-white/10">
 
-    Explore Platform
+    View Platform Features
 
   </button>
 
@@ -65,12 +65,16 @@ AI-Powered.
 
           </div>
 
-          {/* RIGHT */}
+          {/* Mobile Dashboard Preview */}
 
-         <div className="relative">
+<div className="mt-8 lg:hidden">
+  <DashboardPreview />
+</div>
 
-    <DashboardPreview />
+          {/* RIGHT - Desktop Only */}
 
+<div className="relative hidden lg:block">
+  <DashboardPreview />
 </div>
 
         </div>
