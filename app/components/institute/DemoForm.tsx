@@ -81,7 +81,10 @@ const handleSubmit = async (
   }
 };
   return (
-   <section id="book-demo" className="py-20">
+   <section
+  id="book-demo"
+  className="py-24 bg-gradient-to-b from-transparent via-[#0B1220] to-[#08101D]"
+>
 
       <div className="mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-2 items-center">
 
@@ -105,6 +108,8 @@ const handleSubmit = async (
             performance.
           </p>
 
+
+
           <div className="mt-10 space-y-5">
 
             <Benefit text="30-minute personalised walkthrough" />
@@ -119,24 +124,31 @@ const handleSubmit = async (
 
           </div>
 
-          <div className="mt-12 rounded-2xl border border-orange-500/20 bg-orange-500/10 p-6">
+         <div className="mt-12 rounded-2xl border border-blue-500/20 bg-blue-500/10 p-6">
 
-            <p className="text-lg font-semibold text-white">
-              🚀 Get started with AI before everyone else.
-            </p>
+  <p className="text-lg font-semibold text-white">
+    What happens during the demo?
+  </p>
 
-            <p className="mt-3 text-slate-300">
-              We'll show you exactly how institutes are improving
-              engagement and learning using Auctor.
-            </p>
+  <div className="mt-4 space-y-3 text-slate-300">
 
-          </div>
+    <p>✓ Live walkthrough of the student platform</p>
+
+    <p>✓ Institute dashboard demonstration</p>
+
+    <p>✓ White-label branding options</p>
+
+    <p>✓ Pricing & onboarding discussion</p>
+
+  </div>
+
+</div>
 
         </div>
 
         {/* RIGHT */}
 
-        <div className="rounded-3xl border border-white/10 bg-[#101828] p-8 shadow-2xl">
+        <div className="rounded-3xl border border-blue-500/20 bg-gradient-to-br from-[#172554] via-[#1E293B] to-[#0F172A] p-8 shadow-2xl">
 
           <h3 className="text-2xl font-bold text-white">
             Schedule Your Demo
@@ -292,7 +304,7 @@ const handleSubmit = async (
 </button>
 
             <p className="text-center text-sm text-slate-500">
-              We'll get back to you within 24 hours.
+            We'll contact you within one business day to schedule your personalised demo.
             </p>
 
           </form>

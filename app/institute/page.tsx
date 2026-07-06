@@ -9,6 +9,7 @@ import WhyAuctor from "../components/institute/WhyAuctor";
 import Testimonials from "../components/institute/Testimonials";
 import Inclusions from "../components/institute/Inclusions";
 import FAQ from "../components/institute/FAQ";
+import CreatedBy from "../components/institute/CreatedBy";
 
 export default function InstitutePage() {
   return (
@@ -19,6 +20,7 @@ export default function InstitutePage() {
 
         <Hero />
          <PlatformFeatures />
+         <CreatedBy />
           <Inclusions />
           <WhyAuctor />
           <DemoForm />

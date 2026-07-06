@@ -97,7 +97,7 @@ ${
 ${
   active === index
     ? "bg-orange-500 text-white"
-    : "border border-white/10 bg-[#111827] text-slate-300 hover:bg-[#1b2435]"
+    : "border border-white/10 bg-[#0F172A] text-slate-300 hover:bg-[#172554]"
 }`}
       >
         <Icon size={18} />
@@ -110,7 +110,7 @@ ${
 
 {/* Active Feature */}
 
-<div className="mt-8 overflow-hidden rounded-3xl border border-white/10 bg-[#111827]">
+<div className="mt-8 overflow-hidden rounded-3xl border border-blue-500/20 bg-gradient-to-br from-[#172554] via-[#1E293B] to-[#0F172A] shadow-2xl">
 
   <div className="p-6">
 
@@ -129,7 +129,7 @@ ${
 
     </h3>
 
-    <p className="mt-3 text-slate-400">
+    <p className="mt-3 text-slate-300">
 
       {features[active].subtitle}
 
