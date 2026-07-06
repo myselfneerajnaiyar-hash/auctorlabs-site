@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react"
 import { Play, Star, X } from "lucide-react";
 
@@ -45,17 +45,48 @@ const reviews = [
 
 export default function Testimonials() {
     const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
-    const [videoRef] = useEmblaCarousel({
+    const [videoIndex, setVideoIndex] = useState(0);
+const [reviewIndex, setReviewIndex] = useState(0);
+    const [videoRef, videoApi] = useEmblaCarousel({
   loop: true,
   align: "start",
-  dragFree: true,
 });
 
-const [reviewRef] = useEmblaCarousel({
+const [reviewRef, reviewApi] = useEmblaCarousel({
   loop: true,
   align: "start",
-  dragFree: true,
 });
+
+useEffect(() => {
+  if (!videoApi) return;
+
+  const onSelect = () => {
+    setVideoIndex(videoApi.selectedScrollSnap());
+  };
+
+  onSelect();
+  videoApi.on("select", onSelect);
+
+  return () => {
+    videoApi.off("select", onSelect);
+  };
+}, [videoApi]);
+
+useEffect(() => {
+  if (!reviewApi) return;
+
+  const onSelect = () => {
+    setReviewIndex(reviewApi.selectedScrollSnap());
+  };
+
+  onSelect();
+  reviewApi.on("select", onSelect);
+
+  return () => {
+    reviewApi.off("select", onSelect);
+  };
+}, [reviewApi]);
+
   return (
     <section className="py-20">
 
@@ -144,6 +175,19 @@ const [reviewRef] = useEmblaCarousel({
 
         </div>
         </div>
+        <div className="mt-6 flex justify-center gap-2">
+  {videos.map((_, index) => (
+    <button
+      key={index}
+      onClick={() => videoApi?.scrollTo(index)}
+      className={`h-2.5 rounded-full transition-all ${
+        videoIndex === index
+          ? "w-6 bg-orange-500"
+          : "w-2.5 bg-white/20"
+      }`}
+    />
+  ))}
+</div>
         
 
         {/* WRITTEN TESTIMONIALS */}
@@ -212,6 +256,20 @@ const [reviewRef] = useEmblaCarousel({
             </div>
 
           </div>
+
+          <div className="mt-6 flex justify-center gap-2">
+  {reviews.map((_, index) => (
+    <button
+      key={index}
+      onClick={() => reviewApi?.scrollTo(index)}
+      className={`h-2.5 w-2.5 rounded-full transition-all ${
+        reviewIndex === index
+          ? "bg-orange-500 w-6"
+          : "bg-white/20"
+      }`}
+    />
+  ))}
+</div>
 
         </div>
 
