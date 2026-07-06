@@ -23,6 +23,63 @@ const exams = [
 export default function DemoForm() {
 
 const [selectedExams, setSelectedExams] = useState<string[]>([]);
+const [form, setForm] = useState({
+  name: "",
+  institute_name: "",
+  phone: "",
+  email: "",
+  student_count: "",
+  
+});
+
+const [loading, setLoading] = useState(false);
+
+const handleSubmit = async (
+  e: React.FormEvent<HTMLFormElement>
+) => {
+  e.preventDefault();
+
+  setLoading(true);
+
+  try {
+    const res = await fetch("/api/institute-demo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...form,
+        exams: selectedExams,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      alert(data.error || "Something went wrong.");
+      return;
+    }
+
+    alert("Demo request submitted successfully!");
+
+    // Reset form
+    setForm({
+      name: "",
+      institute_name: "",
+      phone: "",
+      email: "",
+      student_count: "",
+    });
+
+    setSelectedExams([]);
+
+  } catch (err) {
+    console.error(err);
+    alert("Something went wrong.");
+  } finally {
+    setLoading(false);
+  }
+};
   return (
     <section className="py-20">
 
@@ -89,28 +146,56 @@ const [selectedExams, setSelectedExams] = useState<string[]>([]);
             Fill in your details and we'll contact you shortly.
           </p>
 
-          <form className="mt-8 space-y-5">
+          <form
+  onSubmit={handleSubmit}
+  className="mt-8 space-y-5"
+>
 
-            <Input
-              label="Your Name"
-              placeholder="Enter your name"
-            />
+           <Input
+  label="Your Name"
+  placeholder="Enter your name"
+  value={form.name}
+  onChange={(e) =>
+    setForm({ ...form, name: e.target.value })
+  }
+/>
 
-            <Input
-              label="Institute Name"
-              placeholder="ABC Academy"
-            />
+           <Input
+  label="Institute Name"
+  placeholder="ABC Academy"
+  value={form.institute_name}
+  onChange={(e) =>
+    setForm({
+      ...form,
+      institute_name: e.target.value,
+    })
+  }
+/>
 
-            <Input
-              label="Phone Number"
-              placeholder="+91 XXXXX XXXXX"
-            />
+           <Input
+  label="Phone Number"
+  placeholder="+91 XXXXX XXXXX"
+  value={form.phone}
+  onChange={(e) =>
+    setForm({
+      ...form,
+      phone: e.target.value,
+    })
+  }
+/>
 
-            <Input
-              label="Email Address"
-              placeholder="you@example.com"
-              type="email"
-            />
+       <Input
+  label="Email Address"
+  type="email"
+  placeholder="you@example.com"
+  value={form.email}
+  onChange={(e) =>
+    setForm({
+      ...form,
+      email: e.target.value,
+    })
+  }
+/>     
 
            <div>
 
@@ -172,7 +257,16 @@ const [selectedExams, setSelectedExams] = useState<string[]>([]);
                 Approximate Student Strength
               </label>
 
-              <select className="w-full rounded-xl border border-white/10 bg-[#182234] px-4 py-4 text-white outline-none focus:border-orange-500">
+            <select
+  value={form.student_count}
+  onChange={(e) =>
+    setForm({
+      ...form,
+      student_count: e.target.value,
+    })
+  }
+  className="w-full rounded-xl border border-white/10 bg-[#182234] px-4 py-4 text-white outline-none focus:border-orange-500"
+>
 
                 <option>1–50</option>
                 <option>51–100</option>
@@ -185,29 +279,17 @@ const [selectedExams, setSelectedExams] = useState<string[]>([]);
 
             </div>
 
-            <div>
+           
 
-              <label className="mb-2 block text-sm font-medium text-slate-300">
-                Message (Optional)
-              </label>
+           <button
+  type="submit"
+  disabled={loading}
+  className="flex w-full items-center justify-center gap-2 rounded-xl bg-orange-500 py-4 text-lg font-semibold text-white transition hover:bg-orange-600 disabled:opacity-60"
+>
+  {loading ? "Submitting..." : "Schedule Free Demo"}
 
-              <textarea
-                rows={4}
-                placeholder="Tell us a little about your institute..."
-                className="w-full rounded-xl border border-white/10 bg-[#182234] px-4 py-4 text-white outline-none focus:border-orange-500"
-              />
-
-            </div>
-
-            <button
-              type="submit"
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-orange-500 py-4 text-lg font-semibold text-white transition hover:bg-orange-600"
-            >
-              Schedule Free Demo
-
-              <ArrowRight size={20} />
-
-            </button>
+  <ArrowRight size={20} />
+</button>
 
             <p className="text-center text-sm text-slate-500">
               We'll get back to you within 24 hours.
@@ -247,25 +329,29 @@ function Benefit({ text }: { text: string }) {
 function Input({
   label,
   placeholder,
+  value,
+  onChange,
   type = "text",
 }: {
   label: string;
   placeholder: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   type?: string;
 }) {
   return (
     <div>
-
       <label className="mb-2 block text-sm font-medium text-slate-300">
         {label}
       </label>
 
       <input
         type={type}
+        value={value}
+        onChange={onChange}
         placeholder={placeholder}
         className="w-full rounded-xl border border-white/10 bg-[#182234] px-4 py-4 text-white placeholder:text-slate-500 outline-none focus:border-orange-500"
       />
-
     </div>
   );
 }

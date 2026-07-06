@@ -119,7 +119,7 @@ export default function Navbar() {
             rel="noopener noreferrer"
             className="bg-orange-500 px-4 py-2 rounded-lg w-fit"
           >
-            Try RC
+            Try Auctor RC
           </a>
 
         </div>
