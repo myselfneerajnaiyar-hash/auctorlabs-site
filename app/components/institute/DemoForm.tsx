@@ -81,7 +81,7 @@ const handleSubmit = async (
   }
 };
   return (
-    <section className="py-20">
+   <section id="book-demo" className="py-20">
 
       <div className="mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-2 items-center">
 

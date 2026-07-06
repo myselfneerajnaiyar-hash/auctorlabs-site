@@ -49,18 +49,26 @@ Coaching Institutes.
 </p>
 <div className="mt-12 flex flex-col sm:flex-row gap-4">
 
-  <button className="rounded-xl bg-orange-500 px-8 py-4 font-semibold text-white transition hover:bg-orange-600">
-
-    Book a Live Demo
-
-  </button>
-
-  <button className="rounded-xl border border-white/10 bg-white/5 px-8 py-4 font-semibold text-white hover:bg-white/10">
-
-    View Platform Features
-
-  </button>
-
+ <button
+  onClick={() =>
+    document
+      .getElementById("book-demo")
+      ?.scrollIntoView({ behavior: "smooth" })
+  }
+  className="rounded-xl bg-orange-500 px-8 py-4 font-semibold text-white transition hover:bg-orange-600"
+>
+  Book a Live Demo
+</button>
+  <button
+  onClick={() =>
+    document
+      .getElementById("platform-features")
+      ?.scrollIntoView({ behavior: "smooth" })
+  }
+  className="rounded-xl border border-white/10 bg-white/5 px-8 py-4 font-semibold text-white hover:bg-white/10"
+>
+  View Platform Features
+</button>
 </div>
 
           </div>

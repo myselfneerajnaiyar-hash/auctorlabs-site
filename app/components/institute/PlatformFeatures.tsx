@@ -54,7 +54,7 @@ export default function PlatformFeatures() {
 
   const [active, setActive] = useState(0);
   return (
-    <section className="py-20">
+   <section id="platform-features" className="py-20">
 
       <div className="mx-auto max-w-7xl px-6">
 
@@ -161,10 +161,16 @@ ${
     Give every student an AI mentor, unlimited practice, adaptive learning and detailed analytics — all from one platform.
   </p>
 
-  <button className="mt-8 rounded-xl bg-orange-500 px-8 py-4 font-semibold text-white transition hover:bg-orange-600">
-    Book a Free Demo
-  </button>
-
+ <button
+  onClick={() =>
+    document
+      .getElementById("book-demo")
+      ?.scrollIntoView({ behavior: "smooth" })
+  }
+  className="mt-8 rounded-xl bg-orange-500 px-8 py-4 font-semibold text-white transition hover:bg-orange-600"
+>
+  Book a Free Demo
+</button>
 </div>
              
       </div>

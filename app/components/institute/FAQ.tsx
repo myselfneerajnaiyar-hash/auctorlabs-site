@@ -189,13 +189,18 @@ export default function FAQ() {
 
               </div>
 
-              <button className="mt-10 flex w-full items-center justify-center gap-3 rounded-xl bg-orange-500 py-4 font-semibold text-white transition hover:bg-orange-600">
+            <button
+  onClick={() =>
+    document
+      .getElementById("book-demo")
+      ?.scrollIntoView({ behavior: "smooth" })
+  }
+  className="mt-10 flex w-full items-center justify-center gap-3 rounded-xl bg-orange-500 py-4 font-semibold text-white transition hover:bg-orange-600"
+>
+  Book Your Free Demo
 
-                Book Your Free Demo
-
-                <ArrowRight size={18} />
-
-              </button>
+  <ArrowRight size={18} />
+</button>
 
             </div>
 

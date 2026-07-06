@@ -185,12 +185,16 @@ export default function WhyAuctor() {
 
           </p>
 
-          <button className="mt-10 rounded-xl bg-orange-500 px-8 py-4 text-lg font-semibold text-white transition hover:bg-orange-600">
-
-            Book Your Free Demo
-
-          </button>
-
+          <button
+  onClick={() =>
+    document
+      .getElementById("book-demo")
+      ?.scrollIntoView({ behavior: "smooth" })
+  }
+  className="mt-10 rounded-xl bg-orange-500 px-8 py-4 text-lg font-semibold text-white transition hover:bg-orange-600"
+>
+  Book Your Free Demo
+</button>
         </div>
 
       </div>

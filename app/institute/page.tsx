@@ -23,7 +23,7 @@ export default function InstitutePage() {
           <WhyAuctor />
           <DemoForm />
           <Testimonials />
-        <WhyNow />
+        
        
          
         
