@@ -178,12 +178,13 @@ router.replace("/thank-you");
 
            <Input
   label="Phone Number"
-  placeholder="+91 XXXXX XXXXX"
+  type="tel"
+  placeholder="9876543210"
   value={form.phone}
   onChange={(e) =>
     setForm({
       ...form,
-      phone: e.target.value,
+      phone: e.target.value.replace(/\D/g, "").slice(0, 10),
     })
   }
 />
@@ -349,13 +350,15 @@ function Input({
         {label}
       </label>
 
-      <input
-        type={type}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        className="w-full rounded-xl border border-white/10 bg-[#182234] px-4 py-4 text-white placeholder:text-slate-500 outline-none focus:border-orange-500"
-      />
+     <input
+  type={type}
+  value={value}
+  onChange={onChange}
+  placeholder={placeholder}
+  maxLength={type === "tel" ? 10 : undefined}
+  inputMode={type === "tel" ? "numeric" : undefined}
+  className="w-full rounded-xl border border-white/10 bg-[#182234] px-4 py-4 text-white placeholder:text-slate-500 outline-none focus:border-orange-500"
+/>
     </div>
   );
 }
