@@ -1,5 +1,5 @@
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import Header from "../components/institute/Header";
+import Footer from "../components/institute/Footer";
 
 import Hero from "../components/institute/Hero";
 import WhyNow from "../components/institute/WhyNow";
@@ -14,7 +14,9 @@ import CreatedBy from "../components/institute/CreatedBy";
 export default function InstitutePage() {
   return (
     <>
-      <Navbar />
+
+    <Header/>
+      
 
       <main className="bg-[#07152D] text-white">
 
@@ -35,8 +37,9 @@ export default function InstitutePage() {
        
 
       </main>
-
       <Footer />
+
+      
     </>
   );
 }
