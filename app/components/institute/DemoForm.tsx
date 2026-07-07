@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import {
   ArrowRight,
@@ -21,6 +22,7 @@ const exams = [
 ];
 
 export default function DemoForm() {
+  const router = useRouter();
 
 const [selectedExams, setSelectedExams] = useState<string[]>([]);
 const [form, setForm] = useState({
@@ -55,23 +57,13 @@ const handleSubmit = async (
 
     const data = await res.json();
 
-    if (!res.ok) {
-      alert(data.error || "Something went wrong.");
-      return;
-    }
+   if (!res.ok) {
+  alert(data.error || "Something went wrong.");
+  return;
+}
 
-    alert("Demo request submitted successfully!");
-
-    // Reset form
-    setForm({
-      name: "",
-      institute_name: "",
-      phone: "",
-      email: "",
-      student_count: "",
-    });
-
-    setSelectedExams([]);
+// Redirect to Thank You page
+router.replace("/thank-you");
 
   } catch (err) {
     console.error(err);
