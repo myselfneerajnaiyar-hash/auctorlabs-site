@@ -69,34 +69,43 @@ export default function Testimonials() {
     align: "start",
   });
 
-  useEffect(() => {
-    if (!videoApi) return;
+ useEffect(() => {
+  if (!videoApi) {
+    return;
+  }
 
-    const onSelect = () => setVideoIndex(videoApi.selectedScrollSnap());
+  const onSelect = () => {
+    setVideoIndex(videoApi.selectedScrollSnap());
+  };
 
-    onSelect();
+  onSelect();
+  videoApi.on("select", onSelect);
 
-    videoApi.on("select", onSelect);
+  const cleanup = () => {
+    videoApi.off("select", onSelect);
+  };
 
-   return () => {
-  videoApi.off("select", onSelect);
-};
-  }, [videoApi]);
+  return cleanup;
+}, [videoApi]);
 
-  useEffect(() => {
-    if (!reviewApi) return;
+ useEffect(() => {
+  if (!reviewApi) {
+    return;
+  }
 
-    const onSelect = () => setReviewIndex(reviewApi.selectedScrollSnap());
+  const onSelect = () => {
+    setReviewIndex(reviewApi.selectedScrollSnap());
+  };
 
-    onSelect();
+  onSelect();
+  reviewApi.on("select", onSelect);
 
-    reviewApi.on("select", onSelect);
+  const cleanup = () => {
+    reviewApi.off("select", onSelect);
+  };
 
-   return () => {
-  reviewApi.off("select", onSelect);
-};
-  }, [reviewApi]);
-
+  return cleanup;
+}, [reviewApi]);
   return (
     <section className="relative overflow-hidden bg-[#07152D] py-24">
 
