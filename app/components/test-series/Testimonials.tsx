@@ -78,7 +78,9 @@ export default function Testimonials() {
 
     videoApi.on("select", onSelect);
 
-    return () => videoApi.off("select", onSelect);
+   return () => {
+  videoApi.off("select", onSelect);
+};
   }, [videoApi]);
 
   useEffect(() => {
@@ -90,7 +92,9 @@ export default function Testimonials() {
 
     reviewApi.on("select", onSelect);
 
-    return () => reviewApi.off("select", onSelect);
+   return () => {
+  reviewApi.off("select", onSelect);
+};
   }, [reviewApi]);
 
   return (
