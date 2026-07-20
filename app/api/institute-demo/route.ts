@@ -46,16 +46,28 @@ export async function POST(req: Request) {
       .single();
 
     if (error) {
-      console.error("Supabase Error:", error);
+  // Duplicate phone number
+  if (error.code === "23505") {
+    return NextResponse.json(
+      {
+        success: false,
+        error:
+          "A demo request has already been submitted with this phone number.",
+      },
+      { status: 409 }
+    );
+  }
 
-      return NextResponse.json(
-        {
-          success: false,
-          error: error.message,
-        },
-        { status: 500 }
-      );
-    }
+  console.error("Supabase Error:", error);
+
+  return NextResponse.json(
+    {
+      success: false,
+      error: "Unable to submit your request. Please try again.",
+    },
+    { status: 500 }
+  );
+}
 
     return NextResponse.json({
       success: true,

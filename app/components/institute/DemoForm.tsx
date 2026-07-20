@@ -35,11 +35,24 @@ const [form, setForm] = useState({
 });
 
 const [loading, setLoading] = useState(false);
+const [otp, setOtp] = useState("");
+const [otpSent, setOtpSent] = useState(false);
+const [phoneVerified, setPhoneVerified] = useState(false);
+const [verificationId, setVerificationId] = useState("");
+const [sendingOtp, setSendingOtp] = useState(false);
+const [verifyingOtp, setVerifyingOtp] = useState(false);
+const [submitError, setSubmitError] = useState("");
 
 const handleSubmit = async (
   e: React.FormEvent<HTMLFormElement>
 ) => {
   e.preventDefault();
+  if (!phoneVerified) {
+  alert("Please verify your phone number first.");
+  return;
+}
+
+setSubmitError("");
 
   setLoading(true);
 
@@ -56,11 +69,12 @@ const handleSubmit = async (
     });
 
     const data = await res.json();
-
-   if (!res.ok) {
-  alert(data.error || "Something went wrong.");
+if (!res.ok) {
+  setSubmitError(data.error || "Something went wrong.");
   return;
 }
+
+
 
 // Redirect to Thank You page
 router.replace("/thank-you");
@@ -72,6 +86,85 @@ router.replace("/thank-you");
     setLoading(false);
   }
 };
+
+const sendOtp = async () => {
+  if (form.phone.length !== 10) {
+    alert("Enter a valid phone number");
+    return;
+  }
+
+  try {
+    setSendingOtp(true);
+
+    const res = await fetch("/api/send-otp", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        phone: form.phone,
+      }),
+    });
+
+   const data = await res.json();
+
+console.log("OTP RESPONSE:", data);
+
+// TEMPORARY - so we can see exactly what Message Central returned
+
+
+if (data.responseCode !== 200 || !data.data?.verificationId) {
+  return;
+}
+
+setVerificationId(data.data.verificationId);
+setOtpSent(true);
+
+alert("OTP Sent");
+
+  } finally {
+    setSendingOtp(false);
+  }
+};
+
+const verifyOtp = async () => {
+  if (!otp) {
+    alert("Enter OTP");
+    return;
+  }
+
+  try {
+    setVerifyingOtp(true);
+
+    const res = await fetch("/api/verify-otp", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        verificationId,
+        otp,
+      }),
+    });
+
+    const data = await res.json();
+
+    console.log(data);
+
+    if (!res.ok) {
+      alert(data.message);
+      return;
+    }
+
+    setPhoneVerified(true);
+
+    alert("Phone Verified");
+
+  } finally {
+    setVerifyingOtp(false);
+  }
+};
+
   return (
    <section
   id="book-demo"
@@ -175,11 +268,11 @@ router.replace("/thank-you");
     })
   }
 />
-
-           <Input
+<Input
   label="Phone Number"
   type="tel"
   placeholder="9876543210"
+  disabled={phoneVerified}
   value={form.phone}
   onChange={(e) =>
     setForm({
@@ -188,6 +281,45 @@ router.replace("/thank-you");
     })
   }
 />
+
+{!otpSent && !phoneVerified && (
+  <button
+    type="button"
+    onClick={sendOtp}
+    disabled={sendingOtp}
+    className="w-full rounded-xl bg-blue-600 py-3 text-white"
+  >
+    {sendingOtp ? "Sending..." : "Send OTP"}
+  </button>
+)}
+
+{otpSent && !phoneVerified && (
+  <>
+    <Input
+      label="OTP"
+      placeholder="Enter OTP"
+      value={otp}
+      onChange={(e) => setOtp(e.target.value)}
+    />
+
+    <button
+      type="button"
+      onClick={verifyOtp}
+    disabled={verifyingOtp || phoneVerified}
+      className="w-full rounded-xl bg-green-600 py-3 text-white"
+    >
+      {verifyingOtp ? "Verifying..." : "Verify OTP"}
+    </button>
+  </>
+)}
+
+{phoneVerified && (
+  <div className="rounded-lg bg-green-900/30 border border-green-500/30 p-3">
+    <p className="text-green-400 font-medium">
+      ✓ Phone verified successfully
+    </p>
+  </div>
+)}
 
        <Input
   label="Email Address"
@@ -284,11 +416,17 @@ router.replace("/thank-you");
 
             </div>
 
-           
+           {submitError && (
+  <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-3">
+    <p className="text-red-400 text-sm">
+      {submitError}
+    </p>
+  </div>
+)}
 
            <button
   type="submit"
-  disabled={loading}
+  disabled={loading || !phoneVerified}
   className="flex w-full items-center justify-center gap-2 rounded-xl bg-orange-500 py-4 text-lg font-semibold text-white transition hover:bg-orange-600 disabled:opacity-60"
 >
   {loading ? "Submitting..." : "Schedule Free Demo"}
@@ -337,12 +475,14 @@ function Input({
   value,
   onChange,
   type = "text",
+  disabled = false,
 }: {
   label: string;
   placeholder: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   type?: string;
+  disabled?: boolean;
 }) {
   return (
     <div>
@@ -351,6 +491,7 @@ function Input({
       </label>
 
      <input
+     disabled={disabled}
   type={type}
   value={value}
   onChange={onChange}
