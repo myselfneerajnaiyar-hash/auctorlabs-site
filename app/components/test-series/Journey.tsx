@@ -110,15 +110,21 @@ export default function Journey() {
               <div className="flex flex-col items-center gap-5">
 
                
-                <button className="group mt-10 inline-flex items-center gap-3 rounded-2xl bg-orange-500 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-orange-500/30 transition-all duration-300 hover:scale-105 hover:bg-orange-400">
-
-  Buy Test Series • ₹799
+               <button
+  onClick={() =>
+    document.getElementById("lead-form")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    })
+  }
+  className="group mt-10 inline-flex items-center gap-3 rounded-2xl bg-orange-500 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-orange-500/30 transition-all duration-300 hover:scale-105 hover:bg-orange-400"
+>
+  Start 4 Free Mocks
 
   <ArrowRight
     size={20}
     className="transition-transform duration-300 group-hover:translate-x-1"
   />
-
 </button>
 
                <p className="mt-5 text-sm text-slate-400">

@@ -29,6 +29,13 @@ export default function Navbar() {
             Auctor RC
           </Link>
 
+          <Link
+  href="/test-series"
+  className="text-orange-400 font-semibold hover:text-orange-300"
+>
+  CAT Test Series
+</Link>
+
           <Link href="/institute" className="hover:text-white">
             Institutes
           </Link>
@@ -84,6 +91,16 @@ export default function Navbar() {
           <Link href="/auctor-rc" onClick={() => setOpen(false)}>
             Auctor RC
           </Link>
+
+          <Link
+  href="/test-series"
+  className="text-orange-400 font-semibold"
+  onClick={() => setOpen(false)}
+>
+  CAT Test Series
+</Link>
+
+
 
           <Link href="/institute" onClick={() => setOpen(false)}>
             Institutes

@@ -389,20 +389,26 @@ export default function Testimonials() {
 
             </p>
 
-            <button className="group mt-10 inline-flex items-center gap-3 rounded-2xl bg-orange-500 px-8 py-4 text-lg font-bold text-white transition duration-300 hover:scale-105 hover:bg-orange-400">
+           <button
+  onClick={() =>
+    document.getElementById("lead-form")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    })
+  }
+  className="group mt-10 inline-flex items-center gap-3 rounded-2xl bg-orange-500 px-8 py-4 text-lg font-bold text-white transition duration-300 hover:scale-105 hover:bg-orange-400"
+>
+  Start Your RC Journey
 
-              Buy Test Series • ₹799
-
-              <ArrowRight
-                size={20}
-                className="transition-transform group-hover:translate-x-1"
-              />
-
-            </button>
+  <ArrowRight
+    size={20}
+    className="transition-transform group-hover:translate-x-1"
+  />
+</button>
 
             <p className="mt-6 text-sm text-slate-400">
 
-              10 AI VARC Mocks • 24 CAT PYQs • Lifetime Access
+              10 AI VARC Mocks • 24 CAT PYQs. Access till CAT 26
 
             </p>
 

@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import { ArrowRight, CheckCircle, Sparkles, Brain, TriangleAlert, Target } from "lucide-react";
 
@@ -67,20 +66,20 @@ exactly why your score improved—or didn't.
 
             {/* Buttons */}
             <div className="mt-10 flex flex-wrap gap-4">
-              <Link
-                href="/pricing"
-                className="inline-flex items-center gap-2 rounded-xl bg-orange-500 px-7 py-4 font-semibold text-white transition hover:bg-orange-600"
-              >
-                Buy Now • ₹799
-                <ArrowRight size={18} />
-              </Link>
+             <button
+  onClick={() =>
+    document.getElementById("lead-form")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    })
+  }
+  className="inline-flex items-center gap-2 rounded-xl bg-orange-500 px-7 py-4 font-semibold text-white transition hover:bg-orange-600"
+>
+  Start 4 Free Mocks
+  <ArrowRight size={18} />
+</button>
 
-              <Link
-                href="#ai-report"
-                className="rounded-xl border border-white/20 px-7 py-4 font-semibold text-white transition hover:bg-white/10"
-              >
-               See AI Analysis
-              </Link>
+             
             </div>
 
             {/* Features */}
