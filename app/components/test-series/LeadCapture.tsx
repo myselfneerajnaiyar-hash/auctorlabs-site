@@ -60,7 +60,7 @@ export default function LeadCapture() {
 
  setLoading(false);
 
-router.push("/thank-you-test-series");
+window.location.href = "/thank-you-test-series";
 }
   return (
     <section
