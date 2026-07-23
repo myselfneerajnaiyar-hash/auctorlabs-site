@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
 export default function LeadCapture() {
@@ -10,7 +11,9 @@ export default function LeadCapture() {
   const [catYear, setCatYear] = useState("CAT 2026");
 
   const [loading, setLoading] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  
+
+  const router = useRouter();
 
  async function handleSubmit(e: React.FormEvent) {
   e.preventDefault();
@@ -18,20 +21,26 @@ export default function LeadCapture() {
   setLoading(true);
 
   // Save lead
-  const { error } = await supabase
-    .from("test_series_leads")
-    .insert({
-      name,
-      email,
-      phone,
-      cat_attempt: catYear,
-    });
+ const { error } = await supabase
+  .from("test_series_leads")
+  .insert({
+    name,
+    email,
+    phone,
+    cat_attempt: catYear,
+  });
 
-  if (error) {
-    setLoading(false);
+ if (error) {
+  setLoading(false);
+
+  if (error.code === "23505") {
+    alert("You have already claimed your free AI mocks.");
+  } else {
     alert(error.message);
-    return;
   }
+
+  return;
+}
 
   // Send email
   const emailResponse = await fetch("/api/send-test-series-email", {
@@ -49,14 +58,9 @@ export default function LeadCapture() {
     console.error("Failed to send email");
   }
 
-  setLoading(false);
+ setLoading(false);
 
-  setSubmitted(true);
-
-  setName("");
-  setEmail("");
-  setPhone("");
-  setCatYear("CAT 2026");
+router.push("/thank-you-test-series");
 }
   return (
     <section
@@ -67,8 +71,8 @@ export default function LeadCapture() {
 
         <div className="rounded-3xl border border-orange-500/20 bg-slate-900/80 backdrop-blur-xl p-10 shadow-2xl">
 
-          {!submitted ? (
-            <>
+         
+      
               <div className="text-center">
 
                 <div className="inline-flex items-center rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1 text-sm text-orange-300">
@@ -162,26 +166,9 @@ export default function LeadCapture() {
                   updates.
                 </p>
               </form>
-            </>
-          ) : (
-            <div className="py-12 text-center">
-
-              <div className="text-6xl">
-                🎉
-              </div>
-
-              <h2 className="mt-6 text-4xl font-bold text-white">
-                Check Your Email
-              </h2>
-
-              <p className="mt-6 text-lg leading-8 text-slate-300">
-                Your free CAT mock is on its way.
-                <br />
-                Please open the test link on a <strong>laptop or desktop</strong>
-                &nbsp;for the best exam experience.
-              </p>
-            </div>
-          )}
+           
+          
+         
         </div>
       </div>
     </section>
