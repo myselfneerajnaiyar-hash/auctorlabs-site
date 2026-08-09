@@ -5,7 +5,11 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: ["/admin", "/api/"],
     },
-    sitemap: "https://auctorlabs.in/sitemap.xml",
+    sitemap: [
+      "https://auctorlabs.in/sitemap.xml",
+      "https://auctorlabs.in/blog/sitemap.xml",
+    ],
   };
 }
