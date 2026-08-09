@@ -11,6 +11,14 @@ export default function sitemap() {
     "/success",
     "/auctor-rc",
 
+    // Public Auctor RC feature pages
+    "/features/daily-rc-workout",
+    "/features/speed-drills",
+    "/features/reading-comprehension-generator",
+    "/features/vocabulary-lab",
+    "/features/birbal-editorial-decoder",
+    "/features/precision-drills",
+
     // Blog main page
     "/blog",
 

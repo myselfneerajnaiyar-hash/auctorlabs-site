@@ -1,7 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
+
+const featureLinks = [
+  ["Daily RC Workout", "/features/daily-rc-workout"],
+  ["Speed Drills", "/features/speed-drills"],
+  ["RC Generator", "/features/reading-comprehension-generator"],
+  ["Vocabulary Lab", "/features/vocabulary-lab"],
+  ["Birbal Decoder", "/features/birbal-editorial-decoder"],
+  ["Precision Drills", "/features/precision-drills"],
+] as const;
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -12,9 +22,11 @@ export default function Navbar() {
 
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <img
+          <Image
             src="/logo.png"
             alt="Auctor Labs"
+            width={32}
+            height={32}
             className="h-8 w-auto"
           />
           <span className="text-lg font-semibold tracking-wide hover:text-white">
@@ -28,6 +40,19 @@ export default function Navbar() {
           <Link href="/auctor-rc" className="hover:text-white">
             Auctor RC
           </Link>
+
+          <div className="group relative py-2">
+            <button className="flex items-center gap-1 hover:text-white" aria-haspopup="true">
+              Features <span aria-hidden="true" className="text-[10px]">▾</span>
+            </button>
+            <div className="invisible absolute left-1/2 top-full w-64 -translate-x-1/2 translate-y-2 rounded-xl border border-white/10 bg-[#0b1027] p-2 opacity-0 shadow-2xl transition group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+              {featureLinks.map(([label, href]) => (
+                <Link key={href} href={href} className="block rounded-lg px-4 py-2.5 text-gray-300 hover:bg-white/5 hover:text-white">
+                  {label}
+                </Link>
+              ))}
+            </div>
+          </div>
 
           <Link
   href="/test-series"
@@ -65,7 +90,7 @@ export default function Navbar() {
         {/* CTA Button */}
         <div className="hidden md:block">
           <a
-            href="https://rc.auctorlabs.in"
+            href="https://rc.auctorlabs.in/signup"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-orange-500 hover:bg-orange-600 px-4 py-2 rounded-lg text-sm font-medium transition hover:scale-105"
@@ -91,6 +116,17 @@ export default function Navbar() {
           <Link href="/auctor-rc" onClick={() => setOpen(false)}>
             Auctor RC
           </Link>
+
+          <div className="border-l border-white/10 pl-4">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-500">Features</p>
+            <div className="flex flex-col gap-3">
+              {featureLinks.map(([label, href]) => (
+                <Link key={href} href={href} onClick={() => setOpen(false)}>
+                  {label}
+                </Link>
+              ))}
+            </div>
+          </div>
 
           <Link
   href="/test-series"
@@ -131,7 +167,7 @@ export default function Navbar() {
           </Link>
 
           <a
-            href="https://rc.auctorlabs.in"
+            href="https://rc.auctorlabs.in/signup"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-orange-500 px-4 py-2 rounded-lg w-fit"
