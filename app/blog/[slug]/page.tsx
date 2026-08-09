@@ -5,6 +5,7 @@ import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import TableOfContents from "../../components/TableOfContents";
 import RelatedPosts from "../../components/RelatedPosts";
+import BlogPracticeCTA from "../../components/BlogPracticeCTA";
 
 type Props = {
   params: {
@@ -82,6 +83,10 @@ export default async function BlogPage({ params }: any) {
   const source = fs.readFileSync(filePath, "utf-8");
   const { content, data } = matter(source);
   const headings = extractHeadings(content);
+  const finalThoughtMarker = /^##\s+Final Thought\s*$/m;
+  const markerMatch = finalThoughtMarker.exec(content);
+  const contentBeforeCta = markerMatch ? content.slice(0, markerMatch.index) : content;
+  const contentAfterCta = markerMatch ? content.slice(markerMatch.index) : "";
 
  return (
  <div className="bg-[#0B0F1A] text-white min-h-screen overflow-x-hidden">
@@ -106,7 +111,7 @@ export default async function BlogPage({ params }: any) {
        <article className="prose-custom max-w-none w-full">
          
          <MDXRemote
-  source={content}
+  source={contentBeforeCta}
 
   components={{
  
@@ -183,24 +188,26 @@ blockquote: (props) => (
 ),
   }}
 />
+        <BlogPracticeCTA slug={slug} />
+        {contentAfterCta && (
+          <MDXRemote
+            source={contentAfterCta}
+            components={{
+              h2: (props) => {
+                const text = String(props.children);
+                const id = text.toLowerCase().replace(/\s+/g, "-");
+                return (
+                  <h2 id={id} className="text-3xl font-bold mt-20 mb-6 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+                    {props.children}
+                  </h2>
+                );
+              },
+              p: (props) => <p className="text-gray-300 leading-8 mb-6 text-[17px]">{props.children}</p>,
+            }}
+          />
+        )}
         </article>
         <RelatedPosts currentSlug={slug} />
-
-        {/* CTA */}
-        <div className="mt-16 p-8 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl text-center">
-          <h3 className="text-2xl font-semibold mb-2">
-            Stop solving. Start improving.
-          </h3>
-          <p className="text-white/80 mb-4">
-            Train how you read, think and eliminate options.
-          </p>
-          <a
-            href="https://rc.auctorlabs.in"
-            className="inline-block bg-orange-500 px-6 py-3 rounded-lg font-semibold"
-          >
-            Try Auctor RC →
-          </a>
-        </div>
 
       </div>
 
