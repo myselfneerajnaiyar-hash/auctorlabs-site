@@ -6,6 +6,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import TableOfContents from "../../components/TableOfContents";
 import RelatedPosts from "../../components/RelatedPosts";
 import BlogPracticeCTA from "../../components/BlogPracticeCTA";
+import BlogArticleHeader from "../../components/BlogArticleHeader";
 
 type Props = {
   params: {
@@ -93,6 +94,7 @@ export default async function BlogPage({ params }: any) {
 
     {/* 🔥 PROGRESS BAR */}
   <ProgressBar />
+  <BlogArticleHeader />
 
   <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20 grid grid-cols-12 gap-6 sm:gap-10">
 
