@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import BlogClient from "../components/BlogClient";
+import Navbar from "../components/Navbar";
 
 type Blog = {
   slug: string;
@@ -41,5 +42,12 @@ function getBlogs() {
 export default function BlogPage() {
   const blogs = getBlogs();
 
-  return <BlogClient blogs={blogs} />;
+  return (
+    <>
+      <Navbar />
+      <div className="pt-16">
+        <BlogClient blogs={blogs} />
+      </div>
+    </>
+  );
 }
