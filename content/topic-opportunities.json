@@ -1,0 +1,366 @@
+{
+  "generatedAt": "2026-08-13T13:08:47.454Z",
+  "note": "Discovery candidates are not publication approval. Validate intent, sources, product relevance and SERP quality before adding to the queue.",
+  "candidates": [
+    {
+      "query": "VARC CAT PYQ",
+      "source": "related_search",
+      "seedQuery": "CAT 2026 VARC preparation",
+      "cannibalizationRisk": 0,
+      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "VARC syllabus for CAT",
+      "source": "related_search",
+      "seedQuery": "CAT 2026 VARC preparation",
+      "cannibalizationRisk": 0,
+      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "How can I prepare for the CAT VARC exam?",
+      "source": "people_also_ask",
+      "seedQuery": "CAT 2026 VARC preparation",
+      "cannibalizationRisk": 0,
+      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "How should I start preparing for CAT 2026?",
+      "source": "people_also_ask",
+      "seedQuery": "CAT 2026 VARC preparation",
+      "cannibalizationRisk": 0,
+      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "How to get 99 percentile in varc CAT?",
+      "source": "people_also_ask",
+      "seedQuery": "CAT 2026 VARC preparation",
+      "cannibalizationRisk": 0,
+      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "Which year was CAT varc toughest?",
+      "source": "people_also_ask",
+      "seedQuery": "CAT 2026 VARC preparation",
+      "cannibalizationRisk": 0,
+      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "CAT RC passages",
+      "source": "related_search",
+      "seedQuery": "CAT reading comprehension problems",
+      "cannibalizationRisk": 0,
+      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "Can I crack a cat in 200 days?",
+      "source": "people_also_ask",
+      "seedQuery": "CAT reading comprehension problems",
+      "cannibalizationRisk": 0,
+      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "Cat para jumbles para summary odd sentence pdf",
+      "source": "related_search",
+      "seedQuery": "CAT para jumbles para summary odd sentence",
+      "cannibalizationRisk": 0,
+      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "1000 Parajumbles PDF for CAT",
+      "source": "related_search",
+      "seedQuery": "CAT para jumbles para summary odd sentence",
+      "cannibalizationRisk": 0,
+      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "Para Jumbles for CAT PDF",
+      "source": "related_search",
+      "seedQuery": "CAT para jumbles para summary odd sentence",
+      "cannibalizationRisk": 0,
+      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "Para Summary for CAT",
+      "source": "related_search",
+      "seedQuery": "CAT para jumbles para summary odd sentence",
+      "cannibalizationRisk": 0,
+      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "CAT LRDI",
+      "source": "related_search",
+      "seedQuery": "CAT VARC mock score improvement",
+      "cannibalizationRisk": 0,
+      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "Is 40 mocks enough for a CAT?",
+      "source": "people_also_ask",
+      "seedQuery": "CAT VARC mock score improvement",
+      "cannibalizationRisk": 0,
+      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "What are para jumbles and jumbled sentences?",
+      "source": "people_also_ask",
+      "seedQuery": "CAT para jumbles para summary odd sentence",
+      "cannibalizationRisk": 0.1,
+      "closestExisting": "rc-inference-decision-trap",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "Cat para jumbles para summary odd sentence with answers",
+      "source": "related_search",
+      "seedQuery": "CAT para jumbles para summary odd sentence",
+      "cannibalizationRisk": 0.1111111111111111,
+      "closestExisting": "understanding-rc-answers-youre-probably-misreading-the-inferences",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "How to improve mock test score CAT?",
+      "source": "people_also_ask",
+      "seedQuery": "CAT VARC mock score improvement",
+      "cannibalizationRisk": 0.1111111111111111,
+      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "Cat 2026 varc preparation free",
+      "source": "related_search",
+      "seedQuery": "CAT 2026 VARC preparation",
+      "cannibalizationRisk": 0.125,
+      "closestExisting": "mastering-reading-comprehension-unlocking-strategies-to-elevate-your-cat-preparation",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "What is the para summary in CAT?",
+      "source": "people_also_ask",
+      "seedQuery": "CAT para jumbles para summary odd sentence",
+      "cannibalizationRisk": 0.125,
+      "closestExisting": "rc-inference-decision-trap",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "What are parajumbles in cats?",
+      "source": "people_also_ask",
+      "seedQuery": "CAT para jumbles para summary odd sentence",
+      "cannibalizationRisk": 0.125,
+      "closestExisting": "rc-inference-decision-trap",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "VARC score vs percentile",
+      "source": "related_search",
+      "seedQuery": "CAT VARC mock score improvement",
+      "cannibalizationRisk": 0.125,
+      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "How to improve varc score in CAT?",
+      "source": "people_also_ask",
+      "seedQuery": "CAT VARC mock score improvement",
+      "cannibalizationRisk": 0.125,
+      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "Cat 2026 varc preparation pdf",
+      "source": "related_search",
+      "seedQuery": "CAT 2026 VARC preparation",
+      "cannibalizationRisk": 0.14285714285714285,
+      "closestExisting": "mastering-reading-comprehension-unlocking-strategies-to-elevate-your-cat-preparation",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "VARC preparation for CAT reddit",
+      "source": "related_search",
+      "seedQuery": "CAT 2026 VARC preparation",
+      "cannibalizationRisk": 0.14285714285714285,
+      "closestExisting": "mastering-reading-comprehension-unlocking-strategies-to-elevate-your-cat-preparation",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "1000 Parajumbles PDF for CAT with answers",
+      "source": "related_search",
+      "seedQuery": "CAT para jumbles para summary odd sentence",
+      "cannibalizationRisk": 0.14285714285714285,
+      "closestExisting": "understanding-rc-answers-youre-probably-misreading-the-inferences",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "Is 72 a good score in CAT?",
+      "source": "people_also_ask",
+      "seedQuery": "CAT VARC mock score improvement",
+      "cannibalizationRisk": 0.14285714285714285,
+      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "CAT VARC practice questions free",
+      "source": "related_search",
+      "seedQuery": "CAT 2026 VARC preparation",
+      "cannibalizationRisk": 0.16666666666666666,
+      "closestExisting": "mastering-inference-questions-in-cat-unlocking-the-secrets-to-your-success",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "Para Jumbles questions with answers",
+      "source": "related_search",
+      "seedQuery": "CAT para jumbles para summary odd sentence",
+      "cannibalizationRisk": 0.18181818181818182,
+      "closestExisting": "mastering-cat-reading-comprehension-unveiling-strategies-and-insights-behind-sample-questions-and-answers",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "CAT VARC questions with answers",
+      "source": "related_search",
+      "seedQuery": "CAT 2026 VARC preparation",
+      "cannibalizationRisk": 0.2,
+      "closestExisting": "mastering-cat-reading-comprehension-unveiling-strategies-and-insights-behind-sample-questions-and-answers",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "Parajumbles questions with answers PDF",
+      "source": "related_search",
+      "seedQuery": "CAT para jumbles para summary odd sentence",
+      "cannibalizationRisk": 0.2,
+      "closestExisting": "mastering-cat-reading-comprehension-unveiling-strategies-and-insights-behind-sample-questions-and-answers",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "VARC CAT questions PDF",
+      "source": "related_search",
+      "seedQuery": "CAT 2026 VARC preparation",
+      "cannibalizationRisk": 0.25,
+      "closestExisting": "mastering-inference-questions-in-cat-unlocking-the-secrets-to-your-success",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "CAT RC questions with answers",
+      "source": "related_search",
+      "seedQuery": "CAT reading comprehension problems",
+      "cannibalizationRisk": 0.25,
+      "closestExisting": "mastering-inference-questions-in-cat-unlocking-the-secrets-to-your-success",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "How to solve odd one out questions in CAT?",
+      "source": "people_also_ask",
+      "seedQuery": "CAT para jumbles para summary odd sentence",
+      "cannibalizationRisk": 0.25,
+      "closestExisting": "mastering-inference-questions-in-cat-unlocking-the-secrets-to-your-success",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "What are the reading comprehension passages for the CAT exam?",
+      "source": "people_also_ask",
+      "seedQuery": "CAT reading comprehension problems",
+      "cannibalizationRisk": 0.2857142857142857,
+      "closestExisting": "reading-comprehension-isnt-about-understanding-its-about-insight",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "Cat reading comprehension problems with answers",
+      "source": "related_search",
+      "seedQuery": "CAT reading comprehension problems",
+      "cannibalizationRisk": 0.3333333333333333,
+      "closestExisting": "reading-comprehension-isnt-about-understanding-its-about-insight",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "Cat reading comprehension problems with answers pdf",
+      "source": "related_search",
+      "seedQuery": "CAT reading comprehension problems",
+      "cannibalizationRisk": 0.3333333333333333,
+      "closestExisting": "reading-comprehension-isnt-about-understanding-its-about-insight",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "Cat reading comprehension problems pdf",
+      "source": "related_search",
+      "seedQuery": "CAT reading comprehension problems",
+      "cannibalizationRisk": 0.4,
+      "closestExisting": "reading-comprehension-isnt-about-understanding-its-about-insight",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "1000 Reading Comprehension PDF for CAT",
+      "source": "related_search",
+      "seedQuery": "CAT reading comprehension problems",
+      "cannibalizationRisk": 0.4,
+      "closestExisting": "reading-comprehension-isnt-about-understanding-its-about-insight",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "CAT Reading Comprehension book",
+      "source": "related_search",
+      "seedQuery": "CAT reading comprehension problems",
+      "cannibalizationRisk": 0.4,
+      "closestExisting": "reading-comprehension-isnt-about-understanding-its-about-insight",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    },
+    {
+      "query": "How to solve reading comprehension in cat?",
+      "source": "people_also_ask",
+      "seedQuery": "CAT reading comprehension problems",
+      "cannibalizationRisk": 0.4,
+      "closestExisting": "reading-comprehension-isnt-about-understanding-its-about-insight",
+      "recommendation": "RESEARCH_BRIEF",
+      "requiresEditorialReview": true
+    }
+  ]
+}

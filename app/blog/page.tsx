@@ -1,8 +1,23 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
 import BlogClient from "../components/BlogClient";
 import Navbar from "../components/Navbar";
+import { getAllBlogPosts } from "../../lib/blog";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "CAT VARC & Reading Comprehension Blog | Auctor Labs",
+  description: "Practical CAT VARC strategies, reading comprehension methods, worked explanations and preparation guidance from Auctor Labs.",
+  alternates: {
+    canonical: "https://auctorlabs.in/blog",
+    types: { "application/rss+xml": "https://auctorlabs.in/blog/rss.xml" },
+  },
+  openGraph: {
+    type: "website",
+    url: "https://auctorlabs.in/blog",
+    siteName: "Auctor Labs",
+    title: "CAT VARC & Reading Comprehension Blog",
+    description: "Practical CAT VARC strategies, reading comprehension methods and worked explanations from Auctor Labs.",
+  },
+};
 
 type Blog = {
   slug: string;
@@ -13,34 +28,15 @@ type Blog = {
   category?: string;
 };
 
-function getBlogs() {
-  const dir = path.join(process.cwd(), "content/blog");
-  const files = fs.readdirSync(dir);
-
-  const blogs: Blog[] = files.map((file) => {
-    const slug = file.replace(".mdx", "");
-    const filePath = path.join(dir, file);
-    const source = fs.readFileSync(filePath, "utf-8");
-
-    const { data } = matter(source);
-
-    return {
-      slug,
-      title: data.title || "",
-      description: data.description || "",
-      date: data.date || "",
-      image: data.image || "",
-      category: data.category || "General",
-    };
-  }); // ✅ VERY IMPORTANT — closes map
-
-  return blogs.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
-}
-
 export default function BlogPage() {
-  const blogs = getBlogs();
+  const blogs: Blog[] = getAllBlogPosts().map(({ slug, title, description, date, image, category }) => ({
+    slug,
+    title,
+    description,
+    date,
+    image,
+    category,
+  }));
 
   return (
     <>

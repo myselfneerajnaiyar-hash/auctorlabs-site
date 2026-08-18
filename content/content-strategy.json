@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "minimumQualityScore": 78,
+  "publishingCadence": "One thoroughly reviewed article per week; use the second weekly slot for an update when the audit identifies overlap or staleness.",
+  "clusters": [
+    { "id": "cat-varc-strategy", "name": "CAT VARC Strategy", "pillar": "cat-varc-preparation-strategy", "priority": 95 },
+    { "id": "cat-reading-comprehension", "name": "CAT Reading Comprehension", "pillar": "cat-reading-comprehension-guide", "priority": 100 },
+    { "id": "rc-question-types", "name": "RC Question Types", "pillar": "cat-rc-question-types", "priority": 92 },
+    { "id": "verbal-ability", "name": "CAT Verbal Ability", "pillar": "cat-verbal-ability-guide", "priority": 96 },
+    { "id": "mock-analysis", "name": "VARC Mock Analysis", "pillar": "cat-varc-mock-analysis", "priority": 90 },
+    { "id": "reading-skills", "name": "Reading Skills", "pillar": "improve-reading-for-cat-varc", "priority": 82 }
+  ],
+  "queue": [
+    {
+      "action": "CREATE_NEW",
+      "primaryKeyword": "CAT para summary strategy",
+      "secondaryKeywords": ["para summary CAT 2026", "how to solve para summary", "para summary examples"],
+      "searchIntent": "Learn a repeatable method and apply it to worked examples",
+      "cluster": "verbal-ability",
+      "title": "CAT Para Summary: A Scope-and-Structure Method That Actually Works",
+      "slug": "cat-para-summary-strategy",
+      "priorityScore": 94,
+      "targetPage": "/test-series",
+      "reason": "Core VARC intent is completely absent from the current inventory; SERPs reward worked examples and trap taxonomies."
+    },
+    {
+      "action": "CREATE_NEW",
+      "primaryKeyword": "CAT odd sentence out strategy",
+      "secondaryKeywords": ["odd one out CAT", "odd sentence questions", "sentence exclusion CAT"],
+      "searchIntent": "Learn coherence tests and practise with explained examples",
+      "cluster": "verbal-ability",
+      "title": "CAT Odd Sentence Out: Build the Core Paragraph Before You Eliminate",
+      "slug": "cat-odd-sentence-out-strategy",
+      "priorityScore": 92,
+      "targetPage": "/test-series",
+      "reason": "High-relevance gap with clear example-led differentiation."
+    },
+    {
+      "action": "CREATE_NEW",
+      "primaryKeyword": "CAT para jumbles strategy",
+      "secondaryKeywords": ["para jumbles CAT 2026", "how to solve para jumbles", "parajumble examples"],
+      "searchIntent": "Learn paragraph-coherence signals through worked sets",
+      "cluster": "verbal-ability",
+      "title": "CAT Para Jumbles: Solve for Coherence, Not Sentence Pairs Alone",
+      "slug": "cat-para-jumbles-strategy",
+      "priorityScore": 91,
+      "targetPage": "/test-series",
+      "reason": "Core CAT VA topic missing from Auctor's content graph."
+    },
+    {
+      "action": "CREATE_NEW",
+      "primaryKeyword": "CAT VARC mock analysis",
+      "secondaryKeywords": ["how to analyse VARC mocks", "VARC score not improving", "CAT mock error log"],
+      "searchIntent": "Diagnose score volatility and turn mock errors into a practice plan",
+      "cluster": "mock-analysis",
+      "title": "How to Analyse a CAT VARC Mock: The Decision-Level Review",
+      "slug": "cat-varc-mock-analysis",
+      "priorityScore": 90,
+      "targetPage": "/test-series",
+      "reason": "Strong problem-solution and commercial intent; current community discussion shows persistent demand."
+    },
+    {
+      "action": "UPDATE",
+      "primaryKeyword": "how to improve RC accuracy for CAT",
+      "searchIntent": "Diagnose an accuracy plateau and apply a review framework",
+      "cluster": "cat-reading-comprehension",
+      "title": "Why You're Stuck at 60% Accuracy in RC",
+      "slug": "improve-rc-accuracy-cat",
+      "priorityScore": 88,
+      "targetPage": "/features/precision-drills",
+      "reason": "Existing page is the strongest candidate to consolidate overlapping accuracy articles into a differentiated pillar."
+    },
+    {
+      "action": "CREATE_NEW",
+      "primaryKeyword": "CAT RC question types",
+      "secondaryKeywords": ["main idea questions CAT", "inference questions CAT", "author tone CAT RC"],
+      "searchIntent": "Understand each RC question type and choose the correct solving process",
+      "cluster": "rc-question-types",
+      "title": "CAT RC Question Types: What Each One Actually Tests",
+      "slug": "cat-rc-question-types",
+      "priorityScore": 87,
+      "targetPage": "/features/reading-comprehension-generator",
+      "reason": "Auctor has isolated inference/tone posts but no navigational question-type pillar."
+    }
+  ]
+}

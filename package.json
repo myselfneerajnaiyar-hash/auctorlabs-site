@@ -6,7 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "blog:audit": "node scripts/blog-engine.mjs audit",
+    "blog:registry": "node scripts/blog-engine.mjs registry",
+    "blog:check": "node scripts/blog-engine.mjs check",
+    "blog:sample": "node scripts/blog-engine.mjs sample",
+    "blog:discover": "node scripts/blog-engine.mjs discover"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.110.0",

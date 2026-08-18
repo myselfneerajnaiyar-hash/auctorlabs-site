@@ -1,24 +1,25 @@
-import fs from "fs";
-import path from "path";
 import ProgressBar from "../../components/ProgressBar";
-import matter from "gray-matter";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import TableOfContents from "../../components/TableOfContents";
 import RelatedPosts from "../../components/RelatedPosts";
 import BlogPracticeCTA from "../../components/BlogPracticeCTA";
 import BlogArticleHeader from "../../components/BlogArticleHeader";
+import { absoluteUrl, BLOG_AUTHOR, getBlogPost, getBlogSlugs, SITE_URL } from "../../../lib/blog";
 
-type Props = {
-  params: {
-    slug: string;
-  };
-};
+type Props = { params: Promise<{ slug: string }> };
+
+export function generateStaticParams() {
+  return getBlogSlugs().map((slug) => ({ slug }));
+}
 
 function extractHeadings(content: string) {
   const regex = /^##\s+(.*)/gm;
   const matches = [...content.matchAll(regex)];
 
-  return matches.map((match, index) => {
+  return matches.map((match) => {
   const text = match[1];
 
   return {
@@ -30,67 +31,76 @@ function extractHeadings(content: string) {
 
 /* ================= METADATA ================= */
 
-export async function generateMetadata({ params }: any) {
-  const resolvedParams = await params;   // 🔥 IMPORTANT
-  const slug = resolvedParams.slug;
-
-  const filePath = path.join(
-    process.cwd(),
-    "content",
-    "blog",
-    `${slug}.mdx`
-  );
-
-  if (!fs.existsSync(filePath)) {
-    return {
-      title: "Blog",
-      description: "Auctor Labs Blog",
-    };
-  }
-
-  const source = fs.readFileSync(filePath, "utf-8");
-  const {content,  data } = matter(source);
-  const headings = extractHeadings(content);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getBlogPost(slug);
+  if (!post) return {};
+  const canonical = `${SITE_URL}/blog/${slug}`;
+  const image = absoluteUrl(post.image);
 
   return {
-    title: data.title,
-    description: data.description,
+    title: post.title,
+    description: post.description,
+    alternates: { canonical },
+    openGraph: {
+      type: "article",
+      url: canonical,
+      siteName: "Auctor Labs",
+      title: post.title,
+      description: post.description,
+      publishedTime: post.date,
+      modifiedTime: post.updatedDate || post.date,
+      authors: [BLOG_AUTHOR.url],
+      images: image ? [{ url: image, alt: post.imageAlt || post.title }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+      images: image ? [image] : undefined,
+    },
   };
 }
 /* ================= PAGE ================= */
 
-export default async function BlogPage({ params }: any) {
-  const resolvedParams = await params;   // 🔥 same fix
-  const slug = resolvedParams.slug;
-  const filePath = path.join(
-    process.cwd(),
-    "content",
-    "blog",
-    `${slug}.mdx`
-  );
-
-  // DEBUG (remove later if you want)
-  console.log("SLUG:", slug);
-  console.log("PATH:", filePath);
-
-  if (!fs.existsSync(filePath)) {
-    return (
-      <div className="bg-[#0B0F1A] text-white min-h-screen flex items-center justify-center">
-        <div className="text-xl">Blog not found</div>
-      </div>
-    );
-  }
-
-  const source = fs.readFileSync(filePath, "utf-8");
-  const { content, data } = matter(source);
+export default async function BlogPage({ params }: Props) {
+  const { slug } = await params;
+  const post = getBlogPost(slug);
+  if (!post || post.status !== "published") notFound();
+  const { content } = post;
   const headings = extractHeadings(content);
   const finalThoughtMarker = /^##\s+Final Thought\s*$/m;
   const markerMatch = finalThoughtMarker.exec(content);
   const contentBeforeCta = markerMatch ? content.slice(0, markerMatch.index) : content;
   const contentAfterCta = markerMatch ? content.slice(markerMatch.index) : "";
 
+  const canonical = `${SITE_URL}/blog/${slug}`;
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": post.schemaType || "BlogPosting",
+    headline: post.title,
+    description: post.description,
+    image: absoluteUrl(post.image),
+    datePublished: post.date,
+    dateModified: post.updatedDate || post.date,
+    mainEntityOfPage: canonical,
+    author: { "@type": "Organization", name: post.author || BLOG_AUTHOR.name, url: BLOG_AUTHOR.url },
+    publisher: { "@type": "Organization", name: "Auctor Labs", url: SITE_URL },
+  };
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
+      { "@type": "ListItem", position: 3, name: post.title, item: canonical },
+    ],
+  };
+
  return (
  <div className="bg-[#0B0F1A] text-white min-h-screen overflow-x-hidden">
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema).replace(/</g, "\\u003c") }} />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }} />
 
     {/* 🔥 PROGRESS BAR */}
   <ProgressBar />
@@ -101,13 +111,26 @@ export default async function BlogPage({ params }: any) {
       {/* 📖 MAIN CONTENT */}
      <div className="col-span-12 lg:col-span-8 max-w-full">
 
+        <nav aria-label="Breadcrumb" className="mb-8 flex items-center gap-2 text-sm text-gray-500">
+          <Link href="/" className="hover:text-gray-300">Home</Link>
+          <span aria-hidden="true">/</span>
+          <Link href="/blog" className="hover:text-gray-300">Blog</Link>
+          <span aria-hidden="true">/</span>
+          <span className="truncate text-gray-400" aria-current="page">{post.title}</span>
+        </nav>
+
         <h1 className="text-5xl font-bold leading-tight mb-6">
-          {data.title}
+          {post.title}
         </h1>
 
-        <p className="text-gray-400 mb-12">
-          {data.date} • 5 min read
-        </p>
+        <div className="mb-12 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-gray-400">
+          <span>By <Link href="/about" rel="author" className="text-gray-300 hover:text-white">{post.author}</Link></span>
+          <span aria-hidden="true">•</span>
+          <time dateTime={post.date}>Published {post.date}</time>
+          {post.updatedDate && <><span aria-hidden="true">•</span><time dateTime={post.updatedDate}>Updated {post.updatedDate}</time></>}
+          <span aria-hidden="true">•</span>
+          <span>{post.readingTime} min read</span>
+        </div>
 
 
        <article className="prose-custom max-w-none w-full">
