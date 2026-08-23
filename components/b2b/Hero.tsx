@@ -28,13 +28,13 @@ export default function Hero() {
 
             <div className="inline-flex items-center rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-2 text-sm font-semibold tracking-wider text-orange-400">
 
-              FOR COACHING INSTITUTES
+              AI IS CHANGING EDUCATION
 
             </div>
 
             <h1 className="mt-8 text-6xl font-black leading-[1.05] tracking-tight text-white">
 
-              Build the smartest
+            The Institutes
 
               <br />
 

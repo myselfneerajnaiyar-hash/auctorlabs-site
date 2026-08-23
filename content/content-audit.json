@@ -1,19 +1,25 @@
 {
-  "generatedAt": "2026-08-13T13:13:46.094Z",
-  "allowedActions": [
-    "UPDATE",
-    "MERGE",
-    "REDIRECT",
-    "EXPAND",
-    "CREATE_NEW",
-    "LEAVE_ALONE"
-  ],
+  "generatedAt": "2026-08-21T11:55:59.985Z",
   "summary": {
-    "posts": 27,
-    "overlaps": 9,
+    "posts": 31,
+    "published": 27,
+    "drafts": 4,
+    "overlaps": 15,
     "expandOrUpdate": 27
   },
   "overlaps": [
+    {
+      "left": "improve-rc-accuracy-cat",
+      "right": "mastering-reading-comprehension-unlocking-the-secrets-to-higher-accuracy-in-cat",
+      "similarity": 0.5,
+      "recommendation": "REVIEW_FOR_MERGE_OR_DIFFERENTIATION"
+    },
+    {
+      "left": "improve-rc-accuracy-cat",
+      "right": "unlocking-precision-mastering-reading-comprehension-accuracy-for-cat-success",
+      "similarity": 0.6,
+      "recommendation": "REVIEW_FOR_MERGE_OR_DIFFERENTIATION"
+    },
     {
       "left": "mastering-cat-verbal-ability-secrets-to-conquering-reading-comprehension-challenges",
       "right": "mastering-verbal-ability-and-reading-comprehension-for-cat-strategies-to-unlock-your-full-potential",
@@ -24,6 +30,18 @@
       "left": "mastering-inference-questions-in-cat-unlocking-the-secrets-to-critical-thinking-success",
       "right": "mastering-inference-questions-in-cat-unlocking-the-secrets-to-your-success",
       "similarity": 0.6,
+      "recommendation": "REVIEW_FOR_MERGE_OR_DIFFERENTIATION"
+    },
+    {
+      "left": "mastering-rc-youre-probably-just-memorizing-not-understanding",
+      "right": "reading-comprehension-isnt-about-understanding-its-about-insight",
+      "similarity": 0.43,
+      "recommendation": "REVIEW_FOR_MERGE_OR_DIFFERENTIATION"
+    },
+    {
+      "left": "mastering-rc-youre-probably-just-memorizing-not-understanding",
+      "right": "understanding-rc-answers-youre-probably-misreading-the-inferences",
+      "similarity": 0.44,
       "recommendation": "REVIEW_FOR_MERGE_OR_DIFFERENTIATION"
     },
     {
@@ -63,7 +81,19 @@
       "recommendation": "REVIEW_FOR_MERGE_OR_DIFFERENTIATION"
     },
     {
+      "left": "reading-comprehension-isnt-about-understanding-its-about-insight",
+      "right": "understanding-rc-answers-youre-probably-misreading-the-inferences",
+      "similarity": 0.38,
+      "recommendation": "REVIEW_FOR_MERGE_OR_DIFFERENTIATION"
+    },
+    {
       "left": "unlocking-success-common-rc-mistakes-cat-aspirants-make-and-how-to-overcome-them",
+      "right": "unlocking-success-top-common-rc-mistakes-cat-aspirants-must-avoid",
+      "similarity": 0.5,
+      "recommendation": "REVIEW_FOR_MERGE_OR_DIFFERENTIATION"
+    },
+    {
+      "left": "unlocking-success-mastering-reading-comprehension-questions-for-cat-aspirants",
       "right": "unlocking-success-top-common-rc-mistakes-cat-aspirants-must-avoid",
       "similarity": 0.38,
       "recommendation": "REVIEW_FOR_MERGE_OR_DIFFERENTIATION"
@@ -72,243 +102,270 @@
   "recommendations": [
     {
       "slug": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations",
-        "Meta description duplicates title"
+        "Thin relative to intended depth"
       ]
     },
     {
       "slug": "focusing-on-words-blinds-you-to-the-real-meaning",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations",
-        "Meta description duplicates title"
+        "Thin relative to intended depth"
       ]
     },
     {
       "slug": "improve-rc-accuracy-cat",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations"
+        "Thin relative to intended depth"
       ]
     },
     {
       "slug": "mastering-cat-reading-comprehension-unveiling-strategies-and-insights-behind-sample-questions-and-answers",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations",
-        "Meta description duplicates title"
+        "Thin relative to intended depth"
       ]
     },
     {
       "slug": "mastering-cat-verbal-ability-secrets-to-conquering-reading-comprehension-challenges",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations",
-        "Meta description duplicates title"
+        "Thin relative to intended depth"
       ]
     },
     {
       "slug": "mastering-inference-questions-in-cat-unlocking-the-secrets-to-critical-thinking-success",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations",
-        "Meta description duplicates title"
+        "Thin relative to intended depth"
       ]
     },
     {
       "slug": "mastering-inference-questions-in-cat-unlocking-the-secrets-to-your-success",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations",
-        "Meta description duplicates title"
+        "Thin relative to intended depth"
       ]
     },
     {
       "slug": "mastering-rc-youre-just-one-misread-away-from-failure",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations",
-        "Meta description duplicates title"
+        "Thin relative to intended depth"
       ]
     },
     {
       "slug": "mastering-rc-youre-probably-just-memorizing-not-understanding",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations",
-        "Meta description duplicates title"
+        "Thin relative to intended depth"
       ]
     },
     {
       "slug": "mastering-reading-comprehension-for-cat-unlocking-the-secrets-to-high-scores",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations",
-        "Meta description duplicates title"
+        "Thin relative to intended depth"
       ]
     },
     {
       "slug": "mastering-reading-comprehension-insider-strategies-to-elevate-your-cat-prep",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations",
-        "Meta description duplicates title"
+        "Thin relative to intended depth"
       ]
     },
     {
       "slug": "mastering-reading-comprehension-unlocking-strategies-to-elevate-your-cat-preparation",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations",
-        "Meta description duplicates title"
+        "Thin relative to intended depth"
       ]
     },
     {
       "slug": "mastering-reading-comprehension-unlocking-the-secrets-to-higher-accuracy-in-cat",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations",
-        "Meta description duplicates title"
+        "Thin relative to intended depth"
       ]
     },
     {
       "slug": "mastering-verbal-ability-and-reading-comprehension-for-cat-strategies-to-unlock-your-full-potential",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations",
-        "Meta description duplicates title"
+        "Thin relative to intended depth"
       ]
     },
     {
       "slug": "rc-inference-decision-trap",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations"
+        "Thin relative to intended depth"
       ]
     },
     {
       "slug": "rc-tone-hidden-skill",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations"
+        "Thin relative to intended depth"
       ]
     },
     {
       "slug": "reading-comprehension-isnt-about-understanding-its-about-insight",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations",
-        "Meta description duplicates title"
+        "Thin relative to intended depth"
       ]
     },
     {
       "slug": "understanding-rc-answers-youre-probably-misreading-the-inferences",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations",
-        "Meta description duplicates title"
+        "Thin relative to intended depth"
       ]
     },
     {
       "slug": "understanding-the-text-doesnt-mean-grasping-its-deeper-implications",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations",
-        "Meta description duplicates title"
+        "Thin relative to intended depth"
       ]
     },
     {
       "slug": "unlocking-precision-mastering-reading-comprehension-accuracy-for-cat-success",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations",
-        "Meta description duplicates title"
+        "Thin relative to intended depth"
       ]
     },
     {
       "slug": "unlocking-success-common-rc-mistakes-cat-aspirants-make-and-how-to-overcome-them",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations",
-        "Meta description duplicates title"
+        "Thin relative to intended depth"
       ]
     },
     {
       "slug": "unlocking-success-how-daily-reading-comprehension-transforms-your-cat-preparation",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations",
-        "Meta description duplicates title"
+        "Thin relative to intended depth"
       ]
     },
     {
       "slug": "unlocking-success-mastering-reading-comprehension-for-cat-with-proven-strategies",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations",
-        "Meta description duplicates title"
+        "Thin relative to intended depth"
       ]
     },
     {
       "slug": "unlocking-success-mastering-reading-comprehension-questions-for-cat-aspirants",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations",
-        "Meta description duplicates title"
+        "Thin relative to intended depth"
       ]
     },
     {
       "slug": "unlocking-success-top-common-rc-mistakes-cat-aspirants-must-avoid",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations",
-        "Meta description duplicates title"
+        "Thin relative to intended depth"
       ]
     },
     {
       "slug": "your-comfort-with-tone-masks-a-deeper-misunderstanding-in-rc",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations",
-        "Meta description duplicates title"
+        "Thin relative to intended depth"
       ]
     },
     {
       "slug": "your-comprehension-is-strong-yet-your-inferences-are-weak",
+      "status": "published",
       "action": "EXPAND",
       "reasons": [
         "Missing keyword/intent mapping",
-        "Thin relative to current SERP expectations",
-        "Meta description duplicates title"
+        "Thin relative to intended depth"
       ]
+    },
+    {
+      "slug": "cat-para-summary-strategy",
+      "status": "draft",
+      "action": "LEAVE_ALONE",
+      "reasons": []
+    },
+    {
+      "slug": "learn-vocabulary-from-context-competitive-exams",
+      "status": "draft",
+      "action": "LEAVE_ALONE",
+      "reasons": []
+    },
+    {
+      "slug": "reading-comprehension-trap-answers-proof-before-pick",
+      "status": "draft",
+      "action": "LEAVE_ALONE",
+      "reasons": []
+    },
+    {
+      "slug": "subject-verb-agreement-common-exam-traps",
+      "status": "draft",
+      "action": "LEAVE_ALONE",
+      "reasons": []
     }
   ]
 }

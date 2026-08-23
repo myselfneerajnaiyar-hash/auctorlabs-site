@@ -198,8 +198,6 @@ export default function WhatYouGet() {
 
         </AnimatePresence>
 
-       
-
       </div>
 
     </section>

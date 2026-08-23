@@ -67,15 +67,14 @@ export default function BlogClient({ blogs }: { blogs: Blog[] }) {
           className="w-full md:w-1/3 px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white"
         />
 
-        <div className="flex gap-2">
+        <div className="flex w-full gap-2 overflow-x-auto pb-2 md:w-auto md:pb-0">
           {[
             "All",
-            "Accuracy",
-            "Inference",
-            "Tone",
-            "Elimination",
-            "Speed",
-            "Strategy",
+            "Reading Comprehension",
+            "Vocabulary",
+            "Grammar",
+            "Verbal Ability",
+            "Critical Reading",
           ].map((cat) => (
             <button
               key={cat}

@@ -11,7 +11,11 @@
     "blog:registry": "node scripts/blog-engine.mjs registry",
     "blog:check": "node scripts/blog-engine.mjs check",
     "blog:sample": "node scripts/blog-engine.mjs sample",
-    "blog:discover": "node scripts/blog-engine.mjs discover"
+    "blog:discover": "node scripts/blog-engine.mjs discover",
+    "blog:plan": "node scripts/blog-engine.mjs plan",
+    "blog:generate": "node scripts/blog-engine.mjs generate",
+    "blog:publish": "node scripts/blog-engine.mjs publish",
+    "blog:roadmap": "node scripts/blog-engine.mjs roadmap"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.110.0",

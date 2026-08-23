@@ -1,825 +1,2387 @@
 {
-  "generatedAt": "2026-08-13T13:13:46.067Z",
+  "generatedAt": "2026-08-23T13:18:35.631Z",
   "posts": [
     {
-      "url": "/blog/accuracy-in-rc-ignoring-context-could-ruin-your-score",
       "slug": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+      "url": "/blog/accuracy-in-rc-ignoring-context-could-ruin-your-score",
       "title": "Accuracy in RC? Ignoring Context Could Ruin Your Score",
       "description": "Accuracy in RC? Ignoring Context Could Ruin Your Score",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Accuracy",
       "category": "Accuracy",
-      "publicationDate": "2026-05-20",
-      "updatedDate": null,
       "status": "published",
-      "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
-      "internalLinks": [
-        "/blog/accuracy-in-rc-ignoring-context-could-ruin-your-score-1.png",
-        "/blog/accuracy-in-rc-ignoring-context-could-ruin-your-score-2.png",
-        "/features/precision-drills"
-      ],
-      "externalReferences": [],
+      "date": "2026-05-20",
+      "updatedDate": "",
       "image": "/blog/accuracy-in-rc-ignoring-context-could-ruin-your-score-featured.png",
-      "imageAlt": null,
-      "schemaType": "BlogPosting",
-      "seoScore": 40,
-      "contentQualityScore": 61,
+      "imageAlt": "",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
       "backlinkOpportunities": [],
-      "refreshDate": null,
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
       "wordCount": 585,
-      "headings": 7
+      "headings": 7,
+      "internalLinks": [
+        "/features/precision-drills"
+      ]
     },
     {
-      "url": "/blog/focusing-on-words-blinds-you-to-the-real-meaning",
+      "slug": "cat-varc-passages",
+      "url": "/blog/cat-varc-passages",
+      "title": "CAT VARC Passages: A Skill-Building Solving Guide",
+      "description": "Learn how to read, map, select, and solve CAT VARC passages with original examples, option-elimination methods, timed practice, and error review.",
+      "primaryKeyword": "CAT VARC Passages",
+      "secondaryKeywords": [
+        "CAT RC passages",
+        "CAT reading comprehension passages",
+        "CAT VARC practice",
+        "CAT RC questions with answers",
+        "CAT RC practice",
+        "CAT VARC passages with answers",
+        "CAT reading comprehension practice"
+      ],
+      "searchIntent": "Skill-building",
+      "cluster": "Reading Comprehension",
+      "category": "Reading Comprehension",
+      "status": "published",
+      "date": "2026-08-22",
+      "updatedDate": "2026-08-22",
+      "image": "/blog/cat-varc-passages-featured.png",
+      "imageAlt": "CAT VARC passage-solving diagram showing passage mapping and answer-choice elimination",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [
+        "CAT"
+      ],
+      "targetPage": "/cat-varc-passages",
+      "relatedArticles": [],
+      "externalReferences": [
+        "https://iim-cat-questions-answers.2iim.com/verbal/reading-comprehension/",
+        "https://bodheeprep.com/free-cat-rc-practice-problems",
+        "https://cracku.in/cat-reading-comprehension-questions",
+        "https://mbakaro.in/daily-reading-comprehension/",
+        "https://www.iquanta.in/blog/cat-rc-preparation-tips/",
+        "https://www.careerlauncher.com/cat-mba/freecatmock/reading-comprehension.jsp",
+        "https://mba.hitbullseye.com/CAT/Reading-Comprehension-Test.php",
+        "https://lptedtech.com/blog/cat/practice-questions/varc/"
+      ],
+      "backlinkOpportunities": [
+        {
+          "site": "iim-cat-questions-answers.2iim.com",
+          "sourcePage": "https://iim-cat-questions-answers.2iim.com/verbal/reading-comprehension/",
+          "sourcePageReason": "The page is an existing CAT reading-comprehension practice resource and is directly relevant to a guide that adds a structured solving and review framework.",
+          "reason": "The article can complement a passage bank by explaining how to use individual passages for deliberate practice rather than passive volume-based practice.",
+          "potentialAngle": "Offer a concise companion section on passage mapping, question-type diagnosis, and post-practice error analysis for readers using CAT RC questions.",
+          "suggestedOutreachType": "Editorial resource suggestion with a specific contextual link placement",
+          "priority": "high"
+        },
+        {
+          "site": "bodheeprep.com",
+          "sourcePage": "https://bodheeprep.com/free-cat-rc-practice-problems",
+          "sourcePageReason": "The page explicitly provides CAT RC practice problems and is relevant to a method-based guide for using RC sets effectively.",
+          "reason": "The proposed article supplies a process layer—selection, timed progression, and review—that a practice-question page may not cover in depth.",
+          "potentialAngle": "Suggest the guide as a study-method resource near the practice-question collection or explanation section.",
+          "suggestedOutreachType": "Relevant-content outreach",
+          "priority": "high"
+        },
+        {
+          "site": "cracku.in",
+          "sourcePage": "https://cracku.in/cat-reading-comprehension-questions",
+          "sourcePageReason": "The source page is dedicated to CAT reading-comprehension questions and explanations.",
+          "reason": "The proposed guide can help users interpret explanations, classify mistakes, and turn question practice into measurable skill improvement.",
+          "potentialAngle": "Contribute a short expert section or suggest the article as a companion guide for readers working through the RC question bank.",
+          "suggestedOutreachType": "Editorial collaboration or resource suggestion",
+          "priority": "high"
+        },
+        {
+          "site": "iquanta.in",
+          "sourcePage": "https://www.iquanta.in/blog/cat-rc-preparation-tips/",
+          "sourcePageReason": "The page covers CAT RC preparation and practice, making it directly relevant to a more granular guide on passage-solving mechanics.",
+          "reason": "The article’s original worked examples can demonstrate central-idea tracking and evidence-based elimination in a way that extends general preparation advice.",
+          "potentialAngle": "Suggest the worked-example guide as a practical follow-up to broad CAT RC preparation tips.",
+          "suggestedOutreachType": "Contextual resource outreach",
+          "priority": "medium"
+        },
+        {
+          "site": "careerlauncher.com",
+          "sourcePage": "https://www.careerlauncher.com/cat-mba/freecatmock/reading-comprehension.jsp",
+          "sourcePageReason": "The page offers free CAT RC mock practice and also references other MBA entrance examinations.",
+          "reason": "The proposed article explains how to prepare before and review after using timed RC mocks, with transferable verbal skills across the named exams.",
+          "potentialAngle": "Position the guide as a pre-mock and post-mock RC strategy resource rather than as another mock-test page.",
+          "suggestedOutreachType": "Resource-page suggestion",
+          "priority": "medium"
+        },
+        {
+          "site": "mba.hitbullseye.com",
+          "sourcePage": "https://mba.hitbullseye.com/CAT/Reading-Comprehension-Test.php",
+          "sourcePageReason": "The page is a CAT reading-comprehension practice-test resource and is relevant to timed passage practice.",
+          "reason": "The proposed article addresses how to use timed tests diagnostically and how to review passage and option-level errors afterward.",
+          "potentialAngle": "Suggest a link to the guide in a preparation or test-review context, subject to the publisher’s editorial standards.",
+          "suggestedOutreachType": "Relevant resource outreach",
+          "priority": "medium"
+        }
+      ],
+      "schemaType": "BlogPosting",
+      "seoScore": 84,
+      "contentQualityScore": 84,
+      "wordCount": 2486,
+      "headings": 32,
+      "internalLinks": [
+        "/test-series",
+        "/auctor-rc",
+        "/features/precision-drills"
+      ]
+    },
+    {
       "slug": "focusing-on-words-blinds-you-to-the-real-meaning",
+      "url": "/blog/focusing-on-words-blinds-you-to-the-real-meaning",
       "title": "Focusing on Words Blinds You to the Real Meaning",
       "description": "Focusing on Words Blinds You to the Real Meaning",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Accuracy",
       "category": "Accuracy",
-      "publicationDate": "2026-04-21",
-      "updatedDate": null,
       "status": "published",
+      "date": "2026-04-21",
+      "updatedDate": "",
+      "image": "/blog/focusing-on-words-blinds-you-to-the-real-meaning-featured.png",
+      "imageAlt": "",
       "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
+      "backlinkOpportunities": [],
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
+      "wordCount": 482,
+      "headings": 7,
       "internalLinks": [
-        "/blog/focusing-on-words-blinds-you-to-the-real-meaning-1.png",
-        "/blog/focusing-on-words-blinds-you-to-the-real-meaning-2.png",
         "/features/vocabulary-lab",
         "https://auctorlabs.in/blog/rc-tone-hidden-skill",
         "https://auctorlabs.in/blog/understanding-the-text-doesnt-mean-grasping-its-deeper-implications"
-      ],
-      "externalReferences": [],
-      "image": "/blog/focusing-on-words-blinds-you-to-the-real-meaning-featured.png",
-      "imageAlt": null,
-      "schemaType": "BlogPosting",
-      "seoScore": 40,
-      "contentQualityScore": 53,
-      "backlinkOpportunities": [],
-      "refreshDate": null,
-      "wordCount": 482,
-      "headings": 7
+      ]
     },
     {
-      "url": "/blog/improve-rc-accuracy-cat",
       "slug": "improve-rc-accuracy-cat",
+      "url": "/blog/improve-rc-accuracy-cat",
       "title": "Why You're Stuck at 60% Accuracy in RC",
       "description": "Most aspirants don’t have a comprehension problem. They have a decision-making problem.",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Accuracy",
       "category": "Accuracy",
-      "publicationDate": "2026-04-18",
-      "updatedDate": null,
       "status": "published",
+      "date": "2026-04-18",
+      "updatedDate": "",
+      "image": "/blog/image1.png",
+      "imageAlt": "",
       "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
+      "backlinkOpportunities": [],
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
+      "wordCount": 541,
+      "headings": 7,
       "internalLinks": [
-        "/blog/image1.png",
-        "/blog/image2.png",
         "https://www.auctorlabs.in/blog/your-comprehension-is-strong-yet-your-inferences-are-weak",
         "https://auctorlabs.in/blog/rc-inference-decision-trap",
         "https://auctorlabs.in/blog/rc-tone-hidden-skill",
         "https://auctorlabs.in/blog/unlocking-success-common-rc-mistakes-cat-aspirants-make-and-how-to-overcome-them"
-      ],
-      "externalReferences": [],
-      "image": "/blog/image1.png",
-      "imageAlt": null,
-      "schemaType": "BlogPosting",
-      "seoScore": 33,
-      "contentQualityScore": 46,
-      "backlinkOpportunities": [],
-      "refreshDate": null,
-      "wordCount": 541,
-      "headings": 7
+      ]
     },
     {
-      "url": "/blog/mastering-cat-reading-comprehension-unveiling-strategies-and-insights-behind-sample-questions-and-answers",
       "slug": "mastering-cat-reading-comprehension-unveiling-strategies-and-insights-behind-sample-questions-and-answers",
+      "url": "/blog/mastering-cat-reading-comprehension-unveiling-strategies-and-insights-behind-sample-questions-and-answers",
       "title": "Mastering CAT Reading Comprehension: Unveiling Strategies and Insights Behind Sample Questions and Answers",
       "description": "Mastering CAT Reading Comprehension: Unveiling Strategies and Insights Behind Sample Questions and Answers",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Tone",
       "category": "Tone",
-      "publicationDate": "2026-04-20",
-      "updatedDate": null,
       "status": "published",
-      "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
-      "internalLinks": [
-        "/blog/IM-3.png",
-        "/blog/IM-5.png",
-        "/features/reading-comprehension-generator"
-      ],
-      "externalReferences": [],
+      "date": "2026-04-20",
+      "updatedDate": "",
       "image": "/blog/IM-3.png",
-      "imageAlt": null,
-      "schemaType": "BlogPosting",
-      "seoScore": 25,
-      "contentQualityScore": 61,
+      "imageAlt": "",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
       "backlinkOpportunities": [],
-      "refreshDate": null,
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
       "wordCount": 531,
-      "headings": 7
+      "headings": 7,
+      "internalLinks": [
+        "/features/reading-comprehension-generator"
+      ]
     },
     {
-      "url": "/blog/mastering-cat-verbal-ability-secrets-to-conquering-reading-comprehension-challenges",
       "slug": "mastering-cat-verbal-ability-secrets-to-conquering-reading-comprehension-challenges",
+      "url": "/blog/mastering-cat-verbal-ability-secrets-to-conquering-reading-comprehension-challenges",
       "title": "Mastering CAT Verbal Ability: Secrets to Conquering Reading Comprehension Challenges",
       "description": "Mastering CAT Verbal Ability: Secrets to Conquering Reading Comprehension Challenges",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Speed",
       "category": "Speed",
-      "publicationDate": "2026-04-20",
-      "updatedDate": null,
       "status": "published",
-      "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
-      "internalLinks": [
-        "/blog/IM-19.png",
-        "/blog/IM-10.png",
-        "/features/speed-drills"
-      ],
-      "externalReferences": [],
+      "date": "2026-04-20",
+      "updatedDate": "",
       "image": "/blog/IM-19.png",
-      "imageAlt": null,
-      "schemaType": "BlogPosting",
-      "seoScore": 25,
-      "contentQualityScore": 55,
+      "imageAlt": "",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
       "backlinkOpportunities": [],
-      "refreshDate": null,
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
       "wordCount": 551,
-      "headings": 7
+      "headings": 7,
+      "internalLinks": [
+        "/features/speed-drills"
+      ]
     },
     {
-      "url": "/blog/mastering-inference-questions-in-cat-unlocking-the-secrets-to-critical-thinking-success",
       "slug": "mastering-inference-questions-in-cat-unlocking-the-secrets-to-critical-thinking-success",
+      "url": "/blog/mastering-inference-questions-in-cat-unlocking-the-secrets-to-critical-thinking-success",
       "title": "Mastering Inference Questions in CAT: Unlocking the Secrets to Critical Thinking Success",
       "description": "Mastering Inference Questions in CAT: Unlocking the Secrets to Critical Thinking Success",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Strategy",
       "category": "Strategy",
-      "publicationDate": "2026-04-20",
-      "updatedDate": null,
       "status": "published",
-      "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
-      "internalLinks": [
-        "/blog/IM-18.png",
-        "/blog/IM-5.png"
-      ],
-      "externalReferences": [],
+      "date": "2026-04-20",
+      "updatedDate": "",
       "image": "/blog/IM-18.png",
-      "imageAlt": null,
-      "schemaType": "BlogPosting",
-      "seoScore": 18,
-      "contentQualityScore": 42,
+      "imageAlt": "",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
       "backlinkOpportunities": [],
-      "refreshDate": null,
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
       "wordCount": 470,
-      "headings": 7
+      "headings": 7,
+      "internalLinks": []
     },
     {
-      "url": "/blog/mastering-inference-questions-in-cat-unlocking-the-secrets-to-your-success",
       "slug": "mastering-inference-questions-in-cat-unlocking-the-secrets-to-your-success",
+      "url": "/blog/mastering-inference-questions-in-cat-unlocking-the-secrets-to-your-success",
       "title": "Mastering Inference Questions in CAT: Unlocking the Secrets to Your Success",
       "description": "Mastering Inference Questions in CAT: Unlocking the Secrets to Your Success",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Inference",
       "category": "Inference",
-      "publicationDate": "2026-04-20",
-      "updatedDate": null,
       "status": "published",
-      "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
-      "internalLinks": [
-        "/blog/IM-15.png",
-        "/blog/IM-23.png"
-      ],
-      "externalReferences": [],
+      "date": "2026-04-20",
+      "updatedDate": "",
       "image": "/blog/IM-15.png",
-      "imageAlt": null,
-      "schemaType": "BlogPosting",
-      "seoScore": 18,
-      "contentQualityScore": 48,
+      "imageAlt": "",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
       "backlinkOpportunities": [],
-      "refreshDate": null,
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
       "wordCount": 464,
-      "headings": 7
+      "headings": 7,
+      "internalLinks": []
     },
     {
-      "url": "/blog/mastering-rc-youre-just-one-misread-away-from-failure",
       "slug": "mastering-rc-youre-just-one-misread-away-from-failure",
+      "url": "/blog/mastering-rc-youre-just-one-misread-away-from-failure",
       "title": "Mastering RC? You're Just One Misread Away From Failure",
       "description": "Mastering RC? You're Just One Misread Away From Failure",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Tone",
       "category": "Tone",
-      "publicationDate": "2026-04-21",
-      "updatedDate": null,
       "status": "published",
-      "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
-      "internalLinks": [
-        "/blog/mastering-rc-youre-just-one-misread-away-from-failure-1.png",
-        "/blog/mastering-rc-youre-just-one-misread-away-from-failure-2.png"
-      ],
-      "externalReferences": [],
+      "date": "2026-04-21",
+      "updatedDate": "",
       "image": "/blog/mastering-rc-youre-just-one-misread-away-from-failure-featured.png",
-      "imageAlt": null,
-      "schemaType": "BlogPosting",
-      "seoScore": 33,
-      "contentQualityScore": 46,
+      "imageAlt": "",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
       "backlinkOpportunities": [],
-      "refreshDate": null,
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
       "wordCount": 514,
-      "headings": 7
+      "headings": 7,
+      "internalLinks": []
     },
     {
-      "url": "/blog/mastering-rc-youre-probably-just-memorizing-not-understanding",
       "slug": "mastering-rc-youre-probably-just-memorizing-not-understanding",
+      "url": "/blog/mastering-rc-youre-probably-just-memorizing-not-understanding",
       "title": "Mastering RC? You're Probably Just Memorizing, Not Understanding",
       "description": "Mastering RC? You're Probably Just Memorizing, Not Understanding",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Elimination",
       "category": "Elimination",
-      "publicationDate": "2026-05-20",
-      "updatedDate": null,
       "status": "published",
-      "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
-      "internalLinks": [
-        "/blog/rc2.png"
-      ],
-      "externalReferences": [],
+      "date": "2026-05-20",
+      "updatedDate": "",
       "image": "/blog/rc2.png",
-      "imageAlt": null,
-      "schemaType": "BlogPosting",
-      "seoScore": 33,
-      "contentQualityScore": 46,
+      "imageAlt": "",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
       "backlinkOpportunities": [],
-      "refreshDate": null,
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
       "wordCount": 516,
-      "headings": 7
+      "headings": 7,
+      "internalLinks": []
     },
     {
-      "url": "/blog/mastering-reading-comprehension-for-cat-unlocking-the-secrets-to-high-scores",
       "slug": "mastering-reading-comprehension-for-cat-unlocking-the-secrets-to-high-scores",
+      "url": "/blog/mastering-reading-comprehension-for-cat-unlocking-the-secrets-to-high-scores",
       "title": "Mastering Reading Comprehension for CAT: Unlocking the Secrets to High Scores",
       "description": "Mastering Reading Comprehension for CAT: Unlocking the Secrets to High Scores",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Strategy",
       "category": "Strategy",
-      "publicationDate": "2026-04-20",
-      "updatedDate": null,
       "status": "published",
-      "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
-      "internalLinks": [
-        "/blog/IM-7.png",
-        "/blog/IM-3.png"
-      ],
-      "externalReferences": [],
+      "date": "2026-04-20",
+      "updatedDate": "",
       "image": "/blog/IM-7.png",
-      "imageAlt": null,
-      "schemaType": "BlogPosting",
-      "seoScore": 18,
-      "contentQualityScore": 42,
+      "imageAlt": "",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
       "backlinkOpportunities": [],
-      "refreshDate": null,
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
       "wordCount": 459,
-      "headings": 7
+      "headings": 7,
+      "internalLinks": []
     },
     {
-      "url": "/blog/mastering-reading-comprehension-insider-strategies-to-elevate-your-cat-prep",
       "slug": "mastering-reading-comprehension-insider-strategies-to-elevate-your-cat-prep",
+      "url": "/blog/mastering-reading-comprehension-insider-strategies-to-elevate-your-cat-prep",
       "title": "Mastering Reading Comprehension: Insider Strategies to Elevate Your CAT Prep",
       "description": "Mastering Reading Comprehension: Insider Strategies to Elevate Your CAT Prep",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Strategy",
       "category": "Strategy",
-      "publicationDate": "2026-04-20",
-      "updatedDate": null,
       "status": "published",
-      "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
-      "internalLinks": [
-        "/blog/IM-11.png",
-        "/blog/IM-10.png"
-      ],
-      "externalReferences": [],
+      "date": "2026-04-20",
+      "updatedDate": "",
       "image": "/blog/IM-11.png",
-      "imageAlt": null,
-      "schemaType": "BlogPosting",
-      "seoScore": 18,
-      "contentQualityScore": 51,
+      "imageAlt": "",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
       "backlinkOpportunities": [],
-      "refreshDate": null,
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
       "wordCount": 534,
-      "headings": 7
+      "headings": 7,
+      "internalLinks": []
     },
     {
-      "url": "/blog/mastering-reading-comprehension-unlocking-strategies-to-elevate-your-cat-preparation",
       "slug": "mastering-reading-comprehension-unlocking-strategies-to-elevate-your-cat-preparation",
+      "url": "/blog/mastering-reading-comprehension-unlocking-strategies-to-elevate-your-cat-preparation",
       "title": "Mastering Reading Comprehension: Unlocking Strategies to Elevate Your CAT Preparation",
       "description": "Mastering Reading Comprehension: Unlocking Strategies to Elevate Your CAT Preparation",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Strategy",
       "category": "Strategy",
-      "publicationDate": "2026-04-20",
-      "updatedDate": null,
       "status": "published",
-      "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
-      "internalLinks": [
-        "/blog/IM-13.png",
-        "/blog/IM-4.png"
-      ],
-      "externalReferences": [],
+      "date": "2026-04-20",
+      "updatedDate": "",
       "image": "/blog/IM-13.png",
-      "imageAlt": null,
-      "schemaType": "BlogPosting",
-      "seoScore": 18,
-      "contentQualityScore": 42,
+      "imageAlt": "",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
       "backlinkOpportunities": [],
-      "refreshDate": null,
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
       "wordCount": 485,
-      "headings": 7
+      "headings": 7,
+      "internalLinks": []
     },
     {
-      "url": "/blog/mastering-reading-comprehension-unlocking-the-secrets-to-higher-accuracy-in-cat",
       "slug": "mastering-reading-comprehension-unlocking-the-secrets-to-higher-accuracy-in-cat",
+      "url": "/blog/mastering-reading-comprehension-unlocking-the-secrets-to-higher-accuracy-in-cat",
       "title": "Mastering Reading Comprehension: Unlocking the Secrets to Higher Accuracy in CAT",
       "description": "Mastering Reading Comprehension: Unlocking the Secrets to Higher Accuracy in CAT",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Strategy",
       "category": "Strategy",
-      "publicationDate": "2026-04-20",
-      "updatedDate": null,
       "status": "published",
-      "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
-      "internalLinks": [
-        "/blog/IM-17.png",
-        "/blog/IM-22.png"
-      ],
-      "externalReferences": [],
+      "date": "2026-04-20",
+      "updatedDate": "",
       "image": "/blog/IM-17.png",
-      "imageAlt": null,
-      "schemaType": "BlogPosting",
-      "seoScore": 18,
-      "contentQualityScore": 51,
+      "imageAlt": "",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
       "backlinkOpportunities": [],
-      "refreshDate": null,
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
       "wordCount": 587,
-      "headings": 7
+      "headings": 7,
+      "internalLinks": []
     },
     {
-      "url": "/blog/mastering-verbal-ability-and-reading-comprehension-for-cat-strategies-to-unlock-your-full-potential",
       "slug": "mastering-verbal-ability-and-reading-comprehension-for-cat-strategies-to-unlock-your-full-potential",
+      "url": "/blog/mastering-verbal-ability-and-reading-comprehension-for-cat-strategies-to-unlock-your-full-potential",
       "title": "Mastering Verbal Ability and Reading Comprehension for CAT: Strategies to Unlock Your Full Potential",
       "description": "Mastering Verbal Ability and Reading Comprehension for CAT: Strategies to Unlock Your Full Potential",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Elimination",
       "category": "Elimination",
-      "publicationDate": "2026-04-20",
-      "updatedDate": null,
       "status": "published",
-      "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
-      "internalLinks": [
-        "/blog/IM-20.png",
-        "/blog/IM-2.png"
-      ],
-      "externalReferences": [],
+      "date": "2026-04-20",
+      "updatedDate": "",
       "image": "/blog/IM-20.png",
-      "imageAlt": null,
-      "schemaType": "BlogPosting",
-      "seoScore": 18,
-      "contentQualityScore": 45,
+      "imageAlt": "",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
       "backlinkOpportunities": [],
-      "refreshDate": null,
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
       "wordCount": 530,
-      "headings": 7
+      "headings": 7,
+      "internalLinks": []
     },
     {
-      "url": "/blog/rc-inference-decision-trap",
       "slug": "rc-inference-decision-trap",
+      "url": "/blog/rc-inference-decision-trap",
       "title": "Why Inference Questions Feel So Unfair (And What You're Missing)",
       "description": "Inference questions are not difficult — they are misunderstood. Learn the real skill behind solving them correctly.",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Inference",
       "category": "Inference",
-      "publicationDate": "2026-04-17",
-      "updatedDate": null,
       "status": "published",
-      "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
-      "internalLinks": [
-        "/blog/rc2.png",
-        "/blog/image2.png"
-      ],
-      "externalReferences": [],
+      "date": "2026-04-17",
+      "updatedDate": "",
       "image": "/blog/rc2.png",
-      "imageAlt": null,
-      "schemaType": "BlogPosting",
-      "seoScore": 48,
-      "contentQualityScore": 48,
+      "imageAlt": "",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
       "backlinkOpportunities": [],
-      "refreshDate": null,
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
       "wordCount": 541,
-      "headings": 7
+      "headings": 7,
+      "internalLinks": []
     },
     {
-      "url": "/blog/rc-tone-hidden-skill",
       "slug": "rc-tone-hidden-skill",
+      "url": "/blog/rc-tone-hidden-skill",
       "title": "Tone in RC Is Not About Words — It's About Intent",
       "description": "Most students misunderstand tone questions because they focus on vocabulary instead of author intent.",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Tone",
       "category": "Tone",
-      "publicationDate": "2026-04-16",
-      "updatedDate": null,
       "status": "published",
-      "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
-      "internalLinks": [
-        "/blog/rc3.png",
-        "/features/birbal-editorial-decoder"
-      ],
-      "externalReferences": [],
+      "date": "2026-04-16",
+      "updatedDate": "",
       "image": "/blog/rc3.png",
-      "imageAlt": null,
-      "schemaType": "BlogPosting",
-      "seoScore": 55,
-      "contentQualityScore": 51,
+      "imageAlt": "",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
       "backlinkOpportunities": [],
-      "refreshDate": null,
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
       "wordCount": 417,
-      "headings": 7
+      "headings": 7,
+      "internalLinks": [
+        "/features/birbal-editorial-decoder"
+      ]
     },
     {
-      "url": "/blog/reading-comprehension-isnt-about-understanding-its-about-insight",
       "slug": "reading-comprehension-isnt-about-understanding-its-about-insight",
+      "url": "/blog/reading-comprehension-isnt-about-understanding-its-about-insight",
       "title": "Reading Comprehension Isn't About Understanding — It's About Insight",
       "description": "Reading Comprehension Isn't About Understanding — It's About Insight",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Tone",
       "category": "Tone",
-      "publicationDate": "2026-05-20",
-      "updatedDate": null,
       "status": "published",
-      "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
-      "internalLinks": [
-        "/blog/reading-comprehension-isnt-about-understanding-its-about-insight-1.png",
-        "/blog/reading-comprehension-isnt-about-understanding-its-about-insight-2.png"
-      ],
-      "externalReferences": [],
+      "date": "2026-05-20",
+      "updatedDate": "",
       "image": "/blog/reading-comprehension-isnt-about-understanding-its-about-insight-featured.png",
-      "imageAlt": null,
-      "schemaType": "BlogPosting",
-      "seoScore": 33,
-      "contentQualityScore": 43,
+      "imageAlt": "",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
       "backlinkOpportunities": [],
-      "refreshDate": null,
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
       "wordCount": 447,
-      "headings": 7
+      "headings": 7,
+      "internalLinks": []
     },
     {
-      "url": "/blog/understanding-rc-answers-youre-probably-misreading-the-inferences",
       "slug": "understanding-rc-answers-youre-probably-misreading-the-inferences",
+      "url": "/blog/understanding-rc-answers-youre-probably-misreading-the-inferences",
       "title": "Understanding RC Answers? You’re Probably Misreading the Inferences",
       "description": "Understanding RC Answers? You’re Probably Misreading the Inferences",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Inference",
       "category": "Inference",
-      "publicationDate": "2026-05-20",
-      "updatedDate": null,
       "status": "published",
-      "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
-      "internalLinks": [
-        "/blog/understanding-rc-answers-youre-probably-misreading-the-inferences-1.png",
-        "/blog/understanding-rc-answers-youre-probably-misreading-the-inferences-2.png"
-      ],
-      "externalReferences": [],
+      "date": "2026-05-20",
+      "updatedDate": "",
       "image": "/blog/understanding-rc-answers-youre-probably-misreading-the-inferences-featured.png",
-      "imageAlt": null,
-      "schemaType": "BlogPosting",
-      "seoScore": 33,
-      "contentQualityScore": 49,
+      "imageAlt": "",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
       "backlinkOpportunities": [],
-      "refreshDate": null,
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
       "wordCount": 465,
-      "headings": 7
+      "headings": 7,
+      "internalLinks": []
     },
     {
-      "url": "/blog/understanding-the-text-doesnt-mean-grasping-its-deeper-implications",
       "slug": "understanding-the-text-doesnt-mean-grasping-its-deeper-implications",
+      "url": "/blog/understanding-the-text-doesnt-mean-grasping-its-deeper-implications",
       "title": "Understanding the Text Doesn’t Mean Grasping Its Deeper Implications",
       "description": "Understanding the Text Doesn’t Mean Grasping Its Deeper Implications",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Inference",
       "category": "Inference",
-      "publicationDate": "2026-04-21",
-      "updatedDate": null,
       "status": "published",
-      "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
-      "internalLinks": [
-        "/blog/understanding-the-text-doesnt-mean-grasping-its-deeper-implications-1.png",
-        "/blog/understanding-the-text-doesnt-mean-grasping-its-deeper-implications-2.png"
-      ],
-      "externalReferences": [],
+      "date": "2026-04-21",
+      "updatedDate": "",
       "image": "/blog/understanding-the-text-doesnt-mean-grasping-its-deeper-implications-featured.png",
-      "imageAlt": null,
-      "schemaType": "BlogPosting",
-      "seoScore": 33,
-      "contentQualityScore": 46,
+      "imageAlt": "",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
       "backlinkOpportunities": [],
-      "refreshDate": null,
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
       "wordCount": 511,
-      "headings": 7
+      "headings": 7,
+      "internalLinks": []
     },
     {
-      "url": "/blog/unlocking-precision-mastering-reading-comprehension-accuracy-for-cat-success",
       "slug": "unlocking-precision-mastering-reading-comprehension-accuracy-for-cat-success",
+      "url": "/blog/unlocking-precision-mastering-reading-comprehension-accuracy-for-cat-success",
       "title": "Unlocking Precision: Mastering Reading Comprehension Accuracy for CAT Success",
       "description": "Unlocking Precision: Mastering Reading Comprehension Accuracy for CAT Success",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Accuracy",
       "category": "Accuracy",
-      "publicationDate": "2026-04-20",
-      "updatedDate": null,
       "status": "published",
-      "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
-      "internalLinks": [
-        "/blog/IM-21.png",
-        "/blog/IM-13.png"
-      ],
-      "externalReferences": [],
+      "date": "2026-04-20",
+      "updatedDate": "",
       "image": "/blog/IM-21.png",
-      "imageAlt": null,
-      "schemaType": "BlogPosting",
-      "seoScore": 18,
-      "contentQualityScore": 45,
+      "imageAlt": "",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
       "backlinkOpportunities": [],
-      "refreshDate": null,
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
       "wordCount": 633,
-      "headings": 7
+      "headings": 7,
+      "internalLinks": []
     },
     {
-      "url": "/blog/unlocking-success-common-rc-mistakes-cat-aspirants-make-and-how-to-overcome-them",
       "slug": "unlocking-success-common-rc-mistakes-cat-aspirants-make-and-how-to-overcome-them",
+      "url": "/blog/unlocking-success-common-rc-mistakes-cat-aspirants-make-and-how-to-overcome-them",
       "title": "Unlocking Success: Common RC Mistakes CAT Aspirants Make and How to Overcome Them",
       "description": "Unlocking Success: Common RC Mistakes CAT Aspirants Make and How to Overcome Them",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Accuracy",
       "category": "Accuracy",
-      "publicationDate": "2026-04-20",
-      "updatedDate": null,
       "status": "published",
-      "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
-      "internalLinks": [
-        "/blog/IM-18.png",
-        "/blog/image2.png"
-      ],
-      "externalReferences": [],
+      "date": "2026-04-20",
+      "updatedDate": "",
       "image": "/blog/IM-18.png",
-      "imageAlt": null,
-      "schemaType": "BlogPosting",
-      "seoScore": 18,
-      "contentQualityScore": 42,
+      "imageAlt": "",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
       "backlinkOpportunities": [],
-      "refreshDate": null,
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
       "wordCount": 457,
-      "headings": 7
+      "headings": 7,
+      "internalLinks": []
     },
     {
-      "url": "/blog/unlocking-success-how-daily-reading-comprehension-transforms-your-cat-preparation",
       "slug": "unlocking-success-how-daily-reading-comprehension-transforms-your-cat-preparation",
+      "url": "/blog/unlocking-success-how-daily-reading-comprehension-transforms-your-cat-preparation",
       "title": "Unlocking Success: How Daily Reading Comprehension Transforms Your CAT Preparation",
       "description": "Unlocking Success: How Daily Reading Comprehension Transforms Your CAT Preparation",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Accuracy",
       "category": "Accuracy",
-      "publicationDate": "2026-04-20",
-      "updatedDate": null,
       "status": "published",
-      "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
-      "internalLinks": [
-        "/blog/IM-5.png",
-        "/blog/IM-18.png",
-        "/features/daily-rc-workout"
-      ],
-      "externalReferences": [],
+      "date": "2026-04-20",
+      "updatedDate": "",
       "image": "/blog/IM-5.png",
-      "imageAlt": null,
-      "schemaType": "BlogPosting",
-      "seoScore": 25,
-      "contentQualityScore": 52,
+      "imageAlt": "",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
       "backlinkOpportunities": [],
-      "refreshDate": null,
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
       "wordCount": 459,
-      "headings": 7
+      "headings": 7,
+      "internalLinks": [
+        "/features/daily-rc-workout"
+      ]
     },
     {
-      "url": "/blog/unlocking-success-mastering-reading-comprehension-for-cat-with-proven-strategies",
       "slug": "unlocking-success-mastering-reading-comprehension-for-cat-with-proven-strategies",
+      "url": "/blog/unlocking-success-mastering-reading-comprehension-for-cat-with-proven-strategies",
       "title": "Unlocking Success: Mastering Reading Comprehension for CAT with Proven Strategies",
       "description": "Unlocking Success: Mastering Reading Comprehension for CAT with Proven Strategies",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Strategy",
       "category": "Strategy",
-      "publicationDate": "2026-04-20",
-      "updatedDate": null,
       "status": "published",
-      "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
-      "internalLinks": [
-        "/blog/IM-2.png",
-        "/blog/IM-1.png"
-      ],
-      "externalReferences": [],
+      "date": "2026-04-20",
+      "updatedDate": "",
       "image": "/blog/IM-2.png",
-      "imageAlt": null,
-      "schemaType": "BlogPosting",
-      "seoScore": 18,
-      "contentQualityScore": 45,
+      "imageAlt": "",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
       "backlinkOpportunities": [],
-      "refreshDate": null,
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
       "wordCount": 571,
-      "headings": 7
+      "headings": 7,
+      "internalLinks": []
     },
     {
-      "url": "/blog/unlocking-success-mastering-reading-comprehension-questions-for-cat-aspirants",
       "slug": "unlocking-success-mastering-reading-comprehension-questions-for-cat-aspirants",
+      "url": "/blog/unlocking-success-mastering-reading-comprehension-questions-for-cat-aspirants",
       "title": "Unlocking Success: Mastering Reading Comprehension Questions for CAT Aspirants",
       "description": "Unlocking Success: Mastering Reading Comprehension Questions for CAT Aspirants",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Inference",
       "category": "Inference",
-      "publicationDate": "2026-04-20",
-      "updatedDate": null,
       "status": "published",
-      "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
-      "internalLinks": [
-        "/blog/IM-8.png",
-        "/blog/IM-1.png"
-      ],
-      "externalReferences": [],
+      "date": "2026-04-20",
+      "updatedDate": "",
       "image": "/blog/IM-8.png",
-      "imageAlt": null,
-      "schemaType": "BlogPosting",
-      "seoScore": 18,
-      "contentQualityScore": 42,
+      "imageAlt": "",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
       "backlinkOpportunities": [],
-      "refreshDate": null,
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
       "wordCount": 430,
-      "headings": 7
+      "headings": 7,
+      "internalLinks": []
     },
     {
-      "url": "/blog/unlocking-success-top-common-rc-mistakes-cat-aspirants-must-avoid",
       "slug": "unlocking-success-top-common-rc-mistakes-cat-aspirants-must-avoid",
+      "url": "/blog/unlocking-success-top-common-rc-mistakes-cat-aspirants-must-avoid",
       "title": "Unlocking Success: Top Common RC Mistakes CAT Aspirants Must Avoid",
       "description": "Unlocking Success: Top Common RC Mistakes CAT Aspirants Must Avoid",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Strategy",
       "category": "Strategy",
-      "publicationDate": "2026-04-20",
-      "updatedDate": null,
       "status": "published",
-      "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
-      "internalLinks": [
-        "/blog/IM-15.png",
-        "/blog/IM-10.png"
-      ],
-      "externalReferences": [],
+      "date": "2026-04-20",
+      "updatedDate": "",
       "image": "/blog/IM-15.png",
-      "imageAlt": null,
-      "schemaType": "BlogPosting",
-      "seoScore": 33,
-      "contentQualityScore": 46,
+      "imageAlt": "",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
       "backlinkOpportunities": [],
-      "refreshDate": null,
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
       "wordCount": 554,
-      "headings": 7
+      "headings": 7,
+      "internalLinks": []
     },
     {
-      "url": "/blog/your-comfort-with-tone-masks-a-deeper-misunderstanding-in-rc",
       "slug": "your-comfort-with-tone-masks-a-deeper-misunderstanding-in-rc",
+      "url": "/blog/your-comfort-with-tone-masks-a-deeper-misunderstanding-in-rc",
       "title": "Your Comfort with Tone Masks a Deeper Misunderstanding in RC",
       "description": "Your Comfort with Tone Masks a Deeper Misunderstanding in RC",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Tone",
       "category": "Tone",
-      "publicationDate": "2026-04-21",
-      "updatedDate": null,
       "status": "published",
-      "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
-      "internalLinks": [
-        "/blog/IM-1.png",
-        "/blog/IM-2.png"
-      ],
-      "externalReferences": [],
+      "date": "2026-04-21",
+      "updatedDate": "",
       "image": "/blog/IM-1.png",
-      "imageAlt": null,
-      "schemaType": "BlogPosting",
-      "seoScore": 33,
-      "contentQualityScore": 46,
+      "imageAlt": "",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
       "backlinkOpportunities": [],
-      "refreshDate": null,
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
       "wordCount": 521,
-      "headings": 7
+      "headings": 7,
+      "internalLinks": []
     },
     {
-      "url": "/blog/your-comprehension-is-strong-yet-your-inferences-are-weak",
       "slug": "your-comprehension-is-strong-yet-your-inferences-are-weak",
+      "url": "/blog/your-comprehension-is-strong-yet-your-inferences-are-weak",
       "title": "Your Comprehension Is Strong — Yet Your Inferences Are Weak",
       "description": "Your Comprehension Is Strong — Yet Your Inferences Are Weak",
-      "primaryKeyword": null,
+      "primaryKeyword": "",
       "secondaryKeywords": [],
-      "searchIntent": null,
+      "searchIntent": "",
       "cluster": "Inference",
       "category": "Inference",
-      "publicationDate": "2026-04-21",
-      "updatedDate": null,
       "status": "published",
+      "date": "2026-04-21",
+      "updatedDate": "",
+      "image": "/blog/your-comprehension-is-strong-yet-your-inferences-are-weak-featured.png",
+      "imageAlt": "",
       "author": "Auctor Labs Editorial Team",
-      "targetPage": null,
-      "internalLinks": [
-        "/blog/your-comprehension-is-strong-yet-your-inferences-are-weak-1.png",
-        "/blog/your-comprehension-is-strong-yet-your-inferences-are-weak-2.png"
+      "relevantExams": [],
+      "targetPage": "",
+      "relatedArticles": [],
+      "externalReferences": [],
+      "backlinkOpportunities": [],
+      "schemaType": "BlogPosting",
+      "seoScore": null,
+      "contentQualityScore": null,
+      "wordCount": 472,
+      "headings": 7,
+      "internalLinks": []
+    },
+    {
+      "slug": "cat-para-summary-strategy",
+      "url": "/blog/cat-para-summary-strategy",
+      "title": "CAT Para Summary: A Scope-and-Structure Method That Actually Works",
+      "description": "Learn a reliable CAT para summary method using scope, coverage and stance checks, with Auctor-created worked examples and a practical error log.",
+      "primaryKeyword": "CAT para summary strategy",
+      "secondaryKeywords": [
+        "para summary CAT 2026",
+        "how to solve para summary",
+        "para summary examples"
+      ],
+      "searchIntent": "Learn a repeatable method and apply it to worked examples",
+      "cluster": "verbal-ability",
+      "category": "Verbal Ability",
+      "status": "draft",
+      "date": "2026-08-13",
+      "updatedDate": "2026-08-13",
+      "image": "/blog/cat-para-summary-framework.png",
+      "imageAlt": "CAT para summary method showing coverage, scope and author stance checks",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [],
+      "targetPage": "/test-series",
+      "relatedArticles": [
+        "improve-rc-accuracy-cat",
+        "unlocking-success-mastering-reading-comprehension-for-cat-with-proven-strategies"
       ],
       "externalReferences": [],
-      "image": "/blog/your-comprehension-is-strong-yet-your-inferences-are-weak-featured.png",
-      "imageAlt": null,
+      "backlinkOpportunities": [
+        {
+          "type": "Resource pages",
+          "targets": "MBA preparation and college learning-resource pages",
+          "pitch": "Offer the worked para-summary framework as a free reference."
+        },
+        {
+          "type": "Student communities",
+          "targets": "CAT study communities and campus MBA clubs",
+          "pitch": "Share the exercise as a discussion resource; do not automate posting."
+        },
+        {
+          "type": "Guest expertise",
+          "targets": "Education publications and MBA preparation blogs",
+          "pitch": "Contribute a decision-analysis excerpt with an original visual."
+        },
+        {
+          "type": "Linkable asset",
+          "targets": "Teachers, mentors and study groups",
+          "pitch": "Create a downloadable one-page error taxonomy and attribution-friendly diagram."
+        }
+      ],
       "schemaType": "BlogPosting",
-      "seoScore": 33,
-      "contentQualityScore": 49,
-      "backlinkOpportunities": [],
-      "refreshDate": null,
-      "wordCount": 472,
-      "headings": 7
+      "seoScore": 100,
+      "contentQualityScore": 90,
+      "wordCount": 816,
+      "headings": 12,
+      "internalLinks": [
+        "/features/precision-drills",
+        "/blog/improve-rc-accuracy-cat",
+        "/features/daily-rc-workout",
+        "/test-series"
+      ]
+    },
+    {
+      "slug": "contrast-transitions-cat-reading-comprehension",
+      "url": "/blog/contrast-transitions-cat-reading-comprehension",
+      "title": "Contrast Transitions in CAT RC: Meaning & Practice",
+      "description": "Master contrast transitions in CAT reading comprehension passages to track argument shifts, spot qualifications, infer author intent, and eliminate misleading options.",
+      "primaryKeyword": "contrast transitions in CAT reading comprehension passages",
+      "secondaryKeywords": [
+        "contrast words in reading comprehension",
+        "CAT RC transition words",
+        "however in reading comprehension",
+        "reading comprehension contrast signals",
+        "CAT VARC passage strategy"
+      ],
+      "searchIntent": "Skill-building",
+      "cluster": "Reading Comprehension",
+      "category": "Reading Comprehension",
+      "status": "draft",
+      "date": "2026-08-23",
+      "updatedDate": "2026-08-23",
+      "image": "/blog/contrast-transitions-cat-reading-comprehension-featured.png",
+      "imageAlt": "Annotated reading-comprehension passage showing how a contrast transition shifts the author’s emphasis",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [
+        "CAT"
+      ],
+      "targetPage": "/blog/contrast-transitions-cat-reading-comprehension",
+      "relatedArticles": [
+        "cat-varc-passages",
+        "improve-rc-accuracy-cat",
+        "reading-comprehension-isnt-about-understanding-its-about-insight",
+        "unlocking-success-mastering-reading-comprehension-questions-for-cat-aspirants",
+        "rc-tone-hidden-skill"
+      ],
+      "externalReferences": [
+        "https://study.com/academy/lesson/video/navigating-a-reading-passage-with-transitions.html",
+        "https://iim-cat-questions-answers.2iim.com/verbal/reading-comprehension/",
+        "https://byjus.com/free-cat-prep/different-question-types-in-cat-rc/",
+        "https://cracku.in/cat-reading-comprehension-questions",
+        "https://edge.wordpandit.com/cat-rc-terms-library/"
+      ],
+      "backlinkOpportunities": [
+        {
+          "site": "study.com",
+          "sourcePage": "https://study.com/academy/lesson/video/navigating-a-reading-passage-with-transitions.html",
+          "sourcePageReason": "The exact supplied lesson addresses transitions that signal contrast, making the proposed article a relevant exam-focused application.",
+          "reason": "The article can extend a general transition lesson with CAT RC annotation, question-type, and answer-elimination applications.",
+          "potentialAngle": "A complementary CAT-focused guide on applying contrast signals inside dense passages.",
+          "suggestedOutreachType": "Editorial resource suggestion",
+          "priority": "high"
+        },
+        {
+          "site": "byjus.com",
+          "sourcePage": "https://byjus.com/free-cat-prep/different-question-types-in-cat-rc/",
+          "sourcePageReason": "The exact supplied page discusses CAT RC question types, which are directly addressed by the proposed worked examples.",
+          "reason": "The article adds a narrow skill lens for solving main-idea, inference, tone, and detail questions.",
+          "potentialAngle": "A focused companion resource showing how one passage feature influences several CAT RC question types.",
+          "suggestedOutreachType": "Relevant resource recommendation",
+          "priority": "medium"
+        },
+        {
+          "site": "cracku.in",
+          "sourcePage": "https://cracku.in/cat-reading-comprehension-questions",
+          "sourcePageReason": "The exact supplied page contains CAT RC practice sets that could be paired with a transition-identification method.",
+          "reason": "The proposed article offers a strategy layer that can help readers analyse practice questions more systematically.",
+          "potentialAngle": "A transition-marking checklist to use alongside CAT RC practice sets.",
+          "suggestedOutreachType": "Practice-resource collaboration or editorial suggestion",
+          "priority": "medium"
+        },
+        {
+          "site": "unstop.com",
+          "sourcePage": "https://unstop.com/blog/reading-comprehension-for-cat",
+          "sourcePageReason": "The exact supplied page is a CAT reading-comprehension guide, so a focused article on contrast signals is topically relevant.",
+          "reason": "The proposed resource can add depth to general CAT RC advice by isolating a frequently tested reading skill.",
+          "potentialAngle": "A narrow, worked-example guide that complements a broader CAT RC preparation article.",
+          "suggestedOutreachType": "Contextual resource suggestion",
+          "priority": "medium"
+        },
+        {
+          "site": "linkedin.com",
+          "sourcePage": "https://www.linkedin.com/pulse/how-comprehend-cat-passage-effectively-kaushik-kapoor-llygc",
+          "sourcePageReason": "The exact supplied post mentions overlooked transitions or contrast points as a CAT passage-comprehension issue.",
+          "reason": "The article directly develops the transition problem identified in the supplied source.",
+          "potentialAngle": "A detailed practice framework for the transition-overlooking problem noted in the post.",
+          "suggestedOutreachType": "Professional content-sharing suggestion",
+          "priority": "medium"
+        }
+      ],
+      "schemaType": "BlogPosting",
+      "seoScore": 84,
+      "contentQualityScore": 86,
+      "wordCount": 2606,
+      "headings": 36,
+      "internalLinks": [
+        "/blog/cat-varc-passages",
+        "/blog/improve-rc-accuracy-cat",
+        "/blog/unlocking-success-mastering-reading-comprehension-questions-for-cat-aspirants",
+        "/blog/rc-tone-hidden-skill",
+        "/features/precision-drills",
+        "/blog/reading-comprehension-isnt-about-understanding-its-about-insight"
+      ]
+    },
+    {
+      "slug": "learn-vocabulary-from-context-competitive-exams",
+      "url": "/blog/learn-vocabulary-from-context-competitive-exams",
+      "title": "Learn Vocabulary from Context for Competitive Exams",
+      "description": "Learn vocabulary from context with a six-step method for using clues, checking nuance, and retaining unfamiliar words for competitive-exam passages.",
+      "primaryKeyword": "learn vocabulary from context",
+      "secondaryKeywords": [
+        "how to learn vocabulary for competitive exams",
+        "vocabulary in context",
+        "contextual vocabulary practice",
+        "learn English vocabulary effectively",
+        "vocabulary from context clues",
+        "vocabulary in context exercises"
+      ],
+      "searchIntent": "Skill-building",
+      "cluster": "Vocabulary",
+      "category": "Vocabulary Building",
+      "status": "draft",
+      "date": "2026-08-21",
+      "updatedDate": "2026-08-21",
+      "image": "/blog/learn-vocabulary-from-context-competitive-exams-featured.png",
+      "imageAlt": "Learner inferring an unfamiliar vocabulary word from passage context using clues and an inference log",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [
+        "CAT",
+        "XAT",
+        "GMAT",
+        "GRE",
+        "CUET",
+        "CLAT",
+        "IPMAT",
+        "NMAT",
+        "SNAP",
+        "SSC",
+        "Banking exams",
+        "Government exams"
+      ],
+      "targetPage": "https://www.example.com/learn-vocabulary-from-context-competitive-exams",
+      "relatedArticles": [
+        "accuracy-in-rc-ignoring-context-could-ruin-your-score"
+      ],
+      "externalReferences": [
+        "https://pressbooks.pub/iagtm/chapter/learning-vocabulary-in-context/",
+        "https://keystoliteracy.com/blog/vocabulary-strategy-use-of-context/",
+        "https://www.cambridge.org/core/books/learning-vocabulary-in-another-language/learning-words-from-context/33FDEF27CA084307DB5997A6F919CC53",
+        "https://www.readingrockets.org/blogs/shanahan-on-literacy/how-i-teach-students-use-context-vocabulary-learning",
+        "https://ieltstutors.org/lessons/working-out-vocabulary-in-context/"
+      ],
+      "backlinkOpportunities": [
+        {
+          "site": "pressbooks.pub",
+          "sourcePage": "https://pressbooks.pub/iagtm/chapter/learning-vocabulary-in-context/",
+          "sourcePageReason": "The page directly explains learning vocabulary in context, making it relevant to a practical guide that extends the concept to competitive-exam passages.",
+          "reason": "A resource that turns the definition of contextual learning into a structured exam-reading method could be a relevant supplementary reference.",
+          "potentialAngle": "Offer the article as an applied practice guide featuring an inference log, original worked examples, and vocabulary-in-context exercises.",
+          "suggestedOutreachType": "Relevant editorial resource suggestion",
+          "priority": "high"
+        },
+        {
+          "site": "keystoliteracy.com",
+          "sourcePage": "https://keystoliteracy.com/blog/vocabulary-strategy-use-of-context/",
+          "sourcePageReason": "The source specifically covers using clues or hints in text to build vocabulary.",
+          "reason": "The proposed article provides an exam-focused implementation of the context-clue strategy.",
+          "potentialAngle": "Highlight the six-step process for identifying grammatical, contrast, and cause-effect clues in timed passages.",
+          "suggestedOutreachType": "Relevant editorial resource suggestion",
+          "priority": "high"
+        },
+        {
+          "site": "cambridge.org",
+          "sourcePage": "https://www.cambridge.org/core/books/learning-vocabulary-in-another-language/learning-words-from-context/33FDEF27CA084307DB5997A6F919CC53",
+          "sourcePageReason": "The source discusses learning words from context alongside direct intentional learning.",
+          "reason": "The article's distinction between contextual inference and later verification creates a practical bridge between the two approaches.",
+          "potentialAngle": "Present the guide as an applied companion for learners who need to combine passage-based inference with deliberate revision.",
+          "suggestedOutreachType": "Academic resource suggestion",
+          "priority": "medium"
+        },
+        {
+          "site": "readingrockets.org",
+          "sourcePage": "https://www.readingrockets.org/blogs/shanahan-on-literacy/how-i-teach-students-use-context-vocabulary-learning",
+          "sourcePageReason": "The source addresses how to teach and check vocabulary understanding derived from context.",
+          "reason": "The inference log and confidence-checking method offer a concrete way to assess whether a learner's contextual guess is accurate.",
+          "potentialAngle": "Share the worked examples and self-check prompts as an assessment-oriented extension of contextual vocabulary instruction.",
+          "suggestedOutreachType": "Relevant editorial resource suggestion",
+          "priority": "medium"
+        },
+        {
+          "site": "ieltstutors.org",
+          "sourcePage": "https://ieltstutors.org/lessons/working-out-vocabulary-in-context/",
+          "sourcePageReason": "The source directly advises readers to identify a word's likely grammatical category before using contextual clues.",
+          "reason": "This article broadens that process beyond one exam by applying it to multiple competitive-exam formats.",
+          "potentialAngle": "Emphasize the transferable grammatical-role and clue-analysis framework for candidates preparing across different verbal exams.",
+          "suggestedOutreachType": "Relevant exam-preparation resource suggestion",
+          "priority": "medium"
+        }
+      ],
+      "schemaType": "BlogPosting",
+      "seoScore": 85,
+      "contentQualityScore": 83,
+      "wordCount": 2063,
+      "headings": 26,
+      "internalLinks": [
+        "/blog/accuracy-in-rc-ignoring-context-could-ruin-your-score",
+        "/test-series",
+        "/auctor-rc"
+      ]
+    },
+    {
+      "slug": "para-jumbles-solving-strategy-examples",
+      "url": "/blog/para-jumbles-solving-strategy-examples",
+      "title": "Para Jumbles: A Step-by-Step Method to Arrange Sentences",
+      "description": "Learn how to solve para jumbles using opening clues, mandatory pairs, pronoun links, transitions, chronology, elimination, and original worked examples.",
+      "primaryKeyword": "para jumbles",
+      "secondaryKeywords": [
+        "how to solve para jumbles",
+        "para jumbles with answers",
+        "sentence rearrangement questions",
+        "para jumbles for CAT",
+        "para jumbles for competitive exams",
+        "para jumble rules",
+        "paragraph rearrangement"
+      ],
+      "searchIntent": "Skill-building",
+      "cluster": "Verbal Ability",
+      "category": "Verbal Ability",
+      "status": "draft",
+      "date": "2026-08-21",
+      "updatedDate": "2026-08-22",
+      "image": "/blog/para-jumbles-solving-strategy-examples-featured.png",
+      "imageAlt": "Illustration of shuffled sentences arranged into a logical paragraph for para-jumble solving",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [
+        "CAT",
+        "Banking and other competitive exams with verbal-ability sections"
+      ],
+      "targetPage": "/para-jumbles-solving-strategy-examples",
+      "relatedArticles": [],
+      "externalReferences": [
+        "https://www.geeksforgeeks.org/aptitude/para-jumbles-verbal-ability-questions-and-answers/",
+        "https://testbook.com/english-grammar/para-jumbles",
+        "https://www.youtube.com/watch?v=cUgelkymHvo",
+        "https://www.smartkeeda.com/general-english/sentence-rearrangement-questions",
+        "https://www.slideshare.net/slideshow/grammar-para-jumbles-its-rules-with-examples/273557298",
+        "https://iim-cat-questions-answers.2iim.com/verbal/sentence-rearrangement/",
+        "https://www.youtube.com/watch?v=WHe36fkTA-g",
+        "https://catking.in/para-jumbles"
+      ],
+      "backlinkOpportunities": [
+        {
+          "site": "geeksforgeeks.org",
+          "sourcePage": "https://www.geeksforgeeks.org/aptitude/para-jumbles-verbal-ability-questions-and-answers/",
+          "sourcePageReason": "The supplied page directly covers para jumbles and verbal-ability questions.",
+          "reason": "The article’s original solving workflow and worked examples could provide a complementary instructional resource for readers learning sentence rearrangement.",
+          "potentialAngle": "Offer a concise, method-focused guide emphasizing discourse relationships, verification, and original examples rather than duplicating a question bank.",
+          "suggestedOutreachType": "Relevant editorial resource suggestion",
+          "priority": "medium"
+        },
+        {
+          "site": "testbook.com",
+          "sourcePage": "https://testbook.com/english-grammar/para-jumbles",
+          "sourcePageReason": "The supplied page directly covers para-jumble types, rules, tips, and solved questions.",
+          "reason": "A distinct explanation of how to validate a proposed sequence could complement a rules-and-practice page.",
+          "potentialAngle": "Position the resource as a transferable reasoning framework for solving unfamiliar para jumbles across exam formats.",
+          "suggestedOutreachType": "Relevant editorial resource suggestion",
+          "priority": "medium"
+        },
+        {
+          "site": "smartkeeda.com",
+          "sourcePage": "https://www.smartkeeda.com/general-english/sentence-rearrangement-questions",
+          "sourcePageReason": "The supplied page directly addresses sentence rearrangement and para-jumble questions for competitive exams.",
+          "reason": "The brief’s accuracy-review checklist and original worked examples could supplement a practice-oriented page.",
+          "potentialAngle": "Suggest the guide as a strategy and error-analysis resource to use before or alongside sentence-rearrangement practice.",
+          "suggestedOutreachType": "Relevant editorial resource suggestion",
+          "priority": "medium"
+        },
+        {
+          "site": "iim-cat-questions-answers.2iim.com",
+          "sourcePage": "https://iim-cat-questions-answers.2iim.com/verbal/sentence-rearrangement/",
+          "sourcePageReason": "The supplied page is specifically about CAT verbal-ability sentence-rearrangement questions.",
+          "reason": "The proposed article can add a general method that explains why sequences work, complementing CAT-focused question practice.",
+          "potentialAngle": "Offer a cross-format explanation of opening sentences, mandatory pairs, and final coherence checks, with CAT-specific caveats clearly separated.",
+          "suggestedOutreachType": "Relevant editorial resource suggestion",
+          "priority": "high"
+        },
+        {
+          "site": "catking.in",
+          "sourcePage": "https://catking.in/para-jumbles",
+          "sourcePageReason": "The supplied page directly explains the para-jumble task in a CAT-preparation context.",
+          "reason": "An original instructional guide with a structured solving process could complement the supplied introductory CAT-focused material.",
+          "potentialAngle": "Suggest the article as a step-by-step reasoning and review guide for learners who need more than definitions and basic rules.",
+          "suggestedOutreachType": "Relevant editorial resource suggestion",
+          "priority": "medium"
+        }
+      ],
+      "schemaType": "BlogPosting",
+      "seoScore": 80,
+      "contentQualityScore": 100,
+      "wordCount": 2779,
+      "headings": 45,
+      "internalLinks": [
+        "/features/precision-drills",
+        "/test-series",
+        "/auctor-rc"
+      ]
+    },
+    {
+      "slug": "reading-comprehension-trap-answers-proof-before-pick",
+      "url": "/blog/reading-comprehension-trap-answers-proof-before-pick",
+      "title": "RC Answers: Use a Proof-Before-Pick Method to Reject Trap Options",
+      "description": "Learn how to validate reading comprehension answers with a proof-before-pick method. Test every option for contradiction, scope, evidence, inference distance, and wording precision before selecting it.",
+      "primaryKeyword": "reading comprehension trap answers",
+      "secondaryKeywords": [
+        "how to eliminate wrong answers in reading comprehension",
+        "RC answer elimination method",
+        "text-supported answer choices",
+        "reading comprehension distractors"
+      ],
+      "searchIntent": "Problem-solving",
+      "cluster": "critical-reading",
+      "category": "Reading Comprehension Strategy",
+      "status": "draft",
+      "date": "2026-08-21",
+      "updatedDate": "2026-08-21",
+      "image": "/blog/reading-comprehension-trap-answers-proof-before-pick-featured.png",
+      "imageAlt": "Proof-before-pick checklist for rejecting reading comprehension trap answers",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [
+        "CAT",
+        "XAT",
+        "GMAT",
+        "GRE",
+        "CLAT",
+        "IPMAT",
+        "SSC",
+        "Banking exams",
+        "Government exams"
+      ],
+      "targetPage": "/blog/reading-comprehension-trap-answers-proof-before-pick",
+      "relatedArticles": [
+        "unlocking-precision-mastering-reading-comprehension-accuracy-for-cat-success",
+        "reading-comprehension-isnt-about-understanding-its-about-insight",
+        "unlocking-success-mastering-reading-comprehension-questions-for-cat-aspirants",
+        "unlocking-success-mastering-reading-comprehension-for-cat-with-proven-strategies",
+        "mastering-cat-verbal-ability-secrets-to-conquering-reading-comprehension-challenges",
+        "mastering-verbal-ability-and-reading-comprehension-for-cat-strategies-to-unlock-your-full-potential"
+      ],
+      "externalReferences": [
+        "https://www.oneprep.com/blog/sat-trap-answers-eliminate-reading-distractors",
+        "https://act.magoosh.com/lessons/1457-trap-answer-choices",
+        "https://verbloom.dev/blog/lsat-rc-two-answers-seem-right",
+        "https://app.achievable.me/study/act/learn/act-reading-test-traps",
+        "https://mba.hitbullseye.com/CAT/CAT-RCs-Answer-Choices.php",
+        "https://times.edu.vn/en/sat/digital-sat-reading-trap-answers/"
+      ],
+      "backlinkOpportunities": [
+        {
+          "site": "https://www.oneprep.com/blog/sat-trap-answers-eliminate-reading-distractors",
+          "reason": "The topic overlaps directly with trap-answer identification and distractor elimination.",
+          "potentialAngle": "Offer the proof-before-pick sequence as a cross-exam framework that complements a SAT-focused discussion.",
+          "suggestedOutreachType": "Relevant editorial resource suggestion",
+          "priority": "medium"
+        },
+        {
+          "site": "https://act.magoosh.com/lessons/1457-trap-answer-choices",
+          "reason": "The resource addresses the same broad problem of plausible but incorrect reading choices.",
+          "potentialAngle": "Contribute a worked-example framework for testing contradiction, scope, evidence, inference distance, and wording precision.",
+          "suggestedOutreachType": "Educational resource pitch",
+          "priority": "medium"
+        },
+        {
+          "site": "https://verbloom.dev/blog/lsat-rc-two-answers-seem-right",
+          "reason": "Both resources address the difficult case in which multiple options appear supported.",
+          "potentialAngle": "Share the proof comparison method for rejecting partial matches and unsupported extensions.",
+          "suggestedOutreachType": "Contextual resource suggestion",
+          "priority": "high"
+        },
+        {
+          "site": "https://app.achievable.me/study/act/learn/act-reading-test-traps",
+          "reason": "The supplied result covers recycled passage language and other ACT reading traps.",
+          "potentialAngle": "Position the article as a transferable validation checklist for readers preparing for multiple exam formats.",
+          "suggestedOutreachType": "Editorial collaboration or resource suggestion",
+          "priority": "low"
+        },
+        {
+          "site": "https://mba.hitbullseye.com/CAT/CAT-RCs-Answer-Choices.php",
+          "reason": "The result is closely aligned with CAT RC answer-choice elimination and scope errors.",
+          "potentialAngle": "Add a proof-based, auditable protocol and original paired examples to the existing elimination discussion.",
+          "suggestedOutreachType": "Relevant CAT resource outreach",
+          "priority": "high"
+        }
+      ],
+      "schemaType": "BlogPosting",
+      "seoScore": 74,
+      "contentQualityScore": 86,
+      "wordCount": 2486,
+      "headings": 26,
+      "internalLinks": [
+        "/blog/unlocking-precision-mastering-reading-comprehension-accuracy-for-cat-success",
+        "/blog/reading-comprehension-isnt-about-understanding-its-about-insight",
+        "/blog/unlocking-success-mastering-reading-comprehension-questions-for-cat-aspirants",
+        "/blog/mastering-cat-verbal-ability-secrets-to-conquering-reading-comprehension-challenges"
+      ]
+    },
+    {
+      "slug": "subject-verb-agreement-common-exam-traps",
+      "url": "/blog/subject-verb-agreement-common-exam-traps",
+      "title": "Subject-Verb Agreement: Common Exam Traps",
+      "description": "Master subject-verb agreement rules for error spotting: find the true subject, handle tricky structures, and choose the correct verb under time pressure.",
+      "primaryKeyword": "Subject-Verb Agreement: The Grammar Mistakes That Trap Exam Takers",
+      "secondaryKeywords": [
+        "subject-verb agreement rules",
+        "subject-verb agreement errors",
+        "subject-verb agreement questions",
+        "grammar error spotting",
+        "common grammar mistakes in exams",
+        "subject verb agreement examples"
+      ],
+      "searchIntent": "Skill-building",
+      "cluster": "Grammar",
+      "category": "Grammar",
+      "status": "draft",
+      "date": "2026-08-21",
+      "updatedDate": "2026-08-21",
+      "image": "/blog/subject-verb-agreement-common-exam-traps-featured.png",
+      "imageAlt": "Exam grammar study card showing how to identify the true subject for subject-verb agreement",
+      "author": "Auctor Labs Editorial Team",
+      "relevantExams": [
+        "SSC and other competitive English examinations",
+        "NDA-style grammar and error-detection practice",
+        "SAT",
+        "ACT",
+        "GED Language Arts RLA"
+      ],
+      "targetPage": "/blog/subject-verb-agreement-common-exam-traps",
+      "relatedArticles": [],
+      "externalReferences": [
+        "https://www.mcqorbit.com/learn/english/grammar-foundations/subject-verb-agreement",
+        "https://www.varsitytutors.com/practice/subjects/ged-language-arts-rla/lessons/correct-agreement-errors",
+        "https://academicmarker.com/grammar-practice/verb-functions/subject-verb-agreement/what-are-some-common-subject-verb-agreement-errors/",
+        "https://www.econtentpro.com/blog/what-are-the-most-common-grammar-mistakes/408",
+        "https://www.facebook.com/majorkalshiclasses/posts/day-360-stop-guessing-start-spotting-the-ultimate-english-tricks-for-nda-1-2026-/1213332514330346/",
+        "https://www.facebook.com/EnglishWithRaniMam/posts/top-grammar-exam-traps-you-must-avoid-%EF%B8%8Fno-double-negatives-no-repetition-no-doub/1232068929034005/",
+        "https://www.instagram.com/reel/DUYavfok7Qs/",
+        "https://www.youtube.com/watch?v=z96dYT8gjZo"
+      ],
+      "backlinkOpportunities": [
+        {
+          "site": "academicmarker.com",
+          "sourcePage": "https://academicmarker.com/grammar-practice/verb-functions/subject-verb-agreement/what-are-some-common-subject-verb-agreement-errors/",
+          "sourcePageReason": "The supplied page directly covers common subject-verb agreement errors, making it relevant to a complementary exam-trap guide.",
+          "reason": "The article could be cited as an additional practice-oriented explanation of agreement errors.",
+          "potentialAngle": "Offer an original comparison of academic grammar errors versus multiple-choice exam traps, with newly written worked examples and a timed checklist.",
+          "suggestedOutreachType": "Editorial resource suggestion",
+          "priority": "high"
+        },
+        {
+          "site": "varsitytutors.com",
+          "sourcePage": "https://www.varsitytutors.com/practice/subjects/ged-language-arts-rla/lessons/correct-agreement-errors",
+          "sourcePageReason": "The supplied lesson directly addresses correcting agreement errors and identifies the skill as relevant to multiple language examinations.",
+          "reason": "The guide may provide a cross-exam resource for learners who need additional agreement practice.",
+          "potentialAngle": "Position the article as a multi-exam companion focused on trap diagnosis and reasoning rather than only correction practice.",
+          "suggestedOutreachType": "Relevant-resource suggestion",
+          "priority": "high"
+        },
+        {
+          "site": "mcqorbit.com",
+          "sourcePage": "https://www.mcqorbit.com/learn/english/grammar-foundations/subject-verb-agreement",
+          "sourcePageReason": "The supplied page is specifically dedicated to subject-verb agreement rules and error spotting.",
+          "reason": "A link could be appropriate if the publisher maintains a resources section or updates its agreement content with complementary exam strategy material.",
+          "potentialAngle": "Contribute an original framework for rejecting proximity-based answers and handling long, interrupted subjects.",
+          "suggestedOutreachType": "Content collaboration or resource suggestion",
+          "priority": "medium"
+        },
+        {
+          "site": "econtentpro.com",
+          "sourcePage": "https://www.econtentpro.com/blog/what-are-the-most-common-grammar-mistakes/408",
+          "sourcePageReason": "The supplied article lists subject-verb agreement among common grammar mistakes and covers related error categories.",
+          "reason": "The article could reference this guide for a deeper treatment of one of its listed grammar problems.",
+          "potentialAngle": "Provide a focused deep dive that turns the broad mistake list into an exam-specific diagnostic and practice workflow.",
+          "suggestedOutreachType": "Contextual resource suggestion",
+          "priority": "medium"
+        }
+      ],
+      "schemaType": "BlogPosting",
+      "seoScore": 77,
+      "contentQualityScore": 83,
+      "wordCount": 2449,
+      "headings": 39,
+      "internalLinks": [
+        "/features/precision-drills",
+        "/test-series",
+        "/auctor-rc"
+      ]
+    }
+  ],
+  "plannedTopics": [
+    {
+      "action": "CREATE_NEW",
+      "primaryKeyword": "CAT para summary strategy",
+      "secondaryKeywords": [
+        "para summary CAT 2026",
+        "how to solve para summary",
+        "para summary examples"
+      ],
+      "searchIntent": "Learn a repeatable method and apply it to worked examples",
+      "cluster": "verbal-ability",
+      "title": "CAT Para Summary: A Scope-and-Structure Method That Actually Works",
+      "slug": "cat-para-summary-strategy",
+      "priorityScore": 94,
+      "targetPage": "/test-series",
+      "reason": "Core VARC intent is completely absent from the current inventory; SERPs reward worked examples and trap taxonomies."
+    },
+    {
+      "action": "CREATE_NEW",
+      "primaryKeyword": "CAT odd sentence out strategy",
+      "secondaryKeywords": [
+        "odd one out CAT",
+        "odd sentence questions",
+        "sentence exclusion CAT"
+      ],
+      "searchIntent": "Learn coherence tests and practise with explained examples",
+      "cluster": "verbal-ability",
+      "title": "CAT Odd Sentence Out: Build the Core Paragraph Before You Eliminate",
+      "slug": "cat-odd-sentence-out-strategy",
+      "priorityScore": 92,
+      "targetPage": "/test-series",
+      "reason": "High-relevance gap with clear example-led differentiation."
+    },
+    {
+      "action": "CREATE_NEW",
+      "primaryKeyword": "CAT para jumbles strategy",
+      "secondaryKeywords": [
+        "para jumbles CAT 2026",
+        "how to solve para jumbles",
+        "parajumble examples"
+      ],
+      "searchIntent": "Learn paragraph-coherence signals through worked sets",
+      "cluster": "verbal-ability",
+      "title": "CAT Para Jumbles: Solve for Coherence, Not Sentence Pairs Alone",
+      "slug": "cat-para-jumbles-strategy",
+      "priorityScore": 91,
+      "targetPage": "/test-series",
+      "reason": "Core CAT VA topic missing from Auctor's content graph."
+    },
+    {
+      "action": "CREATE_NEW",
+      "primaryKeyword": "CAT VARC mock analysis",
+      "secondaryKeywords": [
+        "how to analyse VARC mocks",
+        "VARC score not improving",
+        "CAT mock error log"
+      ],
+      "searchIntent": "Diagnose score volatility and turn mock errors into a practice plan",
+      "cluster": "mock-analysis",
+      "title": "How to Analyse a CAT VARC Mock: The Decision-Level Review",
+      "slug": "cat-varc-mock-analysis",
+      "priorityScore": 90,
+      "targetPage": "/test-series",
+      "reason": "Strong problem-solution and commercial intent; current community discussion shows persistent demand."
+    },
+    {
+      "action": "UPDATE",
+      "primaryKeyword": "how to improve RC accuracy for CAT",
+      "searchIntent": "Diagnose an accuracy plateau and apply a review framework",
+      "cluster": "cat-reading-comprehension",
+      "title": "Why You're Stuck at 60% Accuracy in RC",
+      "slug": "improve-rc-accuracy-cat",
+      "priorityScore": 88,
+      "targetPage": "/features/precision-drills",
+      "reason": "Existing page is the strongest candidate to consolidate overlapping accuracy articles into a differentiated pillar."
+    },
+    {
+      "action": "CREATE_NEW",
+      "primaryKeyword": "CAT RC question types",
+      "secondaryKeywords": [
+        "main idea questions CAT",
+        "inference questions CAT",
+        "author tone CAT RC"
+      ],
+      "searchIntent": "Understand each RC question type and choose the correct solving process",
+      "cluster": "rc-question-types",
+      "title": "CAT RC Question Types: What Each One Actually Tests",
+      "slug": "cat-rc-question-types",
+      "priorityScore": 87,
+      "targetPage": "/features/reading-comprehension-generator",
+      "reason": "Auctor has isolated inference/tone posts but no navigational question-type pillar."
+    }
+  ],
+  "opportunities": [
+    {
+      "topic": "grammar",
+      "primaryKeyword": "common grammar errors in competitive exams",
+      "searchIntent": "Problem-solving",
+      "contentType": "multi-exam",
+      "contentGapScore": 98,
+      "opportunityScore": 86,
+      "eligible": true
+    },
+    {
+      "topic": "verbal-ability",
+      "primaryKeyword": "CAT para summary strategy",
+      "searchIntent": "Practice-oriented",
+      "contentType": "multi-exam",
+      "contentGapScore": 97,
+      "opportunityScore": 85,
+      "eligible": false
+    },
+    {
+      "topic": "vocabulary",
+      "primaryKeyword": "learn vocabulary from context",
+      "searchIntent": "Skill-building",
+      "contentType": "universal verbal skill",
+      "contentGapScore": 91,
+      "opportunityScore": 84,
+      "eligible": true
+    },
+    {
+      "topic": "verbal-ability",
+      "primaryKeyword": "CAT para jumbles strategy",
+      "searchIntent": "Practice-oriented",
+      "contentType": "multi-exam",
+      "contentGapScore": 97,
+      "opportunityScore": 83,
+      "eligible": true
+    },
+    {
+      "topic": "grammar",
+      "primaryKeyword": "subject verb agreement questions",
+      "searchIntent": "Practice-oriented",
+      "contentType": "multi-exam",
+      "contentGapScore": 96,
+      "opportunityScore": 83,
+      "eligible": true
+    },
+    {
+      "topic": "reading-comprehension",
+      "primaryKeyword": "CAT RC question types",
+      "searchIntent": "Definition/explanation",
+      "contentType": "multi-exam",
+      "contentGapScore": 79,
+      "opportunityScore": 81,
+      "eligible": true
+    },
+    {
+      "topic": "verbal-ability",
+      "primaryKeyword": "CAT odd sentence out strategy",
+      "searchIntent": "Practice-oriented",
+      "contentType": "multi-exam",
+      "contentGapScore": 74,
+      "opportunityScore": 79,
+      "eligible": true
+    }
+  ],
+  "clusters": [
+    {
+      "id": "reading-comprehension",
+      "name": "Reading Comprehension",
+      "pillar": {
+        "title": "Reading Comprehension — Complete Guide",
+        "slug": "reading-comprehension-complete-guide",
+        "searchIntent": "Comprehensive skill-building"
+      },
+      "existingPillar": null,
+      "existingArticles": [
+        {
+          "slug": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+          "title": "Accuracy in RC? Ignoring Context Could Ruin Your Score",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "improve-rc-accuracy-cat",
+          "title": "Why You're Stuck at 60% Accuracy in RC",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-cat-reading-comprehension-unveiling-strategies-and-insights-behind-sample-questions-and-answers",
+          "title": "Mastering CAT Reading Comprehension: Unveiling Strategies and Insights Behind Sample Questions and Answers",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-cat-verbal-ability-secrets-to-conquering-reading-comprehension-challenges",
+          "title": "Mastering CAT Verbal Ability: Secrets to Conquering Reading Comprehension Challenges",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-inference-questions-in-cat-unlocking-the-secrets-to-critical-thinking-success",
+          "title": "Mastering Inference Questions in CAT: Unlocking the Secrets to Critical Thinking Success",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-inference-questions-in-cat-unlocking-the-secrets-to-your-success",
+          "title": "Mastering Inference Questions in CAT: Unlocking the Secrets to Your Success",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-rc-youre-just-one-misread-away-from-failure",
+          "title": "Mastering RC? You're Just One Misread Away From Failure",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-rc-youre-probably-just-memorizing-not-understanding",
+          "title": "Mastering RC? You're Probably Just Memorizing, Not Understanding",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-reading-comprehension-for-cat-unlocking-the-secrets-to-high-scores",
+          "title": "Mastering Reading Comprehension for CAT: Unlocking the Secrets to High Scores",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-reading-comprehension-insider-strategies-to-elevate-your-cat-prep",
+          "title": "Mastering Reading Comprehension: Insider Strategies to Elevate Your CAT Prep",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-reading-comprehension-unlocking-strategies-to-elevate-your-cat-preparation",
+          "title": "Mastering Reading Comprehension: Unlocking Strategies to Elevate Your CAT Preparation",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-reading-comprehension-unlocking-the-secrets-to-higher-accuracy-in-cat",
+          "title": "Mastering Reading Comprehension: Unlocking the Secrets to Higher Accuracy in CAT",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-verbal-ability-and-reading-comprehension-for-cat-strategies-to-unlock-your-full-potential",
+          "title": "Mastering Verbal Ability and Reading Comprehension for CAT: Strategies to Unlock Your Full Potential",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "rc-inference-decision-trap",
+          "title": "Why Inference Questions Feel So Unfair (And What You're Missing)",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "rc-tone-hidden-skill",
+          "title": "Tone in RC Is Not About Words — It's About Intent",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "reading-comprehension-isnt-about-understanding-its-about-insight",
+          "title": "Reading Comprehension Isn't About Understanding — It's About Insight",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "understanding-rc-answers-youre-probably-misreading-the-inferences",
+          "title": "Understanding RC Answers? You’re Probably Misreading the Inferences",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-precision-mastering-reading-comprehension-accuracy-for-cat-success",
+          "title": "Unlocking Precision: Mastering Reading Comprehension Accuracy for CAT Success",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-success-common-rc-mistakes-cat-aspirants-make-and-how-to-overcome-them",
+          "title": "Unlocking Success: Common RC Mistakes CAT Aspirants Make and How to Overcome Them",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-success-how-daily-reading-comprehension-transforms-your-cat-preparation",
+          "title": "Unlocking Success: How Daily Reading Comprehension Transforms Your CAT Preparation",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-success-mastering-reading-comprehension-for-cat-with-proven-strategies",
+          "title": "Unlocking Success: Mastering Reading Comprehension for CAT with Proven Strategies",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-success-mastering-reading-comprehension-questions-for-cat-aspirants",
+          "title": "Unlocking Success: Mastering Reading Comprehension Questions for CAT Aspirants",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-success-top-common-rc-mistakes-cat-aspirants-must-avoid",
+          "title": "Unlocking Success: Top Common RC Mistakes CAT Aspirants Must Avoid",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "your-comfort-with-tone-masks-a-deeper-misunderstanding-in-rc",
+          "title": "Your Comfort with Tone Masks a Deeper Misunderstanding in RC",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "your-comprehension-is-strong-yet-your-inferences-are-weak",
+          "title": "Your Comprehension Is Strong — Yet Your Inferences Are Weak",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "contrast-transitions-cat-reading-comprehension",
+          "title": "Contrast Transitions in CAT RC: Meaning & Practice",
+          "status": "draft",
+          "searchIntent": "Skill-building"
+        },
+        {
+          "slug": "learn-vocabulary-from-context-competitive-exams",
+          "title": "Learn Vocabulary from Context for Competitive Exams",
+          "status": "draft",
+          "searchIntent": "Skill-building"
+        },
+        {
+          "slug": "reading-comprehension-trap-answers-proof-before-pick",
+          "title": "RC Answers: Use a Proof-Before-Pick Method to Reject Trap Options",
+          "status": "draft",
+          "searchIntent": "Problem-solving"
+        }
+      ],
+      "missingArticles": [
+        "how to identify the main idea",
+        "how to identify author's tone",
+        "how to identify passage structure",
+        "how to handle two seemingly correct options",
+        "how to read dense passages",
+        "scope and distortion"
+      ],
+      "searchIntentGaps": [
+        "Informational",
+        "Strategy",
+        "Practice-oriented"
+      ],
+      "internalLinkGaps": [
+        "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+        "mastering-cat-reading-comprehension-unveiling-strategies-and-insights-behind-sample-questions-and-answers",
+        "mastering-cat-verbal-ability-secrets-to-conquering-reading-comprehension-challenges",
+        "mastering-inference-questions-in-cat-unlocking-the-secrets-to-critical-thinking-success",
+        "mastering-inference-questions-in-cat-unlocking-the-secrets-to-your-success",
+        "mastering-rc-youre-just-one-misread-away-from-failure",
+        "mastering-rc-youre-probably-just-memorizing-not-understanding",
+        "mastering-reading-comprehension-for-cat-unlocking-the-secrets-to-high-scores",
+        "mastering-reading-comprehension-insider-strategies-to-elevate-your-cat-prep",
+        "mastering-reading-comprehension-unlocking-strategies-to-elevate-your-cat-preparation",
+        "mastering-reading-comprehension-unlocking-the-secrets-to-higher-accuracy-in-cat",
+        "mastering-verbal-ability-and-reading-comprehension-for-cat-strategies-to-unlock-your-full-potential",
+        "rc-inference-decision-trap",
+        "rc-tone-hidden-skill",
+        "reading-comprehension-isnt-about-understanding-its-about-insight",
+        "understanding-rc-answers-youre-probably-misreading-the-inferences",
+        "unlocking-precision-mastering-reading-comprehension-accuracy-for-cat-success",
+        "unlocking-success-common-rc-mistakes-cat-aspirants-make-and-how-to-overcome-them",
+        "unlocking-success-how-daily-reading-comprehension-transforms-your-cat-preparation",
+        "unlocking-success-mastering-reading-comprehension-for-cat-with-proven-strategies",
+        "unlocking-success-mastering-reading-comprehension-questions-for-cat-aspirants",
+        "unlocking-success-top-common-rc-mistakes-cat-aspirants-must-avoid",
+        "your-comfort-with-tone-masks-a-deeper-misunderstanding-in-rc",
+        "your-comprehension-is-strong-yet-your-inferences-are-weak"
+      ],
+      "topicalAuthorityGaps": [
+        "Missing pillar: Reading Comprehension — Complete Guide",
+        "how to identify the main idea",
+        "how to identify author's tone",
+        "how to identify passage structure",
+        "how to handle two seemingly correct options",
+        "how to read dense passages",
+        "scope and distortion"
+      ],
+      "backlinkWorthyResourceGaps": [
+        "how to identify passage structure"
+      ],
+      "contentGapScore": 63,
+      "recommendedNext": [
+        {
+          "title": "how to identify the main idea",
+          "priority": "high",
+          "opportunityScore": 63,
+          "reason": "Fills an uncovered Reading Comprehension supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "how to identify author's tone",
+          "priority": "high",
+          "opportunityScore": 60,
+          "reason": "Fills an uncovered Reading Comprehension supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "how to identify passage structure",
+          "priority": "high",
+          "opportunityScore": 57,
+          "reason": "Fills an uncovered Reading Comprehension supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "how to handle two seemingly correct options",
+          "priority": "medium",
+          "opportunityScore": 54,
+          "reason": "Fills an uncovered Reading Comprehension supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "how to read dense passages",
+          "priority": "medium",
+          "opportunityScore": 51,
+          "reason": "Fills an uncovered Reading Comprehension supporting-topic gap while the pillar is also missing."
+        }
+      ]
+    },
+    {
+      "id": "vocabulary",
+      "name": "Vocabulary",
+      "pillar": {
+        "title": "Vocabulary Building for Competitive Exams",
+        "slug": "vocabulary-building-competitive-exams",
+        "searchIntent": "Comprehensive skill-building"
+      },
+      "existingPillar": {
+        "slug": "learn-vocabulary-from-context-competitive-exams",
+        "title": "Learn Vocabulary from Context for Competitive Exams",
+        "status": "draft",
+        "similarity": 0.57
+      },
+      "existingArticles": [
+        {
+          "slug": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+          "title": "Accuracy in RC? Ignoring Context Could Ruin Your Score",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "improve-rc-accuracy-cat",
+          "title": "Why You're Stuck at 60% Accuracy in RC",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-cat-verbal-ability-secrets-to-conquering-reading-comprehension-challenges",
+          "title": "Mastering CAT Verbal Ability: Secrets to Conquering Reading Comprehension Challenges",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-rc-youre-just-one-misread-away-from-failure",
+          "title": "Mastering RC? You're Just One Misread Away From Failure",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-rc-youre-probably-just-memorizing-not-understanding",
+          "title": "Mastering RC? You're Probably Just Memorizing, Not Understanding",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-reading-comprehension-for-cat-unlocking-the-secrets-to-high-scores",
+          "title": "Mastering Reading Comprehension for CAT: Unlocking the Secrets to High Scores",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-reading-comprehension-insider-strategies-to-elevate-your-cat-prep",
+          "title": "Mastering Reading Comprehension: Insider Strategies to Elevate Your CAT Prep",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-reading-comprehension-unlocking-strategies-to-elevate-your-cat-preparation",
+          "title": "Mastering Reading Comprehension: Unlocking Strategies to Elevate Your CAT Preparation",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-reading-comprehension-unlocking-the-secrets-to-higher-accuracy-in-cat",
+          "title": "Mastering Reading Comprehension: Unlocking the Secrets to Higher Accuracy in CAT",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-verbal-ability-and-reading-comprehension-for-cat-strategies-to-unlock-your-full-potential",
+          "title": "Mastering Verbal Ability and Reading Comprehension for CAT: Strategies to Unlock Your Full Potential",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "rc-tone-hidden-skill",
+          "title": "Tone in RC Is Not About Words — It's About Intent",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "reading-comprehension-isnt-about-understanding-its-about-insight",
+          "title": "Reading Comprehension Isn't About Understanding — It's About Insight",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "understanding-rc-answers-youre-probably-misreading-the-inferences",
+          "title": "Understanding RC Answers? You’re Probably Misreading the Inferences",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-precision-mastering-reading-comprehension-accuracy-for-cat-success",
+          "title": "Unlocking Precision: Mastering Reading Comprehension Accuracy for CAT Success",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-success-common-rc-mistakes-cat-aspirants-make-and-how-to-overcome-them",
+          "title": "Unlocking Success: Common RC Mistakes CAT Aspirants Make and How to Overcome Them",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-success-how-daily-reading-comprehension-transforms-your-cat-preparation",
+          "title": "Unlocking Success: How Daily Reading Comprehension Transforms Your CAT Preparation",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-success-mastering-reading-comprehension-for-cat-with-proven-strategies",
+          "title": "Unlocking Success: Mastering Reading Comprehension for CAT with Proven Strategies",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-success-mastering-reading-comprehension-questions-for-cat-aspirants",
+          "title": "Unlocking Success: Mastering Reading Comprehension Questions for CAT Aspirants",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-success-top-common-rc-mistakes-cat-aspirants-must-avoid",
+          "title": "Unlocking Success: Top Common RC Mistakes CAT Aspirants Must Avoid",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "your-comfort-with-tone-masks-a-deeper-misunderstanding-in-rc",
+          "title": "Your Comfort with Tone Masks a Deeper Misunderstanding in RC",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "learn-vocabulary-from-context-competitive-exams",
+          "title": "Learn Vocabulary from Context for Competitive Exams",
+          "status": "draft",
+          "searchIntent": "Skill-building"
+        }
+      ],
+      "missingArticles": [
+        "word roots",
+        "prefixes and suffixes",
+        "vocabulary retention",
+        "synonyms and antonyms",
+        "commonly confused words",
+        "contextual vocabulary"
+      ],
+      "searchIntentGaps": [
+        "Informational",
+        "Problem-solving",
+        "Strategy",
+        "Practice-oriented"
+      ],
+      "internalLinkGaps": [
+        "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+        "mastering-cat-verbal-ability-secrets-to-conquering-reading-comprehension-challenges",
+        "mastering-rc-youre-just-one-misread-away-from-failure",
+        "mastering-rc-youre-probably-just-memorizing-not-understanding",
+        "mastering-reading-comprehension-for-cat-unlocking-the-secrets-to-high-scores",
+        "mastering-reading-comprehension-insider-strategies-to-elevate-your-cat-prep",
+        "mastering-reading-comprehension-unlocking-strategies-to-elevate-your-cat-preparation",
+        "mastering-reading-comprehension-unlocking-the-secrets-to-higher-accuracy-in-cat",
+        "mastering-verbal-ability-and-reading-comprehension-for-cat-strategies-to-unlock-your-full-potential",
+        "rc-tone-hidden-skill",
+        "reading-comprehension-isnt-about-understanding-its-about-insight",
+        "understanding-rc-answers-youre-probably-misreading-the-inferences",
+        "unlocking-precision-mastering-reading-comprehension-accuracy-for-cat-success",
+        "unlocking-success-common-rc-mistakes-cat-aspirants-make-and-how-to-overcome-them",
+        "unlocking-success-how-daily-reading-comprehension-transforms-your-cat-preparation",
+        "unlocking-success-mastering-reading-comprehension-for-cat-with-proven-strategies",
+        "unlocking-success-mastering-reading-comprehension-questions-for-cat-aspirants",
+        "unlocking-success-top-common-rc-mistakes-cat-aspirants-must-avoid",
+        "your-comfort-with-tone-masks-a-deeper-misunderstanding-in-rc"
+      ],
+      "topicalAuthorityGaps": [
+        "word roots",
+        "prefixes and suffixes",
+        "vocabulary retention",
+        "synonyms and antonyms",
+        "commonly confused words",
+        "contextual vocabulary"
+      ],
+      "backlinkWorthyResourceGaps": [
+        "word roots"
+      ],
+      "contentGapScore": 58,
+      "recommendedNext": [
+        {
+          "title": "vocabulary retention",
+          "priority": "high",
+          "opportunityScore": 58,
+          "reason": "Fills an uncovered Vocabulary supporting-topic gap."
+        },
+        {
+          "title": "contextual vocabulary",
+          "priority": "high",
+          "opportunityScore": 55,
+          "reason": "Fills an uncovered Vocabulary supporting-topic gap."
+        },
+        {
+          "title": "word roots",
+          "priority": "high",
+          "opportunityScore": 52,
+          "reason": "Fills an uncovered Vocabulary supporting-topic gap."
+        },
+        {
+          "title": "prefixes and suffixes",
+          "priority": "medium",
+          "opportunityScore": 49,
+          "reason": "Fills an uncovered Vocabulary supporting-topic gap."
+        },
+        {
+          "title": "synonyms and antonyms",
+          "priority": "medium",
+          "opportunityScore": 46,
+          "reason": "Fills an uncovered Vocabulary supporting-topic gap."
+        }
+      ]
+    },
+    {
+      "id": "grammar",
+      "name": "Grammar",
+      "pillar": {
+        "title": "Grammar for Competitive Exams",
+        "slug": "grammar-for-competitive-exams",
+        "searchIntent": "Comprehensive skill-building"
+      },
+      "existingPillar": null,
+      "existingArticles": [
+        {
+          "slug": "subject-verb-agreement-common-exam-traps",
+          "title": "Subject-Verb Agreement: Common Exam Traps",
+          "status": "draft",
+          "searchIntent": "Skill-building"
+        }
+      ],
+      "missingArticles": [
+        "common grammar errors",
+        "modifiers",
+        "parallelism",
+        "pronouns",
+        "tenses",
+        "sentence correction",
+        "error spotting"
+      ],
+      "searchIntentGaps": [
+        "Informational",
+        "Problem-solving",
+        "Strategy",
+        "Practice-oriented"
+      ],
+      "internalLinkGaps": [],
+      "topicalAuthorityGaps": [
+        "Missing pillar: Grammar for Competitive Exams",
+        "common grammar errors",
+        "modifiers",
+        "parallelism",
+        "pronouns",
+        "tenses",
+        "sentence correction",
+        "error spotting"
+      ],
+      "backlinkWorthyResourceGaps": [
+        "common grammar errors"
+      ],
+      "contentGapScore": 85,
+      "recommendedNext": [
+        {
+          "title": "common grammar errors",
+          "priority": "high",
+          "opportunityScore": 85,
+          "reason": "Fills an uncovered Grammar supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "modifiers",
+          "priority": "high",
+          "opportunityScore": 82,
+          "reason": "Fills an uncovered Grammar supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "parallelism",
+          "priority": "high",
+          "opportunityScore": 79,
+          "reason": "Fills an uncovered Grammar supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "pronouns",
+          "priority": "medium",
+          "opportunityScore": 76,
+          "reason": "Fills an uncovered Grammar supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "tenses",
+          "priority": "medium",
+          "opportunityScore": 73,
+          "reason": "Fills an uncovered Grammar supporting-topic gap while the pillar is also missing."
+        }
+      ]
+    },
+    {
+      "id": "verbal-ability",
+      "name": "Verbal Ability",
+      "pillar": {
+        "title": "Verbal Ability Preparation",
+        "slug": "verbal-ability-preparation",
+        "searchIntent": "Comprehensive skill-building"
+      },
+      "existingPillar": null,
+      "existingArticles": [
+        {
+          "slug": "mastering-cat-verbal-ability-secrets-to-conquering-reading-comprehension-challenges",
+          "title": "Mastering CAT Verbal Ability: Secrets to Conquering Reading Comprehension Challenges",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-verbal-ability-and-reading-comprehension-for-cat-strategies-to-unlock-your-full-potential",
+          "title": "Mastering Verbal Ability and Reading Comprehension for CAT: Strategies to Unlock Your Full Potential",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "cat-para-summary-strategy",
+          "title": "CAT Para Summary: A Scope-and-Structure Method That Actually Works",
+          "status": "draft",
+          "searchIntent": "Learn a repeatable method and apply it to worked examples"
+        },
+        {
+          "slug": "para-jumbles-solving-strategy-examples",
+          "title": "Para Jumbles: A Step-by-Step Method to Arrange Sentences",
+          "status": "draft",
+          "searchIntent": "Skill-building"
+        }
+      ],
+      "missingArticles": [
+        "sentence placement",
+        "odd sentence",
+        "para summary",
+        "logical flow",
+        "cohesion",
+        "coherence"
+      ],
+      "searchIntentGaps": [
+        "Informational",
+        "Problem-solving",
+        "Strategy",
+        "Practice-oriented"
+      ],
+      "internalLinkGaps": [
+        "mastering-cat-verbal-ability-secrets-to-conquering-reading-comprehension-challenges",
+        "mastering-verbal-ability-and-reading-comprehension-for-cat-strategies-to-unlock-your-full-potential"
+      ],
+      "topicalAuthorityGaps": [
+        "Missing pillar: Verbal Ability Preparation",
+        "sentence placement",
+        "odd sentence",
+        "para summary",
+        "logical flow",
+        "cohesion",
+        "coherence"
+      ],
+      "backlinkWorthyResourceGaps": [],
+      "contentGapScore": 86,
+      "recommendedNext": [
+        {
+          "title": "sentence placement",
+          "priority": "high",
+          "opportunityScore": 86,
+          "reason": "Fills an uncovered Verbal Ability supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "odd sentence",
+          "priority": "high",
+          "opportunityScore": 83,
+          "reason": "Fills an uncovered Verbal Ability supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "para summary",
+          "priority": "high",
+          "opportunityScore": 80,
+          "reason": "Fills an uncovered Verbal Ability supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "logical flow",
+          "priority": "medium",
+          "opportunityScore": 77,
+          "reason": "Fills an uncovered Verbal Ability supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "cohesion",
+          "priority": "medium",
+          "opportunityScore": 74,
+          "reason": "Fills an uncovered Verbal Ability supporting-topic gap while the pillar is also missing."
+        }
+      ]
+    },
+    {
+      "id": "critical-reading",
+      "name": "Critical Reading",
+      "pillar": {
+        "title": "Critical Reading Skills",
+        "slug": "critical-reading-skills",
+        "searchIntent": "Comprehensive skill-building"
+      },
+      "existingPillar": null,
+      "existingArticles": [
+        {
+          "slug": "improve-rc-accuracy-cat",
+          "title": "Why You're Stuck at 60% Accuracy in RC",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-inference-questions-in-cat-unlocking-the-secrets-to-your-success",
+          "title": "Mastering Inference Questions in CAT: Unlocking the Secrets to Your Success",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "reading-comprehension-isnt-about-understanding-its-about-insight",
+          "title": "Reading Comprehension Isn't About Understanding — It's About Insight",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-precision-mastering-reading-comprehension-accuracy-for-cat-success",
+          "title": "Unlocking Precision: Mastering Reading Comprehension Accuracy for CAT Success",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-success-mastering-reading-comprehension-for-cat-with-proven-strategies",
+          "title": "Unlocking Success: Mastering Reading Comprehension for CAT with Proven Strategies",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-success-mastering-reading-comprehension-questions-for-cat-aspirants",
+          "title": "Unlocking Success: Mastering Reading Comprehension Questions for CAT Aspirants",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "reading-comprehension-trap-answers-proof-before-pick",
+          "title": "RC Answers: Use a Proof-Before-Pick Method to Reject Trap Options",
+          "status": "draft",
+          "searchIntent": "Problem-solving"
+        }
+      ],
+      "missingArticles": [
+        "author's argument",
+        "assumptions",
+        "evidence",
+        "tone",
+        "bias",
+        "logical gaps",
+        "argument structure"
+      ],
+      "searchIntentGaps": [
+        "Informational",
+        "Skill-building",
+        "Strategy",
+        "Practice-oriented"
+      ],
+      "internalLinkGaps": [
+        "mastering-inference-questions-in-cat-unlocking-the-secrets-to-your-success",
+        "reading-comprehension-isnt-about-understanding-its-about-insight",
+        "unlocking-precision-mastering-reading-comprehension-accuracy-for-cat-success",
+        "unlocking-success-mastering-reading-comprehension-for-cat-with-proven-strategies",
+        "unlocking-success-mastering-reading-comprehension-questions-for-cat-aspirants"
+      ],
+      "topicalAuthorityGaps": [
+        "Missing pillar: Critical Reading Skills",
+        "author's argument",
+        "assumptions",
+        "evidence",
+        "tone",
+        "bias",
+        "logical gaps",
+        "argument structure"
+      ],
+      "backlinkWorthyResourceGaps": [
+        "evidence",
+        "argument structure"
+      ],
+      "contentGapScore": 90,
+      "recommendedNext": [
+        {
+          "title": "author's argument",
+          "priority": "high",
+          "opportunityScore": 90,
+          "reason": "Fills an uncovered Critical Reading supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "assumptions",
+          "priority": "high",
+          "opportunityScore": 87,
+          "reason": "Fills an uncovered Critical Reading supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "evidence",
+          "priority": "high",
+          "opportunityScore": 84,
+          "reason": "Fills an uncovered Critical Reading supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "tone",
+          "priority": "medium",
+          "opportunityScore": 81,
+          "reason": "Fills an uncovered Critical Reading supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "bias",
+          "priority": "medium",
+          "opportunityScore": 78,
+          "reason": "Fills an uncovered Critical Reading supporting-topic gap while the pillar is also missing."
+        }
+      ]
     }
   ]
 }

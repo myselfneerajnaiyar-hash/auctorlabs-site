@@ -1,0 +1,287 @@
+{
+  "generatedAt": "2026-08-22T18:06:51.872Z",
+  "model": "gpt-5.6-luna",
+  "cannibalization": {
+    "serious": false,
+    "closest": {
+      "slug": "learn-vocabulary-from-context-competitive-exams",
+      "status": "draft",
+      "cluster": "Vocabulary",
+      "risk": 0.38,
+      "keywordMatch": false,
+      "intentMatch": true,
+      "crossClusterOverlap": false,
+      "recommendation": "REVIEW_OVERLAP"
+    },
+    "matches": [
+      {
+        "slug": "learn-vocabulary-from-context-competitive-exams",
+        "status": "draft",
+        "cluster": "Vocabulary",
+        "risk": 0.38,
+        "keywordMatch": false,
+        "intentMatch": true,
+        "crossClusterOverlap": false,
+        "recommendation": "REVIEW_OVERLAP"
+      },
+      {
+        "slug": "para-jumbles-solving-strategy-examples",
+        "status": "draft",
+        "cluster": "Verbal Ability",
+        "risk": 0.37,
+        "keywordMatch": false,
+        "intentMatch": true,
+        "crossClusterOverlap": false,
+        "recommendation": "REVIEW_OVERLAP"
+      },
+      {
+        "slug": "subject-verb-agreement-common-exam-traps",
+        "status": "draft",
+        "cluster": "Grammar",
+        "risk": 0.33,
+        "keywordMatch": false,
+        "intentMatch": true,
+        "crossClusterOverlap": false,
+        "recommendation": "REVIEW_OVERLAP"
+      },
+      {
+        "slug": "reading-comprehension-trap-answers-proof-before-pick",
+        "status": "draft",
+        "cluster": "critical-reading",
+        "risk": 0.06,
+        "keywordMatch": false,
+        "intentMatch": false,
+        "crossClusterOverlap": false,
+        "recommendation": "REVIEW_OVERLAP"
+      },
+      {
+        "slug": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+        "status": "published",
+        "cluster": "Accuracy",
+        "risk": 0,
+        "keywordMatch": false,
+        "intentMatch": false,
+        "crossClusterOverlap": false,
+        "recommendation": "REVIEW_OVERLAP"
+      }
+    ]
+  },
+  "brief": {
+    "topic": "CAT VARC Passages",
+    "title": "CAT VARC Passages: A Skill-Building Practice and Solving Guide",
+    "seoTitle": "CAT VARC Passages: Practice RC and Improve Accuracy",
+    "slug": "cat-varc-passages",
+    "description": "A practical guide to CAT VARC passages that teaches readers how to read, map, question, and review reading comprehension passages. It uses original worked examples and emphasizes transferable skills for CAT and other management-entrance verbal sections without relying on a static passage dump.",
+    "primaryKeyword": "CAT VARC Passages",
+    "secondaryKeywords": [
+      "CAT RC passages",
+      "CAT reading comprehension passages",
+      "CAT VARC practice",
+      "CAT RC questions with answers",
+      "CAT RC practice",
+      "CAT VARC passages with answers",
+      "CAT reading comprehension practice"
+    ],
+    "searchIntent": "Skill-building",
+    "readerProblem": "Readers need a structured way to practise CAT VARC passages, decide which passages to attempt, identify the author’s central argument, handle inference and elimination questions, and learn from mistakes rather than merely collect large numbers of practice passages.",
+    "targetAudience": [
+      "CAT aspirants building RC fundamentals",
+      "Students seeking CAT VARC practice with a repeatable method",
+      "MBA-entrance candidates preparing for RC across multiple exams",
+      "Learners who struggle with accuracy, passage selection, or time management"
+    ],
+    "relevantExams": [
+      "CAT",
+      "XAT",
+      "IIFT",
+      "SNAP",
+      "NMAT"
+    ],
+    "contentType": "multi-exam",
+    "cluster": "Reading Comprehension",
+    "category": "Reading Comprehension",
+    "contentAngle": "Use CAT VARC passages as deliberate skill drills: classify passage structure, build a short mental map, predict question types, eliminate options with textual evidence, and review errors by cause. Keep the article CAT-led while showing which skills transfer to other management-entrance exams.",
+    "uniqueValue": "Instead of presenting another undifferentiated list of passages, the article should connect each practice passage to a specific RC skill, include original worked examples, show why tempting answer choices fail, and provide a review system that distinguishes comprehension errors from reasoning, vocabulary, or time-management errors.",
+    "outline": [
+      "What CAT VARC passages test: comprehension, argument tracking, inference, tone, and evidence-based option selection",
+      "How to read a CAT RC passage without over-highlighting or trying to memorise every sentence",
+      "A three-step passage map: subject, central claim, and paragraph roles",
+      "How to choose which passage to attempt first",
+      "Question-type method: main idea, detail, inference, tone, application, and author-purpose questions",
+      "Option elimination: scope, contradiction, distortion, unsupported inference, and extreme language",
+      "Original worked example 1: mapping a short argumentative passage and answering a main-idea question",
+      "Original worked example 2: resolving an inference question using only stated evidence",
+      "Original worked example 3: identifying why a plausible answer is too broad or too narrow",
+      "How to practise CAT VARC passages in untimed, timed, and mixed sets",
+      "How to review wrong answers and maintain an RC error log",
+      "How CAT-focused RC skills transfer to other management-entrance verbal sections",
+      "Practice plan: a repeatable weekly progression from accuracy to timed performance",
+      "Frequently asked questions about passage count, reading approach, practice sources, and percentile goals"
+    ],
+    "questionsToAnswer": [
+      "How many passages are in CAT VARC?",
+      "How should a candidate read a CAT VARC passage?",
+      "How do you solve RC passages in CAT?",
+      "How should candidates choose the first passage to attempt?",
+      "Which question types commonly appear in CAT RC practice?",
+      "How can candidates eliminate attractive but incorrect answer options?",
+      "How many CAT VARC passages should a candidate practise?",
+      "How should wrong answers be reviewed?",
+      "Can CAT RC skills transfer to XAT, IIFT, SNAP, and NMAT preparation?",
+      "How should candidates pursue a high VARC percentile without treating an unverified score target as a guarantee?"
+    ],
+    "relatedEntities": [
+      "CAT",
+      "VARC",
+      "Reading Comprehension",
+      "Critical Reading",
+      "Main Idea",
+      "Inference Questions",
+      "Author Tone",
+      "Paragraph Structure",
+      "Option Elimination",
+      "Passage Selection",
+      "XAT",
+      "IIFT",
+      "SNAP",
+      "NMAT"
+    ],
+    "internalLinks": [
+      {
+        "url": "/auctor-rc",
+        "anchor": "RC practice",
+        "reason": "Directly supports the article’s recommendation to practise passages in a structured RC environment."
+      },
+      {
+        "url": "/test-series",
+        "anchor": "timed verbal practice",
+        "reason": "Fits the section on moving from untimed comprehension work to timed mixed practice."
+      },
+      {
+        "url": "/features/precision-drills",
+        "anchor": "accuracy practice",
+        "reason": "Supports targeted drills for recurring errors such as inference, scope, and option elimination."
+      }
+    ],
+    "externalSources": [
+      {
+        "title": "CAT Questions | CAT Reading Comprehension",
+        "url": "https://iim-cat-questions-answers.2iim.com/verbal/reading-comprehension/",
+        "snippet": "Practice RC passages for CAT, with questions presented as Reading Comprehension practice for the VARC section.",
+        "sourceType": "practice resource"
+      },
+      {
+        "title": "521+ CAT RC Practice Questions",
+        "url": "https://bodheeprep.com/free-cat-rc-practice-problems",
+        "snippet": "A collection of CAT reading comprehension practice questions covering passages and explanations.",
+        "sourceType": "practice resource"
+      },
+      {
+        "title": "CAT Reading Comprehension Questions With Video Explanations",
+        "url": "https://cracku.in/cat-reading-comprehension-questions",
+        "snippet": "A large CAT RC question resource with practice questions, answers, and video explanations.",
+        "sourceType": "practice resource"
+      },
+      {
+        "title": "Daily Reading Comprehension for CAT 2026",
+        "url": "https://mbakaro.in/daily-reading-comprehension/",
+        "snippet": "Daily reading-comprehension practice for CAT using curated articles and questions.",
+        "sourceType": "practice resource"
+      },
+      {
+        "title": "CAT RC Preparation Tips: 250+ CAT RC Practice Questions",
+        "url": "https://www.iquanta.in/blog/cat-rc-preparation-tips/",
+        "snippet": "Preparation guidance and practice questions, including a focus on identifying keywords and the central idea.",
+        "sourceType": "preparation guide"
+      },
+      {
+        "title": "Free CAT Reading Comprehension Mock Tests",
+        "url": "https://www.careerlauncher.com/cat-mba/freecatmock/reading-comprehension.jsp",
+        "snippet": "Free RC mock practice for CAT and other MBA entrance exams including XAT, IIFT, SNAP, and NMAT.",
+        "sourceType": "mock-test resource"
+      },
+      {
+        "title": "Reading Comprehension Practice Test - CAT",
+        "url": "https://mba.hitbullseye.com/CAT/Reading-Comprehension-Test.php",
+        "snippet": "A CAT reading-comprehension practice test page with information about a recent CAT VARC structure and practice access.",
+        "sourceType": "practice resource"
+      },
+      {
+        "title": "Top 200+ CAT VARC Questions: With Answers and PDF",
+        "url": "https://lptedtech.com/blog/cat/practice-questions/varc/",
+        "snippet": "A CAT VARC practice resource containing questions, answers, and a downloadable PDF.",
+        "sourceType": "practice resource"
+      }
+    ],
+    "backlinkOpportunities": [
+      {
+        "site": "iim-cat-questions-answers.2iim.com",
+        "sourcePage": "https://iim-cat-questions-answers.2iim.com/verbal/reading-comprehension/",
+        "sourcePageReason": "The page is an existing CAT reading-comprehension practice resource and is directly relevant to a guide that adds a structured solving and review framework.",
+        "reason": "The article can complement a passage bank by explaining how to use individual passages for deliberate practice rather than passive volume-based practice.",
+        "potentialAngle": "Offer a concise companion section on passage mapping, question-type diagnosis, and post-practice error analysis for readers using CAT RC questions.",
+        "suggestedOutreachType": "Editorial resource suggestion with a specific contextual link placement",
+        "priority": "high"
+      },
+      {
+        "site": "bodheeprep.com",
+        "sourcePage": "https://bodheeprep.com/free-cat-rc-practice-problems",
+        "sourcePageReason": "The page explicitly provides CAT RC practice problems and is relevant to a method-based guide for using RC sets effectively.",
+        "reason": "The proposed article supplies a process layer—selection, timed progression, and review—that a practice-question page may not cover in depth.",
+        "potentialAngle": "Suggest the guide as a study-method resource near the practice-question collection or explanation section.",
+        "suggestedOutreachType": "Relevant-content outreach",
+        "priority": "high"
+      },
+      {
+        "site": "cracku.in",
+        "sourcePage": "https://cracku.in/cat-reading-comprehension-questions",
+        "sourcePageReason": "The source page is dedicated to CAT reading-comprehension questions and explanations.",
+        "reason": "The proposed guide can help users interpret explanations, classify mistakes, and turn question practice into measurable skill improvement.",
+        "potentialAngle": "Contribute a short expert section or suggest the article as a companion guide for readers working through the RC question bank.",
+        "suggestedOutreachType": "Editorial collaboration or resource suggestion",
+        "priority": "high"
+      },
+      {
+        "site": "iquanta.in",
+        "sourcePage": "https://www.iquanta.in/blog/cat-rc-preparation-tips/",
+        "sourcePageReason": "The page covers CAT RC preparation and practice, making it directly relevant to a more granular guide on passage-solving mechanics.",
+        "reason": "The article’s original worked examples can demonstrate central-idea tracking and evidence-based elimination in a way that extends general preparation advice.",
+        "potentialAngle": "Suggest the worked-example guide as a practical follow-up to broad CAT RC preparation tips.",
+        "suggestedOutreachType": "Contextual resource outreach",
+        "priority": "medium"
+      },
+      {
+        "site": "careerlauncher.com",
+        "sourcePage": "https://www.careerlauncher.com/cat-mba/freecatmock/reading-comprehension.jsp",
+        "sourcePageReason": "The page offers free CAT RC mock practice and also references other MBA entrance examinations.",
+        "reason": "The proposed article explains how to prepare before and review after using timed RC mocks, with transferable verbal skills across the named exams.",
+        "potentialAngle": "Position the guide as a pre-mock and post-mock RC strategy resource rather than as another mock-test page.",
+        "suggestedOutreachType": "Resource-page suggestion",
+        "priority": "medium"
+      },
+      {
+        "site": "mba.hitbullseye.com",
+        "sourcePage": "https://mba.hitbullseye.com/CAT/Reading-Comprehension-Test.php",
+        "sourcePageReason": "The page is a CAT reading-comprehension practice-test resource and is relevant to timed passage practice.",
+        "reason": "The proposed article addresses how to use timed tests diagnostically and how to review passage and option-level errors afterward.",
+        "potentialAngle": "Suggest a link to the guide in a preparation or test-review context, subject to the publisher’s editorial standards.",
+        "suggestedOutreachType": "Relevant resource outreach",
+        "priority": "medium"
+      }
+    ],
+    "imageConcept": "A clean instructional graphic showing a CAT RC passage transformed into a three-part passage map: subject, central claim, and paragraph roles, alongside an answer-choice elimination checklist.",
+    "imageAlt": "CAT VARC passage-solving diagram showing passage mapping and answer-choice elimination",
+    "targetPage": "/cat-varc-passages",
+    "factConstraints": [
+      "Verify the current CAT VARC format, passage count, question count, and marking rules against an official or current authoritative source before publication; do not present the supplied third-party pattern claims as permanent facts.",
+      "Do not promise a 99 percentile or imply that a fixed number of passages guarantees a score outcome.",
+      "Treat references to CAT 2026 and other future exam patterns as time-sensitive and update them before publishing.",
+      "Use the supplied URLs only for external references; do not add unsupplied sources or invented statistics.",
+      "Clearly distinguish CAT-specific observations from skills that transfer to XAT, IIFT, SNAP, and NMAT.",
+      "Write original passages, questions, answer choices, explanations, and worked examples; do not reproduce copyrighted practice content from the supplied pages.",
+      "Have a qualified human reviewer verify every worked example, answer key, explanation, exam-pattern statement, and internal-link destination before publication.",
+      "Review overlap with the draft article \"learn-vocabulary-from-context-competitive-exams\" and keep vocabulary discussion limited to context-based comprehension where necessary.",
+      "Avoid duplicating the separate para-jumbles, grammar, and accuracy articles; link to those only if supplied internal URLs become available."
+    ]
+  }
+}

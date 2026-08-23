@@ -1,0 +1,291 @@
+{
+  "generatedAt": "2026-08-22T18:06:06.210Z",
+  "region": "India",
+  "cacheHours": 24,
+  "googleTrendsLastSuccess": null,
+  "googleTrendSnapshot": null,
+  "sourceAvailability": {
+    "googleTrends": "Unavailable",
+    "serpApi": "Available",
+    "exactSearchVolume": "Unavailable — no exact-volume API is configured."
+  },
+  "sourceErrors": {
+    "googleTrends": [
+      {
+        "seed": "CAT VARC",
+        "error": "Unexpected token 'L', \"L><HEAD><m\"... is not valid JSON"
+      },
+      {
+        "seed": "reading comprehension competitive exams",
+        "error": "Unexpected token '<', \"<HTML><HEA\"... is not valid JSON"
+      },
+      {
+        "seed": "para jumbles",
+        "error": "Unexpected token '<', \"<HTML><HEA\"... is not valid JSON"
+      },
+      {
+        "seed": "competitive exam English grammar",
+        "error": "Unexpected token '<', \"<HTML><HEA\"... is not valid JSON"
+      },
+      {
+        "seed": "vocabulary for competitive exams",
+        "error": "Unexpected token '<', \"<HTML><HEA\"... is not valid JSON"
+      },
+      {
+        "seed": "XAT verbal ability",
+        "error": "Unexpected token '<', \"<HTML><HEA\"... is not valid JSON"
+      },
+      {
+        "seed": "CUET English",
+        "error": "Unexpected token '<', \"<HTML><HEA\"... is not valid JSON"
+      },
+      {
+        "seed": "GMAT GRE verbal",
+        "error": "Unexpected token '<', \"<HTML><HEA\"... is not valid JSON"
+      }
+    ],
+    "serpApi": []
+  },
+  "scoreDefinition": {
+    "maximum": 100,
+    "components": {
+      "trend": 20,
+      "demand": 20,
+      "relevance": 20,
+      "contentGap": 25,
+      "examRelevance": 10,
+      "usefulness": 5
+    },
+    "note": "Opportunity score is a deterministic editorial ranking, not monthly search volume, keyword difficulty, CPC, traffic, or ranking position."
+  },
+  "topics": [
+    {
+      "title": "CAT VARC Passages",
+      "primaryQuery": "CAT VARC passages",
+      "opportunityScore": 63,
+      "trendStatus": "No Google Trends query signal",
+      "searchDemandEstimate": "Emerging",
+      "examRelevance": [
+        "CAT"
+      ],
+      "contentGap": "High",
+      "existingCoverage": {
+        "status": "Limited",
+        "closestSlug": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+        "risk": 0
+      },
+      "reason": "No Google Trends query signal. Emerging search-demand estimate from available related-query/search signals; Auctor coverage is a high gap and the topic is relevant to CAT.",
+      "signals": [
+        "Google related searches (SerpApi)",
+        "CAT",
+        "High content gap"
+      ],
+      "scoreBreakdown": {
+        "trend": 0,
+        "demand": 5,
+        "relevance": 20,
+        "contentGap": 25,
+        "examRelevance": 10,
+        "usefulness": 3
+      },
+      "sources": {
+        "googleTrends": [],
+        "serpApi": [
+          "CAT VARC preparation"
+        ]
+      },
+      "eligible": true,
+      "category": "Reading Comprehension"
+    },
+    {
+      "title": "Sentence Placement CAT with Answers",
+      "primaryQuery": "Sentence placement cat with answers",
+      "opportunityScore": 63,
+      "trendStatus": "No Google Trends query signal",
+      "searchDemandEstimate": "Emerging",
+      "examRelevance": [
+        "CAT"
+      ],
+      "contentGap": "High",
+      "existingCoverage": {
+        "status": "Limited",
+        "closestSlug": "understanding-rc-answers-youre-probably-misreading-the-inferences",
+        "risk": 0.11
+      },
+      "reason": "No Google Trends query signal. Emerging search-demand estimate from available related-query/search signals; Auctor coverage is a high gap and the topic is relevant to CAT.",
+      "signals": [
+        "Google related searches (SerpApi)",
+        "CAT",
+        "High content gap"
+      ],
+      "scoreBreakdown": {
+        "trend": 0,
+        "demand": 5,
+        "relevance": 20,
+        "contentGap": 25,
+        "examRelevance": 10,
+        "usefulness": 3
+      },
+      "sources": {
+        "googleTrends": [],
+        "serpApi": [
+          "sentence placement CAT"
+        ]
+      },
+      "eligible": true,
+      "category": "Verbal Ability"
+    },
+    {
+      "title": "Odd Sentence CAT Questions",
+      "primaryQuery": "Odd sentence cat questions",
+      "opportunityScore": 58,
+      "trendStatus": "No Google Trends query signal",
+      "searchDemandEstimate": "Emerging",
+      "examRelevance": [
+        "CAT"
+      ],
+      "contentGap": "Partial",
+      "existingCoverage": {
+        "status": "Partial",
+        "closestSlug": "mastering-inference-questions-in-cat-unlocking-the-secrets-to-your-success",
+        "risk": 0.25
+      },
+      "reason": "No Google Trends query signal. Emerging search-demand estimate from available related-query/search signals; Auctor coverage is a partial gap and the topic is relevant to CAT.",
+      "signals": [
+        "Google related searches (SerpApi)",
+        "CAT",
+        "Partial content gap"
+      ],
+      "scoreBreakdown": {
+        "trend": 0,
+        "demand": 5,
+        "relevance": 20,
+        "contentGap": 18,
+        "examRelevance": 10,
+        "usefulness": 5
+      },
+      "sources": {
+        "googleTrends": [],
+        "serpApi": [
+          "odd sentence CAT"
+        ]
+      },
+      "eligible": true,
+      "category": "Verbal Ability"
+    },
+    {
+      "title": "What Are 10 Powerful Words in English?",
+      "primaryQuery": "What are 10 powerful words in English?",
+      "opportunityScore": 55,
+      "trendStatus": "No Google Trends query signal",
+      "searchDemandEstimate": "Emerging",
+      "examRelevance": [
+        "Multi-exam"
+      ],
+      "contentGap": "Partial",
+      "existingCoverage": {
+        "status": "Partial",
+        "closestSlug": "focusing-on-words-blinds-you-to-the-real-meaning",
+        "risk": 0.13
+      },
+      "reason": "No Google Trends query signal. Emerging search-demand estimate from available related-query/search signals; Auctor coverage is a partial gap and the topic is relevant to Multi-exam.",
+      "signals": [
+        "People-also-ask question",
+        "Transferable English skill",
+        "Partial content gap"
+      ],
+      "scoreBreakdown": {
+        "trend": 0,
+        "demand": 5,
+        "relevance": 20,
+        "contentGap": 18,
+        "examRelevance": 7,
+        "usefulness": 5
+      },
+      "sources": {
+        "googleTrends": [],
+        "serpApi": [
+          "competitive exam English vocabulary"
+        ]
+      },
+      "eligible": true,
+      "category": "Reading Comprehension"
+    },
+    {
+      "title": "Competitive Exam English Vocabulary with Answers",
+      "primaryQuery": "Competitive exam english vocabulary with answers",
+      "opportunityScore": 53,
+      "trendStatus": "No Google Trends query signal",
+      "searchDemandEstimate": "Emerging",
+      "examRelevance": [
+        "Multi-exam"
+      ],
+      "contentGap": "Partial",
+      "existingCoverage": {
+        "status": "Partial",
+        "closestSlug": "learn-vocabulary-from-context-competitive-exams",
+        "risk": 0.2
+      },
+      "reason": "No Google Trends query signal. Emerging search-demand estimate from available related-query/search signals; Auctor coverage is a partial gap and the topic is relevant to Multi-exam.",
+      "signals": [
+        "Google related searches (SerpApi)",
+        "Transferable English skill",
+        "Partial content gap"
+      ],
+      "scoreBreakdown": {
+        "trend": 0,
+        "demand": 5,
+        "relevance": 20,
+        "contentGap": 18,
+        "examRelevance": 7,
+        "usefulness": 3
+      },
+      "sources": {
+        "googleTrends": [],
+        "serpApi": [
+          "competitive exam English vocabulary"
+        ]
+      },
+      "eligible": true,
+      "category": "Vocabulary"
+    },
+    {
+      "title": "Best English Vocabulary Book for Competitive Exams",
+      "primaryQuery": "Best English vocabulary book for competitive exams",
+      "opportunityScore": 53,
+      "trendStatus": "No Google Trends query signal",
+      "searchDemandEstimate": "Emerging",
+      "examRelevance": [
+        "Multi-exam"
+      ],
+      "contentGap": "Partial",
+      "existingCoverage": {
+        "status": "Partial",
+        "closestSlug": "learn-vocabulary-from-context-competitive-exams",
+        "risk": 0.33
+      },
+      "reason": "No Google Trends query signal. Emerging search-demand estimate from available related-query/search signals; Auctor coverage is a partial gap and the topic is relevant to Multi-exam.",
+      "signals": [
+        "Google related searches (SerpApi)",
+        "Transferable English skill",
+        "Partial content gap"
+      ],
+      "scoreBreakdown": {
+        "trend": 0,
+        "demand": 5,
+        "relevance": 20,
+        "contentGap": 18,
+        "examRelevance": 7,
+        "usefulness": 3
+      },
+      "sources": {
+        "googleTrends": [],
+        "serpApi": [
+          "competitive exam English vocabulary"
+        ]
+      },
+      "eligible": true,
+      "category": "Vocabulary"
+    }
+  ]
+}

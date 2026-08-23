@@ -1,0 +1,273 @@
+{
+  "generatedAt": "2026-08-21T17:51:02.960Z",
+  "model": "gpt-5.6-luna",
+  "cannibalization": {
+    "serious": false,
+    "closest": {
+      "slug": "learn-vocabulary-from-context-competitive-exams",
+      "status": "draft",
+      "cluster": "Vocabulary",
+      "risk": 0.34,
+      "keywordMatch": false,
+      "intentMatch": true,
+      "crossClusterOverlap": false,
+      "recommendation": "REVIEW_OVERLAP"
+    },
+    "matches": [
+      {
+        "slug": "learn-vocabulary-from-context-competitive-exams",
+        "status": "draft",
+        "cluster": "Vocabulary",
+        "risk": 0.34,
+        "keywordMatch": false,
+        "intentMatch": true,
+        "crossClusterOverlap": false,
+        "recommendation": "REVIEW_OVERLAP"
+      },
+      {
+        "slug": "subject-verb-agreement-common-exam-traps",
+        "status": "draft",
+        "cluster": "Grammar",
+        "risk": 0.31,
+        "keywordMatch": false,
+        "intentMatch": true,
+        "crossClusterOverlap": false,
+        "recommendation": "REVIEW_OVERLAP"
+      },
+      {
+        "slug": "cat-para-summary-strategy",
+        "status": "draft",
+        "cluster": "verbal-ability",
+        "risk": 0.11,
+        "keywordMatch": false,
+        "intentMatch": false,
+        "crossClusterOverlap": false,
+        "recommendation": "REVIEW_OVERLAP"
+      },
+      {
+        "slug": "reading-comprehension-trap-answers-proof-before-pick",
+        "status": "draft",
+        "cluster": "critical-reading",
+        "risk": 0.05,
+        "keywordMatch": false,
+        "intentMatch": false,
+        "crossClusterOverlap": false,
+        "recommendation": "REVIEW_OVERLAP"
+      },
+      {
+        "slug": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+        "status": "published",
+        "cluster": "Accuracy",
+        "risk": 0,
+        "keywordMatch": false,
+        "intentMatch": false,
+        "crossClusterOverlap": false,
+        "recommendation": "REVIEW_OVERLAP"
+      }
+    ]
+  },
+  "brief": {
+    "topic": "Para jumbles",
+    "title": "Para Jumbles: A Step-by-Step Method to Arrange Sentences Logically",
+    "seoTitle": "Para Jumbles: Rules, Solving Strategy, Examples & Practice",
+    "slug": "para-jumbles-solving-strategy-examples",
+    "description": "Learn how to solve para jumbles by identifying opening sentences, mandatory pairs, pronoun links, transitions, chronology, and the paragraph’s overall flow. Includes original worked examples and exam-focused practice guidance.",
+    "primaryKeyword": "para jumbles",
+    "secondaryKeywords": [
+      "how to solve para jumbles",
+      "para jumbles with answers",
+      "sentence rearrangement questions",
+      "para jumbles for CAT",
+      "para jumbles for competitive exams",
+      "para jumble rules",
+      "paragraph rearrangement"
+    ],
+    "searchIntent": "Skill-building",
+    "readerProblem": "Readers can understand individual sentences but struggle to identify the opening sentence, connect related statements, eliminate impossible sequences, and verify the final paragraph under time pressure.",
+    "targetAudience": [
+      "CAT and other management-entrance aspirants",
+      "Banking and general competitive-exam aspirants",
+      "Students preparing for verbal-ability sections",
+      "Learners developing logical reading and paragraph-ordering skills"
+    ],
+    "relevantExams": [
+      "CAT",
+      "Banking and other competitive exams with verbal-ability sections"
+    ],
+    "contentType": "multi-exam",
+    "cluster": "Verbal Ability",
+    "category": "Verbal Ability",
+    "contentAngle": "Teach para jumbles as a transferable logical-reading skill rather than a list of rigid tricks, while noting that question formats and sentence counts can vary by exam.",
+    "uniqueValue": "Combines a reliable solving workflow with evidence-based clues—discourse openings, reference words, mandatory pairs, transitions, chronology, and topic continuity—and uses original worked examples instead of reproducing examples from external sources.",
+    "outline": [
+      "What para jumbles test: coherence, sentence relationships, and paragraph structure",
+      "First identify the paragraph’s subject and likely direction",
+      "How to find the opening sentence",
+      "How pronouns, demonstratives, and repeated nouns reveal sentence links",
+      "How to detect mandatory pairs using cause-effect, contrast, explanation, and example relationships",
+      "How transition words and chronology determine sequence",
+      "How to use answer options and elimination without guessing",
+      "A complete step-by-step method for solving para jumbles",
+      "Original worked example 1: identifying the opening and a mandatory pair",
+      "Original worked example 2: resolving two plausible middle sequences",
+      "Original worked example 3: handling a paragraph without obvious linking words",
+      "Common mistakes: choosing the most familiar sentence, overusing grammar clues, and ignoring meaning",
+      "Exam adaptation: CAT-style ordering versus broader competitive-exam sentence rearrangement formats",
+      "Timed practice routine and accuracy review checklist"
+    ],
+    "questionsToAnswer": [
+      "What are para jumbles?",
+      "What skills do para jumbles test?",
+      "How do you identify the opening sentence?",
+      "How can pronouns and repeated nouns help arrange sentences?",
+      "What is a mandatory pair in a para jumble?",
+      "How do contrast and cause-effect relationships determine order?",
+      "How should you solve para jumbles when more than one sequence seems possible?",
+      "How can answer options be used efficiently?",
+      "What common mistakes reduce para-jumble accuracy?",
+      "How should preparation differ across CAT and other competitive-exam formats?"
+    ],
+    "relatedEntities": [
+      "sentence rearrangement",
+      "paragraph coherence",
+      "discourse markers",
+      "pronoun reference",
+      "demonstratives",
+      "cause and effect",
+      "contrast markers",
+      "chronological order",
+      "logical sequencing",
+      "mandatory pairs",
+      "CAT verbal ability",
+      "competitive-exam English"
+    ],
+    "internalLinks": [
+      {
+        "url": "/test-series",
+        "anchor": "timed verbal practice",
+        "reason": "Links the solving method to timed application after readers learn the core process."
+      },
+      {
+        "url": "/auctor-rc",
+        "anchor": "RC practice",
+        "reason": "Connects paragraph-ordering skills with broader reading and coherence practice without conflating para jumbles with reading comprehension."
+      },
+      {
+        "url": "/features/precision-drills",
+        "anchor": "accuracy practice",
+        "reason": "Supports targeted review of recurring sequencing errors and helps readers build accuracy before increasing speed."
+      }
+    ],
+    "externalSources": [
+      {
+        "title": "Para Jumbles",
+        "url": "https://www.geeksforgeeks.org/aptitude/para-jumbles-verbal-ability-questions-and-answers/",
+        "snippet": "Defines para jumbles as sets of sentences presented in the wrong order and explains that the task is to rearrange them.",
+        "sourceType": "organic result"
+      },
+      {
+        "title": "Para Jumbles: Types, Rules, Tips and Tricks with Solved Questions",
+        "url": "https://testbook.com/english-grammar/para-jumbles",
+        "snippet": "Presents para jumbles as paragraphs whose sentences are mixed and assigned identifying labels.",
+        "sourceType": "organic result"
+      },
+      {
+        "title": "Most Important 75 Para Jumbles | Master Para Jumbles with Tricks & Practice",
+        "url": "https://www.youtube.com/watch?v=cUgelkymHvo",
+        "snippet": "Video lesson focused on para-jumble strategies and practice.",
+        "sourceType": "video"
+      },
+      {
+        "title": "Rearrangement of Sentences Questions and Answers",
+        "url": "https://www.smartkeeda.com/general-english/sentence-rearrangement-questions",
+        "snippet": "Describes sentence rearrangement, also called para jumbles, as a topic appearing in multiple competitive-exam English sections.",
+        "sourceType": "organic result"
+      },
+      {
+        "title": "PARAJUMBLES & ITS RULES WITH EXAMPLES",
+        "url": "https://www.slideshare.net/slideshow/grammar-para-jumbles-its-rules-with-examples/273557298",
+        "snippet": "Explains the basic task of arranging mixed sentences into a logical paragraph.",
+        "sourceType": "presentation"
+      },
+      {
+        "title": "CAT Questions - Verbal Ability: Sentence Rearrangement",
+        "url": "https://iim-cat-questions-answers.2iim.com/verbal/sentence-rearrangement/",
+        "snippet": "Provides CAT-focused sentence-rearrangement questions and identifies the sentences with labels such as P, Q, R, and S.",
+        "sourceType": "exam-practice page"
+      },
+      {
+        "title": "How To Solve Para Jumbles In English",
+        "url": "https://www.youtube.com/watch?v=WHe36fkTA-g",
+        "snippet": "Video lesson presenting a strategy for solving English para jumbles.",
+        "sourceType": "video"
+      },
+      {
+        "title": "Para Jumbles",
+        "url": "https://catking.in/para-jumbles",
+        "snippet": "Introduces para jumbles as paragraphs with sentences arranged out of order and explains the task of rearranging them.",
+        "sourceType": "exam-preparation page"
+      }
+    ],
+    "backlinkOpportunities": [
+      {
+        "site": "geeksforgeeks.org",
+        "sourcePage": "https://www.geeksforgeeks.org/aptitude/para-jumbles-verbal-ability-questions-and-answers/",
+        "sourcePageReason": "The supplied page directly covers para jumbles and verbal-ability questions.",
+        "reason": "The article’s original solving workflow and worked examples could provide a complementary instructional resource for readers learning sentence rearrangement.",
+        "potentialAngle": "Offer a concise, method-focused guide emphasizing discourse relationships, verification, and original examples rather than duplicating a question bank.",
+        "suggestedOutreachType": "Relevant editorial resource suggestion",
+        "priority": "medium"
+      },
+      {
+        "site": "testbook.com",
+        "sourcePage": "https://testbook.com/english-grammar/para-jumbles",
+        "sourcePageReason": "The supplied page directly covers para-jumble types, rules, tips, and solved questions.",
+        "reason": "A distinct explanation of how to validate a proposed sequence could complement a rules-and-practice page.",
+        "potentialAngle": "Position the resource as a transferable reasoning framework for solving unfamiliar para jumbles across exam formats.",
+        "suggestedOutreachType": "Relevant editorial resource suggestion",
+        "priority": "medium"
+      },
+      {
+        "site": "smartkeeda.com",
+        "sourcePage": "https://www.smartkeeda.com/general-english/sentence-rearrangement-questions",
+        "sourcePageReason": "The supplied page directly addresses sentence rearrangement and para-jumble questions for competitive exams.",
+        "reason": "The brief’s accuracy-review checklist and original worked examples could supplement a practice-oriented page.",
+        "potentialAngle": "Suggest the guide as a strategy and error-analysis resource to use before or alongside sentence-rearrangement practice.",
+        "suggestedOutreachType": "Relevant editorial resource suggestion",
+        "priority": "medium"
+      },
+      {
+        "site": "iim-cat-questions-answers.2iim.com",
+        "sourcePage": "https://iim-cat-questions-answers.2iim.com/verbal/sentence-rearrangement/",
+        "sourcePageReason": "The supplied page is specifically about CAT verbal-ability sentence-rearrangement questions.",
+        "reason": "The proposed article can add a general method that explains why sequences work, complementing CAT-focused question practice.",
+        "potentialAngle": "Offer a cross-format explanation of opening sentences, mandatory pairs, and final coherence checks, with CAT-specific caveats clearly separated.",
+        "suggestedOutreachType": "Relevant editorial resource suggestion",
+        "priority": "high"
+      },
+      {
+        "site": "catking.in",
+        "sourcePage": "https://catking.in/para-jumbles",
+        "sourcePageReason": "The supplied page directly explains the para-jumble task in a CAT-preparation context.",
+        "reason": "An original instructional guide with a structured solving process could complement the supplied introductory CAT-focused material.",
+        "potentialAngle": "Suggest the article as a step-by-step reasoning and review guide for learners who need more than definitions and basic rules.",
+        "suggestedOutreachType": "Relevant editorial resource suggestion",
+        "priority": "medium"
+      }
+    ],
+    "imageConcept": "A clean educational graphic showing five shuffled sentence cards being arranged into a coherent paragraph, with visual markers for an opening sentence, a mandatory pair, a transition, and a final coherence check.",
+    "imageAlt": "Illustration of shuffled sentences arranged into a logical paragraph for para-jumble solving",
+    "targetPage": "/para-jumbles-solving-strategy-examples",
+    "factConstraints": [
+      "Treat the article as multi-exam, but explain that formats, labels, sentence counts, and marking schemes may differ by exam; do not present one format as universal.",
+      "Use the supplied sources for background and attribution only; do not reproduce their examples, wording, or question sets.",
+      "Create original worked examples and have every example, answer, and explanation reviewed by a qualified human before publication.",
+      "Do not claim that any single clue—such as a pronoun, transition, or grammatical pattern—always determines the correct order.",
+      "Separate general logical-sequencing principles from CAT-specific observations drawn from the supplied CAT practice source.",
+      "Do not invent exam frequency, scoring patterns, difficulty statistics, or claims about which strategy is guaranteed to work.",
+      "Verify all external links and any exam-format statements during editorial review.",
+      "Review overlap with the existing draft on CAT para-summary strategy so the article remains focused on sentence ordering, not summary selection or para-summary methods.",
+      "Keep links to the supplied internal product pages natural and avoid implying that product use guarantees score improvement."
+    ]
+  }
+}

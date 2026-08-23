@@ -1,0 +1,261 @@
+{
+  "generatedAt": "2026-08-21T04:41:14.492Z",
+  "model": "gpt-5.6-luna",
+  "cannibalization": {
+    "serious": false,
+    "closest": {
+      "slug": "mastering-cat-reading-comprehension-unveiling-strategies-and-insights-behind-sample-questions-and-answers",
+      "status": "published",
+      "risk": 0.17,
+      "keywordMatch": false,
+      "intentMatch": false
+    },
+    "matches": [
+      {
+        "slug": "mastering-cat-reading-comprehension-unveiling-strategies-and-insights-behind-sample-questions-and-answers",
+        "status": "published",
+        "risk": 0.17,
+        "keywordMatch": false,
+        "intentMatch": false
+      },
+      {
+        "slug": "reading-comprehension-isnt-about-understanding-its-about-insight",
+        "status": "published",
+        "risk": 0.14,
+        "keywordMatch": false,
+        "intentMatch": false
+      },
+      {
+        "slug": "unlocking-precision-mastering-reading-comprehension-accuracy-for-cat-success",
+        "status": "published",
+        "risk": 0.14,
+        "keywordMatch": false,
+        "intentMatch": false
+      },
+      {
+        "slug": "unlocking-success-mastering-reading-comprehension-for-cat-with-proven-strategies",
+        "status": "published",
+        "risk": 0.14,
+        "keywordMatch": false,
+        "intentMatch": false
+      },
+      {
+        "slug": "unlocking-success-mastering-reading-comprehension-questions-for-cat-aspirants",
+        "status": "published",
+        "risk": 0.14,
+        "keywordMatch": false,
+        "intentMatch": false
+      }
+    ]
+  },
+  "brief": {
+    "topic": "Reading comprehension answer validation",
+    "title": "RC Answers: Use a Proof-Before-Pick Method to Reject Trap Options",
+    "seoTitle": "Reading Comprehension Trap Answers: Proof-Before-Pick Method",
+    "slug": "reading-comprehension-trap-answers-proof-before-pick",
+    "description": "Learn how to validate reading comprehension answers with a proof-before-pick method. Test every option for contradiction, scope, evidence, inference distance, and wording precision before selecting it.",
+    "primaryKeyword": "reading comprehension trap answers",
+    "secondaryKeywords": [
+      "how to eliminate wrong answers in reading comprehension",
+      "RC answer elimination method",
+      "text-supported answer choices",
+      "reading comprehension distractors"
+    ],
+    "searchIntent": "Problem-solving",
+    "readerProblem": "Students choose options because they sound reasonable, repeat passage language, or express a real-world truth—even when the passage contradicts them, does not support them, or makes a narrower claim.",
+    "targetAudience": [
+      "CAT aspirants",
+      "XAT aspirants",
+      "GMAT and GRE test-takers",
+      "CLAT and IPMAT students",
+      "SSC and Banking exam candidates",
+      "Government exam candidates"
+    ],
+    "relevantExams": [
+      "CAT",
+      "XAT",
+      "GMAT",
+      "GRE",
+      "CLAT",
+      "IPMAT",
+      "SSC",
+      "Banking exams",
+      "Government exams"
+    ],
+    "contentType": "hybrid",
+    "cluster": "critical-reading",
+    "category": "Reading Comprehension Strategy",
+    "contentAngle": "Teach an auditable answer-verification protocol rather than a general elimination list. Readers must prove that an option fits the question and passage before selecting it.",
+    "uniqueValue": "The article will pair each trap type with an original mini-passage, question, attractive wrong option, and proof-based rejection. The central sequence—contradiction, scope, evidence, inference distance, and wording precision—helps readers distinguish a supported answer from one that merely sounds plausible.",
+    "outline": [
+      "What a proof-before-pick method means in reading comprehension",
+      "Step 1: Identify exactly what the question is asking",
+      "Step 2: Test for direct contradiction with the passage",
+      "Step 3: Check whether the option stays within the passage’s scope",
+      "Step 4: Demand evidence for every important part of the option",
+      "Step 5: Measure inference distance and reject unsupported leaps",
+      "Step 6: Inspect wording precision, including absolute and comparative terms",
+      "How to handle options that reuse the passage’s exact language",
+      "How to compare two plausible options using the stronger proof",
+      "Original worked examples across main idea, inference, detail, tone, and application questions",
+      "A timed proof-before-pick checklist and error-log format",
+      "How the method transfers across CAT, XAT, GMAT, GRE, CLAT, IPMAT, SSC, and Banking-style RC questions"
+    ],
+    "questionsToAnswer": [
+      "How can I find the correct answer in a reading comprehension passage?",
+      "What makes a reading comprehension answer choice a trap?",
+      "How do I eliminate wrong answers in reading comprehension?",
+      "Why can an option containing passage language still be incorrect?",
+      "How do scope and extreme wording make an option wrong?",
+      "How much inference is acceptable in an RC answer?",
+      "What should I do when two reading comprehension options both seem correct?",
+      "How can I validate an answer quickly under exam time pressure?",
+      "Does the proof-before-pick method work across different competitive exams?"
+    ],
+    "relatedEntities": [
+      "reading comprehension",
+      "answer choice elimination",
+      "distractors",
+      "scope errors",
+      "contradiction",
+      "unsupported inference",
+      "extreme wording",
+      "main idea questions",
+      "inference questions",
+      "detail questions",
+      "tone questions",
+      "textual evidence",
+      "critical reading",
+      "CAT VARC",
+      "XAT verbal ability",
+      "GMAT verbal reasoning",
+      "GRE verbal reasoning",
+      "CLAT reading comprehension",
+      "IPMAT verbal ability",
+      "SSC reading comprehension",
+      "Banking exam verbal ability"
+    ],
+    "internalLinks": [
+      {
+        "url": "/blog/unlocking-precision-mastering-reading-comprehension-accuracy-for-cat-success",
+        "anchor": "improve reading comprehension accuracy",
+        "reason": "Supports the article’s broader accuracy objective while this page focuses specifically on validating individual answer choices."
+      },
+      {
+        "url": "/blog/reading-comprehension-isnt-about-understanding-its-about-insight",
+        "anchor": "read for insight in reading comprehension",
+        "reason": "Provides a complementary perspective on interpreting the passage before applying the proof-before-pick test."
+      },
+      {
+        "url": "/blog/unlocking-success-mastering-reading-comprehension-questions-for-cat-aspirants",
+        "anchor": "reading comprehension question types",
+        "reason": "Useful for readers who need to identify whether they are solving a detail, inference, tone, or main idea question."
+      },
+      {
+        "url": "/blog/unlocking-success-mastering-reading-comprehension-for-cat-with-proven-strategies",
+        "anchor": "reading comprehension strategies",
+        "reason": "Links the narrow answer-validation protocol to broader passage-solving strategy."
+      },
+      {
+        "url": "/blog/mastering-cat-verbal-ability-secrets-to-conquering-reading-comprehension-challenges",
+        "anchor": "CAT verbal ability and reading comprehension",
+        "reason": "Connects the exam-agnostic skill to CAT preparation without making the article CAT-only."
+      },
+      {
+        "url": "/blog/mastering-verbal-ability-and-reading-comprehension-for-cat-strategies-to-unlock-your-full-potential",
+        "anchor": "verbal ability and reading comprehension preparation",
+        "reason": "Offers a broader preparation resource after readers learn the answer-selection method."
+      }
+    ],
+    "externalSources": [
+      {
+        "title": "SAT® Trap Answers: Eliminate Reading Distractors",
+        "url": "https://www.oneprep.com/blog/sat-trap-answers-eliminate-reading-distractors",
+        "snippet": "The supplied result describes trap answers as plausible but incorrect and notes the risk of using outside knowledge.",
+        "sourceType": "organic search result"
+      },
+      {
+        "title": "Trap Answer Choices",
+        "url": "https://act.magoosh.com/lessons/1457-trap-answer-choices",
+        "snippet": "The supplied result explains that trap choices appear almost correct and require careful reading and analysis.",
+        "sourceType": "organic search result"
+      },
+      {
+        "title": "When Two LSAT Reading Comp Answers Both Seem Right",
+        "url": "https://verbloom.dev/blog/lsat-rc-two-answers-seem-right",
+        "snippet": "The supplied result highlights traps that reuse passage wording, state real-world truths, or get only part of a claim right.",
+        "sourceType": "organic search result"
+      },
+      {
+        "title": "Test traps - ACT Reading - Exam catalog - Achievable",
+        "url": "https://app.achievable.me/study/act/learn/act-reading-test-traps",
+        "snippet": "The supplied result identifies recycled passage language and question mismatch as features of trap answers.",
+        "sourceType": "organic search result"
+      },
+      {
+        "title": "How to identify incorrect answer choices in Reading Comprehension",
+        "url": "https://mba.hitbullseye.com/CAT/CAT-RCs-Answer-Choices.php",
+        "snippet": "The supplied result discusses scope traps and options that are not actually related to the passage’s scope.",
+        "sourceType": "organic search result"
+      },
+      {
+        "title": "Digital SAT Reading Trap Answers 2026: Common Wrong Answers",
+        "url": "https://times.edu.vn/en/sat/digital-sat-reading-trap-answers/",
+        "snippet": "The supplied result mentions absolute language and subtle inference leaps as recurring wrong-answer patterns.",
+        "sourceType": "organic search result"
+      }
+    ],
+    "backlinkOpportunities": [
+      {
+        "site": "https://www.oneprep.com/blog/sat-trap-answers-eliminate-reading-distractors",
+        "reason": "The topic overlaps directly with trap-answer identification and distractor elimination.",
+        "potentialAngle": "Offer the proof-before-pick sequence as a cross-exam framework that complements a SAT-focused discussion.",
+        "suggestedOutreachType": "Relevant editorial resource suggestion",
+        "priority": "medium"
+      },
+      {
+        "site": "https://act.magoosh.com/lessons/1457-trap-answer-choices",
+        "reason": "The resource addresses the same broad problem of plausible but incorrect reading choices.",
+        "potentialAngle": "Contribute a worked-example framework for testing contradiction, scope, evidence, inference distance, and wording precision.",
+        "suggestedOutreachType": "Educational resource pitch",
+        "priority": "medium"
+      },
+      {
+        "site": "https://verbloom.dev/blog/lsat-rc-two-answers-seem-right",
+        "reason": "Both resources address the difficult case in which multiple options appear supported.",
+        "potentialAngle": "Share the proof comparison method for rejecting partial matches and unsupported extensions.",
+        "suggestedOutreachType": "Contextual resource suggestion",
+        "priority": "high"
+      },
+      {
+        "site": "https://app.achievable.me/study/act/learn/act-reading-test-traps",
+        "reason": "The supplied result covers recycled passage language and other ACT reading traps.",
+        "potentialAngle": "Position the article as a transferable validation checklist for readers preparing for multiple exam formats.",
+        "suggestedOutreachType": "Editorial collaboration or resource suggestion",
+        "priority": "low"
+      },
+      {
+        "site": "https://mba.hitbullseye.com/CAT/CAT-RCs-Answer-Choices.php",
+        "reason": "The result is closely aligned with CAT RC answer-choice elimination and scope errors.",
+        "potentialAngle": "Add a proof-based, auditable protocol and original paired examples to the existing elimination discussion.",
+        "suggestedOutreachType": "Relevant CAT resource outreach",
+        "priority": "high"
+      }
+    ],
+    "imageConcept": "A clean exam-style decision flowchart showing an RC answer option passing through five checks: contradiction, scope, evidence, inference distance, and wording precision. Include a marked red trap option and a green proof-supported option, without using copyrighted exam material.",
+    "imageAlt": "Proof-before-pick checklist for rejecting reading comprehension trap answers",
+    "targetPage": "/blog/reading-comprehension-trap-answers-proof-before-pick",
+    "factConstraints": [
+      "Use the supplied SERP URLs only as external references; verify every page and its current claims before publication.",
+      "Do not present supplied SERP snippets as independently verified research until a human reviewer checks the linked pages.",
+      "Do not claim that any trap type appears at a particular frequency or that the method guarantees a score increase; no such statistics were supplied.",
+      "Keep the framework exam-agnostic, and label exam-specific differences only when supported by verified official or supplied sources.",
+      "Create original passages, questions, answer choices, and worked explanations; do not reproduce copyrighted exam questions or third-party examples.",
+      "For every worked example, explicitly show the passage claim, the option’s wording, the failed proof check, and the corrected choice if applicable.",
+      "Require human review for factual accuracy, exam terminology, answer keys, originality, and alignment with the linked source material before publication.",
+      "Avoid implying that outside knowledge is always irrelevant; explain that the answer must be justified by the passage when the question is passage-based.",
+      "Use only the supplied internal URLs for internal linking, with natural anchors and no invented page destinations.",
+      "Review for cannibalization against existing broad CAT reading-comprehension strategy and accuracy pages; preserve this article’s narrower proof-based intent."
+    ]
+  }
+}

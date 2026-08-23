@@ -1,0 +1,269 @@
+{
+  "generatedAt": "2026-08-21T11:10:42.644Z",
+  "model": "gpt-5.6-luna",
+  "cannibalization": {
+    "serious": false,
+    "closest": {
+      "slug": "learn-vocabulary-from-context-competitive-exams",
+      "status": "draft",
+      "cluster": "Vocabulary",
+      "risk": 0.33,
+      "keywordMatch": false,
+      "intentMatch": true,
+      "crossClusterOverlap": false,
+      "recommendation": "REVIEW_OVERLAP"
+    },
+    "matches": [
+      {
+        "slug": "learn-vocabulary-from-context-competitive-exams",
+        "status": "draft",
+        "cluster": "Vocabulary",
+        "risk": 0.33,
+        "keywordMatch": false,
+        "intentMatch": true,
+        "crossClusterOverlap": false,
+        "recommendation": "REVIEW_OVERLAP"
+      },
+      {
+        "slug": "unlocking-success-common-rc-mistakes-cat-aspirants-make-and-how-to-overcome-them",
+        "status": "published",
+        "cluster": "Accuracy",
+        "risk": 0.06,
+        "keywordMatch": false,
+        "intentMatch": false,
+        "crossClusterOverlap": false,
+        "recommendation": "REVIEW_OVERLAP"
+      },
+      {
+        "slug": "unlocking-success-top-common-rc-mistakes-cat-aspirants-must-avoid",
+        "status": "published",
+        "cluster": "Strategy",
+        "risk": 0.06,
+        "keywordMatch": false,
+        "intentMatch": false,
+        "crossClusterOverlap": false,
+        "recommendation": "REVIEW_OVERLAP"
+      },
+      {
+        "slug": "reading-comprehension-trap-answers-proof-before-pick",
+        "status": "draft",
+        "cluster": "critical-reading",
+        "risk": 0.05,
+        "keywordMatch": false,
+        "intentMatch": false,
+        "crossClusterOverlap": false,
+        "recommendation": "REVIEW_OVERLAP"
+      },
+      {
+        "slug": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+        "status": "published",
+        "cluster": "Accuracy",
+        "risk": 0,
+        "keywordMatch": false,
+        "intentMatch": false,
+        "crossClusterOverlap": false,
+        "recommendation": "REVIEW_OVERLAP"
+      }
+    ]
+  },
+  "brief": {
+    "topic": "Subject-Verb Agreement: The Grammar Mistakes That Trap Exam Takers",
+    "title": "Subject-Verb Agreement: The Grammar Mistakes That Trap Exam Takers",
+    "seoTitle": "Subject-Verb Agreement Rules and Common Exam Traps",
+    "slug": "subject-verb-agreement-common-exam-traps",
+    "description": "Learn how to identify the real subject, choose the correct verb, and avoid the subject-verb agreement traps commonly used in grammar and error-spotting questions.",
+    "primaryKeyword": "Subject-Verb Agreement: The Grammar Mistakes That Trap Exam Takers",
+    "secondaryKeywords": [
+      "subject-verb agreement rules",
+      "subject-verb agreement errors",
+      "subject-verb agreement questions",
+      "grammar error spotting",
+      "common grammar mistakes in exams",
+      "subject verb agreement examples"
+    ],
+    "searchIntent": "Skill-building",
+    "readerProblem": "Exam takers often choose a verb based on the nearest noun rather than the actual subject, especially when sentences contain prepositional phrases, collective nouns, indefinite pronouns, inverted structures, or subjects ending in -s.",
+    "targetAudience": [
+      "Competitive-exam candidates preparing for English grammar and error-spotting sections",
+      "Students preparing for SAT, ACT, or GED language questions",
+      "Learners who make avoidable subject-verb agreement errors",
+      "Teachers and tutors creating grammar revision material"
+    ],
+    "relevantExams": [
+      "SSC and other competitive English examinations",
+      "NDA-style grammar and error-detection practice",
+      "SAT",
+      "ACT",
+      "GED Language Arts RLA"
+    ],
+    "contentType": "multi-exam",
+    "cluster": "Grammar",
+    "category": "Grammar",
+    "contentAngle": "A trap-focused, exam-oriented guide that teaches readers to locate the grammatical subject before selecting the verb, rather than memorising isolated rules.",
+    "uniqueValue": "Uses original worked examples to show why tempting answers are wrong, groups mistakes by the trap that causes them, and ends with a fast decision process for timed questions.",
+    "outline": [
+      "Why subject-verb agreement appears in error-spotting questions",
+      "The core method: find the subject, ignore interruptions, then match the verb",
+      "Trap 1: Prepositional phrases between subject and verb",
+      "Trap 2: Nouns ending in -s that are singular",
+      "Trap 3: Compound subjects joined by and, or, and nor",
+      "Trap 4: Indefinite pronouns such as each, everyone, and several",
+      "Trap 5: Collective nouns and context-sensitive agreement",
+      "Trap 6: Quantities, fractions, percentages, and expressions beginning with there or here",
+      "Trap 7: Inverted sentences and questions",
+      "Trap 8: Relative clauses and the agreement of who, which, and that",
+      "Original worked examples with elimination reasoning",
+      "A timed checklist and mini-practice set",
+      "Answer explanations and common revision mistakes"
+    ],
+    "questionsToAnswer": [
+      "What is subject-verb agreement?",
+      "How can a test taker identify the true subject in a long sentence?",
+      "Why is the noun closest to the verb often a distraction?",
+      "Which nouns ending in -s can take a singular verb?",
+      "How do compound subjects joined by and, or, or nor affect verb choice?",
+      "How do indefinite pronouns affect subject-verb agreement?",
+      "How should learners handle collective nouns, quantities, and percentages?",
+      "How do inverted sentences and relative clauses create agreement traps?",
+      "What is the fastest reliable method for solving agreement questions under time pressure?",
+      "How can learners distinguish a genuine agreement error from a sentence that is merely unfamiliar?"
+    ],
+    "relatedEntities": [
+      "subject",
+      "predicate",
+      "finite verb",
+      "singular noun",
+      "plural noun",
+      "indefinite pronoun",
+      "collective noun",
+      "prepositional phrase",
+      "relative clause",
+      "compound subject",
+      "error spotting",
+      "sentence correction",
+      "SAT",
+      "ACT",
+      "GED Language Arts RLA",
+      "NDA"
+    ],
+    "internalLinks": [
+      {
+        "url": "/test-series",
+        "anchor": "timed verbal practice",
+        "reason": "Link the final timed-practice section to a test series so readers can apply agreement rules under exam conditions."
+      },
+      {
+        "url": "/features/precision-drills",
+        "anchor": "accuracy-focused precision drills",
+        "reason": "Connect the trap-based exercises to targeted drills that reinforce careful subject identification and verb selection."
+      },
+      {
+        "url": "/auctor-rc",
+        "anchor": "RC practice",
+        "reason": "Use this as a broader verbal-accuracy link for readers who want to transfer careful grammar checking into reading-comprehension practice."
+      }
+    ],
+    "externalSources": [
+      {
+        "title": "Subject-Verb Agreement — 20 Rules, Error Spotting & Practice",
+        "url": "https://www.mcqorbit.com/learn/english/grammar-foundations/subject-verb-agreement",
+        "snippet": "Highlights the exam trap in which a distracting singular or plural noun appears close to the verb and recommends identifying the subject rather than relying on proximity.",
+        "sourceType": "grammar reference and practice"
+      },
+      {
+        "title": "Correct subject-verb agreement errors",
+        "url": "https://www.varsitytutors.com/practice/subjects/ged-language-arts-rla/lessons/correct-agreement-errors",
+        "snippet": "Describes subject-verb agreement as a tested grammar skill and references SAT, ACT, and GED language testing.",
+        "sourceType": "exam-practice resource"
+      },
+      {
+        "title": "What are some common subject-verb agreement errors?",
+        "url": "https://academicmarker.com/grammar-practice/verb-functions/subject-verb-agreement/what-are-some-common-subject-verb-agreement-errors/",
+        "snippet": "Discusses common difficulties, including nouns ending in -s that may appear plural while functioning as singular subjects.",
+        "sourceType": "grammar reference"
+      },
+      {
+        "title": "What are the Most Common Grammar Mistakes and How ...",
+        "url": "https://www.econtentpro.com/blog/what-are-the-most-common-grammar-mistakes/408",
+        "snippet": "Lists subject-verb agreement errors among common grammar mistakes alongside punctuation, homophones, fragments, and run-ons.",
+        "sourceType": "grammar overview"
+      },
+      {
+        "title": "Day 3/60: Stop guessing, start \"Spotting!\" ...",
+        "url": "https://www.facebook.com/majorkalshiclasses/posts/day-360-stop-guessing-start-spotting-the-ultimate-english-tricks-for-nda-1-2026-/1213332514330346/",
+        "snippet": "Presents error detection as a way to identify traps involving subject-verb disagreement and other grammar issues in an NDA-related context.",
+        "sourceType": "social learning post"
+      },
+      {
+        "title": "Top Grammar Exam Traps You Must Avoid",
+        "url": "https://www.facebook.com/EnglishWithRaniMam/posts/top-grammar-exam-traps-you-must-avoid-%EF%B8%8Fno-double-negatives-no-repetition-no-doub/1232068929034005/",
+        "snippet": "Emphasises matching singular subjects with singular verbs and plural subjects with plural verbs, using a list-of-items example.",
+        "sourceType": "social learning post"
+      },
+      {
+        "title": "Abhishek English | Subject–Verb Agreement: Identify the Error",
+        "url": "https://www.instagram.com/reel/DUYavfok7Qs/",
+        "snippet": "Positions subject-verb agreement errors as recurring grammar questions in SSC and competitive examinations.",
+        "sourceType": "social learning post"
+      },
+      {
+        "title": "Common mistakes in Subject-Verb Agreement | English Grammar",
+        "url": "https://www.youtube.com/watch?v=z96dYT8gjZo",
+        "snippet": "Focuses on identifying subjects and verbs and reviewing common subject-verb agreement mistakes.",
+        "sourceType": "video lesson"
+      }
+    ],
+    "backlinkOpportunities": [
+      {
+        "site": "academicmarker.com",
+        "sourcePage": "https://academicmarker.com/grammar-practice/verb-functions/subject-verb-agreement/what-are-some-common-subject-verb-agreement-errors/",
+        "sourcePageReason": "The supplied page directly covers common subject-verb agreement errors, making it relevant to a complementary exam-trap guide.",
+        "reason": "The article could be cited as an additional practice-oriented explanation of agreement errors.",
+        "potentialAngle": "Offer an original comparison of academic grammar errors versus multiple-choice exam traps, with newly written worked examples and a timed checklist.",
+        "suggestedOutreachType": "Editorial resource suggestion",
+        "priority": "high"
+      },
+      {
+        "site": "varsitytutors.com",
+        "sourcePage": "https://www.varsitytutors.com/practice/subjects/ged-language-arts-rla/lessons/correct-agreement-errors",
+        "sourcePageReason": "The supplied lesson directly addresses correcting agreement errors and identifies the skill as relevant to multiple language examinations.",
+        "reason": "The guide may provide a cross-exam resource for learners who need additional agreement practice.",
+        "potentialAngle": "Position the article as a multi-exam companion focused on trap diagnosis and reasoning rather than only correction practice.",
+        "suggestedOutreachType": "Relevant-resource suggestion",
+        "priority": "high"
+      },
+      {
+        "site": "mcqorbit.com",
+        "sourcePage": "https://www.mcqorbit.com/learn/english/grammar-foundations/subject-verb-agreement",
+        "sourcePageReason": "The supplied page is specifically dedicated to subject-verb agreement rules and error spotting.",
+        "reason": "A link could be appropriate if the publisher maintains a resources section or updates its agreement content with complementary exam strategy material.",
+        "potentialAngle": "Contribute an original framework for rejecting proximity-based answers and handling long, interrupted subjects.",
+        "suggestedOutreachType": "Content collaboration or resource suggestion",
+        "priority": "medium"
+      },
+      {
+        "site": "econtentpro.com",
+        "sourcePage": "https://www.econtentpro.com/blog/what-are-the-most-common-grammar-mistakes/408",
+        "sourcePageReason": "The supplied article lists subject-verb agreement among common grammar mistakes and covers related error categories.",
+        "reason": "The article could reference this guide for a deeper treatment of one of its listed grammar problems.",
+        "potentialAngle": "Provide a focused deep dive that turns the broad mistake list into an exam-specific diagnostic and practice workflow.",
+        "suggestedOutreachType": "Contextual resource suggestion",
+        "priority": "medium"
+      }
+    ],
+    "imageConcept": "A clean exam-preparation desk scene with a sentence card showing a misleading noun near a verb, highlighted brackets identifying the true subject, and a checklist labelled “Find the subject → Ignore distractions → Match the verb.”",
+    "imageAlt": "Exam grammar study card showing how to identify the true subject for subject-verb agreement",
+    "targetPage": "/blog/subject-verb-agreement-common-exam-traps",
+    "factConstraints": [
+      "Treat the article as multi-exam and avoid claiming that every listed rule appears in every examination.",
+      "Use the supplied Varsity Tutors evidence only for the stated SAT, ACT, and GED coverage; verify current exam specifications before publication.",
+      "Do not present social posts, videos, or search-result snippets as authoritative grammatical proof without checking the underlying lesson or rule.",
+      "Write all sentence examples, answer choices, and explanations originally; do not reproduce examples from the supplied sources.",
+      "Explain that agreement conventions for collective nouns and quantities can depend on intended meaning and the variety of English being used.",
+      "Define exceptions carefully and distinguish formal test-writing conventions from informal usage where relevant.",
+      "Include human editorial review by a qualified English educator before publishing, especially for examples involving collective nouns, percentages, fractions, relative clauses, and inverted constructions.",
+      "Validate every answer in the worked examples independently and ensure that each practice item has one defensible best answer.",
+      "Do not report the supplied opportunity scores as search-demand or ranking statistics; they are editorial opportunity metadata, not independently verified market data."
+    ]
+  }
+}

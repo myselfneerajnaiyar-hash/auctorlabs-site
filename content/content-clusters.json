@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "editorialPriority": ["userValue", "informationGain", "searchIntent", "topicalAuthority", "seo", "commercialValue"],
+  "clusters": [
+    {
+      "id": "reading-comprehension",
+      "name": "Reading Comprehension",
+      "pillar": { "title": "Reading Comprehension — Complete Guide", "slug": "reading-comprehension-complete-guide", "searchIntent": "Comprehensive skill-building" },
+      "supportingTopics": ["how to improve reading comprehension", "how to identify the main idea", "how to identify author's tone", "how to solve inference questions", "how to identify passage structure", "how to eliminate RC trap answers", "how to handle two seemingly correct options", "how to improve RC accuracy", "how to improve RC speed", "how to read dense passages", "vocabulary in context", "reading comprehension question types", "evidence and inference", "scope and distortion"]
+    },
+    {
+      "id": "vocabulary",
+      "name": "Vocabulary",
+      "pillar": { "title": "Vocabulary Building for Competitive Exams", "slug": "vocabulary-building-competitive-exams", "searchIntent": "Comprehensive skill-building" },
+      "supportingTopics": ["learn vocabulary from context", "word roots", "prefixes and suffixes", "vocabulary retention", "synonyms and antonyms", "commonly confused words", "vocabulary for reading comprehension", "contextual vocabulary"]
+    },
+    {
+      "id": "grammar",
+      "name": "Grammar",
+      "pillar": { "title": "Grammar for Competitive Exams", "slug": "grammar-for-competitive-exams", "searchIntent": "Comprehensive skill-building" },
+      "supportingTopics": ["common grammar errors", "subject-verb agreement", "modifiers", "parallelism", "pronouns", "tenses", "sentence correction", "error spotting"]
+    },
+    {
+      "id": "verbal-ability",
+      "name": "Verbal Ability",
+      "pillar": { "title": "Verbal Ability Preparation", "slug": "verbal-ability-preparation", "searchIntent": "Comprehensive skill-building" },
+      "supportingTopics": ["sentence placement", "para jumbles", "odd sentence", "para summary", "logical flow", "cohesion", "coherence"]
+    },
+    {
+      "id": "critical-reading",
+      "name": "Critical Reading",
+      "pillar": { "title": "Critical Reading Skills", "slug": "critical-reading-skills", "searchIntent": "Comprehensive skill-building" },
+      "supportingTopics": ["author's argument", "assumptions", "evidence", "inference", "tone", "bias", "logical gaps", "argument structure"]
+    }
+  ]
+}

@@ -1,224 +1,330 @@
 import fs from "fs";
 import path from "path";
+import os from "os";
 import matter from "gray-matter";
 import slugify from "slugify";
 import axios from "axios";
 import dotenv from "dotenv";
+import OpenAI from "openai";
+import { pathToFileURL } from "url";
+import googleTrends from "google-trends-api";
 
 dotenv.config({ path: ".env.local" });
+const ROOT = process.cwd(), SOURCE_CONTENT = path.join(ROOT,"content"), RUNTIME_ROOT = process.env.VERCEL ? path.join(os.tmpdir(),"auctor-blog") : ROOT, CONTENT = path.join(RUNTIME_ROOT,"content");
+const BLOG = path.join(SOURCE_CONTENT,"blog"), DRAFTS = path.join(CONTENT,"drafts"), BRIEFS = path.join(CONTENT,"briefs");
+const STRATEGY = path.join(SOURCE_CONTENT,"content-strategy.json"), REGISTRY = path.join(CONTENT,"content-registry.json");
+const AUDIT = path.join(CONTENT,"content-audit.json"), OPPORTUNITIES = path.join(CONTENT,"topic-opportunities.json");
+const CLUSTERS = path.join(SOURCE_CONTENT,"content-clusters.json"), ROADMAP = path.join(CONTENT,"content-roadmap.json");
+const TOPIC_INTELLIGENCE = path.join(CONTENT,"topic-intelligence.json");
+const TEXT_MODEL = process.env.OPENAI_TEXT_MODEL || "gpt-5.6-luna";
+const IMAGE_MODEL = process.env.OPENAI_IMAGE_MODEL || "gpt-image-1";
+const MIN_SCORE = Number(process.env.BLOG_MIN_QUALITY_SCORE || 80);
+const MAX_REVISIONS = Math.min(2, Math.max(0, Number(process.env.BLOG_MAX_REVISIONS || 1)));
+const EXAMS = ["CAT", "XAT", "GMAT", "GRE", "CUET", "CLAT", "IPMAT", "NMAT", "SNAP", "SSC", "Banking exams", "Government exams"];
+const CANONICAL_CATEGORIES = ["Reading Comprehension", "Vocabulary", "Grammar", "Verbal Ability", "Critical Reading"];
+const ALLOWED = /reading comprehension|\brc\b|passage|main idea|author.?s? (?:tone|purpose|argument|stance)|inference|context|scope|trap answer|vocab|word meaning|word root|prefix|suffix|synonym|antonym|verbal ability|para jumble|para summary|odd sentence|sentence placement|cohesion|coherence|grammar|grammatical|subject[ -]?verb agreement|tense|modifier|parallelism|pronoun|article|preposition|sentence correction|error spotting|parts? of speech|punctuation|clause|conjunction|critical reading|assumption|evidence|bias|logical gap|english/i;
+const REJECTED = /stock market|share trading|cryptocurrency|\bcricket\b|\bcoding\b|software development|real estate|\brecipes?\b|cooking|unrelated current affairs|quantitative aptitude|data interpretation|mba admission|generic productivity|generic ai news/i;
+const stringArray = { type: "array", items: { type: "string" } };
 
-const ROOT = process.cwd();
-const BLOG_DIR = path.join(ROOT, "content", "blog");
-const DRAFT_DIR = path.join(ROOT, "content", "drafts");
-const STRATEGY_PATH = path.join(ROOT, "content", "content-strategy.json");
-const REGISTRY_PATH = path.join(ROOT, "content", "content-registry.json");
-const REPORT_PATH = path.join(ROOT, "content", "content-audit.json");
-const DISCOVERY_PATH = path.join(ROOT, "content", "topic-opportunities.json");
-const VALID_ACTIONS = ["UPDATE", "MERGE", "REDIRECT", "EXPAND", "CREATE_NEW", "LEAVE_ALONE"];
-
-function readStrategy() {
-  return JSON.parse(fs.readFileSync(STRATEGY_PATH, "utf8"));
+function readJson(file, fallback) { return fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, "utf8")) : fallback; }
+function writeJson(file, value) { fs.writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`); }
+function ensureDirs() { for (const dir of [DRAFTS, BRIEFS]) fs.mkdirSync(dir, { recursive: true }); }
+function articleReferences(content) {
+  const markdownImages=[...content.matchAll(/!\[([^\]]*)\]\(([^)]+)\)/g)].map(match=>({kind:"markdown-image",alt:match[1],src:match[2]}));
+  const jsxImages=[...content.matchAll(/<(?:img|Image)\b[^>]*\bsrc=["']([^"']+)["'][^>]*>/g)].map(match=>({kind:"jsx-image",alt:"",src:match[1]}));
+  const markdownLinks=[...content.matchAll(/(^|[^!])\[([^\]]+)\]\(([^)]+)\)/gm)].map(match=>({kind:"markdown-link",text:match[2],href:match[3]}));
+  const jsxLinks=[...content.matchAll(/<(?:a|Link)\b[^>]*\bhref=["']([^"']+)["'][^>]*>/g)].map(match=>({kind:"jsx-link",text:"",href:match[1]}));
+  return { hyperlinks:[...new Set([...markdownLinks,...jsxLinks].map(item=>item.href))], images:[...markdownImages,...jsxImages] };
 }
-
-function extractLinks(content) {
-  const markdown = [...content.matchAll(/\[[^\]]+\]\(([^)]+)\)/g)].map((match) => match[1]);
-  const html = [...content.matchAll(/href=["']([^"']+)["']/g)].map((match) => match[1]);
-  return [...new Set([...markdown, ...html])];
-}
-
-function wordCount(content) {
-  return content.replace(/<[^>]+>/g, " ").replace(/!\[[^\]]*\]\([^)]*\)/g, " ").split(/\s+/).filter(Boolean).length;
-}
-
-function inventory(directory = BLOG_DIR) {
-  if (!fs.existsSync(directory)) return [];
-  return fs.readdirSync(directory).filter((file) => file.endsWith(".mdx")).map((file) => {
-    const raw = fs.readFileSync(path.join(directory, file), "utf8");
-    const { data, content } = matter(raw);
-    const links = extractLinks(content);
-    return {
-      url: `/blog/${file.replace(/\.mdx$/, "")}`,
-      slug: file.replace(/\.mdx$/, ""),
-      title: data.title || "",
-      description: data.description || "",
-      primaryKeyword: data.primaryKeyword || null,
-      secondaryKeywords: data.secondaryKeywords || [],
-      searchIntent: data.searchIntent || null,
-      cluster: data.cluster || data.category || "Unmapped",
-      category: data.category || "Strategy",
-      publicationDate: data.date || null,
-      updatedDate: data.updatedDate || null,
-      status: data.status || "published",
-      author: data.author || "Auctor Labs Editorial Team",
-      targetPage: data.targetPage || null,
-      internalLinks: links.filter((link) => link.startsWith("/") || link.includes("auctorlabs.in")),
-      externalReferences: data.externalReferences || links.filter((link) => link.startsWith("http") && !link.includes("auctorlabs.in")),
-      image: data.image || null,
-      imageAlt: data.imageAlt || null,
-      schemaType: data.schemaType || "BlogPosting",
-      seoScore: data.seoScore || scoreSeo(data, content),
-      contentQualityScore: data.contentQualityScore || scoreQuality(data, content).total,
-      backlinkOpportunities: data.backlinkOpportunities || [],
-      refreshDate: data.refreshDate || null,
-      wordCount: wordCount(content),
-      headings: (content.match(/^#{2,3}\s+/gm) || []).length,
-    };
+function links(content) { return articleReferences(content).hyperlinks; }
+function imageSources(content) { return [...new Set(articleReferences(content).images.map(item=>item.src))]; }
+function words(content) { return content.replace(/<[^>]+>/g, " ").replace(/!\[[^\]]*\]\([^)]*\)/g, " ").split(/\s+/).filter(Boolean).length; }
+function scan(dir, fallbackStatus) {
+  if (!fs.existsSync(dir)) return [];
+  return fs.readdirSync(dir).filter(x => x.endsWith(".mdx")).map(file => {
+    const { data, content } = matter(fs.readFileSync(path.join(dir, file), "utf8"));
+    return { slug: file.replace(/\.mdx$/, ""), url: `/blog/${file.replace(/\.mdx$/, "")}`, title: data.title || "", description: data.description || "",
+      primaryKeyword: data.primaryKeyword || "", secondaryKeywords: data.secondaryKeywords || [], searchIntent: data.searchIntent || "", cluster: data.cluster || data.category || "Unmapped",
+      category: data.category || "Strategy", status: data.status || fallbackStatus, date: data.date || "", updatedDate: data.updatedDate || "", image: data.image || "", imageAlt: data.imageAlt || "",
+      author: data.author || "Auctor Labs Editorial Team", relevantExams: data.relevantExams || [], targetPage: data.targetPage || "", relatedArticles: data.relatedArticles || [],
+      externalReferences: data.externalReferences || [], backlinkOpportunities: data.backlinkOpportunities || [], schemaType: data.schemaType || "BlogPosting",
+      seoScore: data.seoScore ?? null, contentQualityScore: data.contentQualityScore ?? null, wordCount: words(content), headings: (content.match(/^#{2,3}\s+/gm) || []).length,
+      internalLinks: links(content).filter(x => x.startsWith("/") || x.includes("auctorlabs.in")) };
   });
 }
-
-function scoreSeo(data, content) {
-  let score = 0;
-  if (data.title && data.title.length >= 25 && data.title.length <= 70) score += 15;
-  if (data.description && data.description !== data.title && data.description.length >= 100 && data.description.length <= 170) score += 15;
-  if (data.primaryKeyword) score += 10;
-  if (data.searchIntent && data.cluster) score += 10;
-  if (data.image && data.imageAlt) score += 10;
-  if (data.author && data.date) score += 10;
-  if (data.updatedDate || data.refreshDate) score += 5;
-  if ((content.match(/^##\s+/gm) || []).length >= 3) score += 10;
-  if (extractLinks(content).some((link) => link.startsWith("/blog/"))) score += 8;
-  if (extractLinks(content).some((link) => link.startsWith("/features/") || link === "/test-series" || link === "/auctor-rc")) score += 7;
-  return score;
+function inventory() { return [...scan(BLOG, "published"), ...scan(DRAFTS, "draft")]; }
+function tokenSet(value) {
+  const stop = new Set(["with", "from", "that", "this", "your", "into", "about", "guide", "strategy", "mastering", "unlocking", "success", "best"]);
+  const text = typeof value === "string" ? value : `${value.title || value.topic || ""} ${value.primaryKeyword || ""} ${value.searchIntent || ""}`;
+  return new Set(text.toLowerCase().replace(/\brc\b/g,"reading comprehension").split(/[^a-z0-9]+/).filter(x => x.length > 3 && !stop.has(x)));
 }
-
-function scoreQuality(data, content) {
-  const words = wordCount(content);
-  const links = extractLinks(content);
-  const dimensions = {
-    searchIntentMatch: data.primaryKeyword && data.searchIntent ? 10 : 3,
-    originality: /Auctor-created|illustrative example|diagnostic|framework/i.test(content) ? 9 : 4,
-    depth: words >= 1200 ? 10 : words >= 800 ? 7 : words >= 500 ? 5 : 2,
-    usefulness: /\|.+\|\n\|[- :|]+\||exercise|worked example|checklist|step \d/i.test(content) ? 10 : 4,
-    seoCompleteness: Math.round(scoreSeo(data, content) / 10),
-    internalLinking: links.filter((link) => link.startsWith("/")).length >= 3 ? 10 : links.some((link) => link.startsWith("/")) ? 6 : 2,
-    readability: (content.match(/^##\s+/gm) || []).length >= 3 && !content.includes("In today's fast-paced world") ? 8 : 4,
-    factualReliability: data.externalReferences?.length || /Auctor-created|illustrative/i.test(content) ? 9 : 5,
-    visualQuality: data.image && data.imageAlt && /diagram|table|framework|visual/i.test(content) ? 9 : data.image ? 5 : 0,
-    conversionRelevance: links.some((link) => /features|test-series|auctor-rc/.test(link)) ? 8 : 3,
-  };
-  return { total: Object.values(dimensions).reduce((sum, value) => sum + value, 0), dimensions };
+function similarity(a, b) { const x = tokenSet(a), y = tokenSet(b); return [...x].filter(t => y.has(t)).length / Math.max(1, new Set([...x, ...y]).size); }
+function cannibalization(topic, records = inventory()) {
+  const matches = records.map(post => { const keywordMatch = !!topic.primaryKeyword && topic.primaryKeyword.toLowerCase() === post.primaryKeyword.toLowerCase();
+    const intentMatch = !!topic.searchIntent && !!post.searchIntent && similarity(topic.searchIntent, post.searchIntent) >= .6;
+    const semantic = similarity(topic, post), crossCluster = !!topic.cluster && !!post.cluster && topic.cluster !== post.cluster;
+    return { slug: post.slug, status: post.status, cluster: post.cluster, risk: Number(Math.min(1, semantic + (keywordMatch ? .45 : 0) + (intentMatch ? .2 : 0)).toFixed(2)), keywordMatch, intentMatch, crossClusterOverlap: crossCluster && semantic >= .35, recommendation: crossCluster && semantic >= .35 ? "DIFFERENTIATE_SEARCH_INTENT" : "REVIEW_OVERLAP" }; })
+    .sort((a, b) => b.risk - a.risk);
+  return { serious: (matches[0]?.risk || 0) >= .68, closest: matches[0] || null, matches: matches.slice(0, 5) };
 }
-
-function similarity(a, b) {
-  const stop = new Set(["with", "from", "that", "this", "your", "into", "about", "mastering", "unlocking", "success"]);
-  const tokens = (value) => new Set(value.toLowerCase().split(/[^a-z0-9]+/).filter((token) => token.length > 3 && !stop.has(token)));
-  const left = tokens(`${a.title} ${a.primaryKeyword || ""}`); const right = tokens(`${b.title} ${b.primaryKeyword || ""}`);
-  const shared = [...left].filter((token) => right.has(token)).length;
-  return shared / Math.max(1, new Set([...left, ...right]).size);
+function relevant(item) { const text = `${item.topic || ""} ${item.title || ""} ${item.primaryKeyword || ""}`; return ALLOWED.test(text) && !REJECTED.test(text); }
+function canonicalCategory(value, topic = "") {
+  const text = `${value || ""} ${topic}`.toLowerCase();
+  if (/vocab|word root|synonym|antonym/.test(text)) return "Vocabulary";
+  if (/grammar|modifier|parallelism|pronoun|tense|subject.?verb|error spotting|sentence correction/.test(text)) return "Grammar";
+  if (/para jumble|para summary|odd sentence|verbal ability|cohesion|coherence|sentence placement/.test(text)) return "Verbal Ability";
+  if (/critical reading|argument|assumption|bias|logical gap/.test(text)) return "Critical Reading";
+  return "Reading Comprehension";
 }
-
-function audit() {
-  const posts = inventory();
-  const today = new Date();
-  const overlaps = [];
-  for (let i = 0; i < posts.length; i++) for (let j = i + 1; j < posts.length; j++) {
-    const value = similarity(posts[i], posts[j]);
-    if (value >= 0.34) overlaps.push({ left: posts[i].slug, right: posts[j].slug, similarity: Number(value.toFixed(2)), recommendation: "REVIEW_FOR_MERGE_OR_DIFFERENTIATION" });
-  }
-  const recommendations = posts.map((post) => {
-    const ageDays = post.publicationDate ? Math.floor((today - new Date(post.updatedDate || post.publicationDate)) / 86400000) : null;
-    let action = "LEAVE_ALONE";
-    const reasons = [];
-    if (!post.primaryKeyword || !post.searchIntent) { action = "EXPAND"; reasons.push("Missing keyword/intent mapping"); }
-    if (post.wordCount < 700) { action = "EXPAND"; reasons.push("Thin relative to current SERP expectations"); }
-    if (post.description === post.title) reasons.push("Meta description duplicates title");
-    if (ageDays !== null && ageDays > 365) { action = "UPDATE"; reasons.push("Freshness review due"); }
-    return { slug: post.slug, action, reasons };
+function opportunityScore(item) {
+  const raw = Object.fromEntries(["relevance", "demand", "trend", "competition", "gap", "authority", "commercialValue", "internalLinkPotential", "backlinkPotential", "evergreenValue"].map(k => [k, Number(item.scores?.[k] ?? 50)]));
+  const tenPointScale = Math.max(...Object.values(raw)) <= 10;
+  const d = Object.fromEntries(Object.entries(raw).map(([key, value]) => [key, tenPointScale ? value * 10 : value]));
+  const score = d.relevance*.2+d.demand*.11+d.trend*.07+(100-d.competition)*.07+d.gap*.16+d.authority*.13+d.commercialValue*.05+d.internalLinkPotential*.08+d.backlinkPotential*.05+d.evergreenValue*.08;
+  return { scores: d, contentGapScore: d.gap, opportunityScore: Math.round(score) };
+}
+function roadmap(write = false) {
+  const taxonomy = readJson(CLUSTERS, { clusters: [] }), records = inventory();
+  const clusters = taxonomy.clusters.map(cluster => {
+    const candidates = records.filter(post => post.cluster === cluster.id || similarity(cluster.name, post) >= .2 || cluster.supportingTopics.some(topic => similarity(topic, post) >= .22));
+    const pillarMatch = records.map(post => ({ post, score: similarity(cluster.pillar.title, post) })).sort((a,b) => b.score-a.score)[0];
+    const existingPillar = pillarMatch?.score >= .45 ? { slug:pillarMatch.post.slug,title:pillarMatch.post.title,status:pillarMatch.post.status,similarity:Number(pillarMatch.score.toFixed(2)) } : null;
+    const coverage = cluster.supportingTopics.map(topic => { const match=records.map(post=>({post,score:similarity(topic,post)})).sort((a,b)=>b.score-a.score)[0]; return { topic, covered:(match?.score||0)>=.22, closestArticle:match?match.post.slug:null, similarity:Number((match?.score||0).toFixed(2)) }; });
+    const missing = coverage.filter(x=>!x.covered), intentSet = new Set(candidates.map(x=>x.searchIntent).filter(Boolean));
+    const expectedIntents = ["Informational","Problem-solving","Skill-building","Strategy","Practice-oriented"];
+    const searchIntentGaps = expectedIntents.filter(intent=>![...intentSet].some(value=>value.toLowerCase().includes(intent.toLowerCase())));
+    const internalLinkGaps = candidates.filter(post=>post.internalLinks.length<2).map(post=>post.slug);
+    const backlinkResourceGaps = missing.filter(x=>/question types|framework|checklist|roots|errors|structure|evidence|comparison|practice/i.test(x.topic)).map(x=>x.topic);
+    const contentGapScore = Math.min(100, Math.round((existingPillar?0:25) + (missing.length/Math.max(1,coverage.length))*55 + Math.min(15,searchIntentGaps.length*3) + Math.min(5,internalLinkGaps.length)));
+    const recommendedNext = missing.slice().sort((a,b)=>similarity(b.topic,cluster.pillar.title)-similarity(a.topic,cluster.pillar.title)).slice(0,5).map((item,index)=>({title:item.topic,priority:index===0&& !existingPillar?"high":index<3?"high":"medium",opportunityScore:Math.max(45,Math.round(contentGapScore-index*3)),reason:`Fills an uncovered ${cluster.name} supporting-topic gap${existingPillar?"":" while the pillar is also missing"}.`}));
+    return {id:cluster.id,name:cluster.name,pillar:cluster.pillar,existingPillar,existingArticles:candidates.map(({slug,title,status,searchIntent})=>({slug,title,status,searchIntent})),missingArticles:missing.map(x=>x.topic),searchIntentGaps,internalLinkGaps,topicalAuthorityGaps:[...(existingPillar?[]:[`Missing pillar: ${cluster.pillar.title}`]),...missing.map(x=>x.topic)],backlinkWorthyResourceGaps:backlinkResourceGaps,contentGapScore,recommendedNext};
   });
-  const report = { generatedAt: new Date().toISOString(), allowedActions: VALID_ACTIONS, summary: { posts: posts.length, overlaps: overlaps.length, expandOrUpdate: recommendations.filter((item) => item.action !== "LEAVE_ALONE").length }, overlaps, recommendations };
-  fs.writeFileSync(REPORT_PATH, `${JSON.stringify(report, null, 2)}\n`);
-  return report;
+  const output={generatedAt:new Date().toISOString(),editorialPriority:taxonomy.editorialPriority,clusters,recommendedNext:clusters.flatMap(c=>c.recommendedNext.map(x=>({...x,cluster:c.name,contentGapScore:c.contentGapScore}))).sort((a,b)=>b.opportunityScore-a.opportunityScore).slice(0,15)};
+  if(write)writeJson(ROADMAP,output); return output;
 }
-
-function registry() {
-  const posts = inventory();
-  fs.writeFileSync(REGISTRY_PATH, `${JSON.stringify({ generatedAt: new Date().toISOString(), posts }, null, 2)}\n`);
-  return posts;
+function detectedGapScore(item, map) {
+  const ranked=map.clusters.map(cluster=>({cluster,score:Math.max(similarity(item,cluster.name),...cluster.missingArticles.map(topic=>similarity(item,topic)))})).sort((a,b)=>b.score-a.score);
+  return ranked[0]?.score >= .15 ? ranked[0].cluster.contentGapScore : 50;
 }
-
-function backlinks(topic) {
-  return [
-    { type: "Resource pages", targets: "MBA preparation and college learning-resource pages", pitch: `Offer the worked ${topic} framework as a free reference.` },
-    { type: "Student communities", targets: "CAT study communities and campus MBA clubs", pitch: "Share the exercise as a discussion resource; do not automate posting." },
-    { type: "Guest expertise", targets: "Education publications and MBA preparation blogs", pitch: "Contribute a decision-analysis excerpt with an original visual." },
-    { type: "Linkable asset", targets: "Teachers, mentors and study groups", pitch: "Create a downloadable one-page error taxonomy and attribution-friendly diagram." }
-  ];
+function client() { if (!process.env.OPENAI_API_KEY) throw new Error("OPENAI_API_KEY is required for AI editorial commands."); return new OpenAI({ apiKey: process.env.OPENAI_API_KEY }); }
+function normalizeMetaDescription(value) {
+  let text=String(value||"").replace(/\s+/g," ").trim();
+  const supplement=" Learn practical methods, worked examples, and exam-focused guidance.";
+  while(text.length<140)text+=supplement;
+  if(text.length<=160)return text;
+  let clipped=text.slice(0,159),boundary=clipped.lastIndexOf(" ");
+  if(boundary>=140)clipped=clipped.slice(0,boundary);
+  return `${clipped.replace(/[\s,;:.!?-]+$/g,"")}.`;
 }
-
-async function discover() {
-  if (!process.env.SERP_API_KEY) throw new Error("SERP_API_KEY is required for topic discovery.");
-  const queries = [
-    "CAT 2026 VARC preparation",
-    "CAT reading comprehension problems",
-    "CAT para jumbles para summary odd sentence",
-    "CAT VARC mock score improvement",
-  ];
-  const existing = inventory();
-  const candidates = [];
-  for (const query of queries) {
-    const { data } = await axios.get("https://serpapi.com/search.json", { params: { engine: "google", q: query, google_domain: "google.co.in", gl: "in", hl: "en", api_key: process.env.SERP_API_KEY } });
-    const ideas = [
-      ...(data.related_searches || []).map((item) => ({ query: item.query, source: "related_search" })),
-      ...(data.related_questions || []).map((item) => ({ query: item.question, source: "people_also_ask" })),
-    ];
-    for (const idea of ideas) {
-      if (!/cat|varc|verbal|reading comprehension|para|mock/i.test(idea.query)) continue;
-      const probe = { title: idea.query, primaryKeyword: idea.query };
-      const collision = existing.map((post) => ({ slug: post.slug, similarity: similarity(post, probe) })).sort((a, b) => b.similarity - a.similarity)[0];
-      candidates.push({ ...idea, seedQuery: query, cannibalizationRisk: collision?.similarity || 0, closestExisting: collision?.slug || null, recommendation: collision?.similarity >= 0.5 ? "UPDATE_OR_DIFFERENTIATE" : "RESEARCH_BRIEF", requiresEditorialReview: true });
-    }
+async function structured(name, schema, instructions, input) {
+  const response = await client().responses.create({ model: TEXT_MODEL, instructions, input, text: { format: { type: "json_schema", name, strict: true, schema } }, store: false });
+  if (!response.output_text) throw new Error(`OpenAI returned no output for ${name}.`);
+  return JSON.parse(response.output_text);
+}
+const scoreKeys = ["relevance", "demand", "trend", "competition", "gap", "authority", "commercialValue", "internalLinkPotential", "backlinkPotential", "evergreenValue"];
+const scoreProperties = Object.fromEntries(scoreKeys.map(k => [k, { type: "integer", minimum: 0, maximum: 100 }]));
+const opportunitySchema = { type: "object", additionalProperties: false, required: ["opportunities"], properties: { opportunities: { type: "array", items: { type: "object", additionalProperties: false,
+  required: ["topic", "title", "primaryKeyword", "secondaryKeywords", "searchIntent", "readerProblem", "targetAudience", "relevantExams", "contentType", "contentAngle", "differentiationOpportunity", "evidence", "trendStatus", "scores"],
+  properties: { topic: {type:"string"}, title:{type:"string"}, primaryKeyword:{type:"string"}, secondaryKeywords:stringArray,
+    searchIntent:{type:"string",enum:["Informational","Problem-solving","Comparison","Exam-specific","Skill-building","Definition/explanation","Strategy","Practice-oriented"]}, readerProblem:{type:"string"}, targetAudience:stringArray, relevantExams:stringArray,
+    contentType:{type:"string",enum:["universal verbal skill","exam-agnostic","multi-exam","exam-specific"]}, contentAngle:{type:"string"}, differentiationOpportunity:{type:"string"}, evidence:stringArray,
+    trendStatus:{type:"string",enum:["verified-trend","seasonal","editorial-opportunity"]}, scores:{type:"object",additionalProperties:false,required:scoreKeys,properties:scoreProperties} } } } } };
+const sourceArray = { type:"array", items:{type:"object",additionalProperties:false,required:["title","url","snippet","sourceType"],properties:{title:{type:"string"},url:{type:"string"},snippet:{type:"string"},sourceType:{type:"string"}}} };
+const briefSchema = { type:"object",additionalProperties:false,required:["topic","title","seoTitle","slug","description","primaryKeyword","secondaryKeywords","searchIntent","readerProblem","targetAudience","relevantExams","contentType","cluster","category","contentAngle","uniqueValue","outline","questionsToAnswer","relatedEntities","internalLinks","externalSources","backlinkOpportunities","imageConcept","imageAlt","targetPage","factConstraints"],properties:{
+  topic:{type:"string"},title:{type:"string"},seoTitle:{type:"string"},slug:{type:"string"},description:{type:"string"},primaryKeyword:{type:"string"},secondaryKeywords:stringArray,searchIntent:{type:"string"},readerProblem:{type:"string"},targetAudience:stringArray,relevantExams:stringArray,contentType:{type:"string",enum:["universal verbal skill","exam-agnostic","multi-exam","exam-specific"]},cluster:{type:"string"},category:{type:"string",enum:CANONICAL_CATEGORIES},contentAngle:{type:"string"},uniqueValue:{type:"string"},outline:stringArray,questionsToAnswer:stringArray,relatedEntities:stringArray,
+  internalLinks:{type:"array",items:{type:"object",additionalProperties:false,required:["url","anchor","reason"],properties:{url:{type:"string"},anchor:{type:"string"},reason:{type:"string"}}}}, externalSources:sourceArray,
+  backlinkOpportunities:{type:"array",items:{type:"object",additionalProperties:false,required:["site","sourcePage","sourcePageReason","reason","potentialAngle","suggestedOutreachType","priority"],properties:{site:{type:"string"},sourcePage:{type:"string"},sourcePageReason:{type:"string"},reason:{type:"string"},potentialAngle:{type:"string"},suggestedOutreachType:{type:"string"},priority:{type:"string",enum:["high","medium","low"]}}}},
+  imageConcept:{type:"string"},imageAlt:{type:"string"},targetPage:{type:"string"},factConstraints:stringArray } };
+const articleSchema = { type:"object",additionalProperties:false,required:["title","description","content","faqIncluded","claims"],properties:{title:{type:"string"},description:{type:"string"},content:{type:"string"},faqIncluded:{type:"boolean"},claims:{type:"array",items:{type:"object",additionalProperties:false,required:["claim","sourceUrl","verified","action"],properties:{claim:{type:"string"},sourceUrl:{type:"string"},verified:{type:"boolean"},action:{type:"string",enum:["keep","qualify","remove"]}}}}} };
+const reviewKeys = ["seo","searchIntent","originality","depth","accuracy","usefulness","examples","clarity","readability","informationGain","redundancy","expertise","naturalness","differentiation","brandAlignment","internalLinking","schemaCompleteness"];
+const reviewSchema = { type:"object",additionalProperties:false,required:["overallScore","dimensions","weaknesses","unsupportedClaims","revisionRequired","revisionInstructions"],properties:{overallScore:{type:"integer",minimum:0,maximum:100},dimensions:{type:"object",additionalProperties:false,required:reviewKeys,properties:Object.fromEntries(reviewKeys.map(k=>[k,{type:"integer",minimum:0,maximum:100}]))},weaknesses:stringArray,unsupportedClaims:stringArray,revisionRequired:{type:"boolean"},revisionInstructions:stringArray} };
+const inlineImageSchema = {type:"object",additionalProperties:false,required:["images"],properties:{images:{type:"array",maxItems:5,items:{type:"object",additionalProperties:false,required:["id","type","placement","purpose","prompt","alt"],properties:{id:{type:"string"},type:{type:"string",enum:["concept","infographic","worked-example","editorial"]},placement:{type:"string"},purpose:{type:"string"},prompt:{type:"string"},alt:{type:"string"}}}}}};
+async function serp(query) {
+  if (!process.env.SERP_API_KEY) return { query, verified:false, results:[], relatedSearches:[], questions:[] };
+  let data;
+  try {
+    ({ data } = await axios.get("https://serpapi.com/search.json", { timeout:30000, params:{engine:"google",q:query,google_domain:"google.co.in",gl:"in",hl:"en",num:10,api_key:process.env.SERP_API_KEY} }));
+  } catch (error) {
+    const code = error?.response?.status || error?.code || "UNKNOWN";
+    throw new Error(`SerpApi request failed (${code}) for query: ${query}`);
   }
-  const unique = [...new Map(candidates.map((item) => [item.query.toLowerCase(), item])).values()]
-    .sort((a, b) => a.cannibalizationRisk - b.cannibalizationRisk)
-    .slice(0, 40);
-  const output = { generatedAt: new Date().toISOString(), note: "Discovery candidates are not publication approval. Validate intent, sources, product relevance and SERP quality before adding to the queue.", candidates: unique };
-  fs.writeFileSync(DISCOVERY_PATH, `${JSON.stringify(output, null, 2)}\n`);
-  return { candidates: unique.length, output: DISCOVERY_PATH };
+  return { query, verified:true, results:(data.organic_results||[]).slice(0,10).map(x=>({title:x.title||"",url:x.link||"",snippet:x.snippet||"",sourceType:"organic"})), relatedSearches:(data.related_searches||[]).map(x=>x.query).filter(Boolean), questions:(data.related_questions||[]).map(x=>x.question).filter(Boolean) };
 }
-
-function sampleDraft() {
-  const strategy = readStrategy();
-  const brief = strategy.queue.find((item) => item.slug === "cat-para-summary-strategy");
-  const existing = inventory();
-  const collision = existing.map((post) => ({ slug: post.slug, similarity: similarity(post, brief) })).sort((a, b) => b.similarity - a.similarity)[0];
-  if (collision?.similarity >= 0.5) throw new Error(`Cannibalization risk with ${collision.slug}`);
-  fs.mkdirSync(DRAFT_DIR, { recursive: true });
-  const date = new Date().toISOString().slice(0, 10);
-  const content = `## Why para summary is a scope test\n\nA CAT para summary question does not ask you to rewrite a paragraph. It asks you to choose the option that preserves the paragraph's central claim, logical movement and degree of certainty. The wrong options are often factually related; they fail because they shrink, stretch or tilt the original argument.\n\nThis guide uses **Auctor-created illustrative examples**, not official CAT questions. Use them to learn the method, then validate the method on genuine CAT previous-year questions.\n\n## The three-part summary test\n\n| Test | Ask | Reject an option when |\n|---|---|---|\n| Coverage | Does it include the paragraph's governing idea? | It captures only an example or one half of a contrast. |\n| Scope | Is it no broader or narrower than the paragraph? | It adds a population, cause or consequence the paragraph never established. |\n| Stance | Does it preserve the author's level of certainty? | It turns may into must, criticism into rejection, or observation into advocacy. |\n\nApply the tests in that order. Coverage quickly removes fragments. Scope removes attractive overreach. Stance usually separates the final two options. This same evidence discipline also matters when you [practise CAT RC accuracy](/features/precision-drills).\n\n## Auctor-created worked example\n\n**Paragraph:** Remote work can widen access to jobs for people outside major cities. Yet access alone does not erase inequality: reliable internet, quiet workspace and managerial trust remain unevenly distributed. Companies that treat location flexibility as a complete inclusion policy may therefore preserve the barriers they intended to remove.\n\n**Option A:** Remote work eliminates geographic and economic inequality in employment.\n\n**Option B:** Although remote work can expand job access, it does not ensure inclusion unless other unequal working conditions are addressed.\n\n**Option C:** Companies should require every employee to work remotely to improve inclusion.\n\n**Option D:** Internet access is the only remaining barrier to equitable employment.\n\n**Answer: B.** It keeps both halves of the argument: expanded access and the limits created by unequal conditions. A overstates the benefit, C invents a recommendation, and D narrows several barriers to one.\n\n## The five traps behind wrong options\n\n1. **Example trap:** repeats a vivid illustration but drops the main claim.\n2. **Half-summary trap:** preserves one side of a contrast and ignores the qualification.\n3. **Overreach trap:** adds a cause, solution or prediction not established in the paragraph.\n4. **Tone shift:** converts a measured observation into praise, alarm or condemnation.\n5. **Keyword mirror:** reuses the paragraph's language while changing the relationship between ideas.\n\nThese traps overlap with the option errors discussed in [why RC accuracy gets stuck](/blog/improve-rc-accuracy-cat). The difference is that para summary compresses the entire decision into one paragraph-level claim.\n\n## A 60-second solving workflow\n\n### 1. State the paragraph's job\n\nBefore reading the options, complete this sentence: “The paragraph argues that…” If you can only name the topic, read again for the relationship between ideas.\n\n### 2. Mark the turn\n\nWords such as *but*, *yet*, *however*, *therefore* and *although* often reveal which claim controls the paragraph. Do not automatically treat the last sentence as the summary; identify what logical work it performs.\n\n### 3. Eliminate by named failure\n\nDo not say an option “feels incomplete.” Name the failure: too narrow, too broad, unsupported conclusion, wrong stance or missing contrast. A named rejection can be reviewed and improved.\n\n### 4. Compare the final two against the paragraph\n\nThe better option is not the prettier sentence. It is the one that loses the least essential meaning while adding nothing.\n\n## Mini exercise\n\n**Auctor-created paragraph:** Public rankings can make institutions more transparent, but they also encourage institutions to optimise what the ranking measures. When indicators become targets, performance may improve on paper without the underlying educational experience improving at the same rate.\n\nWrite a one-sentence summary before revealing the model below. Check whether your sentence retains both transparency and the risk of metric-driven distortion.\n\n<details><summary>Model summary</summary><p>Rankings may increase transparency, yet they can distort institutional priorities when measured indicators become targets rather than reflections of educational quality.</p></details>\n\n## How to practise without memorising tricks\n\nBuild a small error log with four columns: your predicted main claim, the option selected, the exact trap, and the phrase in the paragraph that disproves your choice. Review the log after five sets. If the same trap repeats, use targeted practice before taking another full sectional.\n\nPair this method with [daily structured VARC practice](/features/daily-rc-workout), and use a [CAT VARC test](/test-series) to check whether the method survives time pressure.\n\n## Final checklist\n\n- Can I express the central claim before viewing options?\n- Did I preserve every essential contrast?\n- Is the option at the same scope as the paragraph?\n- Did it strengthen or weaken the author's certainty?\n- Can I name why each rejected option fails?\n\nA good summary is faithful compression. It covers the paragraph's argument, respects its boundaries and keeps its stance intact.`;
-  const data = {
-    title: brief.title,
-    description: "Learn a reliable CAT para summary method using scope, coverage and stance checks, with Auctor-created worked examples and a practical error log.",
-    date,
-    updatedDate: date,
-    image: "/blog/cat-para-summary-framework.png",
-    imageAlt: "CAT para summary method showing coverage, scope and author stance checks",
-    category: "Verbal Ability",
-    author: "Auctor Labs Editorial Team",
-    status: "draft",
-    primaryKeyword: brief.primaryKeyword,
-    secondaryKeywords: brief.secondaryKeywords,
-    searchIntent: brief.searchIntent,
-    cluster: brief.cluster,
-    targetPage: brief.targetPage,
-    relatedArticles: ["improve-rc-accuracy-cat", "unlocking-success-mastering-reading-comprehension-for-cat-with-proven-strategies"],
-    externalReferences: [],
-    schemaType: "BlogPosting",
-    refreshDate: new Date(Date.now() + 180 * 86400000).toISOString().slice(0, 10),
-    backlinkOpportunities: backlinks("para-summary"),
-  };
-  const quality = scoreQuality(data, content); const seo = scoreSeo(data, content);
-  data.seoScore = seo; data.contentQualityScore = quality.total;
-  data.qualityDimensions = quality.dimensions;
-  data.publishEligible = quality.total >= strategy.minimumQualityScore;
-  const filePath = path.join(DRAFT_DIR, `${slugify(brief.slug, { lower: true, strict: true })}.mdx`);
-  fs.writeFileSync(filePath, matter.stringify(content, data));
-  return { filePath, quality: quality.total, seo, threshold: strategy.minimumQualityScore, publishEligible: data.publishEligible, closestExisting: collision };
+async function discover(options={}) {
+  const seeds = options.topic ? [options.topic] : ["improve reading comprehension","reading comprehension trap answers","learn vocabulary from context","competitive exam grammar common errors","critical reading strategies","verbal reasoning sentence understanding"];
+  const research=[]; for (const seed of seeds) research.push(await serp(seed));
+  const records=inventory(), strategy=readJson(STRATEGY,{clusters:[],queue:[]}), gapMap=roadmap(false);
+  const result=await structured("topic_opportunities",opportunitySchema,"You are Auctor Labs' senior editorial strategist. Answer what Auctor should write next, not merely what it could write. Allow only reading comprehension, vocabulary, verbal ability, grammar, reading skills, verbal reasoning, and competitive-exam English. Classify each topic as universal verbal skill, exam-agnostic, multi-exam, or exam-specific. Prefer universal and multi-exam coverage whenever the skill transfers; require a meaningful exam-specific reason before narrowing to CAT or another exam. Prioritize user value, information gain, intent and cluster gaps above volume or commercial value. Never call something a verified trend unless supplied evidence proves recency or growth. Competition score means difficulty. Avoid duplicate intent within or across clusters and state a differentiated angle when concepts overlap.",JSON.stringify({date:new Date().toISOString().slice(0,10),allowedExams:EXAMS,serpResearch:research,contentRoadmap:gapMap.clusters.map(({id,name,contentGapScore,missingArticles,searchIntentGaps})=>({id,name,contentGapScore,missingArticles,searchIntentGaps})),existingContent:records.map(({slug,title,primaryKeyword,searchIntent,cluster,status})=>({slug,title,primaryKeyword,searchIntent,cluster,status})),plannedQueue:strategy.queue||[]}));
+  const opportunities=result.opportunities.filter(relevant).map(item=>{const detected=detectedGapScore(item,gapMap);item.scores.gap=Math.round((Number(item.scores.gap)+detected)/2);const scored=opportunityScore(item), risk=cannibalization(item,records);return{...item,...scored,detectedContentGapScore:detected,cannibalization:risk,eligible:scored.opportunityScore>=60&&!risk.serious};}).sort((a,b)=>b.opportunityScore-a.opportunityScore);
+  const output={generatedAt:new Date().toISOString(),model:TEXT_MODEL,sourcesVerified:research.some(x=>x.verified),note:"Trends are only marked verified when supported by supplied search evidence; otherwise they are editorial opportunities.",opportunities}; writeJson(OPPORTUNITIES,output); return output;
 }
+function internalCandidates(topic) { return inventory().filter(x=>x.status==="published").map(x=>({url:x.url,title:x.title,description:x.description,cluster:x.cluster,relevance:Number(similarity(topic,x).toFixed(2))})).filter(x=>x.relevance>0).sort((a,b)=>b.relevance-a.relevance).slice(0,12); }
+function host(value) { try { return new URL(/^https?:\/\//i.test(value) ? value : `https://${value}`).hostname.replace(/^www\./,""); } catch { return ""; } }
+async function plan(opportunity, suppliedResearch = null) {
+  const research=suppliedResearch||await serp(opportunity.primaryKeyword||opportunity.topic), candidates=internalCandidates(opportunity), strategy=readJson(STRATEGY,{clusters:[]});
+  const brief=await structured("content_brief",briefSchema,"Create a precise expert verbal-education brief. Classify it as universal verbal skill, exam-agnostic, multi-exam, or exam-specific; prefer broad transfer unless exam-specific differences materially change the answer. Use only supplied external URLs and supplied internal candidates. Suggest 3-8 natural internal links. A backlink opportunity is valid only when it cites an exact supplied sourcePage whose content is relevant; site must be that source page's domain. Never invent sites, contact details, sources, statistics, trends, or likelihood of obtaining a link. Require original worked examples and human review.",JSON.stringify({opportunity,serpResearch:research,clusters:strategy.clusters||[],internalCandidates:candidates,productPages:[{url:"/test-series",purpose:"timed verbal practice"},{url:"/auctor-rc",purpose:"RC practice"},{url:"/features/precision-drills",purpose:"accuracy practice"}]}));
+  brief.slug=slugify(brief.slug||brief.title,{lower:true,strict:true}); brief.category=canonicalCategory(brief.category,`${brief.topic} ${brief.cluster}`); brief.internalLinks=brief.internalLinks.filter(x=>candidates.some(c=>c.url===x.url)||["/test-series","/auctor-rc","/features/precision-drills"].includes(x.url)).slice(0,8); brief.externalSources=brief.externalSources.filter(x=>research.results.some(r=>r.url===x.url));
+  brief.backlinkOpportunities=brief.backlinkOpportunities.filter(item=>research.results.some(result=>result.url===item.sourcePage)&&host(item.site)===host(item.sourcePage)).map(item=>({...item,site:host(item.site)}));
+  const risk=cannibalization(brief); if(risk.serious) throw new Error(`Serious cannibalization risk with ${risk.closest.slug} (${risk.closest.risk}).`);
+  ensureDirs(); const output={generatedAt:new Date().toISOString(),model:TEXT_MODEL,cannibalization:risk,brief}; writeJson(path.join(BRIEFS,`${brief.slug}.json`),output); return output;
+}
+async function writeArticle(brief,previous=null,instructions=[]) { const {externalSources:_externalSources,backlinkOpportunities:_backlinkOpportunities,...writerBrief}=brief; return structured("editorial_article",articleSchema,"Write as an expert verbal-ability educator: clear, direct, practical, evidence-oriented, student-centric. Return an MDX body with no frontmatter and no H1. The only permitted links are the Auctor internalLinks supplied in the brief. Never insert an HTTP/HTTPS URL, external citation, external source link, or backlink-opportunity link into the article body. Use the primary keyword naturally when it fits, preferably early, but never damage readability or stuff keywords. Keep the title natural and approximately 45-60 characters; keep the meta description approximately 140-160 characters. Every section must add new information. Remove repeated frameworks, restated explanations, redundant summaries, and excessive reuse of the same terminology unless repetition has a clear pedagogical purpose and adds a new application. When a Reading Comprehension example materially improves learning, create an entirely original short passage, MCQ options, a tempting distractor analysis, textual proof for the correct answer, and why the tempting option fails. Never copy or closely imitate exam, website, book, or competitor material, and never call illustrative questions official. Avoid generic introductions, filler, fake facts or quotes, excessive lists, corporate marketing, forced Auctor mentions, imports, scripts, JSX, and raw styles. Ground time-sensitive or empirical claims in the private research summarized by the brief; otherwise qualify or omit them without linking externally.",JSON.stringify({editorialPriority:["user value","information gain","search intent","topical authority","SEO","commercial value"],brief:writerBrief,approvedInternalLinks:brief.internalLinks,previousArticle:previous,revisionInstructions:instructions,targetLength:"1200-2200 useful words; shorter if intent is fully answered"})); }
+function externalBodyLinks(content) { const withoutImages=content.replace(/!\[[^\]]*\]\([^)]*\)/g,"").replace(/<(?:img|Image)\b[^>]*>/g,""); return [...new Set(withoutImages.match(/https?:\/\/[^\s)"'<>]+/gi)||[])]; }
+function invalidInternalLinks(content){const published=new Set(scan(BLOG,"published").map(post=>post.url));const fixed=new Set(["/","/about","/blog","/test-series","/auctor-rc","/products","/pricing","/contact","/success","/features/daily-rc-workout","/features/speed-drills","/features/reading-comprehension-generator","/features/precision-drills"]);return links(content).filter(link=>link.startsWith("/")&&!published.has(link.split("#")[0])&&!fixed.has(link.split("#")[0]));}
+function checks(brief,article) {
+  const c=article.content||"", ls=links(c), paragraphs=c.split(/\n\s*\n/).map(x=>x.replace(/^#+\s+/,"").trim()).filter(x=>words(x)>=35), redundantParagraphPairs=[];
+  for(let i=0;i<paragraphs.length;i++)for(let j=i+1;j<paragraphs.length;j++){const score=similarity(paragraphs[i],paragraphs[j]);if(score>=.62)redundantParagraphPairs.push({first:i+1,second:j+1,similarity:Number(score.toFixed(2))});}
+  const keywordPresent=c.toLowerCase().includes(brief.primaryKeyword.toLowerCase()), metaLength=article.description.length, titleLength=article.title.length, seoIssues=[];
+  if(!keywordPresent)seoIssues.push(`Use the primary keyword '${brief.primaryKeyword}' once where natural, or a close grammatical variant if exact match harms readability.`);
+  if(titleLength<35||titleLength>60)seoIssues.push(`Rewrite the title to a natural 45-60 characters (currently ${titleLength}) without stuffing.`);
+  if(metaLength<140||metaLength>160)seoIssues.push(`Rewrite the meta description to 140-160 characters (currently ${metaLength}) while preserving intent and usefulness.`);
+  const outboundLinks=externalBodyLinks(c);
+  return {words:words(c),h2Count:(c.match(/^##\s+/gm)||[]).length,h3Count:(c.match(/^###\s+/gm)||[]).length,internalLinkCount:ls.filter(x=>x.startsWith("/")).length,imageSources:imageSources(c),invalidInternalLinks:invalidInternalLinks(c),externalLinkCount:outboundLinks.length,externalLinks:outboundLinks,keywordPresent,metaLength,titleLength,seoIssues,redundantParagraphPairs,forbiddenPhrases:["In today's fast-paced world","Whether you're a student or professional"].filter(x=>c.includes(x)),unverifiedClaims:(article.claims||[]).filter(x=>!x.verified&&x.action==="keep").map(x=>x.claim)};
+}
+async function review(brief,article,deterministic) { return structured("editorial_review",reviewSchema,"Be a strict independent editor. Score redundancy as freedom from unnecessary repetition: 100 means every section adds information; low scores indicate repeated explanations, repeated frameworks, redundant sections, restated paragraphs, or excessive terminology reuse. Pedagogical repetition is acceptable only when each recurrence adds a new example, distinction, or application. Penalize generic prose, unsupported claims, weak or derivative examples, artificial SEO, forced links, unnecessary exam-specificity, and low information gain. SEO below 80 requires concrete revision instructions unless readability or factual accuracy provides a genuine editorial reason. Require revision below the overall threshold, for deterministic SEO issues, redundancy warnings, or unsupported claims.",JSON.stringify({threshold:MIN_SCORE,seoTarget:80,brief,article,deterministicChecks:deterministic})); }
+function imagePrompt(brief) { return `${brief.imageConcept}\n\nPremium Auctor Labs educational editorial illustration about ${brief.topic}. Audience: ${brief.targetAudience.join(", ")}. Clean modern composition, intelligent focused mood, dark navy with restrained orange and violet accents, central visual metaphor, professional lighting, negative space. No words, letters, numbers, logos, watermarks, exam trademarks, UI screenshots, distorted anatomy, generic stock-photo staging, or clutter.`; }
+async function generateImageBytes(prompt) { const result=await client().images.generate({model:IMAGE_MODEL,prompt,size:"1536x1024"}), b64=result.data?.[0]?.b64_json; if(!b64)throw new Error("Image API returned no image data."); return Buffer.from(b64,"base64"); }
+async function generateImageFile(prompt,relative) { const output=path.join(RUNTIME_ROOT,"public",relative.slice(1));fs.mkdirSync(path.dirname(output),{recursive:true});fs.writeFileSync(output,await generateImageBytes(prompt));return relative; }
+async function generateImage(brief) { return generateImageFile(imagePrompt(brief),`/blog/${brief.slug}-featured.png`); }
+function articleSections(content){return [...content.matchAll(/^##\s+(.+)$/gm)].map(match=>({heading:match[1].trim(),id:slugify(match[1],{lower:true,strict:true})}));}
+function inlineMarker(id){return `{/* inline-image:${id} */}`;}
+function legacyInlineMarker(id){return `<!-- inline-image:${id} -->`;}
+function escapeRegex(value){return value.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");}
+function removeInlineImageBlock(content,id){let next=content;for(const value of [inlineMarker(id),legacyInlineMarker(id)]){const marker=escapeRegex(value);next=next.replace(new RegExp(`\\n?\\s*${marker}\\s*\\n+!\\[[^\\]]*\\]\\([^\\n)]+\\)\\s*\\n?`,"g"),"\n\n");}return next;}
+function placeInlineImage(content,item){if(!item.src)return{content,resolved:false};const marker=inlineMarker(item.id),legacy=legacyInlineMarker(item.id);content=content.split(legacy).join(marker);if(content.includes(marker)&&content.includes(`](${item.src})`))return{content,resolved:true};if(content.includes(marker))content=content.replace(marker,`${marker}\n\n![${item.alt}](${item.src})`);if(content.includes(`](${item.src})`))return{content,resolved:true};const sections=[...content.matchAll(/^##\s+(.+)$/gm)];const index=sections.findIndex(match=>slugify(match[1],{lower:true,strict:true})===item.placement);if(index<0)return{content,resolved:false};const insertAt=index+1<sections.length?sections[index+1].index:content.length;const block=`\n\n${marker}\n\n![${item.alt}](${item.src})\n`;return{content:`${content.slice(0,insertAt).trimEnd()}${block}\n${content.slice(insertAt).trimStart()}`,resolved:true};}
+function syncInlineImages(content,images=[]){let next=content;for(const image of images)next=next.split(legacyInlineMarker(image.id)).join(inlineMarker(image.id));const updated=images.map(image=>{if(image.status==="removed"){next=removeInlineImageBlock(next,image.id);return image;}if(image.status!=="generated"||!image.src)return image;const placed=placeInlineImage(next,image);next=placed.content;return{...image,status:placed.resolved?"generated":"placement-unresolved"};});return{content:next,images:updated};}
+function inlineStylePrompt(item,brief){return `${item.prompt}\n\nPurpose: ${item.purpose}. Article topic: ${brief.topic||brief.title}. Premium Auctor Labs educational ${item.type} illustration. Modern, intelligent and clean with strong visual hierarchy, dark navy base and restrained orange and violet accents. Make the educational relationship immediately understandable. Use concise, legible text only when essential to a diagram; otherwise no text. No logo, watermark, trademark, copyrighted character, fake UI, generic stock-photo staging, clutter, or decorative filler. Wide editorial composition suitable inside a web article.`;}
+async function planInlineImages(brief,content){const sections=articleSections(content),count=words(content),maximum=count<900?2:count<1600?4:5;if(!sections.length)return[];const result=await structured("inline_image_plan",inlineImageSchema,`Plan only contextual images that materially improve comprehension. Return zero images if none add information. Use only supplied placement IDs. Target at most ${maximum} images based on article length. Prefer concept illustrations, educational infographics and worked-example visuals; use editorial/student scenes sparingly. Avoid repeating what text already explains well. IDs must be short lowercase hyphenated identifiers. Alt text must state what the visual communicates, not say merely image or illustration. Prompts must specify the educational relationships clearly and avoid large amounts of text.`,JSON.stringify({title:brief.title||brief.topic,topic:brief.topic,wordCount:count,maximumInlineImages:maximum,sections,article:content}));const allowed=new Set(sections.map(section=>section.id)),seen=new Set();return result.images.filter(item=>allowed.has(item.placement)).slice(0,maximum).map(item=>{let id=slugify(item.id,{lower:true,strict:true})||`inline-${seen.size+1}`;while(seen.has(id))id=`${id}-${seen.size+1}`;seen.add(id);return{...item,id,status:"planned",src:"",error:""};});}
+async function generateInlineImages(brief,content,plan,progress=async()=>{}){let next=content,success=0,failed=0;const images=[];for(let index=0;index<plan.length;index++){const item={...plan[index],status:"generating"};await progress("inlineImages","processing",{current:index+1,total:plan.length,id:item.id});try{item.src=`/blog/${brief.slug}-inline-${item.id}.png`;await generateImageFile(inlineStylePrompt(item,brief),item.src);item.status="generated";const placed=placeInlineImage(next,item);next=placed.content;if(!placed.resolved){item.status="placement-unresolved";item.error=`Heading '${item.placement}' no longer exists.`;failed++;}else success++;}catch(error){item.status="failed";item.src="";item.error=error instanceof Error?error.message:String(error);failed++;}images.push(item);}return{content:next,images,summary:{planned:plan.length,generated:success,failed}};}
+async function generate(options={}) {
+  const progress=typeof options.onProgress==="function"?options.onProgress:()=>{};
+  const explicitTopic=Boolean(options.topic); let opportunity, suppliedResearch=null;
+  if(explicitTopic){
+    await progress("researching","processing");
+    suppliedResearch=await serp(options.topic);
+    const gapMap=roadmap(false), localTopic={topic:options.topic,title:options.topic,primaryKeyword:options.topic,secondaryKeywords:[],searchIntent:"Skill-building",contentType:"multi-exam",contentAngle:"User-supplied topic",evidence:suppliedResearch.results.map(x=>x.url),trendStatus:"editorial-opportunity",scores:{relevance:100,demand:50,trend:0,competition:50,gap:detectedGapScore({topic:options.topic,title:options.topic,primaryKeyword:options.topic},gapMap),authority:70,commercialValue:40,internalLinkPotential:60,backlinkPotential:50,evergreenValue:80}};
+    if(!relevant(localTopic))throw new Error("Topic failed relevance filter.");
+    const scored=opportunityScore(localTopic), risk=cannibalization(localTopic);
+    opportunity={...localTopic,...scored,detectedContentGapScore:scored.contentGapScore,cannibalization:risk,eligible:!risk.serious};
+  }else{
+    let found=readJson(OPPORTUNITIES,null);if(!found?.generatedAt||Date.now()-new Date(found.generatedAt).getTime()>7*86400000)found=await discover();
+    opportunity=found.opportunities.find(x=>x.eligible);
+  }
+  if(!opportunity)throw new Error("No eligible topic. Run blog:discover or provide --topic."); if(!relevant(opportunity))throw new Error("Topic failed relevance filter."); if(opportunity.cannibalization?.serious)throw new Error(`Topic rejected for cannibalization with ${opportunity.cannibalization.closest.slug}.`);
+  await progress("researching","complete");await progress("brief","processing");
+  const planned=await plan(opportunity,suppliedResearch), brief=planned.brief;
+  if(options.audience){brief.audience=options.audience;brief.relevantExams=options.audience==="General / Multi-exam"?brief.relevantExams:[options.audience];brief.targetAudience=[options.audience==="General / Multi-exam"?"Competitive-exam learners across multiple exams":`${options.audience} learners`,...brief.targetAudience];brief.factConstraints.push(options.audience==="General / Multi-exam"?"Keep the method transferable across exams and avoid unnecessary CAT framing.":`Use ${options.audience} terminology only where verified; do not claim official testing without evidence.`);}
+  await progress("brief","complete");await progress("writing","processing");
+  let article=await writeArticle(brief), deterministic=checks(brief,article);await progress("writing","complete");await progress("reviewing","processing");let editorial=await review(brief,article,deterministic), revisions=0;await progress("reviewing","complete");
+  const needsRevision=()=>editorial.revisionRequired||editorial.overallScore<MIN_SCORE||editorial.dimensions.seo<80||deterministic.seoIssues.length||deterministic.redundantParagraphPairs.length||deterministic.unverifiedClaims.length||deterministic.externalLinks.length;
+  await progress("improving",needsRevision()?"processing":"complete");
+  while(revisions<(explicitTopic?1:MAX_REVISIONS)&&needsRevision()){article=await writeArticle(brief,article,[...editorial.revisionInstructions,...deterministic.seoIssues,...deterministic.redundantParagraphPairs.map(x=>`Remove or consolidate redundant paragraphs ${x.first} and ${x.second}; similarity ${x.similarity}.`),...deterministic.unverifiedClaims.map(x=>`Remove or qualify unsupported claim: ${x}`),...deterministic.externalLinks.map(x=>`Remove this forbidden external URL from the article body: ${x}`)]);deterministic=checks(brief,article);revisions++;if(!explicitTopic)editorial=await review(brief,article,deterministic);}await progress("improving","complete");
+  if(deterministic.externalLinks.length)throw new Error(`Article contains forbidden external links after revision: ${deterministic.externalLinks.join(", ")}`);
+  await progress("featuredImage","processing");const date=new Date().toISOString().slice(0,10), image=options.withImage?await generateImage(brief):`/blog/${brief.slug}-featured.png`;await progress("featuredImage","complete");
+  await progress("imagePlanning","processing");const inlinePlan=await planInlineImages(brief,article.content);await progress("imagePlanning","complete",{planned:inlinePlan.length});
+  await progress("inlineImages",inlinePlan.length?"processing":"complete",{current:0,total:inlinePlan.length});const inlineResult=await generateInlineImages(brief,article.content,inlinePlan,progress);await progress("inlineImages","complete",inlineResult.summary);
+  const data={title:article.title,description:normalizeMetaDescription(article.description),date,updatedDate:date,image,imageAlt:brief.imageAlt,inlineImages:inlineResult.images,inlineImageSummary:inlineResult.summary,category:canonicalCategory(brief.category,`${brief.topic} ${brief.cluster}`),author:"Auctor Labs Editorial Team",status:"draft",primaryKeyword:brief.primaryKeyword,secondaryKeywords:brief.secondaryKeywords,searchIntent:brief.searchIntent,cluster:brief.cluster,relevantExams:brief.relevantExams,audience:options.audience||"General / Multi-exam",contentType:brief.contentType,targetPage:brief.targetPage,relatedArticles:brief.internalLinks.filter(x=>x.url.startsWith("/blog/")).map(x=>x.url.replace("/blog/","")),internalLinkSuggestions:brief.internalLinks,externalReferences:brief.externalSources.map(x=>x.url),backlinkOpportunities:brief.backlinkOpportunities,schemaType:"BlogPosting",seoScore:editorial.dimensions.seo,contentQualityScore:editorial.overallScore,qualityDimensions:editorial.dimensions,seoIssues:deterministic.seoIssues,qualityWarnings:[...deterministic.seoIssues,...deterministic.redundantParagraphPairs.map(x=>`Potential repetition between paragraphs ${x.first} and ${x.second} (${x.similarity}).`),...editorial.weaknesses,...editorial.unsupportedClaims],publishEligible:editorial.overallScore>=MIN_SCORE&&editorial.dimensions.seo>=80&&!deterministic.seoIssues.length&&!deterministic.unverifiedClaims.length&&!deterministic.externalLinks.length,humanReviewRequired:true,aiGenerated:true,generationModel:TEXT_MODEL,generatedAt:new Date().toISOString(),briefPath:`content/briefs/${brief.slug}.json`,imagePrompt:imagePrompt(brief)};
+  await progress("finalizing","processing");ensureDirs();const file=path.join(DRAFTS,`${brief.slug}.mdx`);fs.writeFileSync(file,matter.stringify(inlineResult.content.trim(),data));registry();await progress("finalizing","complete");return{slug:brief.slug,filePath:file,briefPath:path.join(BRIEFS,`${brief.slug}.json`),topic:brief.topic,title:article.title,model:TEXT_MODEL,revisions,qualityScore:editorial.overallScore,threshold:MIN_SCORE,publishEligible:data.publishEligible,status:"draft",imageGenerated:!!options.withImage,inlineImages:inlineResult.summary,checks:deterministic};
+}
+function registry(){const strategy=readJson(STRATEGY,{clusters:[],queue:[]}),posts=inventory(),opps=readJson(OPPORTUNITIES,{opportunities:[]}).opportunities||[],map=roadmap(false);const output={generatedAt:new Date().toISOString(),posts,plannedTopics:strategy.queue||[],opportunities:opps.map(({topic,primaryKeyword,searchIntent,contentType,contentGapScore,opportunityScore,eligible})=>({topic,primaryKeyword,searchIntent,contentType,contentGapScore,opportunityScore,eligible})),clusters:map.clusters};writeJson(REGISTRY,output);return output;}
+function audit(){const posts=inventory(),overlaps=[];for(let i=0;i<posts.length;i++)for(let j=i+1;j<posts.length;j++){const value=similarity(posts[i],posts[j]);if(value>=.34)overlaps.push({left:posts[i].slug,right:posts[j].slug,similarity:Number(value.toFixed(2)),recommendation:"REVIEW_FOR_MERGE_OR_DIFFERENTIATION"});}const recommendations=posts.map(p=>{let action="LEAVE_ALONE";const reasons=[];if(!p.primaryKeyword||!p.searchIntent){action="EXPAND";reasons.push("Missing keyword/intent mapping");}if(p.wordCount<700){action="EXPAND";reasons.push("Thin relative to intended depth");}if(p.date&&Math.floor((Date.now()-new Date(p.updatedDate||p.date))/86400000)>365){action="UPDATE";reasons.push("Freshness review due");}return{slug:p.slug,status:p.status,action,reasons};});const report={generatedAt:new Date().toISOString(),summary:{posts:posts.length,published:posts.filter(p=>p.status==="published").length,drafts:posts.filter(p=>p.status==="draft").length,overlaps:overlaps.length,expandOrUpdate:recommendations.filter(x=>x.action!=="LEAVE_ALONE").length},overlaps,recommendations};writeJson(AUDIT,report);return report;}
+function check(){const posts=inventory(),failing=[],warnings=[];for(const p of posts){const missing=["title","description","date","image"].filter(k=>!p[k]);if(missing.length)failing.push({slug:p.slug,missing});const migration=["imageAlt","primaryKeyword","searchIntent","cluster"].filter(k=>!p[k]);if(migration.length)warnings.push({slug:p.slug,missing:migration});}return{posts:posts.length,failing,migrationWarnings:warnings,valid:failing.length===0};}
+function publish(slug) {
+  if(!slug)throw new Error("--slug is required. Example: npm run blog:publish -- --slug=article-slug");
+  const safeSlug=slugify(slug,{lower:true,strict:true});if(safeSlug!==slug)throw new Error("Slug must already be a lowercase URL-safe article slug.");
+  const source=path.join(DRAFTS,`${safeSlug}.mdx`),destination=path.join(BLOG,`${safeSlug}.mdx`);
+  if(!fs.existsSync(source))throw new Error(`Draft not found: ${source}`);if(fs.existsSync(destination))throw new Error(`Published article already exists: ${destination}`);
+  const parsed=matter(fs.readFileSync(source,"utf8")),data=parsed.data,content=parsed.content;
+  if(data.status!=="draft")throw new Error(`Refusing to publish: expected status 'draft', found '${data.status || "missing"}'.`);
+  const required=["title","description","date","image","imageAlt","category","author","primaryKeyword","secondaryKeywords","searchIntent","cluster","relevantExams","schemaType","seoScore","contentQualityScore","publishEligible"];
+  const missing=required.filter(key=>!Object.hasOwn(data,key)||data[key]===null||data[key]===undefined||data[key]==="");
+  if(missing.length)throw new Error(`Refusing to publish: missing required frontmatter: ${missing.join(", ")}`);
+  if(data.publishEligible!==true)throw new Error("Refusing to publish: publishEligible must be true.");
+  const validation=check();if(!validation.valid)throw new Error(`Refusing to publish: blog validation currently has ${validation.failing.length} failure(s).`);
+  if(Number(data.seoScore)<80)throw new Error(`Refusing to publish: SEO score ${data.seoScore} is below 80.`);
+  if(Number(data.contentQualityScore)<MIN_SCORE)throw new Error(`Refusing to publish: content quality score ${data.contentQualityScore} is below ${MIN_SCORE}.`);
+  const deterministic=checks({primaryKeyword:data.primaryKeyword},{title:data.title,description:data.description,content,claims:[]});
+  const unresolvedSeo=[...(Array.isArray(data.seoIssues)?data.seoIssues:[]),...deterministic.seoIssues];
+  if(unresolvedSeo.length)throw new Error(`Refusing to publish: unresolved SEO issues: ${[...new Set(unresolvedSeo)].join(" | ")}`);
+  if(deterministic.externalLinks.length)throw new Error(`Refusing to publish: external article-body links found: ${deterministic.externalLinks.join(", ")}`);
+  if(deterministic.invalidInternalLinks.length)throw new Error(`Refusing to publish: invalid internal links found: ${deterministic.invalidInternalLinks.join(", ")}`);
+  const inlineImages=Array.isArray(data.inlineImages)?data.inlineImages:[], unresolvedImages=inlineImages.filter(item=>["planned","generating","placement-unresolved"].includes(item.status));
+  if(unresolvedImages.length)throw new Error(`Refusing to publish: unresolved inline images: ${unresolvedImages.map(item=>item.id).join(", ")}`);
+  for(const item of inlineImages.filter(item=>item.status==="generated")){if(!item.alt||!item.src)throw new Error(`Refusing to publish: inline image '${item.id}' is missing alt text or src.`);if(!content.includes(inlineMarker(item.id))||!content.includes(`](${item.src})`))throw new Error(`Refusing to publish: inline image '${item.id}' is not present at its reviewed MDX placement.`);if(!item.src.startsWith("/blog/")||![path.join(RUNTIME_ROOT,"public",item.src.slice(1)),path.join(ROOT,"public",item.src.slice(1))].some(fs.existsSync))throw new Error(`Refusing to publish: inline image asset is missing or invalid: ${item.src}`);}
+  const publishedData={...data,status:"published",category:canonicalCategory(data.category,`${data.cluster} ${data.title}`),updatedDate:data.updatedDate||new Date().toISOString().slice(0,10)};
+  fs.writeFileSync(destination,matter.stringify(content.trim(),publishedData),{flag:"wx"});fs.unlinkSync(source);
+  registry();const finalValidation=check();if(!finalValidation.valid)throw new Error(`Article moved, but post-publish validation failed for ${safeSlug}.`);
+  return {publishedSlug:safeSlug,filePath:destination,title:publishedData.title,seoScore:Number(publishedData.seoScore),contentQualityScore:Number(publishedData.contentQualityScore),category:publishedData.category,internalLinks:links(content).filter(link=>link.startsWith("/")),status:"published",inContentBlog:true};
+}
+const SEO_SEEDS=["CAT VARC","reading comprehension competitive exams","para jumbles","competitive exam English grammar","vocabulary for competitive exams","XAT verbal ability","CUET English","GMAT GRE verbal"];
+function titleCaseQuery(value){const preserved=new Map([["cat","CAT"],["varc","VARC"],["xat","XAT"],["cuet","CUET"],["gmat","GMAT"],["gre","GRE"],["rc","RC"]]);return value.trim().replace(/\s+/g," ").split(" ").map((part,index)=>preserved.get(part.toLowerCase())||(index===0||!/^(to|in|for|of|and|the|a|an|from|with)$/i.test(part)?part.charAt(0).toUpperCase()+part.slice(1).toLowerCase():part.toLowerCase())).join(" ");}
+function examSignals(query){const matches=[];for(const exam of ["CAT","XAT","CUET","GMAT","GRE","CLAT","IPMAT","NMAT","SNAP","SSC"]){if(new RegExp(`\\b${exam}\\b`,"i").test(query))matches.push(exam);}if(/banking|bank exam/i.test(query))matches.push("Banking");return matches.length?matches:["Multi-exam"];}
+function topicCandidateRelevant(query){return query.length>=12&&query.split(/\s+/).length>=3&&relevant({topic:query})&&!/exam date|registration|admit card|result|cut.?off|\bpdf\b|meaning in hindi|meaning in tamil|translation|coaching near me|salary|college|quantitative|data interpretation|answer key|download|class \d+|school exam|board exam|what are (?:the )?(?:top )?\d+ vocabulary|what are \d+ common words|what are the \d+ examples|list of \d+ words|vocabulary words with meanings|some good reading/i.test(query);}
+function directCoverageRisk(query,records){const normalized=value=>String(value||"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim(),needle=normalized(query),concepts=["reading comprehension","subject verb agreement","para jumbles","para summary","odd sentence","sentence placement","author tone","vocabulary from context","trap answers"];let risk=0;for(const post of records){for(const value of [post.primaryKeyword,post.title]){const phrase=normalized(value),tokens=phrase.split(" ").filter(Boolean);if(tokens.length>=2&&(needle.includes(phrase)||phrase.includes(needle)))risk=Math.max(risk,.72);if(concepts.some(concept=>needle.includes(concept)&&phrase.includes(concept)))risk=Math.max(risk,.72);}}return risk;}
+async function trendsSignals(seed){try{
+  const startTime=new Date(Date.now()-365*86400000);
+  const [queryRaw,topicRaw,interestRaw]=await Promise.all([googleTrends.relatedQueries({keyword:seed,geo:"IN",hl:"en-IN"}),googleTrends.relatedTopics({keyword:seed,geo:"IN",hl:"en-IN"}),googleTrends.interestOverTime({keyword:seed,geo:"IN",hl:"en-IN",startTime})]);
+  const queries=JSON.parse(queryRaw).default?.rankedList||[],topics=JSON.parse(topicRaw).default?.rankedList||[],timeline=JSON.parse(interestRaw).default?.timelineData||[];
+  const values=timeline.map(point=>Number(point.value?.[0]||0)),recent=values.slice(-8),previous=values.slice(-16,-8),average=list=>list.length?list.reduce((sum,value)=>sum+value,0)/list.length:0,recentAverage=average(recent),previousAverage=average(previous);
+  const interestTrend=!recent.length||!previous.length?"Insufficient data":recentAverage>previousAverage*1.15?"Rising":recentAverage<previousAverage*.85?"Falling":"Stable";
+  const mapList=list=>(list?.rankedKeyword||[]).map((item,index)=>({query:item.query||item.topic?.title||"",rank:index+1,value:item.value,formattedValue:item.formattedValue||"",sourceSeed:seed})).filter(item=>item.query);
+  return{available:true,seed,interestTrend,interestPeriods:values.length,topQueries:mapList(queries[0]),risingQueries:mapList(queries[1]),topTopics:mapList(topics[0]),risingTopics:mapList(topics[1])};
+}catch(error){return{available:false,seed,error:error instanceof Error?error.message:String(error),interestTrend:"Unavailable",interestPeriods:0,topQueries:[],risingQueries:[],topTopics:[],risingTopics:[]};}}
+async function buildTopicIntelligence(){
+  const records=inventory(),candidateMap=new Map(),previous=readJson(TOPIC_INTELLIGENCE,null);
+  const liveTrendResults=await Promise.all(SEO_SEEDS.map(trendsSignals)),liveGoogleAvailable=liveTrendResults.some(result=>result.available);
+  const cachedTrendResults=!liveGoogleAvailable&&Array.isArray(previous?.googleTrendSnapshot)?previous.googleTrendSnapshot:null;
+  const trendResults=cachedTrendResults||liveTrendResults;
+  const serpSeeds=["CAT VARC preparation","reading comprehension competitive exams","para jumbles CAT","competitive exam English vocabulary","para summary CAT","odd sentence CAT","sentence placement CAT","subject verb agreement competitive exams","author tone reading comprehension"];
+  const serpResults=await Promise.all(serpSeeds.map(async seed=>{try{return await serp(seed);}catch(error){return{query:seed,verified:false,results:[],relatedSearches:[],questions:[],error:error instanceof Error?error.message:String(error)};}}));
+  function add(query,signal){
+    const normalized=String(query||"").trim().replace(/\s+/g," ");if(!topicCandidateRelevant(normalized))return;
+    const key=normalized.toLowerCase(),item=candidateMap.get(key)||{query:normalized,topRanks:[],risingRanks:[],relatedCount:0,question:false,trendSeeds:new Set(),trendDirections:new Set(),serpSeeds:new Set()};
+    if(signal.type==="top")item.topRanks.push(signal.rank);if(signal.type==="rising")item.risingRanks.push(signal.rank);if(signal.type==="related")item.relatedCount++;if(signal.type==="question")item.question=true;
+    if(signal.trendSeed)item.trendSeeds.add(signal.trendSeed);if(signal.trendDirection)item.trendDirections.add(signal.trendDirection);if(signal.serpSeed)item.serpSeeds.add(signal.serpSeed);candidateMap.set(key,item);
+  }
+  for(const result of trendResults){for(const item of [...result.topQueries,...result.topTopics])add(item.query,{type:"top",rank:item.rank,trendSeed:result.seed,trendDirection:result.interestTrend});for(const item of [...result.risingQueries,...result.risingTopics])add(item.query,{type:"rising",rank:item.rank,trendSeed:result.seed,trendDirection:result.interestTrend});}
+  for(const result of serpResults){for(const query of result.relatedSearches)add(query,{type:"related",serpSeed:result.query});for(const question of result.questions)add(question,{type:"question",serpSeed:result.query});}
+  const rankedTopics=[...candidateMap.values()].map(item=>{
+    const risk=cannibalization({topic:item.query,title:item.query,primaryKeyword:item.query},records),bestTop=Math.min(...item.topRanks,999),bestRising=Math.min(...item.risingRanks,999);
+    const interestRising=item.trendDirections.has("Rising"),trend=Math.min(20,(bestRising<999?(bestRising<=5?20:15):0)+(bestTop<999?5:0)+(interestRising?5:0));
+    const demand=Math.min(20,(bestTop<=5?15:bestTop<=15?10:bestTop<999?6:0)+(item.relatedCount?5:0)+(item.question?5:0));
+    const coverageRisk=Math.max(risk.closest?.risk||0,directCoverageRisk(item.query,records)),relevanceScore=20,gap=coverageRisk<.12?25:coverageRisk<.35?18:5,exams=examSignals(item.query),examRelevance=exams[0]==="Multi-exam"?7:10;
+    const usefulness=/^(how|what|why|when)|method|strategy|mistake|trap|example|practice|improve|solve|rule|question/i.test(item.query)?5:3;
+    const score=trend+demand+relevanceScore+gap+examRelevance+usefulness,trendStatus=bestRising<999?"Rising":bestTop<999?"Top related":"No Google Trends query signal";
+    const searchDemandEstimate=demand>=15?"Strong":demand>=9?"Moderate":demand>0?"Emerging":"Unavailable",contentGap=coverageRisk<.12?"High":coverageRisk<.35?"Partial":"Low";
+    const signals=[...(bestRising<999?["Rising Google Trends query"]:[]),...(bestTop<999?["Top related Google Trends query"]:[]),...(interestRising?["Rising Google Trends interest"]:[]),...(item.relatedCount?["Google related searches (SerpApi)"]:[]),...(item.question?["People-also-ask question"]:[]),...(exams[0]!=="Multi-exam"?[exams.join(" / ")]:["Transferable English skill"]),`${contentGap} content gap`];
+    return{title:titleCaseQuery(item.query),primaryQuery:item.query,opportunityScore:score,trendStatus,searchDemandEstimate,examRelevance:exams,contentGap,existingCoverage:risk.closest?{status:contentGap==="High"?"Limited":contentGap==="Partial"?"Partial":"Substantial",closestSlug:risk.closest.slug,risk:coverageRisk}:{status:"None",closestSlug:null,risk:0},reason:`${trendStatus}. ${searchDemandEstimate} search-demand estimate from available related-query/search signals; Auctor coverage is a ${contentGap.toLowerCase()} gap and the topic is relevant to ${exams.join(", ")}.`,signals,scoreBreakdown:{trend,demand,relevance:relevanceScore,contentGap:gap,examRelevance,usefulness},sources:{googleTrends:item.trendSeeds.size?[...item.trendSeeds]:[],serpApi:item.serpSeeds.size?[...item.serpSeeds]:[]},eligible:!risk.serious};
+  }).filter(item=>item.eligible&&item.contentGap!=="Low").sort((a,b)=>b.opportunityScore-a.opportunityScore||b.scoreBreakdown.demand-a.scoreBreakdown.demand);
+  const topics=[];const categoryCounts=new Map();
+  for(const item of rankedTopics){const category=canonicalCategory("",item.primaryQuery),count=categoryCounts.get(category)||0;if(count>=2||topics.some(selected=>similarity(selected.primaryQuery,item.primaryQuery)>=.45))continue;topics.push({...item,category});categoryCounts.set(category,count+1);if(topics.length===8)break;}
+  const serpAvailable=serpResults.some(result=>result.verified),googleStatus=liveGoogleAvailable?"Available":cachedTrendResults?`Cached signals — live refresh unavailable; last success ${previous.googleTrendsLastSuccess||"unknown"}`:"Unavailable";
+  const output={generatedAt:new Date().toISOString(),region:"India",cacheHours:24,googleTrendsLastSuccess:liveGoogleAvailable?new Date().toISOString():previous?.googleTrendsLastSuccess||null,googleTrendSnapshot:liveGoogleAvailable?liveTrendResults:cachedTrendResults||null,sourceAvailability:{googleTrends:googleStatus,serpApi:serpAvailable?"Available":"Unavailable",exactSearchVolume:"Unavailable — no exact-volume API is configured."},sourceErrors:{googleTrends:liveTrendResults.filter(result=>!result.available).map(result=>({seed:result.seed,error:result.error})),serpApi:serpResults.filter(result=>result.error).map(result=>({seed:result.query,error:result.error}))},scoreDefinition:{maximum:100,components:{trend:20,demand:20,relevance:20,contentGap:25,examRelevance:10,usefulness:5},note:"Opportunity score is a deterministic editorial ranking, not monthly search volume, keyword difficulty, CPC, traffic, or ranking position."},topics};
+  writeJson(TOPIC_INTELLIGENCE,output);return output;
+}
+async function getTopicIntelligence(force=false){const cached=readJson(TOPIC_INTELLIGENCE,null);if(!force&&cached?.generatedAt&&Date.now()-new Date(cached.generatedAt).getTime()<24*60*60*1000)return cached;return buildTopicIntelligence();}
+async function getStudioData(options={}){const posts=inventory(),intelligence=await getTopicIntelligence(Boolean(options.refresh));return{posts,topics:intelligence.topics.filter(item=>topicCandidateRelevant(item.primaryQuery)).slice(0,5),topicIntelligence:{generatedAt:intelligence.generatedAt,region:intelligence.region,sourceAvailability:intelligence.sourceAvailability,scoreDefinition:intelligence.scoreDefinition},categories:CANONICAL_CATEGORIES,qualityThreshold:MIN_SCORE};}
+function getDraft(slug){const safe=slugify(slug,{lower:true,strict:true});const file=path.join(DRAFTS,`${safe}.mdx`);if(!fs.existsSync(file))return null;const parsed=matter(fs.readFileSync(file,"utf8"));return{slug:safe,data:parsed.data,content:parsed.content,checks:checks({primaryKeyword:parsed.data.primaryKeyword||""},{title:parsed.data.title||"",description:parsed.data.description||"",content:parsed.content,claims:[]})};}
+function saveDraft(slug,input){const draft=getDraft(slug);if(!draft)throw new Error(`Draft not found: ${slug}`);const data={...draft.data,...input.data,status:"draft",updatedDate:new Date().toISOString().slice(0,10),category:canonicalCategory(input.data?.category||draft.data.category,input.data?.title||draft.data.title)};const synced=syncInlineImages(String(input.content??draft.content),Array.isArray(data.inlineImages)?data.inlineImages:[]),content=synced.content;data.inlineImages=synced.images;data.inlineImageSummary={planned:synced.images.filter(item=>item.status!=="removed").length,generated:synced.images.filter(item=>item.status==="generated").length,failed:synced.images.filter(item=>["failed","placement-unresolved"].includes(item.status)).length};const result=checks({primaryKeyword:data.primaryKeyword||""},{title:data.title||"",description:data.description||"",content,claims:[]});data.seoIssues=result.seoIssues;data.seoScore=Math.max(0,100-result.seoIssues.length*15-(result.externalLinks.length?40:0)-(result.invalidInternalLinks.length?20:0));data.contentQualityScore=Math.min(100,40+(result.words>=900?20:result.words>=600?10:0)+(result.h2Count>=3?15:5)+(result.internalLinkCount>=1?10:0)+(!result.externalLinks.length?15:0));data.contentQualityStatus=data.contentQualityScore>=MIN_SCORE?"pass":"needs-improvement";data.publishEligible=data.seoScore>=80&&data.contentQualityScore>=MIN_SCORE&&!result.seoIssues.length&&!result.externalLinks.length&&!result.invalidInternalLinks.length&&!synced.images.some(item=>["planned","generating","placement-unresolved"].includes(item.status));fs.writeFileSync(path.join(DRAFTS,`${draft.slug}.mdx`),matter.stringify(content.trim(),data));registry();return getDraft(slug);}
+function discardDraft(slug){const draft=getDraft(slug);if(!draft)throw new Error(`Draft not found: ${slug}`);const archived=path.join(CONTENT,"archived");fs.mkdirSync(archived,{recursive:true});const target=path.join(archived,`${draft.slug}-${Date.now()}.mdx`);fs.renameSync(path.join(DRAFTS,`${draft.slug}.mdx`),target);registry();return{discarded:true,archived:true,slug:draft.slug,path:target};}
+async function regenerateDraftImage(slug){const draft=getDraft(slug);if(!draft)throw new Error(`Draft not found: ${slug}`);const briefFile=draft.data.briefPath?path.join(ROOT,draft.data.briefPath):null;if(!briefFile||!fs.existsSync(briefFile))throw new Error("The saved content brief is required to regenerate this image.");const brief=readJson(briefFile,null).brief;const image=await generateImage(brief);return saveDraft(slug,{data:{image}});}
+function draftBrief(draft){const briefFile=draft.data.briefPath?path.join(ROOT,draft.data.briefPath):null;if(briefFile&&fs.existsSync(briefFile))return readJson(briefFile,null).brief;return{slug:draft.slug,title:draft.data.title,topic:draft.data.title,targetAudience:draft.data.relevantExams||[draft.data.audience||"Competitive-exam learners"]};}
+async function generateDraftInlineImages(slug){const draft=getDraft(slug);if(!draft)throw new Error(`Draft not found: ${slug}`);const brief=draftBrief(draft),plan=await planInlineImages(brief,draft.content),generated=await generateInlineImages(brief,draft.content,plan);return saveDraft(slug,{content:generated.content,data:{inlineImages:generated.images,inlineImageSummary:generated.summary}});}
+async function regenerateDraftInlineImage(slug,id){const draft=getDraft(slug);if(!draft)throw new Error(`Draft not found: ${slug}`);const images=Array.isArray(draft.data.inlineImages)?draft.data.inlineImages:[],index=images.findIndex(item=>item.id===id);if(index<0)throw new Error(`Inline image not found: ${id}`);const previous=images[index],brief=draftBrief(draft),item={...previous,status:"generating",error:"",src:`/blog/${draft.slug}-inline-${id}.png`};let content=draft.content;try{await generateImageFile(inlineStylePrompt(item,brief),item.src);item.status="generated";content=removeInlineImageBlock(content,id);}catch(error){item.status="failed";item.src=previous.src||"";item.error=error instanceof Error?error.message:String(error);}images[index]=item;return saveDraft(slug,{content,data:{inlineImages:images}});}
+function removeDraftInlineImage(slug,id){const draft=getDraft(slug);if(!draft)throw new Error(`Draft not found: ${slug}`);const images=(Array.isArray(draft.data.inlineImages)?draft.data.inlineImages:[]).map(item=>item.id===id?{...item,status:"removed",src:"",error:""}:item);return saveDraft(slug,{content:removeInlineImageBlock(draft.content,id),data:{inlineImages:images}});}
+async function addDraftInlineImage(slug,placement){const draft=getDraft(slug);if(!draft)throw new Error(`Draft not found: ${slug}`);if(!articleSections(draft.content).some(section=>section.id===placement))throw new Error(`Section placement not found: ${placement}`);const brief=draftBrief(draft),planned=await planInlineImages(brief,draft.content),candidate=planned.find(item=>item.placement===placement);if(!candidate)throw new Error("The image planner determined that this section would not gain enough educational value from an additional image.");const existing=Array.isArray(draft.data.inlineImages)?draft.data.inlineImages:[],idBase=candidate.id;let suffix=2;while(existing.some(item=>item.id===candidate.id))candidate.id=`${idBase}-${suffix++}`;const generated=await generateInlineImages(brief,draft.content,[candidate]);return saveDraft(slug,{content:generated.content,data:{inlineImages:[...existing,...generated.images]}});}
 
-const command = process.argv[2] || "audit";
-if (command === "registry") console.log(JSON.stringify({ posts: registry().length, output: REGISTRY_PATH }, null, 2));
-else if (command === "audit") console.log(JSON.stringify(audit().summary, null, 2));
-else if (command === "sample") console.log(JSON.stringify(sampleDraft(), null, 2));
-else if (command === "discover") console.log(JSON.stringify(await discover(), null, 2));
-else if (command === "check") { const posts = registry(); const report = audit(); const failing = posts.filter((post) => !post.title || !post.description || !post.publicationDate || !post.image); const warnings = posts.filter((post) => !post.imageAlt || !post.primaryKeyword || !post.searchIntent).map((post) => post.slug); console.log(JSON.stringify({ posts: posts.length, failing: failing.map((post) => post.slug), migrationWarnings: warnings, overlaps: report.summary.overlaps }, null, 2)); if (failing.length) process.exitCode = 1; }
-else throw new Error(`Unknown command: ${command}`);
+export { CANONICAL_CATEGORIES, MIN_SCORE, addDraftInlineImage, articleReferences as parseArticleReferences, buildTopicIntelligence, check as validateBlogs, checks as validateArticle, discardDraft, generate as generateBlog, generateDraftInlineImages, generateImageBytes, getDraft, getStudioData, getTopicIntelligence, imageSources as parseImageSources, invalidInternalLinks as validateInternalLinks, placeInlineImage as insertInlineImageAtSection, planInlineImages, publish as publishBlog, regenerateDraftImage, regenerateDraftInlineImage, removeDraftInlineImage, removeInlineImageBlock as removeInlineImageFromMdx, saveDraft, syncInlineImages as reconcileInlineImages };
+function args(values){const out={};for(let index=0;index<values.length;index++){const value=values[index];if(value==="--image")out.withImage=true;else if(value.startsWith("--topic=")||value.startsWith("--slug=")){const key=value.startsWith("--topic=")?"topic":"slug",prefixLength=key.length+3,parts=[value.slice(prefixLength)];while(index+1<values.length&&!values[index+1].startsWith("--"))parts.push(values[++index]);out[key]=parts.join(" ").replace(/^['"]|['"]$/g,"").trim();}}return out;}
+const command=process.argv[2]||"audit", options=args(process.argv.slice(3));
+const isCli=process.argv[1]&&pathToFileURL(path.resolve(process.argv[1])).href===import.meta.url;
+if(isCli&&command==="discover")console.log(JSON.stringify({output:OPPORTUNITIES,opportunities:(await discover(options)).opportunities.length,model:TEXT_MODEL},null,2));
+else if(isCli&&command==="plan"){const found=options.topic?await discover(options):readJson(OPPORTUNITIES,null)||await discover(),opportunity=found.opportunities.find(x=>x.eligible)||found.opportunities[0];if(!opportunity)throw new Error("No opportunity available.");const result=await plan(opportunity);console.log(JSON.stringify({output:path.join(BRIEFS,`${result.brief.slug}.json`),title:result.brief.title,model:TEXT_MODEL},null,2));}
+else if(isCli&&(command==="generate"||command==="sample"))console.log(JSON.stringify(await generate(options),null,2));
+else if(isCli&&command==="registry")console.log(JSON.stringify({posts:registry().posts.length,output:REGISTRY},null,2));
+else if(isCli&&command==="roadmap"){const output=roadmap(true);console.log(JSON.stringify({output:ROADMAP,clusters:output.clusters.map(({name,contentGapScore,existingPillar,missingArticles,recommendedNext})=>({name,contentGapScore,existingPillar:existingPillar?.slug||null,missing:missingArticles.length,recommendedNext}))},null,2));}
+else if(isCli&&command==="publish")console.log(JSON.stringify(publish(options.slug),null,2));
+else if(isCli&&command==="relevance")console.log(JSON.stringify({topic:options.topic||"",relevant:relevant({topic:options.topic||""}),category:relevant({topic:options.topic||""})?canonicalCategory("",options.topic):null},null,2));
+else if(isCli&&command==="audit")console.log(JSON.stringify(audit().summary,null,2));
+else if(isCli&&command==="check"){const result=check();console.log(JSON.stringify(result,null,2));if(!result.valid)process.exitCode=1;}
+else if(isCli)throw new Error(`Unknown command: ${command}`);

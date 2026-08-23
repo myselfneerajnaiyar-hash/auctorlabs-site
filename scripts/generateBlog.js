@@ -1,5 +1,4 @@
-// Backward-compatible entry point. Generation is intentionally draft-first.
-// Use `npm run blog:sample` for the deterministic sample or the commands in
-// scripts/blog-engine.mjs for inventory, audit, discovery and validation.
-process.argv[2] ||= "sample";
+// Backward-compatible entry point for the AI editorial engine.
+// Generated content is always written to content/drafts for human review.
+process.argv[2] ||= "generate";
 await import("./blog-engine.mjs");

@@ -1,0 +1,277 @@
+{
+  "generatedAt": "2026-08-21T10:43:49.331Z",
+  "model": "gpt-5.6-luna",
+  "cannibalization": {
+    "serious": false,
+    "closest": {
+      "slug": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+      "status": "published",
+      "cluster": "Accuracy",
+      "risk": 0.07,
+      "keywordMatch": false,
+      "intentMatch": false,
+      "crossClusterOverlap": false,
+      "recommendation": "REVIEW_OVERLAP"
+    },
+    "matches": [
+      {
+        "slug": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+        "status": "published",
+        "cluster": "Accuracy",
+        "risk": 0.07,
+        "keywordMatch": false,
+        "intentMatch": false,
+        "crossClusterOverlap": false,
+        "recommendation": "REVIEW_OVERLAP"
+      },
+      {
+        "slug": "cat-para-summary-strategy",
+        "status": "draft",
+        "cluster": "verbal-ability",
+        "risk": 0.06,
+        "keywordMatch": false,
+        "intentMatch": false,
+        "crossClusterOverlap": false,
+        "recommendation": "REVIEW_OVERLAP"
+      },
+      {
+        "slug": "focusing-on-words-blinds-you-to-the-real-meaning",
+        "status": "published",
+        "cluster": "Accuracy",
+        "risk": 0,
+        "keywordMatch": false,
+        "intentMatch": false,
+        "crossClusterOverlap": false,
+        "recommendation": "REVIEW_OVERLAP"
+      },
+      {
+        "slug": "improve-rc-accuracy-cat",
+        "status": "published",
+        "cluster": "Accuracy",
+        "risk": 0,
+        "keywordMatch": false,
+        "intentMatch": false,
+        "crossClusterOverlap": false,
+        "recommendation": "REVIEW_OVERLAP"
+      },
+      {
+        "slug": "mastering-cat-reading-comprehension-unveiling-strategies-and-insights-behind-sample-questions-and-answers",
+        "status": "published",
+        "cluster": "Tone",
+        "risk": 0,
+        "keywordMatch": false,
+        "intentMatch": false,
+        "crossClusterOverlap": false,
+        "recommendation": "REVIEW_OVERLAP"
+      }
+    ]
+  },
+  "brief": {
+    "topic": "vocabulary",
+    "title": "How to Learn Vocabulary from Context for Competitive Exams",
+    "seoTitle": "How to Learn Vocabulary from Context for Competitive Exams",
+    "slug": "learn-vocabulary-from-context-competitive-exams",
+    "description": "Learn a repeatable method for inferring unfamiliar word meanings from context, recording your reasoning, verifying nuance, and converting reading encounters into lasting vocabulary knowledge for competitive exams.",
+    "primaryKeyword": "learn vocabulary from context",
+    "secondaryKeywords": [
+      "how to learn vocabulary for competitive exams",
+      "vocabulary in context",
+      "contextual vocabulary practice",
+      "learn English vocabulary effectively",
+      "vocabulary from context clues",
+      "vocabulary in context exercises"
+    ],
+    "searchIntent": "Skill-building",
+    "readerProblem": "Learners memorize isolated word lists but forget meanings, confuse similar words, and struggle to infer unfamiliar vocabulary while reading exam passages.",
+    "targetAudience": [
+      "competitive-exam candidates",
+      "CAT aspirants",
+      "SSC candidates",
+      "banking-exam candidates",
+      "GRE candidates",
+      "CUET candidates"
+    ],
+    "relevantExams": [
+      "CAT",
+      "XAT",
+      "GMAT",
+      "GRE",
+      "CUET",
+      "CLAT",
+      "IPMAT",
+      "NMAT",
+      "SNAP",
+      "SSC",
+      "Banking exams",
+      "Government exams"
+    ],
+    "contentType": "universal verbal skill",
+    "cluster": "Vocabulary",
+    "category": "Vocabulary Building",
+    "contentAngle": "Teach a repeatable context process: identify the word's grammatical role, establish its positive or negative orientation, inspect contrast and cause-effect clues, predict a meaning, and verify it against the sentence.",
+    "uniqueValue": "Combines short original exam-style passages with an inference log that records the clue type, predicted meaning, confidence, and later revision. It distinguishes contextual inference from dictionary memorization.",
+    "outline": [
+      "Why isolated word lists fail during passage-based questions",
+      "What it means to learn a word from context",
+      "The six-step context inference method",
+      "Step 1: Identify the word's grammatical role",
+      "Step 2: Determine the sentence's positive, negative, or neutral orientation",
+      "Step 3: Look for definition, example, contrast, cause-effect, and repetition clues",
+      "Step 4: Predict a meaning before checking a dictionary",
+      "Step 5: Test the prediction against the whole sentence and paragraph",
+      "Step 6: Record the word in an inference log and verify its nuance",
+      "Original worked examples using short exam-style passages",
+      "How to handle weak, misleading, or insufficient context",
+      "A daily contextual vocabulary practice routine",
+      "How to revise inferred words without turning the process into rote memorization",
+      "Common mistakes: guessing from word roots, choosing an overly broad synonym, and ignoring tone",
+      "Exam application across reading comprehension and vocabulary-in-context questions",
+      "A printable inference-log template and practice checklist"
+    ],
+    "questionsToAnswer": [
+      "How can I learn vocabulary from context?",
+      "What does vocabulary in context mean?",
+      "How do I identify context clues in a passage?",
+      "How can I infer an unfamiliar word's meaning without a dictionary?",
+      "How should I record contextual vocabulary practice?",
+      "How can I distinguish a close synonym from the precise meaning required by the sentence?",
+      "What should I do when the context is not sufficient to determine the meaning?",
+      "How can this method help with competitive-exam reading passages?",
+      "How often should I revise words learned from context?"
+    ],
+    "relatedEntities": [
+      "context clues",
+      "grammatical role",
+      "parts of speech",
+      "positive and negative orientation",
+      "contrast clues",
+      "cause-and-effect clues",
+      "definition clues",
+      "example clues",
+      "sentence meaning",
+      "paragraph meaning",
+      "word nuance",
+      "synonyms",
+      "inference log",
+      "dictionary verification",
+      "reading comprehension",
+      "vocabulary-in-context questions"
+    ],
+    "internalLinks": [
+      {
+        "url": "/blog/accuracy-in-rc-ignoring-context-could-ruin-your-score",
+        "anchor": "why context matters for RC accuracy",
+        "reason": "Connects contextual word interpretation with accurate reading-comprehension decisions without making this article another general RC strategy guide."
+      },
+      {
+        "url": "/test-series",
+        "anchor": "timed verbal practice",
+        "reason": "Provides a next step for applying contextual vocabulary inference under exam-like time pressure."
+      },
+      {
+        "url": "/auctor-rc",
+        "anchor": "RC practice",
+        "reason": "Supports readers who want more passage-based opportunities to infer word meanings from context."
+      },
+      {
+        "url": "/features/precision-drills",
+        "anchor": "accuracy practice",
+        "reason": "Relevant for checking whether inferred meanings and nuance are being applied precisely rather than guessed broadly."
+      }
+    ],
+    "externalSources": [
+      {
+        "title": "Learning Vocabulary in Context – It's All Greek to Me!",
+        "url": "https://pressbooks.pub/iagtm/chapter/learning-vocabulary-in-context/",
+        "snippet": "Defines learning vocabulary in context as using the understood situation in previously read sentences to guess the meaning of new vocabulary.",
+        "sourceType": "educational resource"
+      },
+      {
+        "title": "Vocabulary Strategy: Use of Context",
+        "url": "https://keystoliteracy.com/blog/vocabulary-strategy-use-of-context/",
+        "snippet": "Describes the use of clues or hints provided in text as a strategy for building vocabulary.",
+        "sourceType": "literacy education resource"
+      },
+      {
+        "title": "Learning words from context (Chapter 9)",
+        "url": "https://www.cambridge.org/core/books/learning-vocabulary-in-another-language/learning-words-from-context/33FDEF27CA084307DB5997A6F919CC53",
+        "snippet": "Discusses learning vocabulary from context in relation to direct, intentional vocabulary learning and teaching.",
+        "sourceType": "academic book chapter"
+      },
+      {
+        "title": "How I Teach Students to Use Context in Vocabulary Learning",
+        "url": "https://www.readingrockets.org/blogs/shanahan-on-literacy/how-i-teach-students-use-context-vocabulary-learning",
+        "snippet": "Emphasizes checking whether learners have understood a word's meaning when it is inferred from context.",
+        "sourceType": "literacy education resource"
+      },
+      {
+        "title": "Working out Vocabulary in Context",
+        "url": "https://ieltstutors.org/lessons/working-out-vocabulary-in-context/",
+        "snippet": "Recommends first identifying the word's position and likely part of speech, then examining clues in the sentence.",
+        "sourceType": "exam-preparation resource"
+      }
+    ],
+    "backlinkOpportunities": [
+      {
+        "site": "pressbooks.pub",
+        "sourcePage": "https://pressbooks.pub/iagtm/chapter/learning-vocabulary-in-context/",
+        "sourcePageReason": "The page directly explains learning vocabulary in context, making it relevant to a practical guide that extends the concept to competitive-exam passages.",
+        "reason": "A resource that turns the definition of contextual learning into a structured exam-reading method could be a relevant supplementary reference.",
+        "potentialAngle": "Offer the article as an applied practice guide featuring an inference log, original worked examples, and vocabulary-in-context exercises.",
+        "suggestedOutreachType": "Relevant editorial resource suggestion",
+        "priority": "high"
+      },
+      {
+        "site": "keystoliteracy.com",
+        "sourcePage": "https://keystoliteracy.com/blog/vocabulary-strategy-use-of-context/",
+        "sourcePageReason": "The source specifically covers using clues or hints in text to build vocabulary.",
+        "reason": "The proposed article provides an exam-focused implementation of the context-clue strategy.",
+        "potentialAngle": "Highlight the six-step process for identifying grammatical, contrast, and cause-effect clues in timed passages.",
+        "suggestedOutreachType": "Relevant editorial resource suggestion",
+        "priority": "high"
+      },
+      {
+        "site": "cambridge.org",
+        "sourcePage": "https://www.cambridge.org/core/books/learning-vocabulary-in-another-language/learning-words-from-context/33FDEF27CA084307DB5997A6F919CC53",
+        "sourcePageReason": "The source discusses learning words from context alongside direct intentional learning.",
+        "reason": "The article's distinction between contextual inference and later verification creates a practical bridge between the two approaches.",
+        "potentialAngle": "Present the guide as an applied companion for learners who need to combine passage-based inference with deliberate revision.",
+        "suggestedOutreachType": "Academic resource suggestion",
+        "priority": "medium"
+      },
+      {
+        "site": "readingrockets.org",
+        "sourcePage": "https://www.readingrockets.org/blogs/shanahan-on-literacy/how-i-teach-students-use-context-vocabulary-learning",
+        "sourcePageReason": "The source addresses how to teach and check vocabulary understanding derived from context.",
+        "reason": "The inference log and confidence-checking method offer a concrete way to assess whether a learner's contextual guess is accurate.",
+        "potentialAngle": "Share the worked examples and self-check prompts as an assessment-oriented extension of contextual vocabulary instruction.",
+        "suggestedOutreachType": "Relevant editorial resource suggestion",
+        "priority": "medium"
+      },
+      {
+        "site": "ieltstutors.org",
+        "sourcePage": "https://ieltstutors.org/lessons/working-out-vocabulary-in-context/",
+        "sourcePageReason": "The source directly advises readers to identify a word's likely grammatical category before using contextual clues.",
+        "reason": "This article broadens that process beyond one exam by applying it to multiple competitive-exam formats.",
+        "potentialAngle": "Emphasize the transferable grammatical-role and clue-analysis framework for candidates preparing across different verbal exams.",
+        "suggestedOutreachType": "Relevant exam-preparation resource suggestion",
+        "priority": "medium"
+      }
+    ],
+    "imageConcept": "A clean study-desk illustration showing a short passage, one highlighted unfamiliar word, arrows pointing to contrast and cause-effect clues, and an inference log with columns for clue type, predicted meaning, confidence, and verified meaning.",
+    "imageAlt": "Learner inferring an unfamiliar vocabulary word from passage context using clues and an inference log",
+    "targetPage": "https://www.example.com/learn-vocabulary-from-context-competitive-exams",
+    "factConstraints": [
+      "Use only the supplied external URLs as supporting sources.",
+      "Do not claim that contextual inference is always sufficient; explain that some passages provide weak or ambiguous clues.",
+      "Do not present a fixed number of context-clue types as universally authoritative unless separately verified.",
+      "Use original worked examples written specifically for this article; do not reproduce examples from the supplied sources.",
+      "Label exam applications as transferable verbal-skill guidance rather than claiming identical question formats across all listed exams.",
+      "Keep dictionary use as verification and nuance-checking, not as a substitute for analyzing the sentence and paragraph.",
+      "Do not introduce unsupported statistics, rankings, effectiveness claims, or trend claims from the opportunity data.",
+      "Human review is required to check every worked example, inferred meaning, exam reference, and external citation before publication.",
+      "Review overlap with the existing RC-context article so that this page remains focused on vocabulary acquisition and inference rather than broad RC accuracy.",
+      "Ensure all internal links use only the supplied internal candidates and product-page paths."
+    ]
+  }
+}

@@ -1,0 +1,862 @@
+{
+  "generatedAt": "2026-08-21T11:56:04.620Z",
+  "editorialPriority": [
+    "userValue",
+    "informationGain",
+    "searchIntent",
+    "topicalAuthority",
+    "seo",
+    "commercialValue"
+  ],
+  "clusters": [
+    {
+      "id": "reading-comprehension",
+      "name": "Reading Comprehension",
+      "pillar": {
+        "title": "Reading Comprehension — Complete Guide",
+        "slug": "reading-comprehension-complete-guide",
+        "searchIntent": "Comprehensive skill-building"
+      },
+      "existingPillar": null,
+      "existingArticles": [
+        {
+          "slug": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+          "title": "Accuracy in RC? Ignoring Context Could Ruin Your Score",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "improve-rc-accuracy-cat",
+          "title": "Why You're Stuck at 60% Accuracy in RC",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-cat-reading-comprehension-unveiling-strategies-and-insights-behind-sample-questions-and-answers",
+          "title": "Mastering CAT Reading Comprehension: Unveiling Strategies and Insights Behind Sample Questions and Answers",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-cat-verbal-ability-secrets-to-conquering-reading-comprehension-challenges",
+          "title": "Mastering CAT Verbal Ability: Secrets to Conquering Reading Comprehension Challenges",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-inference-questions-in-cat-unlocking-the-secrets-to-critical-thinking-success",
+          "title": "Mastering Inference Questions in CAT: Unlocking the Secrets to Critical Thinking Success",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-inference-questions-in-cat-unlocking-the-secrets-to-your-success",
+          "title": "Mastering Inference Questions in CAT: Unlocking the Secrets to Your Success",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-rc-youre-just-one-misread-away-from-failure",
+          "title": "Mastering RC? You're Just One Misread Away From Failure",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-rc-youre-probably-just-memorizing-not-understanding",
+          "title": "Mastering RC? You're Probably Just Memorizing, Not Understanding",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-reading-comprehension-for-cat-unlocking-the-secrets-to-high-scores",
+          "title": "Mastering Reading Comprehension for CAT: Unlocking the Secrets to High Scores",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-reading-comprehension-insider-strategies-to-elevate-your-cat-prep",
+          "title": "Mastering Reading Comprehension: Insider Strategies to Elevate Your CAT Prep",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-reading-comprehension-unlocking-strategies-to-elevate-your-cat-preparation",
+          "title": "Mastering Reading Comprehension: Unlocking Strategies to Elevate Your CAT Preparation",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-reading-comprehension-unlocking-the-secrets-to-higher-accuracy-in-cat",
+          "title": "Mastering Reading Comprehension: Unlocking the Secrets to Higher Accuracy in CAT",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-verbal-ability-and-reading-comprehension-for-cat-strategies-to-unlock-your-full-potential",
+          "title": "Mastering Verbal Ability and Reading Comprehension for CAT: Strategies to Unlock Your Full Potential",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "rc-inference-decision-trap",
+          "title": "Why Inference Questions Feel So Unfair (And What You're Missing)",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "rc-tone-hidden-skill",
+          "title": "Tone in RC Is Not About Words — It's About Intent",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "reading-comprehension-isnt-about-understanding-its-about-insight",
+          "title": "Reading Comprehension Isn't About Understanding — It's About Insight",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "understanding-rc-answers-youre-probably-misreading-the-inferences",
+          "title": "Understanding RC Answers? You’re Probably Misreading the Inferences",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-precision-mastering-reading-comprehension-accuracy-for-cat-success",
+          "title": "Unlocking Precision: Mastering Reading Comprehension Accuracy for CAT Success",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-success-common-rc-mistakes-cat-aspirants-make-and-how-to-overcome-them",
+          "title": "Unlocking Success: Common RC Mistakes CAT Aspirants Make and How to Overcome Them",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-success-how-daily-reading-comprehension-transforms-your-cat-preparation",
+          "title": "Unlocking Success: How Daily Reading Comprehension Transforms Your CAT Preparation",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-success-mastering-reading-comprehension-for-cat-with-proven-strategies",
+          "title": "Unlocking Success: Mastering Reading Comprehension for CAT with Proven Strategies",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-success-mastering-reading-comprehension-questions-for-cat-aspirants",
+          "title": "Unlocking Success: Mastering Reading Comprehension Questions for CAT Aspirants",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-success-top-common-rc-mistakes-cat-aspirants-must-avoid",
+          "title": "Unlocking Success: Top Common RC Mistakes CAT Aspirants Must Avoid",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "your-comfort-with-tone-masks-a-deeper-misunderstanding-in-rc",
+          "title": "Your Comfort with Tone Masks a Deeper Misunderstanding in RC",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "your-comprehension-is-strong-yet-your-inferences-are-weak",
+          "title": "Your Comprehension Is Strong — Yet Your Inferences Are Weak",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "learn-vocabulary-from-context-competitive-exams",
+          "title": "Learn Vocabulary from Context for Competitive Exams",
+          "status": "draft",
+          "searchIntent": "Skill-building"
+        },
+        {
+          "slug": "reading-comprehension-trap-answers-proof-before-pick",
+          "title": "RC Answers: Use a Proof-Before-Pick Method to Reject Trap Options",
+          "status": "draft",
+          "searchIntent": "Problem-solving"
+        }
+      ],
+      "missingArticles": [
+        "how to identify the main idea",
+        "how to identify author's tone",
+        "how to identify passage structure",
+        "how to handle two seemingly correct options",
+        "how to read dense passages",
+        "scope and distortion"
+      ],
+      "searchIntentGaps": [
+        "Informational",
+        "Strategy",
+        "Practice-oriented"
+      ],
+      "internalLinkGaps": [
+        "mastering-rc-youre-probably-just-memorizing-not-understanding"
+      ],
+      "topicalAuthorityGaps": [
+        "Missing pillar: Reading Comprehension — Complete Guide",
+        "how to identify the main idea",
+        "how to identify author's tone",
+        "how to identify passage structure",
+        "how to handle two seemingly correct options",
+        "how to read dense passages",
+        "scope and distortion"
+      ],
+      "backlinkWorthyResourceGaps": [
+        "how to identify passage structure"
+      ],
+      "contentGapScore": 59,
+      "recommendedNext": [
+        {
+          "title": "how to identify the main idea",
+          "priority": "high",
+          "opportunityScore": 59,
+          "reason": "Fills an uncovered Reading Comprehension supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "how to identify author's tone",
+          "priority": "high",
+          "opportunityScore": 56,
+          "reason": "Fills an uncovered Reading Comprehension supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "how to identify passage structure",
+          "priority": "high",
+          "opportunityScore": 53,
+          "reason": "Fills an uncovered Reading Comprehension supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "how to handle two seemingly correct options",
+          "priority": "medium",
+          "opportunityScore": 50,
+          "reason": "Fills an uncovered Reading Comprehension supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "how to read dense passages",
+          "priority": "medium",
+          "opportunityScore": 47,
+          "reason": "Fills an uncovered Reading Comprehension supporting-topic gap while the pillar is also missing."
+        }
+      ]
+    },
+    {
+      "id": "vocabulary",
+      "name": "Vocabulary",
+      "pillar": {
+        "title": "Vocabulary Building for Competitive Exams",
+        "slug": "vocabulary-building-competitive-exams",
+        "searchIntent": "Comprehensive skill-building"
+      },
+      "existingPillar": {
+        "slug": "learn-vocabulary-from-context-competitive-exams",
+        "title": "Learn Vocabulary from Context for Competitive Exams",
+        "status": "draft",
+        "similarity": 0.57
+      },
+      "existingArticles": [
+        {
+          "slug": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+          "title": "Accuracy in RC? Ignoring Context Could Ruin Your Score",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "improve-rc-accuracy-cat",
+          "title": "Why You're Stuck at 60% Accuracy in RC",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-cat-verbal-ability-secrets-to-conquering-reading-comprehension-challenges",
+          "title": "Mastering CAT Verbal Ability: Secrets to Conquering Reading Comprehension Challenges",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-rc-youre-just-one-misread-away-from-failure",
+          "title": "Mastering RC? You're Just One Misread Away From Failure",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-rc-youre-probably-just-memorizing-not-understanding",
+          "title": "Mastering RC? You're Probably Just Memorizing, Not Understanding",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-reading-comprehension-for-cat-unlocking-the-secrets-to-high-scores",
+          "title": "Mastering Reading Comprehension for CAT: Unlocking the Secrets to High Scores",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-reading-comprehension-insider-strategies-to-elevate-your-cat-prep",
+          "title": "Mastering Reading Comprehension: Insider Strategies to Elevate Your CAT Prep",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-reading-comprehension-unlocking-strategies-to-elevate-your-cat-preparation",
+          "title": "Mastering Reading Comprehension: Unlocking Strategies to Elevate Your CAT Preparation",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-reading-comprehension-unlocking-the-secrets-to-higher-accuracy-in-cat",
+          "title": "Mastering Reading Comprehension: Unlocking the Secrets to Higher Accuracy in CAT",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-verbal-ability-and-reading-comprehension-for-cat-strategies-to-unlock-your-full-potential",
+          "title": "Mastering Verbal Ability and Reading Comprehension for CAT: Strategies to Unlock Your Full Potential",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "rc-tone-hidden-skill",
+          "title": "Tone in RC Is Not About Words — It's About Intent",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "reading-comprehension-isnt-about-understanding-its-about-insight",
+          "title": "Reading Comprehension Isn't About Understanding — It's About Insight",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "understanding-rc-answers-youre-probably-misreading-the-inferences",
+          "title": "Understanding RC Answers? You’re Probably Misreading the Inferences",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-precision-mastering-reading-comprehension-accuracy-for-cat-success",
+          "title": "Unlocking Precision: Mastering Reading Comprehension Accuracy for CAT Success",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-success-common-rc-mistakes-cat-aspirants-make-and-how-to-overcome-them",
+          "title": "Unlocking Success: Common RC Mistakes CAT Aspirants Make and How to Overcome Them",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-success-how-daily-reading-comprehension-transforms-your-cat-preparation",
+          "title": "Unlocking Success: How Daily Reading Comprehension Transforms Your CAT Preparation",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-success-mastering-reading-comprehension-for-cat-with-proven-strategies",
+          "title": "Unlocking Success: Mastering Reading Comprehension for CAT with Proven Strategies",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-success-mastering-reading-comprehension-questions-for-cat-aspirants",
+          "title": "Unlocking Success: Mastering Reading Comprehension Questions for CAT Aspirants",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-success-top-common-rc-mistakes-cat-aspirants-must-avoid",
+          "title": "Unlocking Success: Top Common RC Mistakes CAT Aspirants Must Avoid",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "your-comfort-with-tone-masks-a-deeper-misunderstanding-in-rc",
+          "title": "Your Comfort with Tone Masks a Deeper Misunderstanding in RC",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "learn-vocabulary-from-context-competitive-exams",
+          "title": "Learn Vocabulary from Context for Competitive Exams",
+          "status": "draft",
+          "searchIntent": "Skill-building"
+        }
+      ],
+      "missingArticles": [
+        "word roots",
+        "prefixes and suffixes",
+        "vocabulary retention",
+        "synonyms and antonyms",
+        "commonly confused words",
+        "contextual vocabulary"
+      ],
+      "searchIntentGaps": [
+        "Informational",
+        "Problem-solving",
+        "Strategy",
+        "Practice-oriented"
+      ],
+      "internalLinkGaps": [
+        "mastering-rc-youre-probably-just-memorizing-not-understanding"
+      ],
+      "topicalAuthorityGaps": [
+        "word roots",
+        "prefixes and suffixes",
+        "vocabulary retention",
+        "synonyms and antonyms",
+        "commonly confused words",
+        "contextual vocabulary"
+      ],
+      "backlinkWorthyResourceGaps": [
+        "word roots"
+      ],
+      "contentGapScore": 54,
+      "recommendedNext": [
+        {
+          "title": "vocabulary retention",
+          "priority": "high",
+          "opportunityScore": 54,
+          "reason": "Fills an uncovered Vocabulary supporting-topic gap."
+        },
+        {
+          "title": "contextual vocabulary",
+          "priority": "high",
+          "opportunityScore": 51,
+          "reason": "Fills an uncovered Vocabulary supporting-topic gap."
+        },
+        {
+          "title": "word roots",
+          "priority": "high",
+          "opportunityScore": 48,
+          "reason": "Fills an uncovered Vocabulary supporting-topic gap."
+        },
+        {
+          "title": "prefixes and suffixes",
+          "priority": "medium",
+          "opportunityScore": 45,
+          "reason": "Fills an uncovered Vocabulary supporting-topic gap."
+        },
+        {
+          "title": "synonyms and antonyms",
+          "priority": "medium",
+          "opportunityScore": 45,
+          "reason": "Fills an uncovered Vocabulary supporting-topic gap."
+        }
+      ]
+    },
+    {
+      "id": "grammar",
+      "name": "Grammar",
+      "pillar": {
+        "title": "Grammar for Competitive Exams",
+        "slug": "grammar-for-competitive-exams",
+        "searchIntent": "Comprehensive skill-building"
+      },
+      "existingPillar": null,
+      "existingArticles": [
+        {
+          "slug": "subject-verb-agreement-common-exam-traps",
+          "title": "Subject-Verb Agreement: Common Exam Traps",
+          "status": "draft",
+          "searchIntent": "Skill-building"
+        }
+      ],
+      "missingArticles": [
+        "common grammar errors",
+        "modifiers",
+        "parallelism",
+        "pronouns",
+        "tenses",
+        "sentence correction",
+        "error spotting"
+      ],
+      "searchIntentGaps": [
+        "Informational",
+        "Problem-solving",
+        "Strategy",
+        "Practice-oriented"
+      ],
+      "internalLinkGaps": [],
+      "topicalAuthorityGaps": [
+        "Missing pillar: Grammar for Competitive Exams",
+        "common grammar errors",
+        "modifiers",
+        "parallelism",
+        "pronouns",
+        "tenses",
+        "sentence correction",
+        "error spotting"
+      ],
+      "backlinkWorthyResourceGaps": [
+        "common grammar errors"
+      ],
+      "contentGapScore": 85,
+      "recommendedNext": [
+        {
+          "title": "common grammar errors",
+          "priority": "high",
+          "opportunityScore": 85,
+          "reason": "Fills an uncovered Grammar supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "modifiers",
+          "priority": "high",
+          "opportunityScore": 82,
+          "reason": "Fills an uncovered Grammar supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "parallelism",
+          "priority": "high",
+          "opportunityScore": 79,
+          "reason": "Fills an uncovered Grammar supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "pronouns",
+          "priority": "medium",
+          "opportunityScore": 76,
+          "reason": "Fills an uncovered Grammar supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "tenses",
+          "priority": "medium",
+          "opportunityScore": 73,
+          "reason": "Fills an uncovered Grammar supporting-topic gap while the pillar is also missing."
+        }
+      ]
+    },
+    {
+      "id": "verbal-ability",
+      "name": "Verbal Ability",
+      "pillar": {
+        "title": "Verbal Ability Preparation",
+        "slug": "verbal-ability-preparation",
+        "searchIntent": "Comprehensive skill-building"
+      },
+      "existingPillar": null,
+      "existingArticles": [
+        {
+          "slug": "mastering-cat-verbal-ability-secrets-to-conquering-reading-comprehension-challenges",
+          "title": "Mastering CAT Verbal Ability: Secrets to Conquering Reading Comprehension Challenges",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-verbal-ability-and-reading-comprehension-for-cat-strategies-to-unlock-your-full-potential",
+          "title": "Mastering Verbal Ability and Reading Comprehension for CAT: Strategies to Unlock Your Full Potential",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "cat-para-summary-strategy",
+          "title": "CAT Para Summary: A Scope-and-Structure Method That Actually Works",
+          "status": "draft",
+          "searchIntent": "Learn a repeatable method and apply it to worked examples"
+        }
+      ],
+      "missingArticles": [
+        "sentence placement",
+        "para jumbles",
+        "odd sentence",
+        "para summary",
+        "logical flow",
+        "cohesion",
+        "coherence"
+      ],
+      "searchIntentGaps": [
+        "Informational",
+        "Problem-solving",
+        "Skill-building",
+        "Strategy",
+        "Practice-oriented"
+      ],
+      "internalLinkGaps": [],
+      "topicalAuthorityGaps": [
+        "Missing pillar: Verbal Ability Preparation",
+        "sentence placement",
+        "para jumbles",
+        "odd sentence",
+        "para summary",
+        "logical flow",
+        "cohesion",
+        "coherence"
+      ],
+      "backlinkWorthyResourceGaps": [],
+      "contentGapScore": 95,
+      "recommendedNext": [
+        {
+          "title": "sentence placement",
+          "priority": "high",
+          "opportunityScore": 95,
+          "reason": "Fills an uncovered Verbal Ability supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "para jumbles",
+          "priority": "high",
+          "opportunityScore": 92,
+          "reason": "Fills an uncovered Verbal Ability supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "odd sentence",
+          "priority": "high",
+          "opportunityScore": 89,
+          "reason": "Fills an uncovered Verbal Ability supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "para summary",
+          "priority": "medium",
+          "opportunityScore": 86,
+          "reason": "Fills an uncovered Verbal Ability supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "logical flow",
+          "priority": "medium",
+          "opportunityScore": 83,
+          "reason": "Fills an uncovered Verbal Ability supporting-topic gap while the pillar is also missing."
+        }
+      ]
+    },
+    {
+      "id": "critical-reading",
+      "name": "Critical Reading",
+      "pillar": {
+        "title": "Critical Reading Skills",
+        "slug": "critical-reading-skills",
+        "searchIntent": "Comprehensive skill-building"
+      },
+      "existingPillar": null,
+      "existingArticles": [
+        {
+          "slug": "improve-rc-accuracy-cat",
+          "title": "Why You're Stuck at 60% Accuracy in RC",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "mastering-inference-questions-in-cat-unlocking-the-secrets-to-your-success",
+          "title": "Mastering Inference Questions in CAT: Unlocking the Secrets to Your Success",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "reading-comprehension-isnt-about-understanding-its-about-insight",
+          "title": "Reading Comprehension Isn't About Understanding — It's About Insight",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-precision-mastering-reading-comprehension-accuracy-for-cat-success",
+          "title": "Unlocking Precision: Mastering Reading Comprehension Accuracy for CAT Success",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-success-mastering-reading-comprehension-for-cat-with-proven-strategies",
+          "title": "Unlocking Success: Mastering Reading Comprehension for CAT with Proven Strategies",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "unlocking-success-mastering-reading-comprehension-questions-for-cat-aspirants",
+          "title": "Unlocking Success: Mastering Reading Comprehension Questions for CAT Aspirants",
+          "status": "published",
+          "searchIntent": ""
+        },
+        {
+          "slug": "reading-comprehension-trap-answers-proof-before-pick",
+          "title": "RC Answers: Use a Proof-Before-Pick Method to Reject Trap Options",
+          "status": "draft",
+          "searchIntent": "Problem-solving"
+        }
+      ],
+      "missingArticles": [
+        "author's argument",
+        "assumptions",
+        "evidence",
+        "tone",
+        "bias",
+        "logical gaps",
+        "argument structure"
+      ],
+      "searchIntentGaps": [
+        "Informational",
+        "Skill-building",
+        "Strategy",
+        "Practice-oriented"
+      ],
+      "internalLinkGaps": [],
+      "topicalAuthorityGaps": [
+        "Missing pillar: Critical Reading Skills",
+        "author's argument",
+        "assumptions",
+        "evidence",
+        "tone",
+        "bias",
+        "logical gaps",
+        "argument structure"
+      ],
+      "backlinkWorthyResourceGaps": [
+        "evidence",
+        "argument structure"
+      ],
+      "contentGapScore": 85,
+      "recommendedNext": [
+        {
+          "title": "author's argument",
+          "priority": "high",
+          "opportunityScore": 85,
+          "reason": "Fills an uncovered Critical Reading supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "assumptions",
+          "priority": "high",
+          "opportunityScore": 82,
+          "reason": "Fills an uncovered Critical Reading supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "evidence",
+          "priority": "high",
+          "opportunityScore": 79,
+          "reason": "Fills an uncovered Critical Reading supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "tone",
+          "priority": "medium",
+          "opportunityScore": 76,
+          "reason": "Fills an uncovered Critical Reading supporting-topic gap while the pillar is also missing."
+        },
+        {
+          "title": "bias",
+          "priority": "medium",
+          "opportunityScore": 73,
+          "reason": "Fills an uncovered Critical Reading supporting-topic gap while the pillar is also missing."
+        }
+      ]
+    }
+  ],
+  "recommendedNext": [
+    {
+      "title": "sentence placement",
+      "priority": "high",
+      "opportunityScore": 95,
+      "reason": "Fills an uncovered Verbal Ability supporting-topic gap while the pillar is also missing.",
+      "cluster": "Verbal Ability",
+      "contentGapScore": 95
+    },
+    {
+      "title": "para jumbles",
+      "priority": "high",
+      "opportunityScore": 92,
+      "reason": "Fills an uncovered Verbal Ability supporting-topic gap while the pillar is also missing.",
+      "cluster": "Verbal Ability",
+      "contentGapScore": 95
+    },
+    {
+      "title": "odd sentence",
+      "priority": "high",
+      "opportunityScore": 89,
+      "reason": "Fills an uncovered Verbal Ability supporting-topic gap while the pillar is also missing.",
+      "cluster": "Verbal Ability",
+      "contentGapScore": 95
+    },
+    {
+      "title": "para summary",
+      "priority": "medium",
+      "opportunityScore": 86,
+      "reason": "Fills an uncovered Verbal Ability supporting-topic gap while the pillar is also missing.",
+      "cluster": "Verbal Ability",
+      "contentGapScore": 95
+    },
+    {
+      "title": "common grammar errors",
+      "priority": "high",
+      "opportunityScore": 85,
+      "reason": "Fills an uncovered Grammar supporting-topic gap while the pillar is also missing.",
+      "cluster": "Grammar",
+      "contentGapScore": 85
+    },
+    {
+      "title": "author's argument",
+      "priority": "high",
+      "opportunityScore": 85,
+      "reason": "Fills an uncovered Critical Reading supporting-topic gap while the pillar is also missing.",
+      "cluster": "Critical Reading",
+      "contentGapScore": 85
+    },
+    {
+      "title": "logical flow",
+      "priority": "medium",
+      "opportunityScore": 83,
+      "reason": "Fills an uncovered Verbal Ability supporting-topic gap while the pillar is also missing.",
+      "cluster": "Verbal Ability",
+      "contentGapScore": 95
+    },
+    {
+      "title": "modifiers",
+      "priority": "high",
+      "opportunityScore": 82,
+      "reason": "Fills an uncovered Grammar supporting-topic gap while the pillar is also missing.",
+      "cluster": "Grammar",
+      "contentGapScore": 85
+    },
+    {
+      "title": "assumptions",
+      "priority": "high",
+      "opportunityScore": 82,
+      "reason": "Fills an uncovered Critical Reading supporting-topic gap while the pillar is also missing.",
+      "cluster": "Critical Reading",
+      "contentGapScore": 85
+    },
+    {
+      "title": "parallelism",
+      "priority": "high",
+      "opportunityScore": 79,
+      "reason": "Fills an uncovered Grammar supporting-topic gap while the pillar is also missing.",
+      "cluster": "Grammar",
+      "contentGapScore": 85
+    },
+    {
+      "title": "evidence",
+      "priority": "high",
+      "opportunityScore": 79,
+      "reason": "Fills an uncovered Critical Reading supporting-topic gap while the pillar is also missing.",
+      "cluster": "Critical Reading",
+      "contentGapScore": 85
+    },
+    {
+      "title": "pronouns",
+      "priority": "medium",
+      "opportunityScore": 76,
+      "reason": "Fills an uncovered Grammar supporting-topic gap while the pillar is also missing.",
+      "cluster": "Grammar",
+      "contentGapScore": 85
+    },
+    {
+      "title": "tone",
+      "priority": "medium",
+      "opportunityScore": 76,
+      "reason": "Fills an uncovered Critical Reading supporting-topic gap while the pillar is also missing.",
+      "cluster": "Critical Reading",
+      "contentGapScore": 85
+    },
+    {
+      "title": "tenses",
+      "priority": "medium",
+      "opportunityScore": 73,
+      "reason": "Fills an uncovered Grammar supporting-topic gap while the pillar is also missing.",
+      "cluster": "Grammar",
+      "contentGapScore": 85
+    },
+    {
+      "title": "bias",
+      "priority": "medium",
+      "opportunityScore": 73,
+      "reason": "Fills an uncovered Critical Reading supporting-topic gap while the pillar is also missing.",
+      "cluster": "Critical Reading",
+      "contentGapScore": 85
+    }
+  ]
+}

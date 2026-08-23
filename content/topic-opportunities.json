@@ -1,366 +1,831 @@
 {
-  "generatedAt": "2026-08-13T13:08:47.454Z",
-  "note": "Discovery candidates are not publication approval. Validate intent, sources, product relevance and SERP quality before adding to the queue.",
-  "candidates": [
+  "generatedAt": "2026-08-21T10:43:28.483Z",
+  "model": "gpt-5.6-luna",
+  "sourcesVerified": true,
+  "note": "Trends are only marked verified when supported by supplied search evidence; otherwise they are editorial opportunities.",
+  "opportunities": [
     {
-      "query": "VARC CAT PYQ",
-      "source": "related_search",
-      "seedQuery": "CAT 2026 VARC preparation",
-      "cannibalizationRisk": 0,
-      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
+      "topic": "grammar",
+      "title": "Common Grammar Errors in Competitive Exams: Diagnose the Rule, Not the Sentence",
+      "primaryKeyword": "common grammar errors in competitive exams",
+      "secondaryKeywords": [
+        "grammar error spotting",
+        "English grammar mistakes for exams",
+        "sentence correction rules",
+        "competitive exam grammar practice"
+      ],
+      "searchIntent": "Problem-solving",
+      "readerProblem": "Learners memorize isolated rules but cannot identify which grammatical relationship is actually broken in an error-spotting or sentence-correction question.",
+      "targetAudience": [
+        "CAT aspirants",
+        "SSC candidates",
+        "banking-exam candidates",
+        "government-exam candidates",
+        "CUET candidates"
+      ],
+      "relevantExams": [
+        "CAT",
+        "SSC",
+        "Banking exams",
+        "Government exams",
+        "CUET",
+        "IPMAT",
+        "NMAT"
+      ],
+      "contentType": "multi-exam",
+      "contentAngle": "Organize errors by diagnostic question—who agrees with what, what modifies what, what is being compared, and which tense is required—instead of presenting a long rule list.",
+      "differentiationOpportunity": "Build a decision tree linking each visible symptom to subject-verb agreement, modifiers, pronouns, parallelism, or tense, followed by mixed practice.",
+      "evidence": [
+        "Grammar has the highest supplied content-gap score of 95.",
+        "The roadmap lists common grammar errors, sentence correction, and error spotting as missing topics.",
+        "The allowed exam set includes several exams with grammar or English sections, supporting multi-exam utility."
+      ],
+      "trendStatus": "editorial-opportunity",
+      "scores": {
+        "relevance": 97,
+        "demand": 88,
+        "trend": 50,
+        "competition": 78,
+        "gap": 98,
+        "authority": 94,
+        "commercialValue": 86,
+        "internalLinkPotential": 96,
+        "backlinkPotential": 81,
+        "evergreenValue": 95
+      },
+      "contentGapScore": 98,
+      "opportunityScore": 86,
+      "detectedContentGapScore": 95,
+      "cannibalization": {
+        "serious": false,
+        "closest": {
+          "slug": "reading-comprehension-trap-answers-proof-before-pick",
+          "status": "draft",
+          "cluster": "critical-reading",
+          "risk": 0.3,
+          "keywordMatch": false,
+          "intentMatch": true,
+          "crossClusterOverlap": false,
+          "recommendation": "REVIEW_OVERLAP"
+        },
+        "matches": [
+          {
+            "slug": "reading-comprehension-trap-answers-proof-before-pick",
+            "status": "draft",
+            "cluster": "critical-reading",
+            "risk": 0.3,
+            "keywordMatch": false,
+            "intentMatch": true,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "unlocking-success-common-rc-mistakes-cat-aspirants-make-and-how-to-overcome-them",
+            "status": "published",
+            "cluster": "Accuracy",
+            "risk": 0.06,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "unlocking-success-top-common-rc-mistakes-cat-aspirants-must-avoid",
+            "status": "published",
+            "cluster": "Strategy",
+            "risk": 0.06,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+            "status": "published",
+            "cluster": "Accuracy",
+            "risk": 0,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "focusing-on-words-blinds-you-to-the-real-meaning",
+            "status": "published",
+            "cluster": "Accuracy",
+            "risk": 0,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          }
+        ]
+      },
+      "eligible": true
     },
     {
-      "query": "VARC syllabus for CAT",
-      "source": "related_search",
-      "seedQuery": "CAT 2026 VARC preparation",
-      "cannibalizationRisk": 0,
-      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
+      "topic": "verbal-ability",
+      "title": "CAT Para Summary: A Scope-and-Structure Method That Actually Works",
+      "primaryKeyword": "CAT para summary strategy",
+      "secondaryKeywords": [
+        "para summary CAT 2026",
+        "how to solve para summary",
+        "para summary examples",
+        "para summary practice"
+      ],
+      "searchIntent": "Practice-oriented",
+      "readerProblem": "Learners can identify the general topic but choose options that add information, distort scope, or miss the passage's central claim.",
+      "targetAudience": [
+        "CAT aspirants",
+        "XAT aspirants",
+        "MBA entrance-test candidates"
+      ],
+      "relevantExams": [
+        "CAT",
+        "XAT",
+        "NMAT",
+        "SNAP"
+      ],
+      "contentType": "multi-exam",
+      "contentAngle": "Teach readers to compress a paragraph into its subject, claim, scope, and purpose before evaluating answer choices.",
+      "differentiationOpportunity": "Use a scope-and-structure worksheet, then classify wrong answers as too broad, too narrow, distorted, or unsupported. This separates the article from generic para-summary tips.",
+      "evidence": [
+        "The supplied planned queue assigns this topic a priority score of 94.",
+        "The verbal-ability roadmap has a content-gap score of 95 and explicitly lists para summary as missing.",
+        "The planned SERP rationale says worked examples and trap taxonomies are rewarded."
+      ],
+      "trendStatus": "editorial-opportunity",
+      "scores": {
+        "relevance": 98,
+        "demand": 86,
+        "trend": 50,
+        "competition": 72,
+        "gap": 97,
+        "authority": 91,
+        "commercialValue": 84,
+        "internalLinkPotential": 94,
+        "backlinkPotential": 78,
+        "evergreenValue": 88
+      },
+      "contentGapScore": 97,
+      "opportunityScore": 85,
+      "detectedContentGapScore": 95,
+      "cannibalization": {
+        "serious": true,
+        "closest": {
+          "slug": "cat-para-summary-strategy",
+          "status": "draft",
+          "cluster": "verbal-ability",
+          "risk": 0.95,
+          "keywordMatch": true,
+          "intentMatch": false,
+          "crossClusterOverlap": false,
+          "recommendation": "REVIEW_OVERLAP"
+        },
+        "matches": [
+          {
+            "slug": "cat-para-summary-strategy",
+            "status": "draft",
+            "cluster": "verbal-ability",
+            "risk": 0.95,
+            "keywordMatch": true,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "reading-comprehension-trap-answers-proof-before-pick",
+            "status": "draft",
+            "cluster": "critical-reading",
+            "risk": 0.05,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+            "status": "published",
+            "cluster": "Accuracy",
+            "risk": 0,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "focusing-on-words-blinds-you-to-the-real-meaning",
+            "status": "published",
+            "cluster": "Accuracy",
+            "risk": 0,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "improve-rc-accuracy-cat",
+            "status": "published",
+            "cluster": "Accuracy",
+            "risk": 0,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          }
+        ]
+      },
+      "eligible": false
     },
     {
-      "query": "How can I prepare for the CAT VARC exam?",
-      "source": "people_also_ask",
-      "seedQuery": "CAT 2026 VARC preparation",
-      "cannibalizationRisk": 0,
-      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
+      "topic": "vocabulary",
+      "title": "How to Learn Vocabulary from Context for Competitive Exams",
+      "primaryKeyword": "learn vocabulary from context",
+      "secondaryKeywords": [
+        "how to learn vocabulary for competitive exams",
+        "vocabulary in context",
+        "contextual vocabulary practice",
+        "learn English vocabulary effectively"
+      ],
+      "searchIntent": "Skill-building",
+      "readerProblem": "Learners collect word lists but forget meanings, confuse nuances, and cannot infer unfamiliar words while reading a passage.",
+      "targetAudience": [
+        "competitive-exam candidates",
+        "CAT aspirants",
+        "SSC candidates",
+        "banking-exam candidates",
+        "GRE candidates",
+        "CUET candidates"
+      ],
+      "relevantExams": [
+        "CAT",
+        "XAT",
+        "GMAT",
+        "GRE",
+        "CUET",
+        "CLAT",
+        "IPMAT",
+        "NMAT",
+        "SNAP",
+        "SSC",
+        "Banking exams",
+        "Government exams"
+      ],
+      "contentType": "universal verbal skill",
+      "contentAngle": "Teach a repeatable context process: identify the grammatical role, establish positive or negative orientation, inspect contrast and cause-effect clues, predict a meaning, and verify it against the sentence.",
+      "differentiationOpportunity": "Use short exam-style passages and an inference log that records clue type, predicted meaning, confidence, and later revision; distinguish contextual inference from dictionary memorization.",
+      "evidence": [
+        "The supplied verified SERP research directly covers learning vocabulary from context.",
+        "Related searches include learning vocabulary for exams, bank exams, and English vocabulary effectively.",
+        "The roadmap gives vocabulary a content-gap score of 89 and lists learning from context and contextual vocabulary as missing.",
+        "The research snippets repeatedly emphasize rich context, revision, and practice rather than isolated drilling."
+      ],
+      "trendStatus": "editorial-opportunity",
+      "scores": {
+        "relevance": 96,
+        "demand": 91,
+        "trend": 50,
+        "competition": 76,
+        "gap": 91,
+        "authority": 92,
+        "commercialValue": 83,
+        "internalLinkPotential": 90,
+        "backlinkPotential": 86,
+        "evergreenValue": 96
+      },
+      "contentGapScore": 91,
+      "opportunityScore": 84,
+      "detectedContentGapScore": 89,
+      "cannibalization": {
+        "serious": false,
+        "closest": {
+          "slug": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+          "status": "published",
+          "cluster": "Accuracy",
+          "risk": 0.07,
+          "keywordMatch": false,
+          "intentMatch": false,
+          "crossClusterOverlap": false,
+          "recommendation": "REVIEW_OVERLAP"
+        },
+        "matches": [
+          {
+            "slug": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+            "status": "published",
+            "cluster": "Accuracy",
+            "risk": 0.07,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "cat-para-summary-strategy",
+            "status": "draft",
+            "cluster": "verbal-ability",
+            "risk": 0.06,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "focusing-on-words-blinds-you-to-the-real-meaning",
+            "status": "published",
+            "cluster": "Accuracy",
+            "risk": 0,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "improve-rc-accuracy-cat",
+            "status": "published",
+            "cluster": "Accuracy",
+            "risk": 0,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "mastering-cat-reading-comprehension-unveiling-strategies-and-insights-behind-sample-questions-and-answers",
+            "status": "published",
+            "cluster": "Tone",
+            "risk": 0,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          }
+        ]
+      },
+      "eligible": true
     },
     {
-      "query": "How should I start preparing for CAT 2026?",
-      "source": "people_also_ask",
-      "seedQuery": "CAT 2026 VARC preparation",
-      "cannibalizationRisk": 0,
-      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
+      "topic": "verbal-ability",
+      "title": "CAT Para Jumbles: Solve for Coherence, Not Sentence Pairs Alone",
+      "primaryKeyword": "CAT para jumbles strategy",
+      "secondaryKeywords": [
+        "para jumbles CAT 2026",
+        "how to solve para jumbles",
+        "parajumble examples",
+        "para jumble practice"
+      ],
+      "searchIntent": "Practice-oriented",
+      "readerProblem": "Candidates over-rely on finding opening and mandatory pairs, then lose accuracy when several sentence orders appear plausible.",
+      "targetAudience": [
+        "CAT aspirants",
+        "XAT aspirants",
+        "verbal-ability learners"
+      ],
+      "relevantExams": [
+        "CAT",
+        "XAT",
+        "NMAT",
+        "SNAP"
+      ],
+      "contentType": "multi-exam",
+      "contentAngle": "Present a full ordering process based on opening-sentence tests, pronoun/reference links, contrast, chronology, and paragraph closure.",
+      "differentiationOpportunity": "Compare pair-first and whole-paragraph methods using annotated examples, including cases where a valid pair still produces the wrong sequence.",
+      "evidence": [
+        "The supplied planned queue assigns this topic a priority score of 91.",
+        "Para jumbles are explicitly identified as a missing core verbal-ability topic.",
+        "The verbal-ability roadmap has a content-gap score of 95."
+      ],
+      "trendStatus": "editorial-opportunity",
+      "scores": {
+        "relevance": 95,
+        "demand": 85,
+        "trend": 50,
+        "competition": 74,
+        "gap": 97,
+        "authority": 90,
+        "commercialValue": 81,
+        "internalLinkPotential": 93,
+        "backlinkPotential": 76,
+        "evergreenValue": 90
+      },
+      "contentGapScore": 97,
+      "opportunityScore": 83,
+      "detectedContentGapScore": 95,
+      "cannibalization": {
+        "serious": false,
+        "closest": {
+          "slug": "cat-para-summary-strategy",
+          "status": "draft",
+          "cluster": "verbal-ability",
+          "risk": 0.05,
+          "keywordMatch": false,
+          "intentMatch": false,
+          "crossClusterOverlap": false,
+          "recommendation": "REVIEW_OVERLAP"
+        },
+        "matches": [
+          {
+            "slug": "cat-para-summary-strategy",
+            "status": "draft",
+            "cluster": "verbal-ability",
+            "risk": 0.05,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+            "status": "published",
+            "cluster": "Accuracy",
+            "risk": 0,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "focusing-on-words-blinds-you-to-the-real-meaning",
+            "status": "published",
+            "cluster": "Accuracy",
+            "risk": 0,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "improve-rc-accuracy-cat",
+            "status": "published",
+            "cluster": "Accuracy",
+            "risk": 0,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "mastering-cat-reading-comprehension-unveiling-strategies-and-insights-behind-sample-questions-and-answers",
+            "status": "published",
+            "cluster": "Tone",
+            "risk": 0,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          }
+        ]
+      },
+      "eligible": true
     },
     {
-      "query": "How to get 99 percentile in varc CAT?",
-      "source": "people_also_ask",
-      "seedQuery": "CAT 2026 VARC preparation",
-      "cannibalizationRisk": 0,
-      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
+      "topic": "grammar",
+      "title": "Subject–Verb Agreement in Competitive Exams: A Fast Diagnostic System",
+      "primaryKeyword": "subject verb agreement questions",
+      "secondaryKeywords": [
+        "subject verb agreement rules for exams",
+        "subject verb agreement error spotting",
+        "subject verb agreement practice",
+        "English grammar subject verb agreement"
+      ],
+      "searchIntent": "Practice-oriented",
+      "readerProblem": "Long intervening phrases, collective nouns, either-or constructions, and inverted sentences hide the true subject.",
+      "targetAudience": [
+        "CAT aspirants",
+        "SSC candidates",
+        "banking-exam candidates",
+        "government-exam candidates",
+        "CUET candidates"
+      ],
+      "relevantExams": [
+        "CAT",
+        "SSC",
+        "Banking exams",
+        "Government exams",
+        "CUET",
+        "IPMAT",
+        "NMAT"
+      ],
+      "contentType": "multi-exam",
+      "contentAngle": "Reduce agreement questions to a subject-finding routine before addressing exceptions and distractors.",
+      "differentiationOpportunity": "Group practice by structural trap—prepositional phrases, relative clauses, quantifiers, compound subjects, and inverted order—rather than by an undifferentiated rules list.",
+      "evidence": [
+        "Subject-verb agreement is explicitly listed among the missing grammar articles.",
+        "Grammar has a roadmap content-gap score of 95.",
+        "The topic serves multiple allowed exams without requiring a CAT-only treatment."
+      ],
+      "trendStatus": "editorial-opportunity",
+      "scores": {
+        "relevance": 94,
+        "demand": 84,
+        "trend": 50,
+        "competition": 75,
+        "gap": 96,
+        "authority": 93,
+        "commercialValue": 82,
+        "internalLinkPotential": 91,
+        "backlinkPotential": 73,
+        "evergreenValue": 96
+      },
+      "contentGapScore": 96,
+      "opportunityScore": 83,
+      "detectedContentGapScore": 95,
+      "cannibalization": {
+        "serious": false,
+        "closest": {
+          "slug": "mastering-inference-questions-in-cat-unlocking-the-secrets-to-your-success",
+          "status": "published",
+          "cluster": "Inference",
+          "risk": 0.08,
+          "keywordMatch": false,
+          "intentMatch": false,
+          "crossClusterOverlap": false,
+          "recommendation": "REVIEW_OVERLAP"
+        },
+        "matches": [
+          {
+            "slug": "mastering-inference-questions-in-cat-unlocking-the-secrets-to-your-success",
+            "status": "published",
+            "cluster": "Inference",
+            "risk": 0.08,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "mastering-inference-questions-in-cat-unlocking-the-secrets-to-critical-thinking-success",
+            "status": "published",
+            "cluster": "Strategy",
+            "risk": 0.07,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "unlocking-success-mastering-reading-comprehension-questions-for-cat-aspirants",
+            "status": "published",
+            "cluster": "Inference",
+            "risk": 0.07,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "rc-inference-decision-trap",
+            "status": "published",
+            "cluster": "Inference",
+            "risk": 0.06,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "mastering-cat-reading-comprehension-unveiling-strategies-and-insights-behind-sample-questions-and-answers",
+            "status": "published",
+            "cluster": "Tone",
+            "risk": 0.05,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          }
+        ]
+      },
+      "eligible": true
     },
     {
-      "query": "Which year was CAT varc toughest?",
-      "source": "people_also_ask",
-      "seedQuery": "CAT 2026 VARC preparation",
-      "cannibalizationRisk": 0,
-      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
+      "topic": "reading-comprehension",
+      "title": "CAT RC Question Types: What Each One Actually Tests",
+      "primaryKeyword": "CAT RC question types",
+      "secondaryKeywords": [
+        "main idea questions CAT",
+        "inference questions CAT",
+        "author tone CAT RC",
+        "RC question types practice"
+      ],
+      "searchIntent": "Definition/explanation",
+      "readerProblem": "Candidates apply the same reading process to main-idea, inference, tone, detail, and application questions, leading to avoidable option-selection errors.",
+      "targetAudience": [
+        "CAT aspirants",
+        "XAT aspirants",
+        "GMAT candidates",
+        "GRE candidates",
+        "CLAT candidates"
+      ],
+      "relevantExams": [
+        "CAT",
+        "XAT",
+        "GMAT",
+        "GRE",
+        "CLAT"
+      ],
+      "contentType": "multi-exam",
+      "contentAngle": "Map each question type to its evidence requirement, acceptable scope, and most common trap before demonstrating the method on one passage.",
+      "differentiationOpportunity": "Make this a navigational pillar with a question-type diagnostic table and links to existing inference, tone, accuracy, and trap-answer content; avoid repeating standalone strategy articles.",
+      "evidence": [
+        "The supplied planned queue assigns this topic a priority score of 87.",
+        "The roadmap lists main idea, author's tone, and related RC skills as missing or incomplete areas.",
+        "Existing content contains isolated inference and tone articles but no question-type pillar, creating a stated navigational gap."
+      ],
+      "trendStatus": "editorial-opportunity",
+      "scores": {
+        "relevance": 94,
+        "demand": 83,
+        "trend": 50,
+        "competition": 79,
+        "gap": 79,
+        "authority": 92,
+        "commercialValue": 80,
+        "internalLinkPotential": 99,
+        "backlinkPotential": 79,
+        "evergreenValue": 91
+      },
+      "contentGapScore": 79,
+      "opportunityScore": 81,
+      "detectedContentGapScore": 66,
+      "cannibalization": {
+        "serious": false,
+        "closest": {
+          "slug": "improve-rc-accuracy-cat",
+          "status": "published",
+          "cluster": "Accuracy",
+          "risk": 0.17,
+          "keywordMatch": false,
+          "intentMatch": false,
+          "crossClusterOverlap": false,
+          "recommendation": "REVIEW_OVERLAP"
+        },
+        "matches": [
+          {
+            "slug": "improve-rc-accuracy-cat",
+            "status": "published",
+            "cluster": "Accuracy",
+            "risk": 0.17,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "reading-comprehension-isnt-about-understanding-its-about-insight",
+            "status": "published",
+            "cluster": "Tone",
+            "risk": 0.17,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "unlocking-precision-mastering-reading-comprehension-accuracy-for-cat-success",
+            "status": "published",
+            "cluster": "Accuracy",
+            "risk": 0.17,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "unlocking-success-mastering-reading-comprehension-for-cat-with-proven-strategies",
+            "status": "published",
+            "cluster": "Strategy",
+            "risk": 0.17,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "unlocking-success-mastering-reading-comprehension-questions-for-cat-aspirants",
+            "status": "published",
+            "cluster": "Inference",
+            "risk": 0.17,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          }
+        ]
+      },
+      "eligible": true
     },
     {
-      "query": "CAT RC passages",
-      "source": "related_search",
-      "seedQuery": "CAT reading comprehension problems",
-      "cannibalizationRisk": 0,
-      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "Can I crack a cat in 200 days?",
-      "source": "people_also_ask",
-      "seedQuery": "CAT reading comprehension problems",
-      "cannibalizationRisk": 0,
-      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "Cat para jumbles para summary odd sentence pdf",
-      "source": "related_search",
-      "seedQuery": "CAT para jumbles para summary odd sentence",
-      "cannibalizationRisk": 0,
-      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "1000 Parajumbles PDF for CAT",
-      "source": "related_search",
-      "seedQuery": "CAT para jumbles para summary odd sentence",
-      "cannibalizationRisk": 0,
-      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "Para Jumbles for CAT PDF",
-      "source": "related_search",
-      "seedQuery": "CAT para jumbles para summary odd sentence",
-      "cannibalizationRisk": 0,
-      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "Para Summary for CAT",
-      "source": "related_search",
-      "seedQuery": "CAT para jumbles para summary odd sentence",
-      "cannibalizationRisk": 0,
-      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "CAT LRDI",
-      "source": "related_search",
-      "seedQuery": "CAT VARC mock score improvement",
-      "cannibalizationRisk": 0,
-      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "Is 40 mocks enough for a CAT?",
-      "source": "people_also_ask",
-      "seedQuery": "CAT VARC mock score improvement",
-      "cannibalizationRisk": 0,
-      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "What are para jumbles and jumbled sentences?",
-      "source": "people_also_ask",
-      "seedQuery": "CAT para jumbles para summary odd sentence",
-      "cannibalizationRisk": 0.1,
-      "closestExisting": "rc-inference-decision-trap",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "Cat para jumbles para summary odd sentence with answers",
-      "source": "related_search",
-      "seedQuery": "CAT para jumbles para summary odd sentence",
-      "cannibalizationRisk": 0.1111111111111111,
-      "closestExisting": "understanding-rc-answers-youre-probably-misreading-the-inferences",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "How to improve mock test score CAT?",
-      "source": "people_also_ask",
-      "seedQuery": "CAT VARC mock score improvement",
-      "cannibalizationRisk": 0.1111111111111111,
-      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "Cat 2026 varc preparation free",
-      "source": "related_search",
-      "seedQuery": "CAT 2026 VARC preparation",
-      "cannibalizationRisk": 0.125,
-      "closestExisting": "mastering-reading-comprehension-unlocking-strategies-to-elevate-your-cat-preparation",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "What is the para summary in CAT?",
-      "source": "people_also_ask",
-      "seedQuery": "CAT para jumbles para summary odd sentence",
-      "cannibalizationRisk": 0.125,
-      "closestExisting": "rc-inference-decision-trap",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "What are parajumbles in cats?",
-      "source": "people_also_ask",
-      "seedQuery": "CAT para jumbles para summary odd sentence",
-      "cannibalizationRisk": 0.125,
-      "closestExisting": "rc-inference-decision-trap",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "VARC score vs percentile",
-      "source": "related_search",
-      "seedQuery": "CAT VARC mock score improvement",
-      "cannibalizationRisk": 0.125,
-      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "How to improve varc score in CAT?",
-      "source": "people_also_ask",
-      "seedQuery": "CAT VARC mock score improvement",
-      "cannibalizationRisk": 0.125,
-      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "Cat 2026 varc preparation pdf",
-      "source": "related_search",
-      "seedQuery": "CAT 2026 VARC preparation",
-      "cannibalizationRisk": 0.14285714285714285,
-      "closestExisting": "mastering-reading-comprehension-unlocking-strategies-to-elevate-your-cat-preparation",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "VARC preparation for CAT reddit",
-      "source": "related_search",
-      "seedQuery": "CAT 2026 VARC preparation",
-      "cannibalizationRisk": 0.14285714285714285,
-      "closestExisting": "mastering-reading-comprehension-unlocking-strategies-to-elevate-your-cat-preparation",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "1000 Parajumbles PDF for CAT with answers",
-      "source": "related_search",
-      "seedQuery": "CAT para jumbles para summary odd sentence",
-      "cannibalizationRisk": 0.14285714285714285,
-      "closestExisting": "understanding-rc-answers-youre-probably-misreading-the-inferences",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "Is 72 a good score in CAT?",
-      "source": "people_also_ask",
-      "seedQuery": "CAT VARC mock score improvement",
-      "cannibalizationRisk": 0.14285714285714285,
-      "closestExisting": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "CAT VARC practice questions free",
-      "source": "related_search",
-      "seedQuery": "CAT 2026 VARC preparation",
-      "cannibalizationRisk": 0.16666666666666666,
-      "closestExisting": "mastering-inference-questions-in-cat-unlocking-the-secrets-to-your-success",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "Para Jumbles questions with answers",
-      "source": "related_search",
-      "seedQuery": "CAT para jumbles para summary odd sentence",
-      "cannibalizationRisk": 0.18181818181818182,
-      "closestExisting": "mastering-cat-reading-comprehension-unveiling-strategies-and-insights-behind-sample-questions-and-answers",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "CAT VARC questions with answers",
-      "source": "related_search",
-      "seedQuery": "CAT 2026 VARC preparation",
-      "cannibalizationRisk": 0.2,
-      "closestExisting": "mastering-cat-reading-comprehension-unveiling-strategies-and-insights-behind-sample-questions-and-answers",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "Parajumbles questions with answers PDF",
-      "source": "related_search",
-      "seedQuery": "CAT para jumbles para summary odd sentence",
-      "cannibalizationRisk": 0.2,
-      "closestExisting": "mastering-cat-reading-comprehension-unveiling-strategies-and-insights-behind-sample-questions-and-answers",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "VARC CAT questions PDF",
-      "source": "related_search",
-      "seedQuery": "CAT 2026 VARC preparation",
-      "cannibalizationRisk": 0.25,
-      "closestExisting": "mastering-inference-questions-in-cat-unlocking-the-secrets-to-your-success",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "CAT RC questions with answers",
-      "source": "related_search",
-      "seedQuery": "CAT reading comprehension problems",
-      "cannibalizationRisk": 0.25,
-      "closestExisting": "mastering-inference-questions-in-cat-unlocking-the-secrets-to-your-success",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "How to solve odd one out questions in CAT?",
-      "source": "people_also_ask",
-      "seedQuery": "CAT para jumbles para summary odd sentence",
-      "cannibalizationRisk": 0.25,
-      "closestExisting": "mastering-inference-questions-in-cat-unlocking-the-secrets-to-your-success",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "What are the reading comprehension passages for the CAT exam?",
-      "source": "people_also_ask",
-      "seedQuery": "CAT reading comprehension problems",
-      "cannibalizationRisk": 0.2857142857142857,
-      "closestExisting": "reading-comprehension-isnt-about-understanding-its-about-insight",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "Cat reading comprehension problems with answers",
-      "source": "related_search",
-      "seedQuery": "CAT reading comprehension problems",
-      "cannibalizationRisk": 0.3333333333333333,
-      "closestExisting": "reading-comprehension-isnt-about-understanding-its-about-insight",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "Cat reading comprehension problems with answers pdf",
-      "source": "related_search",
-      "seedQuery": "CAT reading comprehension problems",
-      "cannibalizationRisk": 0.3333333333333333,
-      "closestExisting": "reading-comprehension-isnt-about-understanding-its-about-insight",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "Cat reading comprehension problems pdf",
-      "source": "related_search",
-      "seedQuery": "CAT reading comprehension problems",
-      "cannibalizationRisk": 0.4,
-      "closestExisting": "reading-comprehension-isnt-about-understanding-its-about-insight",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "1000 Reading Comprehension PDF for CAT",
-      "source": "related_search",
-      "seedQuery": "CAT reading comprehension problems",
-      "cannibalizationRisk": 0.4,
-      "closestExisting": "reading-comprehension-isnt-about-understanding-its-about-insight",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "CAT Reading Comprehension book",
-      "source": "related_search",
-      "seedQuery": "CAT reading comprehension problems",
-      "cannibalizationRisk": 0.4,
-      "closestExisting": "reading-comprehension-isnt-about-understanding-its-about-insight",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
-    },
-    {
-      "query": "How to solve reading comprehension in cat?",
-      "source": "people_also_ask",
-      "seedQuery": "CAT reading comprehension problems",
-      "cannibalizationRisk": 0.4,
-      "closestExisting": "reading-comprehension-isnt-about-understanding-its-about-insight",
-      "recommendation": "RESEARCH_BRIEF",
-      "requiresEditorialReview": true
+      "topic": "verbal-ability",
+      "title": "CAT Odd Sentence Out: Build the Core Paragraph Before You Eliminate",
+      "primaryKeyword": "CAT odd sentence out strategy",
+      "secondaryKeywords": [
+        "odd one out CAT",
+        "odd sentence questions",
+        "sentence exclusion CAT",
+        "odd sentence out practice"
+      ],
+      "searchIntent": "Practice-oriented",
+      "readerProblem": "Candidates eliminate sentences using isolated word links without testing whether the remaining sentences form a coherent paragraph.",
+      "targetAudience": [
+        "CAT aspirants",
+        "XAT aspirants",
+        "verbal-ability learners"
+      ],
+      "relevantExams": [
+        "CAT",
+        "XAT",
+        "NMAT",
+        "SNAP"
+      ],
+      "contentType": "multi-exam",
+      "contentAngle": "Reverse the usual method: construct the strongest four-sentence paragraph first, then identify the sentence that does not belong.",
+      "differentiationOpportunity": "Include coherence tests for reference, chronology, contrast, and semantic continuity, with explanations of why tempting exclusions fail.",
+      "evidence": [
+        "The supplied planned queue assigns this topic a priority score of 92.",
+        "Odd sentence questions are listed as a missing verbal-ability article.",
+        "The planned rationale identifies a clear example-led differentiation opportunity."
+      ],
+      "trendStatus": "editorial-opportunity",
+      "scores": {
+        "relevance": 96,
+        "demand": 82,
+        "trend": 50,
+        "competition": 68,
+        "gap": 74,
+        "authority": 89,
+        "commercialValue": 80,
+        "internalLinkPotential": 92,
+        "backlinkPotential": 74,
+        "evergreenValue": 87
+      },
+      "contentGapScore": 74,
+      "opportunityScore": 79,
+      "detectedContentGapScore": 50,
+      "cannibalization": {
+        "serious": false,
+        "closest": {
+          "slug": "reading-comprehension-trap-answers-proof-before-pick",
+          "status": "draft",
+          "cluster": "critical-reading",
+          "risk": 0.05,
+          "keywordMatch": false,
+          "intentMatch": false,
+          "crossClusterOverlap": false,
+          "recommendation": "REVIEW_OVERLAP"
+        },
+        "matches": [
+          {
+            "slug": "reading-comprehension-trap-answers-proof-before-pick",
+            "status": "draft",
+            "cluster": "critical-reading",
+            "risk": 0.05,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
+            "status": "published",
+            "cluster": "Accuracy",
+            "risk": 0,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "focusing-on-words-blinds-you-to-the-real-meaning",
+            "status": "published",
+            "cluster": "Accuracy",
+            "risk": 0,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "improve-rc-accuracy-cat",
+            "status": "published",
+            "cluster": "Accuracy",
+            "risk": 0,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          },
+          {
+            "slug": "mastering-cat-reading-comprehension-unveiling-strategies-and-insights-behind-sample-questions-and-answers",
+            "status": "published",
+            "cluster": "Tone",
+            "risk": 0,
+            "keywordMatch": false,
+            "intentMatch": false,
+            "crossClusterOverlap": false,
+            "recommendation": "REVIEW_OVERLAP"
+          }
+        ]
+      },
+      "eligible": true
     }
   ]
 }

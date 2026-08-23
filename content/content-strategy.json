@@ -1,14 +1,17 @@
 {
-  "version": 1,
+  "version": 2,
   "minimumQualityScore": 78,
   "publishingCadence": "One thoroughly reviewed article per week; use the second weekly slot for an update when the audit identifies overlap or staleness.",
+  "editorialPriority": ["userValue", "informationGain", "searchIntent", "topicalAuthority", "seo", "commercialValue"],
+  "contentClassifications": ["universal verbal skill", "exam-agnostic", "multi-exam", "exam-specific"],
+  "defaultClassification": "multi-exam",
+  "examSpecificRule": "Use an exam-specific angle only when its format, terminology, timing, or question design materially changes the advice.",
   "clusters": [
-    { "id": "cat-varc-strategy", "name": "CAT VARC Strategy", "pillar": "cat-varc-preparation-strategy", "priority": 95 },
-    { "id": "cat-reading-comprehension", "name": "CAT Reading Comprehension", "pillar": "cat-reading-comprehension-guide", "priority": 100 },
-    { "id": "rc-question-types", "name": "RC Question Types", "pillar": "cat-rc-question-types", "priority": 92 },
-    { "id": "verbal-ability", "name": "CAT Verbal Ability", "pillar": "cat-verbal-ability-guide", "priority": 96 },
-    { "id": "mock-analysis", "name": "VARC Mock Analysis", "pillar": "cat-varc-mock-analysis", "priority": 90 },
-    { "id": "reading-skills", "name": "Reading Skills", "pillar": "improve-reading-for-cat-varc", "priority": 82 }
+    { "id": "reading-comprehension", "name": "Reading Comprehension", "pillar": "reading-comprehension-complete-guide", "priority": 100 },
+    { "id": "vocabulary", "name": "Vocabulary", "pillar": "vocabulary-building-competitive-exams", "priority": 94 },
+    { "id": "grammar", "name": "Grammar", "pillar": "grammar-for-competitive-exams", "priority": 90 },
+    { "id": "verbal-ability", "name": "Verbal Ability", "pillar": "verbal-ability-preparation", "priority": 96 },
+    { "id": "critical-reading", "name": "Critical Reading", "pillar": "critical-reading-skills", "priority": 93 }
   ],
   "queue": [
     {

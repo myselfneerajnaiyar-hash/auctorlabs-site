@@ -9,6 +9,16 @@ export const BLOG_AUTHOR = {
 };
 
 export type BlogStatus = "draft" | "review" | "published" | "archived";
+export type BlogCategory = "Reading Comprehension" | "Vocabulary" | "Grammar" | "Verbal Ability" | "Critical Reading";
+
+export function normalizeBlogCategory(value?: string): BlogCategory {
+  const category = (value || "").toLowerCase();
+  if (/vocab|word root|synonym|antonym/.test(category)) return "Vocabulary";
+  if (/grammar|modifier|parallelism|pronoun|tense|subject.?verb|error spotting|sentence correction/.test(category)) return "Grammar";
+  if (/verbal ability|para jumble|para summary|odd sentence|cohesion|coherence|sentence placement/.test(category)) return "Verbal Ability";
+  if (/critical reading|argument|assumption|bias|logical gap/.test(category)) return "Critical Reading";
+  return "Reading Comprehension";
+}
 
 export type BlogFrontmatter = {
   title: string;
@@ -31,6 +41,8 @@ export type BlogFrontmatter = {
   seoScore?: number;
   contentQualityScore?: number;
   refreshDate?: string;
+  audience?: string;
+  relevantExams?: string[];
 };
 
 export type BlogPost = BlogFrontmatter & {
@@ -63,8 +75,11 @@ export function getBlogPost(slug: string): BlogPost | null {
 
   const source = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(source);
-  const wordCount = wordsIn(content);
+  return createBlogPost(slug, data as BlogFrontmatter & Record<string, unknown>, content);
+}
 
+export function createBlogPost(slug: string, data: BlogFrontmatter & Record<string, unknown>, content: string): BlogPost {
+  const wordCount = wordsIn(content);
   return {
     slug,
     content,
@@ -74,7 +89,7 @@ export function getBlogPost(slug: string): BlogPost | null {
     updatedDate: data.updatedDate,
     image: data.image,
     imageAlt: data.imageAlt || data.title,
-    category: data.category || "Strategy",
+    category: normalizeBlogCategory(data.category),
     author: data.author || BLOG_AUTHOR.name,
     status: data.status || "published",
     primaryKeyword: data.primaryKeyword,
@@ -88,6 +103,8 @@ export function getBlogPost(slug: string): BlogPost | null {
     seoScore: data.seoScore,
     contentQualityScore: data.contentQualityScore,
     refreshDate: data.refreshDate,
+    audience: typeof data.audience === "string" ? data.audience : undefined,
+    relevantExams: Array.isArray(data.relevantExams) ? data.relevantExams.map(String) : [],
     wordCount,
     readingTime: Math.max(1, Math.ceil(wordCount / 220)),
   };
@@ -99,6 +116,34 @@ export function getAllBlogPosts() {
     .filter((post): post is BlogPost => Boolean(post))
     .filter((post) => post.status === "published")
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+}
+
+export async function getBlogPostHybrid(slug: string) {
+  const filePost = getBlogPost(slug);
+  if (filePost) return filePost;
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) return null;
+  try {
+    const { getPublishedCmsPost } = await import("./blog-cms-db");
+    return await getPublishedCmsPost(slug);
+  } catch (error) {
+    console.error("CMS article lookup failed; no file fallback exists for this slug.", error);
+    return null;
+  }
+}
+
+export async function getAllBlogPostsHybrid() {
+  const files = getAllBlogPosts();
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) return files;
+  try {
+    const { getPublishedCmsPosts } = await import("./blog-cms-db");
+    const database = await getPublishedCmsPosts();
+    const slugs = new Set(database.map(post => post.slug));
+    return [...database, ...files.filter(post => !slugs.has(post.slug))]
+      .sort((a,b)=>new Date(b.date).getTime()-new Date(a.date).getTime());
+  } catch (error) {
+    console.error("CMS blog index lookup failed; serving file-based articles only.", error);
+    return files;
+  }
 }
 
 function tokens(post: BlogPost) {
