@@ -15,6 +15,7 @@
     "blog:plan": "node scripts/blog-engine.mjs plan",
     "blog:generate": "node scripts/blog-engine.mjs generate",
     "blog:publish": "node scripts/blog-engine.mjs publish",
+    "blog:import-supabase": "node scripts/import-file-blogs-to-supabase.mjs",
     "blog:roadmap": "node scripts/blog-engine.mjs roadmap"
   },
   "dependencies": {
