@@ -27,7 +27,7 @@ const REJECTED = /stock market|share trading|cryptocurrency|\bcricket\b|\bcoding
 const stringArray = { type: "array", items: { type: "string" } };
 
 function readJson(file, fallback) { return fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, "utf8")) : fallback; }
-function writeJson(file, value) { fs.writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`); }
+function writeJson(file, value) { fs.mkdirSync(path.dirname(file), { recursive: true }); fs.writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`); }
 function ensureDirs() { for (const dir of [DRAFTS, BRIEFS]) fs.mkdirSync(dir, { recursive: true }); }
 function articleReferences(content) {
   const markdownImages=[...content.matchAll(/!\[([^\]]*)\]\(([^)]+)\)/g)].map(match=>({kind:"markdown-image",alt:match[1],src:match[2]}));
