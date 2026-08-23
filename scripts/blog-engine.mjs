@@ -16,7 +16,8 @@ const STRATEGY = path.join(SOURCE_CONTENT,"content-strategy.json"), REGISTRY = p
 const AUDIT = path.join(CONTENT,"content-audit.json"), OPPORTUNITIES = path.join(CONTENT,"topic-opportunities.json");
 const CLUSTERS = path.join(SOURCE_CONTENT,"content-clusters.json"), ROADMAP = path.join(CONTENT,"content-roadmap.json");
 const TOPIC_INTELLIGENCE = path.join(CONTENT,"topic-intelligence.json");
-const TEXT_MODEL = process.env.OPENAI_TEXT_MODEL || "gpt-5.6-luna";
+const CONFIGURED_TEXT_MODEL = process.env.OPENAI_TEXT_MODEL || "gpt-5-mini";
+const TEXT_MODEL = CONFIGURED_TEXT_MODEL.toLowerCase() === "gpt-5.6-luna" ? "gpt-5-mini" : CONFIGURED_TEXT_MODEL;
 const IMAGE_MODEL = process.env.OPENAI_IMAGE_MODEL || "gpt-image-1";
 const MIN_SCORE = Number(process.env.BLOG_MIN_QUALITY_SCORE || 80);
 const MAX_REVISIONS = Math.min(2, Math.max(0, Number(process.env.BLOG_MAX_REVISIONS || 1)));
