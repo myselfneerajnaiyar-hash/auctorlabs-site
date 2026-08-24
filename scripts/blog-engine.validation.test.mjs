@@ -3,6 +3,7 @@ import test from "node:test";
 import {
   parseArticleReferences,
   parseImageSources,
+  validateArticle,
   validateInternalLinks,
 } from "./blog-engine.mjs";
 
@@ -89,4 +90,21 @@ test("generated inline-image MDX markers preserve image classification", () => {
     "/blog/cat-varc-passages-inline-passage-map.png",
   ]);
   assert.deepEqual(validateInternalLinks(content), []);
+});
+
+test("internal editorial notes and lesson-plan sections fail editorial checks", () => {
+  const content = [
+    "## Daily routine",
+    "Human review required before this AI-generated article is published.",
+    "## 1. Homework",
+    "Write 2 sentences and record yourself.",
+    "## 2. Final checklist",
+  ].join("\n\n");
+  const result = validateArticle(
+    { primaryKeyword: "vocabulary strategy", searchIntent: "Strategy", topic: "Vocabulary strategy", articleType: "Strategy" },
+    { title: "A Better Vocabulary Strategy for Competitive Exams", description: "A sufficiently descriptive editorial summary about vocabulary strategy for competitive examinations and why contextual learning improves retention over memorised lists.", content, claims: [] },
+  );
+
+  assert.ok(result.editorialIssues.some((issue) => issue.includes("Internal AI/editorial")));
+  assert.ok(result.editorialIssues.some((issue) => issue.includes("Lesson-plan")));
 });
