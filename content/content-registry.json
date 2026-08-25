@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-23T13:18:35.631Z",
+  "generatedAt": "2026-08-24T16:47:54.329Z",
   "posts": [
     {
       "slug": "accuracy-in-rc-ignoring-context-could-ruin-your-score",
@@ -944,107 +944,6 @@
       ]
     },
     {
-      "slug": "contrast-transitions-cat-reading-comprehension",
-      "url": "/blog/contrast-transitions-cat-reading-comprehension",
-      "title": "Contrast Transitions in CAT RC: Meaning & Practice",
-      "description": "Master contrast transitions in CAT reading comprehension passages to track argument shifts, spot qualifications, infer author intent, and eliminate misleading options.",
-      "primaryKeyword": "contrast transitions in CAT reading comprehension passages",
-      "secondaryKeywords": [
-        "contrast words in reading comprehension",
-        "CAT RC transition words",
-        "however in reading comprehension",
-        "reading comprehension contrast signals",
-        "CAT VARC passage strategy"
-      ],
-      "searchIntent": "Skill-building",
-      "cluster": "Reading Comprehension",
-      "category": "Reading Comprehension",
-      "status": "draft",
-      "date": "2026-08-23",
-      "updatedDate": "2026-08-23",
-      "image": "/blog/contrast-transitions-cat-reading-comprehension-featured.png",
-      "imageAlt": "Annotated reading-comprehension passage showing how a contrast transition shifts the author’s emphasis",
-      "author": "Auctor Labs Editorial Team",
-      "relevantExams": [
-        "CAT"
-      ],
-      "targetPage": "/blog/contrast-transitions-cat-reading-comprehension",
-      "relatedArticles": [
-        "cat-varc-passages",
-        "improve-rc-accuracy-cat",
-        "reading-comprehension-isnt-about-understanding-its-about-insight",
-        "unlocking-success-mastering-reading-comprehension-questions-for-cat-aspirants",
-        "rc-tone-hidden-skill"
-      ],
-      "externalReferences": [
-        "https://study.com/academy/lesson/video/navigating-a-reading-passage-with-transitions.html",
-        "https://iim-cat-questions-answers.2iim.com/verbal/reading-comprehension/",
-        "https://byjus.com/free-cat-prep/different-question-types-in-cat-rc/",
-        "https://cracku.in/cat-reading-comprehension-questions",
-        "https://edge.wordpandit.com/cat-rc-terms-library/"
-      ],
-      "backlinkOpportunities": [
-        {
-          "site": "study.com",
-          "sourcePage": "https://study.com/academy/lesson/video/navigating-a-reading-passage-with-transitions.html",
-          "sourcePageReason": "The exact supplied lesson addresses transitions that signal contrast, making the proposed article a relevant exam-focused application.",
-          "reason": "The article can extend a general transition lesson with CAT RC annotation, question-type, and answer-elimination applications.",
-          "potentialAngle": "A complementary CAT-focused guide on applying contrast signals inside dense passages.",
-          "suggestedOutreachType": "Editorial resource suggestion",
-          "priority": "high"
-        },
-        {
-          "site": "byjus.com",
-          "sourcePage": "https://byjus.com/free-cat-prep/different-question-types-in-cat-rc/",
-          "sourcePageReason": "The exact supplied page discusses CAT RC question types, which are directly addressed by the proposed worked examples.",
-          "reason": "The article adds a narrow skill lens for solving main-idea, inference, tone, and detail questions.",
-          "potentialAngle": "A focused companion resource showing how one passage feature influences several CAT RC question types.",
-          "suggestedOutreachType": "Relevant resource recommendation",
-          "priority": "medium"
-        },
-        {
-          "site": "cracku.in",
-          "sourcePage": "https://cracku.in/cat-reading-comprehension-questions",
-          "sourcePageReason": "The exact supplied page contains CAT RC practice sets that could be paired with a transition-identification method.",
-          "reason": "The proposed article offers a strategy layer that can help readers analyse practice questions more systematically.",
-          "potentialAngle": "A transition-marking checklist to use alongside CAT RC practice sets.",
-          "suggestedOutreachType": "Practice-resource collaboration or editorial suggestion",
-          "priority": "medium"
-        },
-        {
-          "site": "unstop.com",
-          "sourcePage": "https://unstop.com/blog/reading-comprehension-for-cat",
-          "sourcePageReason": "The exact supplied page is a CAT reading-comprehension guide, so a focused article on contrast signals is topically relevant.",
-          "reason": "The proposed resource can add depth to general CAT RC advice by isolating a frequently tested reading skill.",
-          "potentialAngle": "A narrow, worked-example guide that complements a broader CAT RC preparation article.",
-          "suggestedOutreachType": "Contextual resource suggestion",
-          "priority": "medium"
-        },
-        {
-          "site": "linkedin.com",
-          "sourcePage": "https://www.linkedin.com/pulse/how-comprehend-cat-passage-effectively-kaushik-kapoor-llygc",
-          "sourcePageReason": "The exact supplied post mentions overlooked transitions or contrast points as a CAT passage-comprehension issue.",
-          "reason": "The article directly develops the transition problem identified in the supplied source.",
-          "potentialAngle": "A detailed practice framework for the transition-overlooking problem noted in the post.",
-          "suggestedOutreachType": "Professional content-sharing suggestion",
-          "priority": "medium"
-        }
-      ],
-      "schemaType": "BlogPosting",
-      "seoScore": 84,
-      "contentQualityScore": 86,
-      "wordCount": 2606,
-      "headings": 36,
-      "internalLinks": [
-        "/blog/cat-varc-passages",
-        "/blog/improve-rc-accuracy-cat",
-        "/blog/unlocking-success-mastering-reading-comprehension-questions-for-cat-aspirants",
-        "/blog/rc-tone-hidden-skill",
-        "/features/precision-drills",
-        "/blog/reading-comprehension-isnt-about-understanding-its-about-insight"
-      ]
-    },
-    {
       "slug": "learn-vocabulary-from-context-competitive-exams",
       "url": "/blog/learn-vocabulary-from-context-competitive-exams",
       "title": "Learn Vocabulary from Context for Competitive Exams",
@@ -1756,12 +1655,6 @@
           "title": "Your Comprehension Is Strong — Yet Your Inferences Are Weak",
           "status": "published",
           "searchIntent": ""
-        },
-        {
-          "slug": "contrast-transitions-cat-reading-comprehension",
-          "title": "Contrast Transitions in CAT RC: Meaning & Practice",
-          "status": "draft",
-          "searchIntent": "Skill-building"
         },
         {
           "slug": "learn-vocabulary-from-context-competitive-exams",

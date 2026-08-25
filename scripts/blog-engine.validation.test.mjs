@@ -5,6 +5,8 @@ import {
   parseImageSources,
   validateArticle,
   validateInternalLinks,
+  sanitizePublicCopy,
+  validateImagePrompt,
 } from "./blog-engine.mjs";
 
 const existingArticle = "/blog/accuracy-in-rc-ignoring-context-could-ruin-your-score";
@@ -107,4 +109,13 @@ test("internal editorial notes and lesson-plan sections fail editorial checks", 
 
   assert.ok(result.editorialIssues.some((issue) => issue.includes("Internal AI/editorial")));
   assert.ok(result.editorialIssues.some((issue) => issue.includes("Lesson-plan")));
+});
+
+test("public-copy sanitization removes internal review language", () => {
+  assert.equal(sanitizePublicCopy("Public opening.\n\nHuman review required.\n\nPublic ending."), "Public opening.\n\nPublic ending.");
+});
+
+test("image prompt validation rejects text and diagram compositions", () => {
+  assert.throws(() => validateImagePrompt("Create a labeled diagram with a word list."), /quality gate/);
+  assert.doesNotThrow(() => validateImagePrompt("Premium photorealistic editorial photograph of a learner weighing two interpretations, no text or diagrams."));
 });

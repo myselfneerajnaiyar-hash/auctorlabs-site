@@ -37,6 +37,14 @@ function imageSummary(images: InlineImage[]) {
   };
 }
 
+function friendlyImageError(error: unknown) {
+  const message = error instanceof Error ? error.message : String(error);
+  if (/insufficient_quota|billing|credit|quota/i.test(message)) return "Image generation unavailable because the OpenAI API organization has insufficient credits.";
+  if (/model.*(?:does not exist|not found|access)|unsupported model/i.test(message)) return "The configured OpenAI image model is unavailable to this API account.";
+  if (/quality gate/i.test(message)) return `The generated image did not meet the visual quality standard after two attempts. ${message.replace(/^.*quality gate:\s*/i, "")}`;
+  return "OpenAI image generation returned an error. Retry the image.";
+}
+
 function briefFor(row: NonNullable<Awaited<ReturnType<typeof getCmsArticle>>>) {
   return row.brief || {
     slug: row.slug,
@@ -68,15 +76,16 @@ async function generateAndStore(
       placement: image.placement,
     });
   } catch (error) {
+    const friendlyError = friendlyImageError(error);
     await updateBlogAssetMetadata(row.id, image.id, {
       assetType,
       prompt: image.prompt,
       altText: image.alt,
       placement: image.placement,
       status: "failed",
-      generationError: error instanceof Error ? error.message : String(error),
+      generationError: friendlyError,
     });
-    throw error;
+    throw new Error(friendlyError);
   }
 }
 
@@ -127,7 +136,14 @@ async function generateInline(admin: BlogAdmin, slug: string, candidate: InlineI
   const row = await draft(slug);
   const images = inlineImages(row.frontmatter);
   const existingIndex = images.findIndex((image) => image.id === candidate.id);
-  const url = await generateAndStore(row, candidate, "inline");
+  let url: string;
+  try { url = await generateAndStore(row, candidate, "inline"); }
+  catch (error) {
+    const failed = { ...candidate, src: "", status: "failed", error: friendlyImageError(error) };
+    if (existingIndex >= 0) images[existingIndex] = failed;
+    else images.push(failed);
+    return saveCmsDraft(admin, slug, { data: { inlineImages: images, inlineImageSummary: imageSummary(images) } });
+  }
   const generated = { ...candidate, src: url, status: "generated", error: "" };
   if (existingIndex >= 0) images[existingIndex] = generated;
   else images.push(generated);
