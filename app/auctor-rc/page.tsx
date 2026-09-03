@@ -2,11 +2,23 @@ import Navbar from "../components/Navbar"
 import { Brain, Zap, BarChart3, Bot } from "lucide-react"
 import ProductDemo from "../components/ProductDemo"
 import Footer from "../components/Footer"
+import AuctorRcDetails, { auctorRcFaqs } from "../components/AuctorRcDetails"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Auctor RC: AI-Adaptive Reading Comprehension Practice",
+  description: "Auctor RC diagnoses RC mistakes and adapts practice for CAT, XAT, CLAT, IIFT, SNAP, NMAT, TISSNET and CUET English.",
+  alternates: { canonical: "https://www.auctorlabs.in/auctor-rc" },
+  openGraph: { type: "website", url: "https://auctorlabs.in/auctor-rc", siteName: "Auctor Labs", title: "Auctor RC: AI-Adaptive Reading Comprehension Practice", description: "Adaptive RC practice, mistake diagnosis, Birbal explanations and Reader DNA for competitive-exam students.", images: [{ url: "https://auctorlabs.in/rc-dashboard.png", alt: "Auctor RC adaptive reading comprehension dashboard" }] },
+};
 
 export default function AuctorRC() {
 
+const faqSchema = { "@context":"https://schema.org", "@type":"FAQPage", mainEntity:auctorRcFaqs.map(([question,answer])=>({"@type":"Question",name:question,acceptedAnswer:{"@type":"Answer",text:answer}})) };
+
 return (
 <>
+<script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(faqSchema).replace(/</g,"\\u003c")}} />
 <Navbar />
 
 <main className="min-h-screen bg-[#0b0f2a] text-white">
@@ -23,7 +35,7 @@ Auctor RC
 
 <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-6">
 Train Your Reading Intelligence
-for CAT RC
+for Competitive-Exam RC
 </h1>
 
 <p className="text-gray-400 text-lg mb-8">
@@ -43,7 +55,7 @@ StartFree Trial →
 </div>
 
 <p className="text-gray-500 text-sm mt-4">
-7 day free trial • Cancel anytime
+Free trial available • Cancel anytime
 </p>
 
 </div>
@@ -67,7 +79,7 @@ className="relative rounded-xl shadow-2xl"
 <section className="max-w-6xl mx-auto px-6 py-10 text-center border-y border-white/10">
 
 <p className="text-gray-400 text-sm mb-4">
-Built for serious CAT & GMAT aspirants
+Built for CAT, XAT, CLAT and other competitive-exam aspirants
 </p>
 
 <div className="flex flex-wrap justify-center gap-10 text-gray-300 text-sm">
@@ -80,6 +92,8 @@ Built for serious CAT & GMAT aspirants
 </div>
 
 </section>
+
+<AuctorRcDetails />
 
 {/* READING INTELLIGENCE */}
 
@@ -135,6 +149,7 @@ speed, inference, reasoning and tone detection.
 
 <img
 src="/reading-intelligence.png"
+alt="Auctor RC reading intelligence skill profile"
 className="relative w-full max-w-none rounded-xl shadow-2xl"
 />
 
@@ -475,11 +490,12 @@ Students Love Auctor RC
 
 <img
 src="/testimonials/student1.jpg"
+alt="Rohan Mehta"
 className="w-20 h-20 rounded-full mx-auto mb-4 object-cover"
 />
 
 <p className="text-gray-300 mb-4">
-"Auctor RC finally made RC practice structured instead of random."
+&ldquo;Auctor RC finally made RC practice structured instead of random.&rdquo;
 </p>
 
 <p className="font-semibold">Rohan Mehta</p>
@@ -497,11 +513,12 @@ CAT Aspirant
 
 <img
 src="/testimonials/student2.jpg"
+alt="Priya Sharma"
 className="w-20 h-20 rounded-full mx-auto mb-4 object-cover"
 />
 
 <p className="text-gray-300 mb-4">
-"The speed gym helped me improve my reading speed significantly."
+&ldquo;The speed gym helped me improve my reading speed significantly.&rdquo;
 </p>
 
 <p className="font-semibold">Priya Sharma</p>
@@ -519,11 +536,12 @@ GMAT Student
 
 <img
 src="/testimonials/student3.jpg"
+alt="Aman Gupta"
 className="w-20 h-20 rounded-full mx-auto mb-4 object-cover"
 />
 
 <p className="text-gray-300 mb-4">
-"Birbal explains RC reasoning much better than typical answer keys."
+&ldquo;Birbal explains RC reasoning much better than typical answer keys.&rdquo;
 </p>
 
 <p className="font-semibold">Aman Gupta</p>
@@ -600,7 +618,7 @@ Students preparing for global exams that demand strong reading ability.
 <section className="max-w-6xl mx-auto px-6 py-28 text-center">
 
 <h2 className="text-4xl font-bold mb-12">
-Start Your 7-Day Free Trial
+Start Your Free Trial
 </h2>
 
 <div className="grid md:grid-cols-3 gap-10 max-w-5xl mx-auto">
@@ -618,7 +636,7 @@ Free Trial
 </p>
 
 <p className="text-gray-400 mb-6">
-Full access for 7 days
+Try the complete training experience before subscribing
 </p>
 
 <ul className="text-gray-300 space-y-2 mb-6 text-sm">
