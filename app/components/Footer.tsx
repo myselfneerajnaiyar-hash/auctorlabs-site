@@ -18,6 +18,9 @@ Auctor Labs
 Building AI-powered learning systems that train
 thinking skills required for competitive exams.
 </p>
+<p className="mt-4 text-sm leading-relaxed text-gray-500">
+Founded by Neeraj sir, with 15-plus years of competitive exam teaching experience.
+</p>
 
 </div>
 

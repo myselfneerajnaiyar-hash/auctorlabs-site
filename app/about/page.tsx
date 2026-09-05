@@ -1,10 +1,28 @@
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "About Auctor Labs | AI Tools for Competitive Exam Prep",
+  description: "Learn how Auctor Labs, founded by educator Neeraj sir, builds AI training tools for reading comprehension and competitive exam preparation.",
+  alternates: { canonical: "https://auctorlabs.in/about" },
+  openGraph: { type: "website", url: "https://auctorlabs.in/about", siteName: "Auctor Labs", title: "About Auctor Labs", description: "AI training tools for competitive-exam preparation, built from over 15 years of classroom experience." },
+}
 
 export default function About() {
 
+const organizationSchema = {
+"@context": "https://schema.org",
+"@type": "Organization",
+name: "Auctor Labs",
+url: "https://auctorlabs.in",
+description: "An ed-tech company building AI training tools for competitive exam preparation in India.",
+founder: { "@type": "Person", name: "Neeraj Kumar Naiyar", description: "Competitive exam educator with over 15 years of classroom experience." },
+}
+
 return (
 <>
+<script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(organizationSchema).replace(/</g,"\\u003c")}} />
 <Navbar />
 
 <main className="min-h-screen bg-[#0b0f2a] text-white overflow-hidden">
@@ -25,6 +43,21 @@ We build AI-powered learning systems designed to train the
 thinking skills required for competitive exams.
 </p>
 
+</section>
+
+{/* COMPANY INTRODUCTION */}
+
+<section className="max-w-6xl mx-auto px-6 py-20" aria-labelledby="what-is-auctor-labs">
+<div className="grid gap-10 rounded-2xl border border-white/10 bg-[#11183d] p-8 md:grid-cols-[0.8fr_1.2fr] md:p-12">
+<div>
+<p className="mb-3 font-semibold text-orange-400">Built from classroom experience</p>
+<h2 id="what-is-auctor-labs" className="text-3xl font-bold md:text-4xl">What is Auctor Labs</h2>
+</div>
+<div className="space-y-5 text-lg leading-relaxed text-gray-400">
+<p>Auctor Labs is an ed-tech company building AI training tools for competitive exam prep in India. The first product is <a href="/auctor-rc" className="font-medium text-orange-400 hover:text-orange-300">Auctor RC</a>, focused on Reading Comprehension. The company was founded by Neeraj sir, who has taught competitive exam students for 15-plus years.</p>
+<p>The starting problem was simple. Most RC prep is the same worksheet model that has existed for twenty years: solve a passage, check the answer key, move to the next passage. Nobody tells the student why they got a question wrong, and nobody adjusts what they practice next based on that gap. Auctor Labs builds tools that do both.</p>
+</div>
+</div>
 </section>
 
 {/* STATS */}
@@ -168,6 +201,7 @@ reading speed, inference ability and reasoning patterns.
 
 <img
 src="/founder.jpeg"
+alt="Neeraj Kumar Naiyar, founder of Auctor Labs"
 className="relative rounded-xl shadow-2xl"
 />
 
