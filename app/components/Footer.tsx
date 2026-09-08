@@ -104,15 +104,13 @@ StartFree Trial
 
 <div className="border-t border-white/10">
 
-<div className="max-w-6xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between text-gray-500 text-sm">
+<div className="max-w-6xl mx-auto px-6 py-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between text-gray-500 text-sm">
 
 <p>
 © 2026 Auctor Labs
 </p>
 
-<p>
-Built with AI for smarter learning
-</p>
+<div className="flex flex-wrap gap-x-5 gap-y-2"><a href="/privacy-policy" className="hover:text-white">Privacy Policy</a><a href="/terms" className="hover:text-white">Terms of Service</a><a href="/data-deletion" className="hover:text-white">Data Deletion</a><span>Built with AI for smarter learning</span></div>
 
 </div>
 
