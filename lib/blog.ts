@@ -8,7 +8,7 @@ export const BLOG_AUTHOR = {
   url: `${SITE_URL}/about`,
 };
 
-export type BlogStatus = "draft" | "review" | "published" | "archived";
+export type BlogStatus = "draft" | "review" | "published" | "unpublished" | "archived";
 export type BlogCategory = "Reading Comprehension" | "Vocabulary" | "Grammar" | "Verbal Ability" | "Critical Reading";
 
 export function normalizeBlogCategory(value?: string): BlogCategory {
@@ -118,33 +118,42 @@ export function getAllBlogPosts() {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
-export async function getBlogPostHybrid(slug: string) {
-  const filePost = getBlogPost(slug);
-  if (filePost) return filePost;
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) return null;
+/** Production repository: Supabase owns every slug it knows; files are legacy-only. */
+export async function getPublishedBlogPostBySlug(slug: string) {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    const filePost = getBlogPost(slug);
+    return filePost?.status === "published" ? filePost : null;
+  }
   try {
-    const { getPublishedCmsPost } = await import("./blog-cms-db");
-    return await getPublishedCmsPost(slug);
+    const { getCmsArticle, cmsRowToPost } = await import("./blog-cms-db");
+    const row = await getCmsArticle(slug);
+    if (row) return row.status === "published" ? cmsRowToPost(row) : null;
+    const legacy = getBlogPost(slug);
+    return legacy?.status === "published" ? legacy : null;
   } catch (error) {
-    console.error("CMS article lookup failed; no file fallback exists for this slug.", error);
+    console.error("Production CMS article lookup failed; refusing an ambiguous filesystem fallback.", error);
     return null;
   }
 }
 
-export async function getAllBlogPostsHybrid() {
+export async function getPublishedBlogPosts() {
   const files = getAllBlogPosts();
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) return files;
   try {
-    const { getPublishedCmsPosts } = await import("./blog-cms-db");
-    const database = await getPublishedCmsPosts();
-    const slugs = new Set(database.map(post => post.slug));
-    return [...database, ...files.filter(post => !slugs.has(post.slug))]
-      .sort((a,b)=>new Date(b.date).getTime()-new Date(a.date).getTime());
+    const { listCmsArticles, cmsRowToPost } = await import("./blog-cms-db");
+    const rows = await listCmsArticles(), ownedSlugs = new Set(rows.map(row => row.slug));
+    const database = rows.filter(row => row.status === "published").map(cmsRowToPost);
+    return mergePublishedBlogPosts(database, files, ownedSlugs);
   } catch (error) {
-    console.error("CMS blog index lookup failed; serving file-based articles only.", error);
-    return files;
+    console.error("Production CMS article listing failed; refusing a potentially stale filesystem fallback.", error);
+    return [];
   }
 }
+
+export function mergePublishedBlogPosts(database:BlogPost[],files:BlogPost[],ownedSlugs:ReadonlySet<string>){return [...database,...files.filter(post=>!ownedSlugs.has(post.slug))].filter(post=>post.status==="published").sort((a,b)=>new Date(b.date).getTime()-new Date(a.date).getTime());}
+
+export const getBlogPostHybrid = getPublishedBlogPostBySlug;
+export const getAllBlogPostsHybrid = getPublishedBlogPosts;
 
 function tokens(post: BlogPost) {
   return new Set(
@@ -155,8 +164,8 @@ function tokens(post: BlogPost) {
   );
 }
 
-export function getRelatedBlogPosts(currentSlug: string, limit = 3) {
-  const posts = getAllBlogPosts();
+export async function getPublishedRelatedPosts(currentSlug: string, limit = 3) {
+  const posts = await getPublishedBlogPosts();
   const current = posts.find((post) => post.slug === currentSlug);
   if (!current) return posts.slice(0, limit);
 
@@ -178,6 +187,8 @@ export function getRelatedBlogPosts(currentSlug: string, limit = 3) {
 
   return [...explicit, ...ranked].slice(0, limit);
 }
+
+export const getRelatedBlogPosts = getPublishedRelatedPosts;
 
 export function absoluteUrl(value?: string) {
   if (!value) return undefined;

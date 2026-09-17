@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 type Heading = {
   id: string;
   text: string;
+  level: number;
 };
 
 export default function TableOfContents({ headings }: { headings: Heading[] }) {
@@ -63,7 +64,7 @@ export default function TableOfContents({ headings }: { headings: Heading[] }) {
 
       <ul className="space-y-3 text-sm pl-4">
         {headings.map((heading) => (
-          <li key={heading.id} className="relative">
+          <li key={heading.id} className={`relative ${heading.level === 3 ? "pl-4" : ""}`}>
             
             {/* 🔥 ACTIVE LEFT BORDER */}
             <span

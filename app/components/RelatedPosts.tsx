@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { getRelatedBlogPosts } from "../../lib/blog";
+import { getPublishedRelatedPosts } from "../../lib/blog";
 
-export default function RelatedPosts({ currentSlug }: { currentSlug: string }) {
-  const related = getRelatedBlogPosts(currentSlug);
+export default async function RelatedPosts({ currentSlug }: { currentSlug: string }) {
+  const related = await getPublishedRelatedPosts(currentSlug);
 
   return (
     <aside className="mt-20" aria-labelledby="related-articles-heading">

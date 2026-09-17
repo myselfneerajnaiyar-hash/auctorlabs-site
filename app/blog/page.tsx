@@ -1,6 +1,6 @@
 import BlogClient from "../components/BlogClient";
 import Navbar from "../components/Navbar";
-import { getAllBlogPostsHybrid } from "../../lib/blog";
+import { getPublishedBlogPosts } from "../../lib/blog";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -30,7 +30,7 @@ type Blog = {
 
 export const dynamic = "force-dynamic";
 export default async function BlogPage() {
-  const blogs: Blog[] = (await getAllBlogPostsHybrid()).map(({ slug, title, description, date, image, category }) => ({
+  const blogs: Blog[] = (await getPublishedBlogPosts()).map(({ slug, title, description, date, image, category }) => ({
     slug,
     title,
     description,

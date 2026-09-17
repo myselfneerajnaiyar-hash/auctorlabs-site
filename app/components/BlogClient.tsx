@@ -21,7 +21,7 @@ export default function BlogClient({ blogs }: { blogs: Blog[] }) {
 
   // ✅ Featured + rest
   const featured = blogs[0];
-  const rest = blogs;
+  const rest = blogs.slice(1);
 
   // ✅ Filter
   const filtered = rest.filter((blog) => {

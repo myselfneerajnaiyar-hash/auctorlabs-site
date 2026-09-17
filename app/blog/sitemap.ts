@@ -1,17 +1,15 @@
 import type { MetadataRoute } from "next";
-import { getAllBlogPosts } from "../../lib/blog";
+import { getPublishedBlogPosts, SITE_URL } from "../../lib/blog";
 
-const BASE_URL = "https://auctorlabs.in";
-
-export default function sitemap(): MetadataRoute.Sitemap {
-  const posts = getAllBlogPosts().map((post) => ({
-    url: `${BASE_URL}/blog/${post.slug}`,
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const posts = (await getPublishedBlogPosts()).map((post) => ({
+    url: `${SITE_URL}/blog/${post.slug}`,
     lastModified: new Date(post.updatedDate || post.date),
   }));
 
   return [
     {
-      url: `${BASE_URL}/blog`,
+      url: `${SITE_URL}/blog`,
       lastModified: new Date(),
     },
     ...posts,

@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test": "node --test scripts/*.test.mjs",
     "blog:audit": "node scripts/blog-engine.mjs audit",
     "blog:registry": "node scripts/blog-engine.mjs registry",
     "blog:check": "node scripts/blog-engine.mjs check",
@@ -16,7 +17,9 @@
     "blog:generate": "node scripts/blog-engine.mjs generate",
     "blog:publish": "node scripts/blog-engine.mjs publish",
     "blog:import-supabase": "node scripts/import-file-blogs-to-supabase.mjs",
-    "blog:roadmap": "node scripts/blog-engine.mjs roadmap"
+    "blog:roadmap": "node scripts/blog-engine.mjs roadmap",
+    "seo:pilot": "node scripts/seo-provider-pilot.mjs",
+    "seo:verify-schema": "node scripts/verify-seo-schema.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.110.0",

@@ -7,17 +7,24 @@ import TableOfContents from "./TableOfContents";
 import RelatedPosts from "./RelatedPosts";
 import BlogPracticeCTA from "./BlogPracticeCTA";
 import BlogArticleHeader from "./BlogArticleHeader";
+import { tocHeadings } from "../../lib/blog-headings.mjs";
+type ArticleHeading = { level: number; text: string; id: string; baseId: string; occurrence: number };
 
 export function extractBlogHeadings(content: string) {
-  return [...content.matchAll(/^##\s+(.*)/gm)].map(match => ({ text: match[1], id: match[1].toLowerCase().replace(/\s+/g, "-") }));
+  return tocHeadings(content);
 }
 
-const mdxComponents = {
-  h2: (props: ComponentProps<"h2">) => {
-    const id = String(props.children).toLowerCase().replace(/\s+/g, "-");
-    return <h2 id={id} className="text-3xl font-bold mt-20 mb-6 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">{props.children}</h2>;
-  },
-  h3: (props: ComponentProps<"h3">) => <h3 className="text-2xl font-semibold mt-10 mb-4">{props.children}</h3>,
+function createMdxComponents(headings: ArticleHeading[]) {
+  let cursor = 0;
+  const takeId = (level: number) => {
+    const index = headings.findIndex((heading, candidate) => candidate >= cursor && heading.level === level);
+    if (index < 0) return undefined;
+    cursor = index + 1;
+    return headings[index].id;
+  };
+  return {
+  h2: (props: ComponentProps<"h2">) => <h2 id={takeId(2)} className="text-3xl font-bold mt-20 mb-6 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">{props.children}</h2>,
+  h3: (props: ComponentProps<"h3">) => <h3 id={takeId(3)} className="text-2xl font-semibold mt-10 mb-4">{props.children}</h3>,
   img: (props: ComponentProps<"img">) => <img {...props} alt={props.alt || ""} className="my-10 rounded-xl shadow-xl border border-white/10 w-full h-auto" />,
   video: (props: ComponentProps<"video">) => <video {...props} controls playsInline className="my-10 w-full rounded-xl shadow-xl border border-white/10" />,
   iframe: (props: ComponentProps<"iframe">) => <div className="my-10 w-full aspect-video rounded-xl overflow-hidden border border-white/10 shadow-xl"><iframe {...props} className="w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen /></div>,
@@ -26,12 +33,12 @@ const mdxComponents = {
   ul: (props: ComponentProps<"ul">) => <ul className="pl-6 my-6 border-l border-white/10">{props.children}</ul>,
   li: (props: ComponentProps<"li">) => <li className="mb-2 text-gray-300">{props.children}</li>,
   blockquote: (props: ComponentProps<"blockquote">) => <div className="my-10 p-6 rounded-xl border border-purple-500/30 bg-gradient-to-r from-purple-500/10 to-indigo-500/10 backdrop-blur text-lg leading-relaxed text-white">{props.children}</div>,
-};
-
-const finalComponents = { h2: mdxComponents.h2, p: mdxComponents.p };
+  };
+}
 
 export default function BlogArticleView({ post }: { post: BlogPost }) {
-  const headings = extractBlogHeadings(post.content);
+  const allHeadings = tocHeadings(post.content), headings = allHeadings;
+  const mdxComponents = createMdxComponents(allHeadings);
   const marker = /^##\s+Final Thought\s*$/m.exec(post.content);
   const beforeCta = marker ? post.content.slice(0, marker.index) : post.content;
   const afterCta = marker ? post.content.slice(marker.index) : "";
@@ -42,7 +49,7 @@ export default function BlogArticleView({ post }: { post: BlogPost }) {
         <nav aria-label="Breadcrumb" className="mb-8 flex items-center gap-2 text-sm text-gray-500"><Link href="/" className="hover:text-gray-300">Home</Link><span aria-hidden="true">/</span><Link href="/blog" className="hover:text-gray-300">Blog</Link><span aria-hidden="true">/</span><span className="truncate text-gray-400" aria-current="page">{post.title}</span></nav>
         <h1 className="text-5xl font-bold leading-tight mb-6">{post.title}</h1>
         <div className="mb-12 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-gray-400"><span>By <Link href="/about" rel="author" className="text-gray-300 hover:text-white">{post.author}</Link></span><span aria-hidden="true">•</span><time dateTime={post.date}>Published {post.date}</time>{post.updatedDate && <><span aria-hidden="true">•</span><time dateTime={post.updatedDate}>Updated {post.updatedDate}</time></>}<span aria-hidden="true">•</span><span>{post.readingTime} min read</span></div>
-        <article className="prose-custom max-w-none w-full"><MDXRemote source={beforeCta} components={mdxComponents} /><BlogPracticeCTA slug={post.slug} />{afterCta && <MDXRemote source={afterCta} components={finalComponents} />}</article>
+        <article className="prose-custom max-w-none w-full"><MDXRemote source={beforeCta} components={mdxComponents} /><BlogPracticeCTA slug={post.slug} />{afterCta && <MDXRemote source={afterCta} components={mdxComponents} />}</article>
         <RelatedPosts currentSlug={post.slug} />
       </div>
       <div className="hidden lg:block col-span-4"><div className="sticky top-24 bg-white/5 border border-white/10 rounded-xl p-5 backdrop-blur-md shadow-[0_0_30px_rgba(255,165,0,0.08)]"><p className="text-sm text-gray-400 mb-4">ON THIS PAGE</p><TableOfContents headings={headings} /></div></div>

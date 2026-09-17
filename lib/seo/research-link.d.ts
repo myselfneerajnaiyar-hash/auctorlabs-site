@@ -1,0 +1,1 @@
+export function attachResearchEvidence(frontmatter:Record<string,unknown>,brief:Record<string,unknown>,research:Record<string,unknown>|null|undefined):{frontmatter:Record<string,unknown>;brief:Record<string,unknown>;context:Record<string,unknown>};

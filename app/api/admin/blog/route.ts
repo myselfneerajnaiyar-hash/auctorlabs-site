@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { isBlogAdmin } from "@/lib/blog-admin-auth";
 import { getStudioData } from "@/lib/blog-engine";
 import { isCmsConfigured, listCmsArticles } from "@/lib/blog-cms-db";
+import {getSeoCorpus} from "@/lib/seo/corpus";
+import {createSupabaseSeoStore} from "@/lib/seo/store.mjs";
 
 export const runtime = "nodejs";
 
@@ -11,7 +13,8 @@ export async function GET(request: Request) {
   }
 
   const refresh = new URL(request.url).searchParams.get("refresh") === "1";
-  const result = await getStudioData({ refresh });
+  const corpus=await getSeoCorpus();
+  const result = await getStudioData({ refresh,corpus });
 
   if (isCmsConfigured()) {
     type StudioPost = (typeof result.posts)[number];
@@ -48,5 +51,10 @@ export async function GET(request: Request) {
     result.posts = [...posts, ...result.posts.filter((post) => !slugs.has(post.slug))];
   }
 
-  return NextResponse.json(result);
+  const seoStore=createSupabaseSeoStore();
+  const researchedKeywords=seoStore?await seoStore.listResearchedKeywords().catch(()=>[]):[];
+  const opportunityActions=seoStore?await seoStore.listOpportunityActions().catch(()=>[]):[];
+  const gscAvailable=seoStore?Boolean((await seoStore.getSearchPerformance({days:90,limit:1}).catch(()=>[])).length):false;
+  const topicIntelligence={...result.topicIntelligence,sourceAvailability:{...result.topicIntelligence.sourceAvailability,actualSearchPerformance:gscAvailable?"AVAILABLE — GSC OBSERVATIONS":"UNAVAILABLE — GSC OBSERVATIONS NOT INGESTED"}};
+  return NextResponse.json({...result,topicIntelligence,researchedKeywords,opportunityActions});
 }

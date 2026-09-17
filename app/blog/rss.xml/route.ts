@@ -1,13 +1,13 @@
-import { getAllBlogPosts, SITE_URL } from "../../../lib/blog";
+import { getPublishedBlogPosts, SITE_URL } from "../../../lib/blog";
 
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
 function escapeXml(value: string) {
   return value.replace(/[<>&'"]/g, (character) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", "'": "&apos;", '"': "&quot;" })[character] || character);
 }
 
-export function GET() {
-  const posts = getAllBlogPosts();
+export async function GET() {
+  const posts = await getPublishedBlogPosts();
   const items = posts.map((post) => `
     <item>
       <title>${escapeXml(post.title)}</title>
