@@ -122,6 +122,10 @@ test("image prompt validation rejects text and diagram compositions", () => {
   assert.doesNotThrow(() => validateImagePrompt("Premium photorealistic editorial photograph of a learner weighing two interpretations, no text or diagrams."));
 });
 
+test("image quality rejection preserves the real quality-gate reason", () => {
+  assert.throws(() => validateImagePrompt("Create a labeled diagram with a word list."), /text-heavy or diagrammatic treatment/);
+});
+
 test("generator relevance accepts the researched CAT VARC topic", () => {
   assert.equal(isRelevantTopic({ topic: "CAT VARC Preparation" }), true);
   assert.equal(topicRelevanceDecision({ topic: "CAT VARC Preparation" }, { manualResearch: true }).allowed, true);

@@ -9,6 +9,7 @@ import {
   planInlineImages,
   removeInlineImageFromMdx,
 } from "./blog-engine";
+import { resolveBirbalImageCandidate } from "./birbal-image-candidate.mjs";
 
 type InlineImage = {
   id: string;
@@ -42,7 +43,7 @@ function friendlyImageError(error: unknown) {
   if (/insufficient_quota|billing|credit|quota/i.test(message)) return "Image generation unavailable because the OpenAI API organization has insufficient credits.";
   if (/model.*(?:does not exist|not found|access)|unsupported model/i.test(message)) return "The configured OpenAI image model is unavailable to this API account.";
   if (/quality gate/i.test(message)) return `The generated image did not meet the visual quality standard after two attempts. ${message.replace(/^.*quality gate:\s*/i, "")}`;
-  return "OpenAI image generation returned an error. Retry the image.";
+  return `Image generation failed: ${message}`;
 }
 
 function briefFor(row: NonNullable<Awaited<ReturnType<typeof getCmsArticle>>>) {
@@ -171,12 +172,13 @@ async function plannedImages(slug: string) {
   return (await planInlineImages(briefFor(row), row.content)) as InlineImage[];
 }
 
-export async function addCmsInlineImage(admin: BlogAdmin, slug: string, placement: string) {
+export async function addCmsInlineImage(admin: BlogAdmin, slug: string, placement: string, explicitBrief = "") {
   const row = await draft(slug);
-  const planned = await plannedImages(slug);
-  const candidate = planned.find((image) => image.placement === placement);
-  if (!candidate) throw new Error("The image planner found no useful image for that section.");
   const images = inlineImages(row.frontmatter);
+  const validPlacements=[...row.content.matchAll(/^##\s+(.+)$/gm)].map(match=>String(match[1]).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,""));
+  let planned:InlineImage[]=[];try{planned=await plannedImages(slug);}catch(error){if(!String(explicitBrief).trim())throw error;}
+  const resolveCandidate=resolveBirbalImageCandidate as unknown as (input:{planned:InlineImage[];placement:string;brief:string;validPlacements:string[];existingIds:string[]})=>InlineImage;
+  const candidate=resolveCandidate({planned,placement,brief:explicitBrief,validPlacements,existingIds:images.map(image=>image.id)});
   const base = candidate.id;
   let suffix = 2;
   while (images.some((image) => image.id === candidate.id)) candidate.id = `${base}-${suffix++}`;
