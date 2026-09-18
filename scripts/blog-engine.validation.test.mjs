@@ -7,6 +7,8 @@ import {
   validateInternalLinks,
   sanitizePublicCopy,
   validateImagePrompt,
+  isRelevantTopic,
+  topicRelevanceDecision,
 } from "./blog-engine.mjs";
 
 const existingArticle = "/blog/accuracy-in-rc-ignoring-context-could-ruin-your-score";
@@ -118,4 +120,28 @@ test("public-copy sanitization removes internal review language", () => {
 test("image prompt validation rejects text and diagram compositions", () => {
   assert.throws(() => validateImagePrompt("Create a labeled diagram with a word list."), /quality gate/);
   assert.doesNotThrow(() => validateImagePrompt("Premium photorealistic editorial photograph of a learner weighing two interpretations, no text or diagrams."));
+});
+
+test("generator relevance accepts the researched CAT VARC topic", () => {
+  assert.equal(isRelevantTopic({ topic: "CAT VARC Preparation" }), true);
+  assert.equal(topicRelevanceDecision({ topic: "CAT VARC Preparation" }, { manualResearch: true }).allowed, true);
+});
+
+test("manual research warns but does not block a low-relevance topic", () => {
+  const decision = topicRelevanceDecision({ topic: "homemade pasta recipes" }, { manualResearch: true });
+  assert.equal(decision.relevant, false);
+  assert.equal(decision.allowed, true);
+  assert.match(decision.warning, /editorial confirmation/i);
+});
+
+test("automatic suggestions still respect the relevance filter", () => {
+  const decision = topicRelevanceDecision({ topic: "homemade pasta recipes" });
+  assert.equal(decision.relevant, false);
+  assert.equal(decision.allowed, false);
+  assert.equal(decision.warning, null);
+});
+
+test("generator relevance still rejects clearly unrelated topics", () => {
+  assert.equal(isRelevantTopic({ topic: "cryptocurrency trading strategy" }), false);
+  assert.equal(isRelevantTopic({ topic: "homemade pasta recipes" }), false);
 });
