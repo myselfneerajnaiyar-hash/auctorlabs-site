@@ -1,0 +1,3 @@
+export type BirbalProgress={phase:"image"|"applying"|"complete";index:number;total:number;imageIndex:number;imageTotal:number;operation?:Record<string,string>};
+export function runBirbalOperations<T>(operations:Record<string,string>[],execute:(operation:Record<string,string>,index:number)=>Promise<T>,onProgress?:(progress:BirbalProgress)=>void):Promise<({ok:true;operation:Record<string,string>;value:T}|{ok:false;operation:Record<string,string>;error:string})[]>;
+export function createBirbalMutationGuard():{readonly active:boolean;run<T>(task:()=>Promise<T>):Promise<{started:false}|{started:true;value:T}>};

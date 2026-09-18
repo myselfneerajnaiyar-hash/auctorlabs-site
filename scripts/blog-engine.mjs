@@ -116,7 +116,7 @@ function detectedGapScore(item, map) {
   const ranked=map.clusters.map(cluster=>({cluster,score:Math.max(similarity(item,cluster.name),...cluster.missingArticles.map(topic=>similarity(item,topic)))})).sort((a,b)=>b.score-a.score);
   return ranked[0]?.score >= .15 ? ranked[0].cluster.contentGapScore : 50;
 }
-function client() { if (!process.env.OPENAI_API_KEY) throw new Error("OPENAI_API_KEY is required for AI editorial commands."); return new OpenAI({ apiKey: process.env.OPENAI_API_KEY }); }
+function client() { if (!process.env.OPENAI_API_KEY) throw new Error("OPENAI_API_KEY is required for AI editorial commands."); return new OpenAI({ apiKey: process.env.OPENAI_API_KEY,timeout:Number(process.env.OPENAI_REQUEST_TIMEOUT_MS||60000),maxRetries:0 }); }
 function normalizeMetaDescription(value) {
   let text=String(value||"").replace(/\s+/g," ").trim();
   const supplement=" Learn practical methods, worked examples, and exam-focused guidance.";
