@@ -13,6 +13,7 @@ import { refreshProviderEvidence } from "../lib/seo/refresh.mjs";
 import { createSerpApiProvider } from "../lib/seo/providers/serpapi.mjs";
 import { createGoogleTrendsProvider } from "../lib/seo/providers/google-trends.mjs";
 import { createDataForSeoProvider } from "../lib/seo/providers/dataforseo.mjs";
+import { resolveOpenAiTextModel } from "../lib/openai-model.mjs";
 import { buildCannibalizationEvidence, buildContentGapEvidence, calculateOpportunityScore } from "../lib/seo/evidence.mjs";
 import { buildResearchIntelligence } from "../lib/seo/intelligence.mjs";
 import { isValidResearchKeyword, unavailableProviderResult } from "../lib/seo/provider.mjs";
@@ -24,8 +25,7 @@ const STRATEGY = path.join(SOURCE_CONTENT,"content-strategy.json"), REGISTRY = p
 const AUDIT = path.join(CONTENT,"content-audit.json"), OPPORTUNITIES = path.join(CONTENT,"topic-opportunities.json");
 const CLUSTERS = path.join(SOURCE_CONTENT,"content-clusters.json"), ROADMAP = path.join(CONTENT,"content-roadmap.json");
 const TOPIC_INTELLIGENCE = path.join(CONTENT,"topic-intelligence.json");
-const CONFIGURED_TEXT_MODEL = process.env.OPENAI_TEXT_MODEL || "gpt-5-mini";
-const TEXT_MODEL = CONFIGURED_TEXT_MODEL.toLowerCase() === "gpt-5.6-luna" ? "gpt-5-mini" : CONFIGURED_TEXT_MODEL;
+const TEXT_MODEL = resolveOpenAiTextModel();
 const IMAGE_MODEL = process.env.OPENAI_IMAGE_MODEL || "gpt-image-1";
 const MIN_SCORE = Number(process.env.BLOG_MIN_QUALITY_SCORE || 80);
 const SEO_STORE=createSupabaseSeoStore(),SERP_PROVIDER=createSerpApiProvider(),TRENDS_PROVIDER=createGoogleTrendsProvider({client:googleTrends}),KEYWORD_PROVIDER=createDataForSeoProvider();
