@@ -14,6 +14,7 @@ import { resolveBirbalImageCandidate } from "./birbal-image-candidate.mjs";
 type InlineImage = {
   id: string;
   type: string;
+  role?: "human" | "supporting_visual";
   placement: string;
   purpose: string;
   prompt: string;
@@ -110,7 +111,7 @@ export async function regenerateCmsFeaturedImage(admin: BlogAdmin, slug: string)
     prompt,
     alt: String(row.frontmatter.imageAlt || row.title),
   }, "featured");
-  return saveCmsDraft(admin, slug, { data: { image: url } });
+  return saveCmsDraft(admin, slug, { data: { image: url, featuredImageRole: "human" } });
 }
 
 export async function removeCmsInlineImage(admin: BlogAdmin, slug: string, id: string) {
@@ -133,7 +134,7 @@ export async function removeCmsInlineImage(admin: BlogAdmin, slug: string, id: s
   });
 }
 
-async function generateInline(admin: BlogAdmin, slug: string, candidate: InlineImage) {
+async function generateInline(admin: BlogAdmin, slug: string, candidate: InlineImage, stage = false) {
   const row = await draft(slug);
   const images = inlineImages(row.frontmatter);
   const existingIndex = images.findIndex((image) => image.id === candidate.id);
@@ -145,9 +146,12 @@ async function generateInline(admin: BlogAdmin, slug: string, candidate: InlineI
     else images.push(failed);
     return saveCmsDraft(admin, slug, { data: { inlineImages: images, inlineImageSummary: imageSummary(images) } });
   }
-  const generated = { ...candidate, src: url, status: "generated", error: "" };
+  const generated = { ...candidate, src: url, status: stage ? "proposed" : "generated", error: "" };
   if (existingIndex >= 0) images[existingIndex] = generated;
   else images.push(generated);
+  if (stage) return saveCmsDraft(admin, slug, {
+    data: { inlineImages: images, inlineImageSummary: imageSummary(images) },
+  });
   const withoutPrevious = removeInlineImageFromMdx(row.content, candidate.id);
   const placed = insertInlineImageAtSection(withoutPrevious, generated);
   if (!placed.resolved) {
@@ -160,11 +164,23 @@ async function generateInline(admin: BlogAdmin, slug: string, candidate: InlineI
   });
 }
 
+export async function acceptCmsInlineImage(admin: BlogAdmin, slug: string, id: string) {
+  const row = await draft(slug);
+  const images = inlineImages(row.frontmatter);
+  const index = images.findIndex(image => image.id === id && image.status === "proposed" && image.src);
+  if (index < 0) throw new Error(`Proposed image not found: ${id}`);
+  const image = { ...images[index], status: "generated" };
+  const placed = insertInlineImageAtSection(row.content, image);
+  if (!placed.resolved) throw new Error(`Heading '${image.placement}' no longer exists.`);
+  images[index] = image;
+  return saveCmsDraft(admin, slug, { content: placed.content, data: { inlineImages: images, inlineImageSummary: imageSummary(images) } });
+}
+
 export async function regenerateCmsInlineImage(admin: BlogAdmin, slug: string, id: string) {
   const row = await draft(slug);
   const image = inlineImages(row.frontmatter).find((item) => item.id === id);
   if (!image) throw new Error(`Inline image not found: ${id}`);
-  return generateInline(admin, slug, { ...image, status: "generating", error: "" });
+  return generateInline(admin, slug, { ...image, status: "generating", error: "" }, image.status === "proposed");
 }
 
 async function plannedImages(slug: string) {
@@ -177,17 +193,23 @@ export async function addCmsInlineImage(admin: BlogAdmin, slug: string, placemen
   const images = inlineImages(row.frontmatter);
   const validPlacements=[...row.content.matchAll(/^##\s+(.+)$/gm)].map(match=>String(match[1]).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,""));
   let planned:InlineImage[]=[];try{planned=await plannedImages(slug);}catch(error){if(!String(explicitBrief).trim())throw error;}
-  const resolveCandidate=resolveBirbalImageCandidate as unknown as (input:{planned:InlineImage[];placement:string;brief:string;validPlacements:string[];existingIds:string[]})=>InlineImage;
-  const candidate=resolveCandidate({planned,placement,brief:explicitBrief,validPlacements,existingIds:images.map(image=>image.id)});
+  const resolveCandidate=resolveBirbalImageCandidate as unknown as (input:{planned:InlineImage[];placement:string;brief:string;validPlacements:string[];existingIds:string[];sectionHeading:string})=>InlineImage;
+  const sectionHeading=[...row.content.matchAll(/^##\s+(.+)$/gm)].find(match=>String(match[1]).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")===placement)?.[1]||"";
+  const candidate=resolveCandidate({planned,placement,brief:explicitBrief,validPlacements,existingIds:images.map(image=>image.id),sectionHeading});
+  if (explicitBrief.trim()) {
+    const supporting = /\b(?:diagram|comparison|comparative|contrast|flowchart|framework|process|infographic|chart|split|composite|illustration|arrows|cards)\b/i.test(explicitBrief) && !/\b(?:photo|photograph|student|learner|person|people)\b/i.test(explicitBrief);
+    candidate.role = supporting ? "supporting_visual" : "human";
+    candidate.prompt = `Create a relevant ${supporting ? "supporting editorial visual (diagram, comparison, or illustration is allowed)" : "human-centered editorial image"} for section ${sectionHeading}. Approved visual brief: ${explicitBrief}. Preserve the approved concept and article relevance. Avoid unrelated decoration, unsafe content, and severe visual artifacts.`;
+  } else candidate.role ||= "human";
   const base = candidate.id;
   let suffix = 2;
   while (images.some((image) => image.id === candidate.id)) candidate.id = `${base}-${suffix++}`;
-  return generateInline(admin, slug, candidate);
+  return generateInline(admin, slug, candidate, true);
 }
 
 export async function planCmsInlineImages(admin: BlogAdmin, slug: string) {
   const planned = await plannedImages(slug);
   let result = await saveCmsDraft(admin, slug, {});
-  for (const image of planned) result = await generateInline(admin, slug, image);
+  for (const image of planned) result = await generateInline(admin, slug, image, true);
   return result;
 }

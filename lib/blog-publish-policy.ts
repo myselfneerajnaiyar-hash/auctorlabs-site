@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any -- CMS JSON fields are runtime-shaped. */
 import { validateArticleHeadings } from "./blog-headings.mjs";
+import { editorialRequirements } from "./blog-editorial-requirements.mjs";
 const technicalRequiredFields = ["title", "description", "date", "author"];
 const internalCopyPattern = /human review required|AI reviewer|editorial review|model-generated|content brief|production note|SEO score|\bdraft\b|this article was generated|image-generation instructions?|notes? to (?:the )?editor|placeholder text|internal instructions?/i;
 
@@ -27,6 +28,11 @@ export function publicationTechnicalBlockers(row: any, assets: any[] = [], valid
   if (missing.length) blockers.push(`Required article fields are missing: ${missing.join(", ")}.`);
   blockers.push(...validateArticleHeadings(row.content).issues);
   if (validation?.invalidInternalLinks?.length) blockers.push(`Broken internal links: ${validation.invalidInternalLinks.join(", ")}.`);
+  if (validation?.validInternalUrls) {
+    const state = editorialRequirements(row, assets, validation.validInternalUrls);
+    if (!state.humanReady) blockers.push(`At least 2 accepted human-centered images are required (${state.humanImages}/2).`);
+    if (!state.linksReady) blockers.push("At least 1 contextual link to a different published Auctor page is required.");
+  }
   const featuredAsset = assets.find((asset: any) => asset.asset_type === "featured" || asset.image_key === "featured");
   if (data.image && (!featuredAsset || featuredAsset.status !== "generated" || !featuredAsset.public_url || data.image !== featuredAsset.public_url)) {
     blockers.push("Featured image is not persisted as a generated CMS asset.");

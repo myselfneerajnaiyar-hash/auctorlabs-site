@@ -9,6 +9,7 @@ import {
   validateImagePrompt,
   isRelevantTopic,
   topicRelevanceDecision,
+  completeInlineImagePlan,
 } from "./blog-engine.mjs";
 
 const existingArticle = "/blog/accuracy-in-rc-ignoring-context-could-ruin-your-score";
@@ -117,13 +118,22 @@ test("public-copy sanitization removes internal review language", () => {
   assert.equal(sanitizePublicCopy("Public opening.\n\nHuman review required.\n\nPublic ending."), "Public opening.\n\nPublic ending.");
 });
 
-test("image prompt validation rejects text and diagram compositions", () => {
-  assert.throws(() => validateImagePrompt("Create a labeled diagram with a word list."), /quality gate/);
+test("image prompt validation permits a relevant diagram brief", () => {
+  assert.doesNotThrow(() => validateImagePrompt("Create a labeled diagram with a word list."));
   assert.doesNotThrow(() => validateImagePrompt("Premium photorealistic editorial photograph of a learner weighing two interpretations, no text or diagrams."));
 });
 
-test("image quality rejection preserves the real quality-gate reason", () => {
-  assert.throws(() => validateImagePrompt("Create a labeled diagram with a word list."), /text-heavy or diagrammatic treatment/);
+test("image planner preserves a supporting visual and supplies two human slots", () => {
+  const sections=[{id:"one",heading:"One"},{id:"two",heading:"Two"},{id:"three",heading:"Three"}];
+  const support={id:"diagram",role:"supporting_visual",placement:"three",prompt:"Relevant diagram"};
+  const plan=completeInlineImagePlan([support],sections);
+  assert.equal(plan.filter(image=>image.role==="human").length,2);
+  assert.equal(plan.filter(image=>image.role==="supporting_visual").length,1);
+  assert.equal(plan.find(image=>image.id==="diagram").prompt,"Relevant diagram");
+});
+
+test("image prompt validation still requires an approved visual brief", () => {
+  assert.throws(() => validateImagePrompt(""), /visual brief is empty/);
 });
 
 test("generator relevance accepts the researched CAT VARC topic", () => {

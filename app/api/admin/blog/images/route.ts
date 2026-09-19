@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getBlogAdmin } from "@/lib/blog-admin-auth";
 import {
   addCmsInlineImage,
+  acceptCmsInlineImage,
   planCmsInlineImages,
   regenerateCmsFeaturedImage,
   regenerateCmsInlineImage,
@@ -23,6 +24,7 @@ export async function POST(request: Request) {
     if (action === "plan-inline") return NextResponse.json(await planCmsInlineImages(admin, safeSlug));
     if (action === "regenerate-inline") return NextResponse.json(await regenerateCmsInlineImage(admin, safeSlug, String(id || "")));
     if (action === "remove-inline") return NextResponse.json(await removeCmsInlineImage(admin, safeSlug, String(id || "")));
+    if (action === "accept-inline") return NextResponse.json(await acceptCmsInlineImage(admin, safeSlug, String(id || "")));
     if (action === "add-inline") return NextResponse.json(await addCmsInlineImage(admin, safeSlug, String(placement || "")));
     return NextResponse.json({ error: "Unknown image action." }, { status: 400 });
   } catch (error) {
