@@ -34,7 +34,7 @@ registerHooks({
       export async function listCmsAssets(){return structuredClone(db.assets)}
       export async function listCmsArticles(){return [structuredClone(db.row)]}
       export async function archiveCmsArticle(){throw new Error("Unexpected archive")}
-      export async function updateBlogAssetMetadata(){throw new Error("Unexpected asset change")}
+      export async function updateBlogAssetMetadata(article,id,changes){const asset=db.assets.find(item=>item.image_key===id);if(!asset)throw new Error("Unknown asset");Object.assign(asset,changes)}
       export async function uploadBlogAsset(){throw new Error("Unexpected image generation")}
       export async function updateCmsArticle(admin,slug,changes,version){
         if(version!==db.row.updated_at)throw new Error("Stale version");

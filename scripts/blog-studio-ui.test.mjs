@@ -13,9 +13,9 @@ const { createElement, act } = await import("react");
 const { createRoot } = await import("react-dom/client");
 const { default: BlogStudio } = await import("../app/admin/blog/studio.tsx");
 const { getCmsDraft, saveCmsDraft, publishCmsDraft } = await import("../lib/blog-cms-actions.ts");
-const { acceptCmsInlineImage } = await import("../lib/blog-cms-images.ts");
+const { acceptCmsInlineImage, removeCmsInlineImage } = await import("../lib/blog-cms-images.ts");
 const admin = { id: "test-admin", role: "owner" };
-let root, calls, scrolls, pendingDraft, withoutWarnings, pendingSave, saveFailure, draftWaits, birbalWait, imageWait, researchWait, jobResponse;
+let draftTransform, root, calls, scrolls, pendingDraft, withoutWarnings, pendingSave, saveFailure, draftWaits, birbalWait, imageWait, researchWait, jobResponse;
 const originalFetch = globalThis.fetch;
 dom.window.HTMLElement.prototype.scrollIntoView = function(options) {
   assert.ok(this.isConnected, "scroll target must already be committed to the DOM");
@@ -28,7 +28,7 @@ function button(label) {
 }
 async function click(label) { await act(async () => button(label).click()); }
 async function setup(options) {
-  fixture(options); calls = []; scrolls = []; pendingDraft = null; withoutWarnings = false; pendingSave = null; saveFailure = false; draftWaits=new Map(); birbalWait=null; imageWait=null; researchWait=null; jobResponse=null;window.scrollTo({top:0});
+  fixture(options); draftTransform=draft=>draft; calls = []; scrolls = []; pendingDraft = null; withoutWarnings = false; pendingSave = null; saveFailure = false; draftWaits=new Map(); birbalWait=null; imageWait=null; researchWait=null; jobResponse=null;window.scrollTo({top:0});
   globalThis.confirm = () => true;
   globalThis.fetch = async (url, init = {}) => {
     calls.push({ url, ...init });
@@ -46,13 +46,14 @@ async function setup(options) {
       body = init.method === "PUT" ? await saveCmsDraft(admin, "current", JSON.parse(init.body)) : await getCmsDraft("current");
       body.internalLinkRecommendations = [{ targetArticle: "Published", url: "/blog/published", anchor: "related reading" }];
       if (withoutWarnings) { body.data.publishWarnings = []; body.data.publishEligibilityIssues = body.data.publishEligibilityIssues.filter(i => i.severity === "blocker"); }
-    } else if (url === "/api/admin/blog/images") {if(imageWait)await imageWait;body = await acceptCmsInlineImage(admin, "current", JSON.parse(init.body).id);}
-    else if (url === "/api/admin/blog/birbal") {if(birbalWait)await birbalWait;body={reply:"A targeted proposal",proposal:[{type:"replace_text",target:"related reading",replacement:"focused reading",summary:"Improve the selected passage"}]};}
+    } else if (url === "/api/admin/blog/images") {if(imageWait)await imageWait;const input=JSON.parse(init.body);body = input.action==="remove-inline"?await removeCmsInlineImage(admin,"current",input.id):await acceptCmsInlineImage(admin, "current",input.id);}
+    else if (url === "/api/admin/blog/birbal") {if(birbalWait)await birbalWait;if(JSON.parse(init.body).action){body={draft:await getCmsDraft("current")}}else body={reply:"A targeted proposal",proposal:[{type:"replace_text",target:"related reading",replacement:"focused reading",summary:"Improve the selected passage"}]};}
     else if (url === "/api/admin/blog/keyword-research") {if(researchWait)await researchWait;body={keyword:"reading practice",provider:"test",status:"SUCCESS",freshness:"FRESH",data:null,partialErrors:[],error:null};}
     else if (url === "/api/admin/blog/generate") body={jobId:"job-1"};
     else if (url === "/api/admin/blog/status/job-1") body=jobResponse||{id:"job-1",status:"processing",stages:{}};
     else if (url === "/api/admin/blog/publish") body = await publishCmsDraft(admin, "current");
     else throw new Error(`Unexpected request: ${url}`);
+    if(url.includes("/draft/"))body=draftTransform(body);
     return { ok: true, json: async () => body };
   };
   root = createRoot(document.getElementById("root"));
@@ -124,7 +125,7 @@ test("accepting a persisted proposed human image refreshes readiness without reo
   cms.assets.push({ image_key: proposal.id, asset_type: "inline", status: "generated", public_url: proposal.src });
   await click("Review / Edit");
   assert.equal(button("Publish").disabled, true);
-  await click("Keep and insert");
+  await click("Images");await click("Keep and insert");
   assert.equal(button("Publish").disabled, false);
   assert.equal((await getCmsDraft("current")).data.editorialRequirements.humanImages, 2);
   assert.equal(scrolls.length, 1, "image acceptance should not move the review viewport");
@@ -133,7 +134,7 @@ test("accepting a persisted proposed human image refreshes readiness without reo
 test("a contextual link enables Publish only after Save & Revalidate", async () => {
   await setup({ link: false });
   await click("Review / Edit");
-  await click("Insert in article");
+  await click("Links");await click("Insert in article");
   assert.equal(button("Publish").disabled, true);
   assert.match(document.getElementById("publish-status").textContent, /Save & Revalidate/);
   await click("Save & Revalidate");
@@ -216,7 +217,7 @@ test("typing during a save remains unsaved after the older response arrives",asy
 });
 
 test("Back to Library confirms unsaved navigation and retains the open draft",async()=>{
-  await setup({link:false});await click("Review / Edit");await click("Insert in article");
+  await setup({link:false});await click("Review / Edit");await click("Links");await click("Insert in article");
   assert.equal(saveStatus(),"Unsaved changes");
   let confirmations=0;globalThis.confirm=()=>{confirmations++;return false};
   const previousScrolls=scrolls.length;await click("Back to Library");
@@ -243,11 +244,12 @@ test("readiness disclosure shows exact server blockers beside the sticky actions
 test("browser departure warns only while local changes are unsaved",async()=>{
   await setup({link:false});await click("Review / Edit");
   let event=new window.Event("beforeunload",{cancelable:true});window.dispatchEvent(event);assert.equal(event.defaultPrevented,false);
-  await click("Insert in article");event=new window.Event("beforeunload",{cancelable:true});window.dispatchEvent(event);assert.equal(event.defaultPrevented,true);
+  await click("Links");await click("Insert in article");event=new window.Event("beforeunload",{cancelable:true});window.dispatchEvent(event);assert.equal(event.defaultPrevented,true);
   await click("Save & Revalidate");event=new window.Event("beforeunload",{cancelable:true});window.dispatchEvent(event);assert.equal(event.defaultPrevented,false);
 });
 
 function workspaceVisible(){return document.getElementById("draft-review")?.hidden===false}
+function activeTool(){return document.querySelector('nav[aria-label="Editorial tools"] [aria-pressed="true"]')?.textContent}
 async function openOther(){await act(async()=>document.querySelector('#article-other button').click())}
 
 test("Studio and article are distinct visible contexts; returning restores position without refetching",async()=>{
@@ -272,7 +274,7 @@ test("Studio and article are distinct visible contexts; returning restores posit
 });
 
 test("Birbal input, conversation and proposal survive navigation; another article gets separate state",async()=>{
-  await setup();await click("Review / Edit");await click("Improve introduction");
+  await setup();await click("Review / Edit");await click("Birbal");await click("Improve introduction");
   const panel=document.querySelector('[aria-label="Birbal editorial assistant"]');
   assert.match(panel.textContent,/Improve the selected passage/);
   await editField(panel.querySelector("input"),"A follow-up question");
@@ -288,7 +290,7 @@ test("Birbal input, conversation and proposal survive navigation; another articl
 });
 
 test("unsaved Article A cannot be silently replaced when Article B is opened from Studio",async()=>{
-  await setup({link:false});await click("Review / Edit");await click("Insert in article");
+  await setup({link:false});await click("Review / Edit");await click("Links");await click("Insert in article");
   await click("Back to Library");globalThis.confirm=()=>false;await openOther();
   assert.equal(calls.filter(c=>c.url==="/api/admin/blog/draft/other").length,0);
   await click("Review / Edit");assert.ok(workspaceVisible());assert.equal(saveStatus(),"Unsaved changes");
@@ -306,7 +308,7 @@ test("overlapping article loads ignore stale responses and duplicate opens do no
 
 test("a running Birbal operation survives navigation and prevents cross-article mutation",async()=>{
   await setup();await click("Review / Edit");let resolve;
-  birbalWait=new Promise(done=>{resolve=done});await click("Improve introduction");
+  birbalWait=new Promise(done=>{resolve=done});await click("Birbal");await click("Improve introduction");
   await click("Back to Library");await openOther();
   assert.equal(calls.filter(c=>c.url==="/api/admin/blog/draft/other").length,0);
   await click("Review / Edit");assert.equal(button("Ask Birbal").disabled,true);
@@ -321,7 +323,7 @@ test("image acceptance finishes in the retained draft while Studio is visible",a
   cms.row.frontmatter.inlineImages.push(proposal);
   cms.assets.push({image_key:proposal.id,asset_type:"inline",status:"generated",public_url:proposal.src});
   await click("Review / Edit");let resolve;imageWait=new Promise(done=>{resolve=done});
-  await click("Keep and insert");await click("Back to Library");
+  await click("Images");await click("Keep and insert");await click("Back to Library");
   await act(async()=>resolve());
   assert.equal(document.getElementById("studio-context").hidden,false,"completion must not switch contexts");
   await click("Review / Edit");assert.equal(button("Publish").disabled,false);
@@ -351,4 +353,81 @@ test("generation polling survives context changes and completion does not replac
   assert.equal(calls.filter(c=>c.url==="/api/admin/blog/draft/other").length,0);
   await click("Back to Library");await click("Open generated draft");
   assert.equal(header().querySelector("h2").textContent,"Article B");
+});
+
+test("Content defaults on each new article; tools are exclusive and preserve the single article preview",async()=>{
+  await setup();await click("Review / Edit");assert.equal(activeTool(),"Content");
+  const preview=document.querySelector('iframe[title="Article preview"]'),count=calls.length;
+  for(const tool of ["Review","Images","Links","SEO","Birbal","Content"]){
+    await click(tool);assert.equal(activeTool(),tool);
+    assert.equal(document.querySelectorAll('[id^="tool-"]:not([hidden])').length,tool==="Content"?0:1);
+    assert.equal(document.querySelector('iframe[title="Article preview"]'),preview);
+    assert.equal(document.querySelectorAll('#article-content').length,1);
+  }
+  assert.equal(calls.length,count,"switching tools must not issue requests");
+  await click("SEO");await click("Back to Library");await openOther();assert.equal(activeTool(),"Content");
+});
+
+for(const label of ["Fix with Birbal","Fix all"])test(`Review ${label} routes proposals into the persistent Birbal conversation`,async()=>{
+  await setup({link:false});await click("Review / Edit");await click("Review");
+  const review=document.querySelector('#tool-review');assert.match(review.textContent,/Blockers/);assert.match(review.textContent,/Warnings/);assert.match(review.textContent,/Improvements/);assert.match(review.textContent,/contextual link/);
+  await click(label);assert.equal(activeTool(),"Birbal");
+  const panel=document.querySelector('[aria-label="Birbal editorial assistant"]');assert.match(panel.textContent,/A targeted proposal/);assert.match(panel.textContent,/Improve the selected passage/);
+  await editField(panel.querySelector('input'),"Keep this follow-up");
+  await click("Images");await click("SEO");await click("Birbal");assert.equal(panel.querySelector('input').value,"Keep this follow-up");assert.match(panel.textContent,/Improve the selected passage/);
+  assert.equal(calls.filter(c=>c.url==="/api/admin/blog/birbal").length,1);
+  await click("Cancel");assert.doesNotMatch(panel.textContent,/Birbal proposes:/);assert.match(panel.textContent,/A targeted proposal/);
+});
+
+test("Birbal Apply and Undo retain their existing request contracts across tool switches",async()=>{
+  await setup();await click("Review / Edit");await click("Birbal");await click("Improve introduction");await click("Links");await click("Birbal");await click("Apply changes");
+  assert.match(document.getElementById('tool-birbal').textContent,/Birbal updated the article/);await click("Undo");
+  const requests=calls.filter(c=>c.url==="/api/admin/blog/birbal").map(c=>JSON.parse(c.body));
+  assert.equal(requests.length,3);assert.equal(requests[1].action,"apply");assert.equal(requests[1].operations.length,1);assert.equal(requests[2].action,"undo");assert.ok(requests.every(r=>r.slug==="current"));
+});
+
+test("Images show each asset once and discard a proposal through the existing image handler",async()=>{
+  await setup({humans:1,supporting:true});const proposal={id:"proposal",role:"human",status:"proposed",src:"https://cdn.test/proposal.png",placement:"insight",alt:"Learner"};
+  cms.row.frontmatter.inlineImages.push(proposal);cms.assets.push({image_key:proposal.id,asset_type:"inline",status:"generated",public_url:proposal.src});
+  await click("Review / Edit");await click("Images");
+  const manager=document.getElementById('tool-images');assert.match(manager.textContent,/Needs decision/);assert.match(manager.textContent,/Accepted/);assert.match(manager.textContent,/Failed/);
+  for(const id of ['proposal','human-0','diagram'])assert.equal(manager.querySelectorAll(`[data-image-id="${id}"]`).length,1);
+  await act(async()=>[...manager.querySelectorAll("button")].find(b=>b.textContent==="Discard").click());assert.equal(manager.querySelector('[data-image-id="proposal"]'),null);assert.equal(button("Publish").disabled,true);
+  const requests=calls.filter(c=>c.url==="/api/admin/blog/images");assert.equal(requests.length,1);assert.equal(JSON.parse(requests[0].body).action,"remove-inline");
+});
+
+test("Links show inserted state immediately and require server revalidation after removal",async()=>{
+  await setup({link:false});await click("Review / Edit");await click("Links");await click("Insert in article");
+  assert.match(document.getElementById('tool-links').textContent,/awaiting revalidation/);assert.equal(button("Publish").disabled,true);
+  await click("Save & Revalidate");assert.match(document.getElementById('tool-links').textContent,/VERIFIED/);assert.match(document.getElementById('tool-links').textContent,/Internal links: 1\/1 required/);
+  await click("Remove link");assert.equal(saveStatus(),"Unsaved changes");assert.match(document.getElementById('tool-links').textContent,/No internal links in the article/);
+  await click("Save & Revalidate");assert.equal(button("Publish").disabled,true);assert.match(document.getElementById('tool-links').textContent,/Internal links: 0\/1 required/);
+});
+
+test("Links cannot count a self, invalid, or unpublished destination toward readiness",async()=>{
+  await setup({link:false});
+  draftTransform=draft=>({...draft,internalLinkRecommendations:[{targetArticle:'Self',url:'/blog/current',anchor:'related reading'},{targetArticle:'Invalid',url:'https://invalid.test',anchor:'related reading'}]});
+  await click("Review / Edit");await click("Links");assert.doesNotMatch(document.getElementById('tool-links').textContent,/Self/);await click("Insert in article");assert.equal(saveStatus(),"Saved");
+  await click("Edit Article");await editField(document.querySelector('[aria-label="Article content"]'),cms.row.content+'\n\n[Unknown](/blog/unpublished) [Self](/blog/current)');
+  await click("Save & Revalidate");assert.equal(button("Publish").disabled,true);assert.match(document.getElementById('tool-links').textContent,/BROKEN/);
+});
+
+test("SEO edits persist across tools and save through the existing draft endpoint",async()=>{
+  await setup();await click("Review / Edit");await click("SEO");
+  await editField(document.querySelector('[aria-label="Primary keyword"]'),"reading practice");await editField(document.querySelector('[aria-label="Meta description"]'),"A revised SEO description.");
+  await click("Content");await click("Birbal");await click("SEO");assert.equal(document.querySelector('[aria-label="Primary keyword"]').value,"reading practice");assert.equal(saveStatus(),"Unsaved changes");
+  await click("Save & Revalidate");assert.equal(saveStatus(),"Saved");const request=calls.find(c=>c.method==="PUT");assert.equal(JSON.parse(request.body).data.description,"A revised SEO description.");assert.equal(document.querySelectorAll('[aria-label="Primary keyword"]').length,1);
+});
+
+test("Links retain saved suggestions without duplicating generated recommendations",async()=>{
+  await setup({link:false});
+  draftTransform=draft=>({...draft,data:{...draft.data,internalLinkStates:[{url:'/blog/published',anchor:'related reading',state:'SUGGESTED'},{url:'/blog/additional',anchor:'practice',state:'SUGGESTED'}]}});
+  await click("Review / Edit");await click("Links");const panel=document.getElementById('tool-links');
+  assert.equal([...panel.querySelectorAll('button')].filter(b=>b.textContent==='Insert in article').length,2);assert.match(panel.textContent,/additional/);
+});
+
+test("running Birbal work and its proposal survive switching to Content without duplicate requests",async()=>{
+  await setup();await click("Review / Edit");await click("Birbal");let resolve;birbalWait=new Promise(done=>{resolve=done});await click("Improve introduction");
+  await click("Images");await click("Content");assert.equal(button("Save & Revalidate").disabled,true);await act(async()=>resolve());assert.equal(activeTool(),"Content");
+  await click("Birbal");assert.match(document.getElementById('tool-birbal').textContent,/Improve the selected passage/);assert.equal(calls.filter(c=>c.url==='/api/admin/blog/birbal').length,1);
 });
