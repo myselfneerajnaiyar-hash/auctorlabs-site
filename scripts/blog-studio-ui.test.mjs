@@ -390,7 +390,7 @@ test("Images show each asset once and discard a proposal through the existing im
   await setup({humans:1,supporting:true});const proposal={id:"proposal",role:"human",status:"proposed",src:"https://cdn.test/proposal.png",placement:"insight",alt:"Learner"};
   cms.row.frontmatter.inlineImages.push(proposal);cms.assets.push({image_key:proposal.id,asset_type:"inline",status:"generated",public_url:proposal.src});
   await click("Review / Edit");await click("Images");
-  const manager=document.getElementById('tool-images');assert.match(manager.textContent,/Needs decision/);assert.match(manager.textContent,/Accepted/);assert.match(manager.textContent,/Failed/);
+  const manager=document.getElementById('tool-images');assert.match(manager.textContent,/Needs Review/);assert.match(manager.textContent,/Accepted/);assert.match(manager.textContent,/Failed/);
   for(const id of ['proposal','human-0','diagram'])assert.equal(manager.querySelectorAll(`[data-image-id="${id}"]`).length,1);
   await act(async()=>[...manager.querySelectorAll("button")].find(b=>b.textContent==="Discard").click());assert.equal(manager.querySelector('[data-image-id="proposal"]'),null);assert.equal(button("Publish").disabled,true);
   const requests=calls.filter(c=>c.url==="/api/admin/blog/images");assert.equal(requests.length,1);assert.equal(JSON.parse(requests[0].body).action,"remove-inline");

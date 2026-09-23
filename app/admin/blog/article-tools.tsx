@@ -1,5 +1,6 @@
 "use client";
 /* eslint-disable @typescript-eslint/no-explicit-any -- Existing server-evaluated draft metadata. */
+import ImageTools, { type ImageInput } from "./image-tools";
 import type { ReactNode } from "react";
 import { extractArticleBodyLinks } from "@/lib/blog-links.mjs";
 
@@ -10,7 +11,7 @@ type Props = {
   active: ArticleTool; onActivate: (tool:ArticleTool)=>void;
   draft: {slug:string;content:string;data:Record<string,any>;internalLinkRecommendations?:Link[]};
   dirty:boolean; busy:boolean; placement:string; headings:{label:string;value:string}[];
-  onPlacement:(value:string)=>void; onImage:(action:string,id?:string)=>void;
+  onPlacement:(value:string)=>void; onImage:(action:string,id?:string,input?:ImageInput)=>Promise<void>|void;
   onInsert:(link:Link)=>void; onRemoveLink:(url:string)=>void;
   onMetadata:(field:string,value:string)=>void; onFix:()=>void; onRetryImages:()=>void;
   onAsk:(prompt:string)=>void; birbal:ReactNode;
@@ -25,7 +26,6 @@ export default function ArticleTools(props:Props) {
   const fixes:any[]=data.auditReport?.fixes||[];
   const findings=[...blockers,...warnings];
   const improvements=fixes.filter(fix=>!findings.includes(fix.message));
-  const images:any[]=data.inlineImages||[];
   const links=extractArticleBodyLinks(draft.content);
   const suggestions:Link[]=(data.internalLinkStates||[]).filter((item:any)=>item.state==="SUGGESTED").map((item:any)=>({targetArticle:item.targetArticle||item.url,url:item.url,anchor:item.anchor||"",context:item.context||"",reason:item.reason||""}));
   const recommendations=[...new Map([...suggestions,...(draft.internalLinkRecommendations||[])].map(link=>[link.url,link])).values()].filter(link=>link.url!==`/blog/${draft.slug}`&&!links.some(item=>item.url===link.url));
@@ -45,13 +45,7 @@ export default function ArticleTools(props:Props) {
       </Panel>
     </section>
     <section id="tool-images" aria-label="Images tool" hidden={active!=="Images"} className="space-y-4">
-      <Panel title="Images"><p>Human images: {data.editorialRequirements?.humanImages||0}/2 required</p><p className="mt-1 text-xs">Supporting visuals are optional. Counts reflect the saved article.</p></Panel>
-      {([ ["Needs decision",images.filter(i=>i.status==="proposed")], ["Accepted",images.filter(i=>i.status==="generated")], ["Failed",images.filter(i=>["failed","placement-unresolved"].includes(i.status))], ["Planned",images.filter(i=>!["proposed","generated","failed","placement-unresolved","removed"].includes(i.status))] ] as [string,any[]][]).map(([title,items])=><Panel key={title} title={title}>
-        {title==="Accepted"&&data.image&&<div data-image-id="featured" className="mb-3 space-y-2"><p>Featured human image</p><img src={data.image} alt={data.imageAlt||""} className="w-full rounded-lg"/><div className="flex flex-wrap gap-3"><button disabled={busy} onClick={()=>props.onImage("regenerate-featured")} className={action}>Replace</button><button disabled={busy} onClick={()=>props.onImage("remove-featured")} className={action}>Remove</button></div></div>}
-        {!items.length&&!(title==="Accepted"&&data.image)&&<p className="text-xs text-slate-500">No {title.toLowerCase()} images.</p>}
-        {items.map(item=><div key={item.id} data-image-id={item.id} className="mb-3 space-y-2 border-t border-white/10 pt-3"><p>{item.purpose||"Inline image"}</p><p className="text-xs">{item.role||"Unclassified"} · {item.placement} · {item.status}</p>{item.src&&<img src={item.src} alt={item.alt||""} className="w-full rounded-lg"/>}{item.error&&<details className="text-xs text-red-300"><summary>Failure details</summary><p className="mt-2">{item.error}</p></details>}<div className="flex flex-wrap gap-3">{item.status==="proposed"&&<button disabled={busy} onClick={()=>props.onImage("accept-inline",item.id)} className={action}>Keep and insert</button>}<button disabled={busy} onClick={()=>props.onImage("remove-inline",item.id)} className={action}>{item.status==="proposed"?"Discard":"Remove"}</button><button disabled={busy} onClick={()=>props.onImage("regenerate-inline",item.id)} className={action}>{title==="Failed"?"Retry":title==="Accepted"?"Replace":"Regenerate"}</button></div></div>)}
-      </Panel>)}
-      <Panel title="Image actions">{!data.image&&<><button disabled={busy} onClick={()=>props.onImage("regenerate-featured")} className={action}>Generate featured image</button>{data.featuredImageError&&<details className="mt-2 text-xs text-red-300"><summary>Featured image failure</summary>{data.featuredImageError}</details>}</>}<label className="mt-3 block text-xs">Add image after section<select value={props.placement} onChange={event=>props.onPlacement(event.target.value)} className="mt-2 w-full min-w-0 rounded-lg border border-white/10 bg-[#101522] p-2">{props.headings.map(item=><option key={item.value} value={item.value}>{item.label}</option>)}</select></label><button disabled={busy||!props.placement} onClick={()=>props.onImage("add-inline")} className={`mt-3 ${action}`}>+ Add Image</button>{!images.length&&<button disabled={busy} onClick={()=>props.onImage("plan-inline")} className={`mt-3 block ${action}`}>Plan images for this draft</button>}</Panel>
+      <ImageTools key={draft.slug} data={data} busy={busy} dirty={dirty} placement={props.placement} headings={props.headings} onPlacement={props.onPlacement} onImage={props.onImage}/>
     </section>
     <section id="tool-links" aria-label="Links tool" hidden={active!=="Links"} className="space-y-4">
       <Panel title="Internal links"><p>Internal links: {data.editorialRequirements?.internalLinks?.length||0}/1 required</p><p className="mt-2 text-xs">Verified count reflects the saved article. Save &amp; Revalidate after inserting or removing links.</p></Panel>

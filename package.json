@@ -36,7 +36,8 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "resend": "^6.17.1",
-    "slugify": "^1.6.9"
+    "slugify": "^1.6.9",
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.2",

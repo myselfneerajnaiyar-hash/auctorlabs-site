@@ -84,6 +84,17 @@ try {
       else {assert.ok(layout.nav.bottom<=layout.article.top);if(layout.panel){assert.ok(layout.panel.x>=layout.article.right);assert.ok(layout.article.width>layout.panel.width);assert.ok(Math.abs(layout.panel.top-layout.article.top)<2)}}
     }
     assert.equal(await evaluate('window.calls.length===window.initialCalls'),true,'tool navigation has no requests');
+    await click('Images');await click('Replace');
+    assert.equal(await evaluate(`!!document.querySelector('[aria-label="Replace image"] textarea')`),true);
+    assert.equal(await evaluate(`document.querySelector('[aria-label="Replace image"] textarea').value`), '');
+    await click('Cancel');await click('+ Add Image');await click('Generate with Birbal');
+    assert.equal(await evaluate(`!!document.querySelector('textarea[placeholder^="Tell Birbal"]')`),true);
+    await click('Upload Image');assert.equal(await evaluate('!!document.querySelector("input[type=file]")'),true);
+    await evaluate('document.querySelector("button[aria-label^=Preview]").click()');
+    await wait('!!document.querySelector("dialog[open]")');
+    assert.equal(await evaluate('(()=>{const r=document.querySelector("dialog").getBoundingClientRect();return r.width<=innerWidth&&r.height<=innerHeight&&document.querySelector("dialog").scrollHeight<=document.querySelector("dialog").clientHeight})()'),true);
+    await click('Close preview');
+    assert.equal(await evaluate('window.calls.length===window.initialCalls'),true,'image forms and preview do not generate blindly');
     await click('Review');await click('Fix with Birbal');
     assert.equal(await evaluate('document.querySelector("[aria-pressed=true]").textContent'),'Birbal');
     await wait('document.getElementById("tool-birbal").textContent.includes("Improve Article A")');
@@ -98,7 +109,7 @@ try {
     await click('Return to article: Article A');assert.equal(await evaluate('document.querySelector("[aria-pressed=true]").textContent'),'SEO');
     await click('Back to Library');await evaluate('document.querySelector("#article-b button").click()');await wait('document.querySelector("header[aria-label] h2")?.textContent==="Article B"');
     assert.equal(await evaluate('document.querySelector("[aria-pressed=true]").textContent'),'Content');assert.equal(await evaluate('document.getElementById("tool-birbal").textContent.includes("Improve Article A")'),false);
-    console.log(`PASS ${name} (${width}x${height}): tool layout, article continuity, no overflow, Review to Birbal, retained state, sticky header, library navigation, article isolation.`);
+    console.log(`PASS ${name} (${width}x${height}): tool layout, image prompt/upload/preview, no modal scrolling, article continuity, no overflow, Review to Birbal, retained state, sticky header, library navigation, article isolation.`);
 
   }
 } finally {

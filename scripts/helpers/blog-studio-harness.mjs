@@ -35,13 +35,21 @@ registerHooks({
       export async function listCmsArticles(){return [structuredClone(db.row)]}
       export async function archiveCmsArticle(){throw new Error("Unexpected archive")}
       export async function updateBlogAssetMetadata(article,id,changes){const asset=db.assets.find(item=>item.image_key===id);if(!asset)throw new Error("Unknown asset");Object.assign(asset,changes)}
-      export async function uploadBlogAsset(){throw new Error("Unexpected image generation")}
+      export async function uploadBlogAsset(article,id,bytes,metadata){if(!db.imageEngine)throw new Error("Unexpected image generation");const url="https://cdn.test/"+id+".png";db.assets.push({image_key:id,asset_type:metadata.assetType,status:"generated",public_url:url,storage_path:id,alt_text:metadata.altText});db.uploads.push({article,id,bytes,metadata});return url;}
       export async function updateCmsArticle(admin,slug,changes,version){
         if(version!==db.row.updated_at)throw new Error("Stale version");
         db.writes.push(structuredClone(changes));
         db.row={...db.row,...structuredClone(changes),updated_at:String(Number(db.row.updated_at)+1)};
         return structuredClone(db.row);
       }`;
+    if (url.endsWith("/lib/blog-engine.ts")) source = `
+      export * from "${new URL("scripts/blog-engine.mjs",root).href}";
+      import * as real from "${new URL("scripts/blog-engine.mjs",root).href}";
+      const db=globalThis.__blogStudioTestCms;
+      export async function generateImageBytes(...args){return db.imageEngine?db.imageEngine.generate(...args):real.generateImageBytes(...args)}
+      export async function validateGeneratedImage(...args){return db.imageEngine?db.imageEngine.validate(...args):real.validateGeneratedImage(...args)}
+      export async function planInlineImages(...args){return db.imageEngine?db.imageEngine.plan(...args):real.planInlineImages(...args)}
+    `;
     if (source !== undefined) return { source, format: "module", shortCircuit: true };
     if (/\.(tsx|ts)$/.test(url) && url.startsWith(root.href)) {
       return { source: ts.transpileModule(readFileSync(new URL(url), "utf8"), {

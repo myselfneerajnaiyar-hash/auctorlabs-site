@@ -12,7 +12,7 @@ export function referencedCmsAssets(row: any, assets: any[]) {
   const data = row.frontmatter || {}, content = String(row.content || ""), inlineImages = Array.isArray(data.inlineImages) ? data.inlineImages : [];
   return assets.filter((asset: any) => {
     if (asset.status === "removed") return false;
-    if (asset.asset_type === "featured" || asset.image_key === "featured") return Boolean(data.image);
+    if (asset.asset_type === "featured" || asset.image_key === "featured") return Boolean(data.image) && asset.image_key === (data.featuredImageKey || "featured");
     const image = inlineImages.find((item: any) => item.id === asset.image_key);
     if (!image || image.status === "removed") return false;
     return Boolean((image.src && content.includes(image.src)) || content.includes(`inline-image:${image.id}`));
@@ -33,7 +33,7 @@ export function publicationTechnicalBlockers(row: any, assets: any[] = [], valid
     if (!state.humanReady) blockers.push(`At least 2 accepted human-centered images are required (${state.humanImages}/2).`);
     if (!state.linksReady) blockers.push("At least 1 contextual link to a different published Auctor page is required.");
   }
-  const featuredAsset = assets.find((asset: any) => asset.asset_type === "featured" || asset.image_key === "featured");
+  const featuredAsset = assets.find((asset: any) => asset.image_key === (data.featuredImageKey || "featured"));
   if (data.image && (!featuredAsset || featuredAsset.status !== "generated" || !featuredAsset.public_url || data.image !== featuredAsset.public_url)) {
     blockers.push("Featured image is not persisted as a generated CMS asset.");
   }
