@@ -1,5 +1,6 @@
 "use client";
 /* eslint-disable @typescript-eslint/no-explicit-any -- CMS payloads contain validated JSON frontmatter from Supabase. */
+import { apiErrorMessage } from "@/lib/blog-api-error.mjs";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import SeoControlCenter,{ResearchDecisionCard,type ResearchDecision} from "./seo-control-center";
 import BirbalPanel,{type BirbalMessage,type BirbalHandle} from "./birbal-panel";
@@ -19,7 +20,7 @@ type Draft={slug:string;version:string;data:Record<string,any>;content:string;ch
 type BirbalProgress={phase:"image"|"applying"|"complete";index:number;total:number;imageIndex:number;imageTotal:number};
 const audiences=["General / Multi-exam","CAT","XAT","GMAT","GRE","CUET","CLAT","IPMAT","NMAT","SNAP","SSC","Banking","Other"];
 const stageNames:Record<string,string>={researching:"Researching topic",brief:"Creating content brief",writing:"Writing article",reviewing:"Reviewing article",improving:"Improving article",featuredImage:"Generating featured image",imagePlanning:"Planning inline images",inlineImages:"Generating inline images",finalizing:"Finalizing draft"};
-async function api<T=any>(url:string,options?:RequestInit):Promise<T>{const response=await fetch(url,{...options,headers:{"content-type":"application/json",...(options?.headers||{})}});let body:unknown;try{body=await response.json()}catch{throw new Error("The server returned an unreadable response. Please retry.")}if(!body||typeof body!=="object")throw new Error("The server returned an invalid response. Please retry.");if(!response.ok)throw new Error("error" in body&&typeof body.error==="string"?body.error:"Request failed.");return body as T;}
+async function api<T=any>(url:string,options?:RequestInit):Promise<T>{const response=await fetch(url,{...options,headers:{"content-type":"application/json",...(options?.headers||{})}});let body:unknown;try{body=await response.json()}catch{throw new Error("The server returned an unreadable response. Please retry.")}if(!body||typeof body!=="object")throw new Error("The server returned an invalid response. Please retry.");if(!response.ok)throw new Error(apiErrorMessage(body,response.status));return body as T;}
 function headingOptions(content:string){return [...content.matchAll(/^##\s+(.+)$/gm)].map(match=>({label:match[1],value:match[1].toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")}));}
 function birbalImageFailure(draft:Draft,operation:{type:string;target:string}){const images:(InlineImage&{replaces?:string;target?:string})[]=draft.data.inlineImages||[];const image=[...images].reverse().find(item=>operation.type==="image_replace_featured"?item.target==="featured":operation.type==="image_replace_inline"?item.replaces===operation.target||item.id===operation.target:item.placement===operation.target);return image&&["failed","placement-unresolved"].includes(image.status)?image.error||"Image generation failed.":"";}
 

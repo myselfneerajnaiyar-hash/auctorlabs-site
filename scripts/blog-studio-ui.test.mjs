@@ -15,7 +15,7 @@ const { default: BlogStudio } = await import("../app/admin/blog/studio.tsx");
 const { getCmsDraft, saveCmsDraft, publishCmsDraft } = await import("../lib/blog-cms-actions.ts");
 const { acceptCmsInlineImage, removeCmsInlineImage } = await import("../lib/blog-cms-images.ts");
 const admin = { id: "test-admin", role: "owner" };
-let draftTransform, root, calls, scrolls, pendingDraft, withoutWarnings, pendingSave, saveFailure, draftWaits, birbalWait, imageWait, researchWait, jobResponse;
+let draftTransform, root, calls, scrolls, pendingDraft, withoutWarnings, pendingSave, saveFailure, draftWaits, birbalWait, imageWait, researchWait, jobResponse, researchFailure;
 const originalFetch = globalThis.fetch;
 dom.window.HTMLElement.prototype.scrollIntoView = function(options) {
   assert.ok(this.isConnected, "scroll target must already be committed to the DOM");
@@ -28,7 +28,7 @@ function button(label) {
 }
 async function click(label) { await act(async () => button(label).click()); }
 async function setup(options) {
-  fixture(options); draftTransform=draft=>draft; calls = []; scrolls = []; pendingDraft = null; withoutWarnings = false; pendingSave = null; saveFailure = false; draftWaits=new Map(); birbalWait=null; imageWait=null; researchWait=null; jobResponse=null;window.scrollTo({top:0});
+  fixture(options); draftTransform=draft=>draft; calls = []; scrolls = []; pendingDraft = null; withoutWarnings = false; pendingSave = null; saveFailure = false; draftWaits=new Map(); birbalWait=null; imageWait=null; researchWait=null; jobResponse=null;researchFailure=null;window.scrollTo({top:0});
   globalThis.confirm = () => true;
   globalThis.fetch = async (url, init = {}) => {
     calls.push({ url, ...init });
@@ -48,7 +48,7 @@ async function setup(options) {
       if (withoutWarnings) { body.data.publishWarnings = []; body.data.publishEligibilityIssues = body.data.publishEligibilityIssues.filter(i => i.severity === "blocker"); }
     } else if (url === "/api/admin/blog/images") {if(imageWait)await imageWait;const input=JSON.parse(init.body);body = input.action==="remove-inline"?await removeCmsInlineImage(admin,"current",input.id):await acceptCmsInlineImage(admin, "current",input.id);}
     else if (url === "/api/admin/blog/birbal") {if(birbalWait)await birbalWait;if(JSON.parse(init.body).action){body={draft:await getCmsDraft("current")}}else body={reply:"A targeted proposal",proposal:[{type:"replace_text",target:"related reading",replacement:"focused reading",summary:"Improve the selected passage"}]};}
-    else if (url === "/api/admin/blog/keyword-research") {if(researchWait)await researchWait;body={keyword:"reading practice",provider:"test",status:"SUCCESS",freshness:"FRESH",data:null,partialErrors:[],error:null};}
+    else if (url === "/api/admin/blog/keyword-research") {if(researchWait)await researchWait;if(researchFailure)return{ok:false,status:researchFailure.status,json:async()=>researchFailure.body};body={keyword:"reading practice",provider:"test",status:"SUCCESS",freshness:"FRESH",data:null,partialErrors:[],error:null};}
     else if (url === "/api/admin/blog/generate") body={jobId:"job-1"};
     else if (url === "/api/admin/blog/status/job-1") body=jobResponse||{id:"job-1",status:"processing",stages:{}};
     else if (url === "/api/admin/blog/publish") body = await publishCmsDraft(admin, "current");
@@ -430,4 +430,17 @@ test("running Birbal work and its proposal survive switching to Content without 
   await setup();await click("Review / Edit");await click("Birbal");let resolve;birbalWait=new Promise(done=>{resolve=done});await click("Improve introduction");
   await click("Images");await click("Content");assert.equal(button("Save & Revalidate").disabled,true);await act(async()=>resolve());assert.equal(activeTool(),"Content");
   await click("Birbal");assert.match(document.getElementById('tool-birbal').textContent,/Improve the selected passage/);assert.equal(calls.filter(c=>c.url==='/api/admin/blog/birbal').length,1);
+});
+
+
+test("keyword research HTTP 429 displays structured quota explanation and clears loading",async()=>{
+ await setup();researchFailure={status:429,body:{error:{code:"QUOTA_EXCEEDED",message:"Daily keyword research limit reached. Try again tomorrow."}}};
+ await editField(document.querySelector('[aria-label="Target keyword"]'),"CAT RC practice");await click("Research Keyword");
+ const panel=document.getElementById("keyword-research");assert.match(panel.textContent,/Daily keyword research limit reached/);assert.doesNotMatch(panel.textContent,/Request failed/);assert.equal(button("Research Keyword").disabled,false);
+ const request=calls.find(call=>call.url==="/api/admin/blog/keyword-research");assert.deepEqual(JSON.parse(request.body),{keyword:"CAT RC practice"});assert.equal(request.method,"POST");
+});
+test("keyword research missing error message cannot expose nested details",async()=>{
+ await setup();researchFailure={status:429,body:{error:{details:{password:"private-test-password"},stack:"private-test-stack"}}};
+ await editField(document.querySelector('[aria-label="Target keyword"]'),"CAT RC practice");await click("Research Keyword");
+ const panel=document.getElementById("keyword-research");assert.match(panel.textContent,/Too many requests/);assert.doesNotMatch(panel.textContent,/private-test/);assert.equal(button("Research Keyword").disabled,false);
 });
