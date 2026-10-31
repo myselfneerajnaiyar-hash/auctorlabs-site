@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { appAttributionHref } from "../../lib/app-attribution";
 
 const featureLinks = [
   ["Daily RC Workout", "/features/daily-rc-workout"],
@@ -90,7 +91,7 @@ export default function Navbar() {
         {/* CTA Button */}
         <div className="hidden md:block">
           <a
-            href="https://rc.auctorlabs.in/signup"
+            href={appAttributionHref("/signup", "navbar_try_rc")}
             target="_blank"
             rel="noopener noreferrer"
             className="bg-orange-500 hover:bg-orange-600 px-4 py-2 rounded-lg text-sm font-medium transition hover:scale-105"
@@ -167,7 +168,7 @@ export default function Navbar() {
           </Link>
 
           <a
-            href="https://rc.auctorlabs.in/signup"
+            href={appAttributionHref("/signup", "navbar_try_rc_mobile")}
             target="_blank"
             rel="noopener noreferrer"
             className="bg-orange-500 px-4 py-2 rounded-lg w-fit"

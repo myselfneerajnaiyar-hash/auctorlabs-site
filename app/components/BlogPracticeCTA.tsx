@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
+import { blogAppAttributionHref } from "../../lib/app-attribution";
 
 const HOME_URL = "https://auctorlabs.in";
-const SIGNUP_URL = "https://rc.auctorlabs.in/login";
 
 type Theme = "accuracy" | "inference" | "tone" | "speed" | "strategy";
 
@@ -71,6 +71,7 @@ const practiceCopy: Record<Theme, { skill: string; action: string; signupAnchor:
 };
 
 export default function BlogPracticeCTA({ slug }: { slug: string }) {
+  const signupUrl = blogAppAttributionHref(slug);
   const theme = getTheme(slug);
   const copy = practiceCopy[theme];
   let related = relatedByTheme[theme];
@@ -94,7 +95,7 @@ export default function BlogPracticeCTA({ slug }: { slug: string }) {
           Auctor Labs
         </Link>{" "}
         are designed around this kind of deliberate skill-building. If you want a focused next step, you can{" "}
-        <Link href={SIGNUP_URL} className="text-orange-400 underline decoration-orange-400/40 underline-offset-4 hover:text-orange-300">
+        <Link href={signupUrl} className="text-orange-400 underline decoration-orange-400/40 underline-offset-4 hover:text-orange-300">
           {copy.signupAnchor}
         </Link>{" "}
         and use the feedback to guide the next session. For a complementary perspective, read about{" "}
@@ -108,7 +109,7 @@ export default function BlogPracticeCTA({ slug }: { slug: string }) {
       </p>
 
       <Link
-        href={SIGNUP_URL}
+        href={signupUrl}
         aria-label="Start practising CAT reading comprehension with Auctor RC"
         className="group block overflow-hidden rounded-2xl border border-white/10 bg-[#090e22] shadow-2xl shadow-indigo-950/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-4 focus-visible:ring-offset-[#0B0F1A]"
       >

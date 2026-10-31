@@ -5,7 +5,8 @@ import { notFound } from "next/navigation";
 import { ArrowRight, Check, Target } from "lucide-react";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
-import { featurePages, getFeaturePage, SIGNUP_URL, SITE_URL } from "../../../lib/feature-pages";
+import { featurePages, getFeaturePage, SITE_URL } from "../../../lib/feature-pages";
+import { appAttributionHref } from "../../../lib/app-attribution";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -40,6 +41,15 @@ export default async function FeaturePage({ params }: PageProps) {
   const { slug } = await params;
   const feature = getFeaturePage(slug);
   if (!feature) notFound();
+  const contentPrefix: Record<string, string> = {
+    "daily-rc-workout": "daily_workout",
+    "speed-drills": "speed_drills",
+    "reading-comprehension-generator": "rc_generator",
+    "vocabulary-lab": "vocabulary_lab",
+    "birbal-editorial-decoder": "birbal_decoder",
+    "precision-drills": "precision_drills",
+  };
+  const content = contentPrefix[slug] || slug.replace(/-/g, "_");
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -65,7 +75,7 @@ export default async function FeaturePage({ params }: PageProps) {
               <h1 className="max-w-4xl text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl">{feature.title}</h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-300">{feature.hero}</p>
               <div className="mt-9 flex flex-wrap items-center gap-4">
-                <a href={SIGNUP_URL} className="inline-flex min-h-12 items-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-red-500 px-6 py-3 font-semibold shadow-lg shadow-orange-950/30 transition hover:-translate-y-0.5">
+                <a href={appAttributionHref("/signup", `${content}_hero`)} className="inline-flex min-h-12 items-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-red-500 px-6 py-3 font-semibold shadow-lg shadow-orange-950/30 transition hover:-translate-y-0.5">
                   Start Practising Free <ArrowRight size={18} />
                 </a>
                 <Link href="/auctor-rc" className="px-2 py-3 font-medium text-purple-300 hover:text-purple-200">Explore Auctor RC</Link>
@@ -190,7 +200,7 @@ export default async function FeaturePage({ params }: PageProps) {
           <div className="mx-auto max-w-5xl rounded-3xl border border-orange-400/20 bg-gradient-to-br from-purple-500/20 via-indigo-500/15 to-orange-500/15 p-8 text-center sm:p-14">
             <h2 className="text-3xl font-bold sm:text-4xl">Ready to practise smarter?</h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-300">Build your CAT VARC skills with Auctor RC. Your practice continues in the separate Auctor RC application.</p>
-            <a href={SIGNUP_URL} className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-xl bg-orange-500 px-7 py-3 font-semibold transition hover:bg-orange-600">
+            <a href={appAttributionHref("/signup", `${content}_bottom`)} className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-xl bg-orange-500 px-7 py-3 font-semibold transition hover:bg-orange-600">
               Start Practising Free <ArrowRight size={18} />
             </a>
           </div>

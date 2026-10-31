@@ -15,6 +15,7 @@ import {
   UserRoundSearch,
 } from "lucide-react";
 import Image from "next/image";
+import { appAttributionHref } from "../../lib/app-attribution";
 
 const capabilities = [
   { title: "Daily Workout", description: "A structured 30-minute session so a student never has to decide what to practice; they just start.", icon: BookOpenCheck },
@@ -88,7 +89,7 @@ export default function AuctorRcDetails() {
             <h1 className="mt-7 max-w-3xl text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl">AI-adaptive Reading Comprehension training<span className="block text-orange-400">for competitive exams.</span></h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-300">Auctor RC tracks what a student gets wrong, why they get it wrong, and adjusts future practice around that specific gap.</p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <a href="https://rc.auctorlabs.in/signup" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl bg-orange-500 px-7 py-4 font-semibold text-white shadow-lg shadow-orange-950/30 transition hover:-translate-y-0.5 hover:bg-orange-600">Try Auctor RC <ArrowRight className="h-5 w-5" aria-hidden="true" /></a>
+              <a href={appAttributionHref("/signup", "auctor_rc_hero")} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl bg-orange-500 px-7 py-4 font-semibold text-white shadow-lg shadow-orange-950/30 transition hover:-translate-y-0.5 hover:bg-orange-600">Try Auctor RC <ArrowRight className="h-5 w-5" aria-hidden="true" /></a>
               <a href="#how-auctor-solves-it" className="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-7 py-4 font-semibold text-white transition hover:border-white/25 hover:bg-white/10">See how it works</a>
             </div>
           </div>

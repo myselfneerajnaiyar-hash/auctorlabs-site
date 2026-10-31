@@ -59,7 +59,7 @@ export async function POST(req: Request) {
     <div style="margin-top:40px;text-align:center;">
 
       <a
-        href="https://rc.auctorlabs.in/login?next=cat&free=1"
+        href="https://rc.auctorlabs.in/signup?next=cat&free=1&utm_source=email&utm_medium=email&utm_campaign=oct_push&utm_content=testseries_free_mock&source=email"
         style="
           background:#f97316;
           color:white;

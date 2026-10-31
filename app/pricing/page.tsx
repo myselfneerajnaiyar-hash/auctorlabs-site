@@ -1,171 +1,73 @@
-import Navbar from "../components/Navbar"
-import Footer from "../components/Footer"
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { appAttributionHref } from "../../lib/app-attribution";
+
+const plans = [
+  { id: "monthly", name: "Monthly", price: "₹399", detail: "Flexible monthly access", featured: false },
+  { id: "quarterly", name: "3 Month", price: "₹799", detail: "Focused preparation", featured: true },
+  { id: "half_yearly", name: "Half-Yearly", price: "₹1,299", detail: "Six months of structured practice", featured: false },
+  { id: "yearly", name: "Yearly", price: "₹1,999", detail: "Best value for a full year", featured: false },
+];
+
+const sharedFeatures = [
+  "Daily RC workouts",
+  "Speed reading gym",
+  "Birbal AI mentor",
+  "Performance analytics",
+  "Unlimited RC practice",
+];
 
 export default function Pricing() {
+  return (
+    <>
+      <Navbar />
+      <main className="min-h-screen bg-[#0b0f2a] text-white">
+        <section className="mx-auto max-w-6xl px-6 pb-16 pt-32 text-center sm:pt-36">
+          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-orange-400">Auctor RC plans</p>
+          <h1 className="mb-6 text-4xl font-black sm:text-5xl">Choose your preparation plan</h1>
+          <p className="mx-auto max-w-2xl text-lg leading-8 text-gray-400">
+            Choose a plan, then review the current offers and complete checkout securely in Auctor RC.
+          </p>
+          <a
+            href={appAttributionHref("/signup", "pricing_free_trial")}
+            className="mt-8 inline-flex rounded-xl bg-green-500 px-6 py-3 font-semibold text-white transition hover:bg-green-600"
+          >
+            Start Free Trial
+          </a>
+        </section>
 
-return (
-<>
-<Navbar />
+        <section aria-label="Subscription plans" className="mx-auto max-w-7xl px-6 pb-24">
+          <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+            {plans.map((plan) => (
+              <article
+                key={plan.id}
+                className={`relative flex flex-col rounded-2xl border p-7 text-center ${plan.featured ? "border-orange-400 bg-gradient-to-b from-orange-500/15 to-[#0f1735] shadow-[0_0_40px_rgba(249,115,22,0.14)]" : "border-white/10 bg-[#0f1735]"}`}
+              >
+                {plan.featured && <span className="absolute right-4 top-4 rounded-full bg-orange-500 px-3 py-1 text-xs font-bold">POPULAR</span>}
+                <h2 className="mt-4 text-2xl font-bold">{plan.name}</h2>
+                <p className="mt-5 text-4xl font-black">{plan.price}</p>
+                <p className="mt-2 min-h-6 text-sm text-gray-400">{plan.detail}</p>
+                <ul className="my-8 flex-1 space-y-3 text-left text-sm text-gray-300">
+                  {sharedFeatures.map((feature) => <li key={feature}>✓ {feature}</li>)}
+                  {plan.id !== "monthly" && <li>✓ AI RC Generator and full CAT practice library</li>}
+                </ul>
+                <a
+                  href={appAttributionHref("/pricing", `pricing_${plan.id}`, { plan: plan.id })}
+                  className={`inline-flex min-h-12 items-center justify-center rounded-xl px-5 py-3 font-semibold transition ${plan.featured ? "bg-orange-500 hover:bg-orange-600" : "bg-[#1a2454] hover:bg-[#243080]"}`}
+                >
+                  Choose {plan.name}
+                </a>
+              </article>
+            ))}
+          </div>
 
-<main className="min-h-screen bg-[#0b0f2a] text-white">
-
-{/* HERO */}
-
-<section className="max-w-6xl mx-auto px-6 py-28 text-center">
-
-<h1 className="text-5xl font-bold mb-6">
-Start Your 7 Day Free Trial
-</h1>
-
-<p className="text-gray-400 text-lg max-w-xl mx-auto">
-Train your reading intelligence with structured RC workouts,
-AI mentorship and performance analytics.
-</p>
-
-</section>
-
-
-{/* PRICING */}
-
-<section className="max-w-6xl mx-auto px-6 pb-32">
-
-<div className="grid md:grid-cols-3 gap-10">
-
-
-{/* FREE TRIAL */}
-
-<div className="bg-[#0f1735] border border-green-400 shadow-[0_0_40px_rgba(34,197,94,0.25)] rounded-xl p-8 text-center hover:scale-105 transition">
-
-<h3 className="text-xl font-semibold mb-4">
-Free Trial
-</h3>
-
-<p className="text-4xl font-bold mb-4">
-₹0
-</p>
-
-<p className="text-gray-400 mb-6">
-Full access for 7 days
-</p>
-
-<ul className="text-gray-300 space-y-2 mb-8 text-sm">
-
-<li>✔ Daily RC workouts</li>
-<li>✔ Speed reading gym</li>
-<li>✔ Birbal AI mentor</li>
-<li>✔ Analytics dashboard</li>
-<li>✔ Unlimited RC practice</li>
-
-</ul>
-
-<a
-href="https://rc.auctorlabs.in"
-className="bg-green-500 hover:bg-green-600 px-6 py-3 rounded-lg font-semibold inline-block"
-> 
-StartFree Trial
-</a>
-
-</div>
-
-
-{/* MONTHLY */}
-
-<div className="bg-[#0f1735] border border-white/10 rounded-xl p-8 text-center hover:scale-105 transition">
-
-<h3 className="text-xl font-semibold mb-4">
-Monthly
-</h3>
-
-<p className="text-4xl font-bold mb-4">
-₹399
-</p>
-
-<p className="text-gray-400 mb-6">
-Flexible plan for short term preparation
-</p>
-
-<ul className="text-gray-400 space-y-2 mb-8 text-sm">
-
-<li>✔ Daily RC workouts</li>
-<li>✔ Speed reading gym</li>
-<li>✔ Birbal AI mentor</li>
-<li>✔ Performance analytics</li>
-<li>✔ Unlimited RC practice</li>
-
-</ul>
-
-<a
-href="https://rzp.io/rzp/8dUAksb"
-className="bg-[#1a2454] hover:bg-[#243080] px-6 py-3 rounded-lg font-semibold inline-block"
-> 
-StartMonthly Plan
-</a>
-
-</div>
-
-
-{/* YEARLY */}
-
-<div className="relative bg-gradient-to-b from-orange-500/20 to-[#0f1735] border border-orange-500 rounded-xl p-8 text-center hover:scale-105 transition">
-
-<div className="absolute top-3 right-3 bg-orange-500 text-xs px-3 py-1 rounded-full">
-MOST POPULAR
-</div>
-
-<h3 className="text-xl font-semibold mb-4">
-Yearly
-</h3>
-
-<p className="text-4xl font-bold mb-2">
-₹1999
-</p>
-
-<p className="text-orange-400 mb-6">
-Only ₹166 / month
-</p>
-
-<ul className="text-gray-300 space-y-2 mb-8 text-sm">
-
-<li>✔ Everything in Monthly</li>
-<li>✔ Unlimited RC practice</li>
-<li>✔ AI RC Generator</li>
-<li>✔ Birbal reasoning explanations</li>
-<li>✔ Full analytics dashboard</li>
-
-</ul>
-
-<a
-href="https://rzp.io/rzp/g0Nxkgl"
-className="bg-orange-500 hover:bg-orange-600 px-6 py-3 rounded-lg font-semibold inline-block"
-> 
-UnlockPremium
-</a>
-
-</div>
-
-</div>
-
-
-{/* TRUST STRIP */}
-
-<div className="text-center mt-16 text-gray-400 text-sm">
-
-<p className="mb-2">
-Secure payments powered by Razorpay
-</p>
-
-<p>
-Cancel anytime • No hidden charges
-</p>
-
-</div>
-
-</section>
-
-</main>
-
-<Footer />
-
-</>
-)
+          <div className="mt-12 text-center text-sm text-gray-400">
+            <p>Secure checkout and current coupons are handled in Auctor RC.</p>
+            <p className="mt-2">Payments are processed securely. No plan is purchased until checkout is confirmed.</p>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
+  );
 }

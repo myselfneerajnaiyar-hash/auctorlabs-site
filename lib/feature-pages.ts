@@ -1,4 +1,3 @@
-export const SIGNUP_URL = "https://rc.auctorlabs.in/signup";
 export const SITE_URL = "https://auctorlabs.in";
 
 export type FeaturePage = {

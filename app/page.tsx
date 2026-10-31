@@ -2,6 +2,7 @@
 import Navbar from "./components/Navbar"
 import { Brain, BookOpen, Sparkles } from "lucide-react"
 import Footer from "./components/Footer"
+import { appAttributionHref } from "../lib/app-attribution"
 
 
 export default function Home() {
@@ -42,7 +43,7 @@ export default function Home() {
       </a>
 
       <a
-        href="https://rc.auctorlabs.in/login"
+        href={appAttributionHref("/signup", "home_hero")}
         className="bg-gradient-to-r from-orange-500 to-red-500 hover:scale-105 transition px-6 py-3 rounded-lg font-semibold shadow-lg"
       >
         Start CAT RC Practice →
@@ -150,7 +151,7 @@ AI-driven reading comprehension training for CAT aspirants.
 </p>
 
 <a
-href="https://rc.auctorlabs.in"
+href={appAttributionHref("/signup", "home_product_auctor_rc")}
 className="text-purple-400"
 > 
  Start CAT RC Practice on Auctor RC →
@@ -232,7 +233,7 @@ for mastering Reading Comprehension in CAT.
 </ul>
 
 <a
-href="https://rc.auctorlabs.in/login"
+href={appAttributionHref("/signup", "home_auctor_rc")}
 className="bg-gradient-to-r from-purple-500 to-indigo-500 hover:scale-105 transition px-6 py-3 rounded-lg font-semibold"
 > 
  Start CAT RC Practice on Auctor RC →
@@ -340,7 +341,7 @@ Why Students Love Auctor
 <div className="bg-[#0f1735] border border-white/10 rounded-xl p-8">
 
 <p className="text-gray-300 mb-4">
-"Auctor RC finally made RC practice feel structured instead of random."
+&ldquo;Auctor RC finally made RC practice feel structured instead of random.&rdquo;
 </p>
 
 <p className="text-sm text-gray-500">
@@ -352,7 +353,7 @@ CAT Aspirant
 <div className="bg-[#0f1735] border border-white/10 rounded-xl p-8">
 
 <p className="text-gray-300 mb-4">
-"The speed gym helped me improve my reading speed significantly."
+&ldquo;The speed gym helped me improve my reading speed significantly.&rdquo;
 </p>
 
 <p className="text-sm text-gray-500">
@@ -364,7 +365,7 @@ GMAT Student
 <div className="bg-[#0f1735] border border-white/10 rounded-xl p-8">
 
 <p className="text-gray-300 mb-4">
-"Birbal explains RC reasoning much better than typical answer keys."
+&ldquo;Birbal explains RC reasoning much better than typical answer keys.&rdquo;
 </p>
 
 <p className="text-sm text-gray-500">

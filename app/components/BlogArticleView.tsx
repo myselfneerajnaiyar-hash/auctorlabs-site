@@ -8,13 +8,14 @@ import RelatedPosts from "./RelatedPosts";
 import BlogPracticeCTA from "./BlogPracticeCTA";
 import BlogArticleHeader from "./BlogArticleHeader";
 import { tocHeadings } from "../../lib/blog-headings.mjs";
+import { blogAppAttributionHref } from "../../lib/app-attribution";
 type ArticleHeading = { level: number; text: string; id: string; baseId: string; occurrence: number };
 
 export function extractBlogHeadings(content: string) {
   return tocHeadings(content);
 }
 
-function createMdxComponents(headings: ArticleHeading[]) {
+function createMdxComponents(headings: ArticleHeading[], slug: string) {
   let cursor = 0;
   const takeId = (level: number) => {
     const index = headings.findIndex((heading, candidate) => candidate >= cursor && heading.level === level);
@@ -23,6 +24,11 @@ function createMdxComponents(headings: ArticleHeading[]) {
     return headings[index].id;
   };
   return {
+  a: (props: ComponentProps<"a">) => {
+    const href = props.href || "";
+    const linksToApp = /(^https?:\/\/rc\.auctorlabs\.in|^\/signup(?:[/?#]|$)|^\/login(?:[/?#]|$))/.test(href);
+    return <a {...props} href={linksToApp ? blogAppAttributionHref(slug) : href} />;
+  },
   h2: (props: ComponentProps<"h2">) => <h2 id={takeId(2)} className="text-3xl font-bold mt-20 mb-6 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">{props.children}</h2>,
   h3: (props: ComponentProps<"h3">) => <h3 id={takeId(3)} className="text-2xl font-semibold mt-10 mb-4">{props.children}</h3>,
   img: (props: ComponentProps<"img">) => <img {...props} alt={props.alt || ""} className="my-10 rounded-xl shadow-xl border border-white/10 w-full h-auto" />,
@@ -38,7 +44,7 @@ function createMdxComponents(headings: ArticleHeading[]) {
 
 export default function BlogArticleView({ post }: { post: BlogPost }) {
   const allHeadings = tocHeadings(post.content), headings = allHeadings;
-  const mdxComponents = createMdxComponents(allHeadings);
+  const mdxComponents = createMdxComponents(allHeadings, post.slug);
   const marker = /^##\s+Final Thought\s*$/m.exec(post.content);
   const beforeCta = marker ? post.content.slice(0, marker.index) : post.content;
   const afterCta = marker ? post.content.slice(marker.index) : "";

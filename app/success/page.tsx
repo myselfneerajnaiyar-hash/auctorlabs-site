@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar"
+import { appAttributionHref } from "../../lib/app-attribution"
 
 export default function Success() {
 
@@ -20,7 +21,7 @@ You can now start training your reading intelligence.
 </p>
 
 <a
-href="https://rc.auctorlabs.in"
+href={appAttributionHref("/", "success_app")}
 className="bg-orange-500 hover:bg-orange-600 px-8 py-4 rounded-lg font-semibold text-lg inline-block"
 > 
 StartAuctor RC →

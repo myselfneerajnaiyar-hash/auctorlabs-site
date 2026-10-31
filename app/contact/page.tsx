@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
+import { appAttributionHref } from "../../lib/app-attribution"
 
 export default function Contact() {
 
@@ -20,7 +21,7 @@ Contact Auctor Labs
 
 <p className="text-gray-400 text-lg max-w-2xl mx-auto">
 Have questions about Auctor RC or need support?  
-Reach out and we'll help you.
+Reach out and we&apos;ll help you.
 </p>
 
 </section>
@@ -64,7 +65,7 @@ Access the Auctor RC platform
 </p>
 
 <a
-href="https://rc.auctorlabs.in"
+href={appAttributionHref("/signup", "contact_app")}
 className="text-orange-400 font-semibold hover:underline"
 > 
 rc.auctorlabs.in
