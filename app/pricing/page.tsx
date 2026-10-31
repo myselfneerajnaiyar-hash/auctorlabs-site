@@ -3,10 +3,10 @@ import Footer from "../components/Footer";
 import { appAttributionHref } from "../../lib/app-attribution";
 
 const plans = [
-  { id: "monthly", name: "Monthly", price: "₹399", detail: "Flexible monthly access", featured: false },
-  { id: "quarterly", name: "3 Month", price: "₹799", detail: "Focused preparation", featured: true },
-  { id: "half_yearly", name: "Half-Yearly", price: "₹1,299", detail: "Six months of structured practice", featured: false },
-  { id: "yearly", name: "Yearly", price: "₹1,999", detail: "Best value for a full year", featured: false },
+  { id: "monthly", contentId: "pricing_monthly", name: "Pro Monthly", price: "₹399", detail: "Flexible monthly access", featured: false },
+  { id: "quarterly", contentId: "pricing_3month", name: "3 Month", price: "₹799", detail: "Focused preparation", featured: true },
+  { id: "half_yearly", contentId: "pricing_half_yearly", name: "Half Yearly", price: "₹1,299", detail: "Six months of structured practice", featured: false },
+  { id: "yearly", contentId: "pricing_elite", name: "Elite (Yearly)", price: "₹1,999", detail: "Best value for a full year", featured: false },
 ];
 
 const sharedFeatures = [
@@ -49,10 +49,14 @@ export default function Pricing() {
                 <p className="mt-2 min-h-6 text-sm text-gray-400">{plan.detail}</p>
                 <ul className="my-8 flex-1 space-y-3 text-left text-sm text-gray-300">
                   {sharedFeatures.map((feature) => <li key={feature}>✓ {feature}</li>)}
-                  {plan.id !== "monthly" && <li>✓ AI RC Generator and full CAT practice library</li>}
+                  {plan.id !== "monthly" && <>
+                    <li>✓ 45-Day VARC Bootcamp</li>
+                    <li>✓ CAT VARC Test Series</li>
+                    <li>✓ All app modules</li>
+                  </>}
                 </ul>
                 <a
-                  href={appAttributionHref("/pricing", `pricing_${plan.id}`, { plan: plan.id })}
+                  href={appAttributionHref("/pricing", plan.contentId, { plan: plan.id })}
                   className={`inline-flex min-h-12 items-center justify-center rounded-xl px-5 py-3 font-semibold transition ${plan.featured ? "bg-orange-500 hover:bg-orange-600" : "bg-[#1a2454] hover:bg-[#243080]"}`}
                 >
                   Choose {plan.name}

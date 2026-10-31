@@ -14,19 +14,33 @@ test("website app links use the shared website campaign attribution", async () =
   assert.match(helper, /utm_medium", "organic"/);
 });
 
+test("share-ready campaign links match the channel conventions", async () => {
+  const links = await read("docs/tracking-oct-push-links.md");
+  for (const tag of [
+    "utm_source=whatsapp&amp;utm_medium=community&amp;utm_campaign=oct_push",
+    "utm_source=whatsapp&amp;utm_medium=direct&amp;utm_campaign=followup",
+    "utm_source=telegram&amp;utm_medium=community&amp;utm_campaign=oct_push",
+    "utm_source=ig&amp;utm_medium=social&amp;utm_campaign=oct_push&amp;utm_content=bio",
+    "utm_content=story",
+    "utm_content=reel",
+    "utm_source=email&amp;utm_medium=email&amp;utm_campaign=oct_push",
+  ]) assert.ok(links.includes(tag.replaceAll("&amp;", "&")), `missing share link pattern ${tag}`);
+});
+
 test("public pricing lists all four subscription plans and sends plan IDs to app checkout", async () => {
   const pricing = await read("app/pricing/page.tsx");
   for (const [id, label, amount] of [
-    ["monthly", "Monthly", "₹399"],
+    ["monthly", "Pro Monthly", "₹399"],
     ["quarterly", "3 Month", "₹799"],
-    ["half_yearly", "Half-Yearly", "₹1,299"],
-    ["yearly", "Yearly", "₹1,999"],
+    ["half_yearly", "Half Yearly", "₹1,299"],
+    ["yearly", "Elite (Yearly)", "₹1,999"],
   ]) {
     assert.ok(pricing.includes(`id: "${id}"`), `${label} plan id should be listed`);
     assert.ok(pricing.includes(`name: "${label}"`), `${label} plan should be named`);
     assert.ok(pricing.includes(`price: "${amount}"`), `${label} price should be displayed`);
   }
-  assert.match(pricing, /appAttributionHref\("\/pricing", `pricing_\$\{plan\.id\}`, \{ plan: plan\.id \}\)/);
+  for (const contentId of ["pricing_monthly", "pricing_3month", "pricing_half_yearly", "pricing_elite"]) assert.ok(pricing.includes(`contentId: "${contentId}"`));
+  assert.match(pricing, /appAttributionHref\("\/pricing", plan\.contentId, \{ plan: plan\.id \}\)/);
   assert.doesNotMatch(pricing, /rzp\.io/);
 });
 

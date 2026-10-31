@@ -91,7 +91,7 @@ export default function Navbar() {
         {/* CTA Button */}
         <div className="hidden md:block">
           <a
-            href={appAttributionHref("/signup", "navbar_try_rc")}
+            href={appAttributionHref("/signup", "header_try_rc")}
             target="_blank"
             rel="noopener noreferrer"
             className="bg-orange-500 hover:bg-orange-600 px-4 py-2 rounded-lg text-sm font-medium transition hover:scale-105"
@@ -168,7 +168,7 @@ export default function Navbar() {
           </Link>
 
           <a
-            href={appAttributionHref("/signup", "navbar_try_rc_mobile")}
+            href={appAttributionHref("/signup", "header_try_rc")}
             target="_blank"
             rel="noopener noreferrer"
             className="bg-orange-500 px-4 py-2 rounded-lg w-fit"

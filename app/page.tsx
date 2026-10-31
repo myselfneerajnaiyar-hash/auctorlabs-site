@@ -151,7 +151,7 @@ AI-driven reading comprehension training for CAT aspirants.
 </p>
 
 <a
-href={appAttributionHref("/signup", "home_product_auctor_rc")}
+href={appAttributionHref("/signup", "home_systems")}
 className="text-purple-400"
 > 
  Start CAT RC Practice on Auctor RC →
@@ -233,7 +233,7 @@ for mastering Reading Comprehension in CAT.
 </ul>
 
 <a
-href={appAttributionHref("/signup", "home_auctor_rc")}
+href={appAttributionHref("/signup", "home_rc_section")}
 className="bg-gradient-to-r from-purple-500 to-indigo-500 hover:scale-105 transition px-6 py-3 rounded-lg font-semibold"
 > 
  Start CAT RC Practice on Auctor RC →
