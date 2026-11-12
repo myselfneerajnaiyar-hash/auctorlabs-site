@@ -43,6 +43,11 @@ export type BlogFrontmatter = {
   refreshDate?: string;
   audience?: string;
   relevantExams?: string[];
+  seoTitle?: string;
+  metaDescription?: string;
+  canonicalUrl?: string;
+  socialImage?: string;
+  tags?: string[];
 };
 
 export type BlogPost = BlogFrontmatter & {
@@ -105,6 +110,11 @@ export function createBlogPost(slug: string, data: BlogFrontmatter & Record<stri
     refreshDate: data.refreshDate,
     audience: typeof data.audience === "string" ? data.audience : undefined,
     relevantExams: Array.isArray(data.relevantExams) ? data.relevantExams.map(String) : [],
+    seoTitle: typeof data.seoTitle === "string" ? data.seoTitle : undefined,
+    metaDescription: typeof data.metaDescription === "string" ? data.metaDescription : undefined,
+    canonicalUrl: typeof data.canonicalUrl === "string" ? data.canonicalUrl : undefined,
+    socialImage: typeof data.socialImage === "string" ? data.socialImage : undefined,
+    tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     wordCount,
     readingTime: Math.max(1, Math.ceil(wordCount / 220)),
   };

@@ -1,4 +1,4 @@
-﻿import assert from "node:assert/strict";
+import assert from "node:assert/strict";
 import test, {beforeEach} from "node:test";
 import sharp from "sharp";
 import {cms,fixture} from "./helpers/blog-studio-harness.mjs";
@@ -6,7 +6,9 @@ import {completeInlineImagePlan} from "./blog-engine.mjs";
 import {directedImage,distinctConcepts} from "../lib/blog-image-concepts.mjs";
 import {stageGeneratedImages} from "../lib/blog-image-review.mjs";
 import {editorialRequirements} from "../lib/blog-editorial-requirements.mjs";
-const {addCmsInlineImage,planCmsInlineImages,regenerateCmsInlineImage,regenerateCmsFeaturedImage,uploadCmsInlineImage,acceptCmsInlineImage,removeCmsInlineImage}=await import("../lib/blog-cms-images.ts");
+const {addCmsInlineImage,planCmsInlineImages,regenerateCmsInlineImage,regenerateCmsFeaturedImage,startCmsFeaturedImageGeneration,processCmsFeaturedImageJob,uploadCmsInlineImage,uploadManualCmsImage,acceptCmsInlineImage,removeCmsInlineImage}=await import("../lib/blog-cms-images.ts");
+const {saveCmsDraft}=await import("../lib/blog-cms-actions.ts");
+const {updateCmsJob}=await import("../lib/blog-cms-db.ts");
 const admin={id:"editor",role:"owner"};
 let prompts,planning,validations;
 beforeEach(()=>{
@@ -53,11 +55,58 @@ test("uploaded supporting image is optional and can be discarded before insertio
 test("corrupt or unsupported uploads and failed quality validation never persist",async()=>{
  await assert.rejects(uploadCmsInlineImage(admin,"current",new File(["bad"],"bad.png",{type:"image/png"}),"insight","human","Student"));await assert.rejects(uploadCmsInlineImage(admin,"current",new File(["svg"],"bad.svg",{type:"image/svg+xml"}),"insight","human","Student"),/PNG/);cms.imageEngine.validate=async()=>{throw Error("unsafe image")};await assert.rejects(upload("human"),/unsafe/);assert.equal(cms.uploads.length,0);
 });
+test("manual featured upload persists the asset reference, alt text and unsaved article fields",async()=>{
+ const bytes=await sharp({create:{width:20,height:20,channels:3,background:"#abc"}}).jpeg().toBuffer(),content=`${cms.row.content}\n\nLocally edited prose.`;
+ const file=new File([bytes],"cover.jpg",{type:"image/jpeg"}),data={...cms.row.frontmatter,title:"Updated working title",author:"Working author",seoTitle:"Working SEO title",date:"2026-10-02",tags:["manual"]};
+ await uploadManualCmsImage(admin,"current",file,"featured","Learner beside a whiteboard",{content,data,expectedUpdatedAt:cms.row.updated_at});
+ const key=cms.row.frontmatter.featuredImageKey,asset=cms.assets.find(item=>item.image_key===key);
+ assert.ok(cms.row.frontmatter.image);assert.equal(cms.row.frontmatter.imageAlt,"Learner beside a whiteboard");assert.equal(asset.alt_text,"Learner beside a whiteboard");assert.equal(cms.row.title,"Updated working title");assert.equal(cms.row.frontmatter.author,"Working author");assert.equal(cms.row.frontmatter.seoTitle,"Working SEO title");assert.ok(cms.row.content.includes("Locally edited prose."));
+});
+test("manual inline upload persists alt metadata and inserts renderer-compatible Markdown without losing working edits",async()=>{
+ const bytes=await sharp({create:{width:20,height:20,channels:3,background:"#abc"}}).png().toBuffer(),content=`${cms.row.content}\n\nLocally edited paragraph.`;
+ const file=new File([bytes],"diagram.png",{type:"image/png"}),data={...cms.row.frontmatter,description:"Edited summary",primaryKeyword:"edited keyword"};
+ const draft=await uploadManualCmsImage(admin,"current",file,"inline","A diagram with labels",{content,data,expectedUpdatedAt:cms.row.updated_at});
+ const inline=draft.data.inlineImages.at(-1);
+ assert.equal(inline.alt,"A diagram with labels");assert.equal(inline.source,"uploaded");assert.ok(cms.row.content.includes("Locally edited paragraph."));assert.ok(cms.row.content.includes(`![A diagram with labels](${inline.src})`));assert.ok(draft.content.includes(inline.src));assert.match(cms.row.description,/^Edited summary/);assert.equal(cms.row.frontmatter.primaryKeyword,"edited keyword");
+});
+test("manual image upload rejects a stale working copy before storing an asset",async()=>{
+ const bytes=await sharp({create:{width:20,height:20,channels:3,background:"#abc"}}).png().toBuffer(),before=structuredClone(cms.row),count=cms.assets.length;
+ await assert.rejects(uploadManualCmsImage(admin,"current",new File([bytes],"cover.png",{type:"image/png"}),"featured","Cover",{content:cms.row.content,data:cms.row.frontmatter,expectedUpdatedAt:"stale-version"}),/changed in another session/);
+ assert.equal(cms.assets.length,count);assert.deepEqual(cms.row,before);
+});
 test("two accepted copies of one human concept count only once regardless of source",()=>{
  const images=cms.row.frontmatter.inlineImages;images[0].visualConceptId=images[1].visualConceptId="same-reading-scene";images[0].source="ai";images[1].source="uploaded";assert.equal(state().humanImages,1);assert.equal(state().humanReady,false);images[1].visualConceptId="peer-teaching";assert.equal(state().humanReady,true);
 });
 test("featured replacement stages and accepts with immutable key, without double counting",async()=>{
  cms.row.frontmatter.image="https://cdn.test/featured.png";cms.assets.push({image_key:"featured",asset_type:"featured",status:"generated",public_url:cms.row.frontmatter.image});await regenerateCmsFeaturedImage(admin,"current","A learner reviewing a plan with a coach");const image=latest();assert.equal(cms.row.frontmatter.image,"https://cdn.test/featured.png");await acceptCmsInlineImage(admin,"current",image.id);assert.equal(cms.row.frontmatter.featuredImageKey,image.id);assert.equal(state().humanImages,3);
+});
+test("featured generation is queued once, uploads the image, and can be accepted",async()=>{
+ const before=cms.row.content,title=cms.row.title,job=await startCmsFeaturedImageGeneration(admin,"current","A learner explaining a reading strategy");
+ assert.equal(job.status,"pending");assert.equal(cms.row.frontmatter.featuredImageGeneration.id,job.jobId);
+ const duplicate=await startCmsFeaturedImageGeneration(admin,"current","A different direction");assert.equal(duplicate.jobId,job.jobId);
+ assert.equal(cms.jobs.length,1);assert.equal(duplicate.direction,job.direction);
+ await processCmsFeaturedImageJob(job.jobId);
+ const image=cms.row.frontmatter.inlineImages.find(item=>item.jobId===job.jobId);
+ assert.equal(cms.row.frontmatter.featuredImageGeneration.status,"review_ready");assert.equal(cms.jobs[0].status,"complete");assert.equal(image.status,"proposed");assert.ok(image.src);assert.equal(cms.assets.at(-1).asset_type,"featured");
+ assert.equal(cms.row.content,before);assert.equal(cms.row.title,title);
+ await acceptCmsInlineImage(admin,"current",image.id);const writes=cms.writes.length;await acceptCmsInlineImage(admin,"current",image.id);assert.equal(cms.writes.length,writes);assert.equal(cms.row.frontmatter.image,image.src);assert.equal(cms.row.frontmatter.featuredImageKey,image.id);
+});
+test("featured generation failure is recorded while saved blog content remains editable",async()=>{
+ const content=`${cms.row.content}\n\nSaved manual paragraph.`,title="Saved manual title";
+ await saveCmsDraft(admin,"current",{content,data:{title},expectedUpdatedAt:cms.row.updated_at});
+ const job=await startCmsFeaturedImageGeneration(admin,"current","A learner sharing an insight");
+ cms.imageEngine.generate=async()=>{throw Error("provider unavailable")};
+ await assert.rejects(processCmsFeaturedImageJob(job.jobId),/provider unavailable/);
+ assert.equal(cms.row.frontmatter.featuredImageGeneration.status,"failed");assert.match(cms.row.frontmatter.featuredImageGeneration.error,/provider unavailable/);
+ assert.equal(cms.row.title,title);assert.ok(cms.row.content.includes("Saved manual paragraph."));assert.equal(cms.row.status,"draft");
+ cms.imageEngine.generate=async prompt=>{prompts.push(prompt);return Buffer.from("fixture")};
+ const retry=await startCmsFeaturedImageGeneration(admin,"current","A learner sharing an insight in a study group");
+ assert.equal(retry.jobId,job.jobId);assert.equal(cms.jobs.length,1);await processCmsFeaturedImageJob(retry.jobId);
+ assert.equal(cms.row.frontmatter.featuredImageGeneration.status,"review_ready");assert.equal(cms.jobs[0].status,"complete");assert.equal(cms.row.title,title);assert.ok(cms.row.content.includes("Saved manual paragraph."));
+});
+test("an expired worker lease at the retry limit is finalized as failed instead of staying generating",async()=>{
+ const job=await startCmsFeaturedImageGeneration(admin,"current","A learner considering a new idea");await updateCmsJob(job.jobId,{status:"processing",attempt_count:3,max_attempts:3,lease_expires_at:new Date(Date.now()-1000).toISOString()});
+ await processCmsFeaturedImageJob(job.jobId);const persisted=cms.jobs[0];assert.equal(persisted.status,"failed");assert.equal(persisted.failure_kind,"permanent");assert.match(persisted.error,/automatic retry limit/);assert.equal(cms.row.frontmatter.featuredImageGeneration.status,"failed");
 });
 test("initial generation enters the same review queue for inline and featured images",()=>{
  const staged=stageGeneratedImages(cms.row.content,{...cms.row.frontmatter,image:"https://cdn.test/featured.png",imagePrompt:"A learner outside"});assert.equal(staged.data.image,"");assert.equal(staged.data.inlineImages.length,3);assert.ok(staged.data.inlineImages.every(i=>i.status==="proposed"));assert.ok(!staged.content.includes('inline-image:'));assert.match(staged.content,/related reading/);

@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { editorialRequirements } from "../lib/blog-editorial-requirements.mjs";
 import { publicationTechnicalBlockers } from "../lib/blog-publish-policy.ts";
-import { publishControlState } from "../lib/blog-studio-state.mjs";
+import { draftEditSignature, publishControlState, retainEditsDuringSave } from "../lib/blog-studio-state.mjs";
 
 const validUrls=["/blog/related"];
 const image=id=>({id,role:"human",status:"generated",src:`https://cdn.test/${id}.png`});
@@ -43,4 +43,18 @@ test("busy state and unverified eligibility cannot be bypassed by an empty block
   assert.equal(publishControlState({...ready,publishEligible:false}).enabled,false);
   assert.equal(publishControlState({technicalBlockers:[]}).enabled,false);
   assert.match(publishControlState({technicalBlockers:[]}).blockers[0],/not been verified/);
+});
+
+test("manual metadata fields participate in the unsaved signature",()=>{
+  const base={slug:"manual",content:"## Draft",data:{title:"Title",description:"Summary",date:"2026-10-02",author:"Editor",category:"Grammar",tags:["manual"],seoTitle:"SEO title",metaDescription:"Meta",primaryKeyword:"keyword",canonicalUrl:"https://auctorlabs.in/blog/manual",socialImage:"https://cdn.test/og.png",editableSlug:"manual",imageAlt:"Cover",inlineImages:[]}};
+  const signature=draftEditSignature(base);
+  for(const [field,value] of [["date","2026-10-03"],["author","Other editor"],["category","Vocabulary"],["tags",["changed"]],["seoTitle","Changed SEO"],["metaDescription","Changed meta"],["canonicalUrl","https://auctorlabs.in/custom"],["socialImage","https://cdn.test/other.png"],["editableSlug","changed-slug"],["imageAlt","Changed alt"]]){
+    assert.notEqual(draftEditSignature({...base,data:{...base.data,[field]:value}}),signature,`${field} must mark the draft unsaved`);
+  }
+});
+
+test("in-flight save retains newer manual SEO metadata and prose",()=>{
+  const submitted={slug:"manual",content:"First body",data:{title:"First title",seoTitle:"First SEO",category:"Grammar"}},current={slug:"manual",content:"Newer body",data:{...submitted.data,seoTitle:"Newer SEO"}},saved={slug:"manual",content:"First body",version:"2",data:{...submitted.data,seoScore:90}};
+  const retained=retainEditsDuringSave(current,submitted,saved);
+  assert.equal(retained.content,"Newer body");assert.equal(retained.data.seoTitle,"Newer SEO");assert.equal(retained.data.seoScore,90);
 });

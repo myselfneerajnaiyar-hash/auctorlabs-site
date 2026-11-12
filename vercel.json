@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "app/api/queues/blog-featured-image/route.ts": {
+      "experimentalTriggers": [
+        {
+          "type": "queue/v2beta",
+          "topic": "blog-featured-image",
+          "retryAfterSeconds": 60
+        }
+      ]
+    }
+  }
+}

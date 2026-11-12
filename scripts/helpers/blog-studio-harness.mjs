@@ -5,7 +5,7 @@ import ts from "typescript";
 
 // Run the real TSX components and CMS actions under node:test. Only persistence
 // and the published URL catalog are replaced; validation/publish policy are real.
-export const cms = { row: null, assets: [], writes: [] };
+export const cms = { row: null, assets: [], writes: [], jobs: [], uploads: [] };
 globalThis.__blogStudioTestCms = cms;
 const root = new URL("../../", import.meta.url);
 registerHooks({
@@ -33,6 +33,12 @@ registerHooks({
       export async function getCmsArticle(){return structuredClone(db.row)}
       export async function listCmsAssets(){return structuredClone(db.assets)}
       export async function listCmsArticles(){return [structuredClone(db.row)]}
+      export async function createCmsFeaturedImageJob(admin,articleId,slug,direction,role){const active=db.jobs.find(job=>job.article_id===articleId&&job.job_type==="featured_image"&&(["pending","processing"].includes(job.status)||job.status==="failed"&&["transient","timeout"].includes(job.failure_kind)&&job.attempt_count<job.max_attempts));if(active)return structuredClone(active);const suffix=String(db.jobs.length+1),job={id:"feature-job-"+suffix,requested_by:admin.id,article_id:articleId,job_type:"featured_image",topic:direction,audience:"featured-image",status:"pending",stages:{featuredImage:"pending"},payload:{slug,direction,role:role||"human"},attempt_count:0,max_attempts:3,idempotency_key:"feature-key-"+suffix,created_at:new Date().toISOString()};db.jobs.push(job);return structuredClone(job)}
+      export async function getCmsFeaturedImageJob(id){return structuredClone(db.jobs.find(job=>job.id===id)||null)}
+      export async function claimCmsJob(id){const job=db.jobs.find(job=>job.id===id);if(!job||!(job.status==="pending"||job.status==="failed"&&["transient","timeout"].includes(job.failure_kind))||job.attempt_count>=job.max_attempts)return null;job.status="processing";job.attempt_count++;return structuredClone(job)}
+      export async function heartbeatCmsJob(id,changes={}){return updateCmsJob(id,changes)}
+      export async function updateCmsJob(id,changes){const job=db.jobs.find(job=>job.id===id);if(!job)throw new Error("Unknown generation job");Object.assign(job,structuredClone(changes));return structuredClone(job)}
+      export async function getCmsJob(id){return getCmsFeaturedImageJob(id)}
       export async function archiveCmsArticle(){throw new Error("Unexpected archive")}
       export async function updateBlogAssetMetadata(article,id,changes){const asset=db.assets.find(item=>item.image_key===id);if(!asset)throw new Error("Unknown asset");Object.assign(asset,changes)}
       export async function uploadBlogAsset(article,id,bytes,metadata){if(!db.imageEngine)throw new Error("Unexpected image generation");const url="https://cdn.test/"+id+".png";db.assets.push({image_key:id,asset_type:metadata.assetType,status:"generated",public_url:url,storage_path:id,alt_text:metadata.altText});db.uploads.push({article,id,bytes,metadata});return url;}
@@ -61,6 +67,7 @@ registerHooks({
 });
 
 export function fixture({ humans = 2, link = true, supporting = false } = {}) {
+  cms.jobs=[];cms.uploads=[];
   const images = Array.from({ length: humans }, (_, i) => ({ id: `human-${i}`, role: "human", status: "generated", src: `https://cdn.test/human-${i}.png`, placement: "insight", alt: "Learner", purpose: "Human context" }));
   if (supporting) images.push({ id: "diagram", role: "supporting_visual", status: "failed", src: "", placement: "insight" });
   cms.row = { id: "article-1", slug: "current", status: "draft", title: "Reading with purpose", description: "Practical reading methods.", updated_at: "1",

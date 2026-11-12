@@ -13,9 +13,9 @@ const { createElement, act } = await import("react");
 const { createRoot } = await import("react-dom/client");
 const { default: BlogStudio } = await import("../app/admin/blog/studio.tsx");
 const { getCmsDraft, saveCmsDraft, publishCmsDraft } = await import("../lib/blog-cms-actions.ts");
-const { acceptCmsInlineImage, removeCmsInlineImage } = await import("../lib/blog-cms-images.ts");
+const { acceptCmsInlineImage, removeCmsInlineImage,startCmsFeaturedImageGeneration,getCmsFeaturedImageGeneration,processCmsFeaturedImageJob } = await import("../lib/blog-cms-images.ts");
 const admin = { id: "test-admin", role: "owner" };
-let draftTransform, root, calls, scrolls, pendingDraft, withoutWarnings, pendingSave, saveFailure, draftWaits, birbalWait, imageWait, researchWait, jobResponse, researchFailure;
+let draftTransform, root, calls, scrolls, pendingDraft, withoutWarnings, pendingSave, saveFailure, draftWaits, birbalWait, imageWait, researchWait, jobResponse, researchFailure,imageGenerationFailure;
 const originalFetch = globalThis.fetch;
 dom.window.HTMLElement.prototype.scrollIntoView = function(options) {
   assert.ok(this.isConnected, "scroll target must already be committed to the DOM");
@@ -27,17 +27,22 @@ function button(label) {
   return found;
 }
 async function click(label) { await act(async () => button(label).click()); }
+async function waitForImageIdle(){for(let attempt=0;attempt<100&&document.querySelector('[role="status"]');attempt++)await act(async()=>new Promise(resolve=>setTimeout(resolve,25)));}
 async function setup(options) {
-  fixture(options); draftTransform=draft=>draft; calls = []; scrolls = []; pendingDraft = null; withoutWarnings = false; pendingSave = null; saveFailure = false; draftWaits=new Map(); birbalWait=null; imageWait=null; researchWait=null; jobResponse=null;researchFailure=null;window.scrollTo({top:0});
+  fixture(options);cms.imageEngine={generate:async()=>{if(imageGenerationFailure){const error=imageGenerationFailure;if(imageGenerationFailure!=="persistent")imageGenerationFailure="";throw new Error(error)}return Buffer.from("fixture")},validate:async()=>{}}; draftTransform=draft=>draft; calls = []; scrolls = []; pendingDraft = null; withoutWarnings = false; pendingSave = null; saveFailure = false; draftWaits=new Map(); birbalWait=null; imageWait=null; researchWait=null; jobResponse=null;researchFailure=null;imageGenerationFailure="";window.scrollTo({top:0});
   globalThis.confirm = () => true;
   globalThis.fetch = async (url, init = {}) => {
     calls.push({ url, ...init });
     let body;
-    if (url === "/api/admin/blog") body = { posts: [{ slug: "current", title: cms.row.title, status: "draft", seoScore: 20 },{slug:"other",title:"Article B",status:"draft"}], topics: [], categories: [], qualityThreshold: 80 };
+    if (url === "/api/admin/blog") body = { posts: [{ slug: cms.row.slug, title: cms.row.title, status: cms.row.status, seoScore: 20 },{slug:"other",title:"Article B",status:"draft"}], topics: [], categories: [], qualityThreshold: 80 };
+    else if(url==="/api/admin/blog/draft"&&init.method==="POST"){cms.row={...cms.row,slug:"manual-draft",title:"Untitled article",description:"",content:"",frontmatter:{...cms.row.frontmatter,title:"Untitled article",description:"",date:"2026-10-02",author:"Auctor Labs Editorial Team",tags:[],seoTitle:"",canonicalUrl:"https://auctorlabs.in/blog/manual-draft"}};body=await getCmsDraft("manual-draft");body={...body,slug:"manual-draft",data:{...body.data,editableSlug:"manual-draft"}};}
     else if (url === "/api/admin/blog/search-performance") body = { status: "UNAVAILABLE" };
     else if (url === "/api/admin/blog/draft/other") {
       if(draftWaits.has("other"))await draftWaits.get("other");
       body=await getCmsDraft("current");body={...body,slug:"other",data:{...body.data,title:"Article B"}};
+    } else if (url === "/api/admin/blog/draft/manual-draft") {
+      if(init.method==="PUT"){body=await saveCmsDraft(admin,"manual-draft",JSON.parse(init.body));}
+      else body=await getCmsDraft("manual-draft");
     } else if (url === "/api/admin/blog/draft/current") {
       if(draftWaits.has("current"))await draftWaits.get("current");
       if (pendingDraft) await pendingDraft;
@@ -46,7 +51,7 @@ async function setup(options) {
       body = init.method === "PUT" ? await saveCmsDraft(admin, "current", JSON.parse(init.body)) : await getCmsDraft("current");
       body.internalLinkRecommendations = [{ targetArticle: "Published", url: "/blog/published", anchor: "related reading" }];
       if (withoutWarnings) { body.data.publishWarnings = []; body.data.publishEligibilityIssues = body.data.publishEligibilityIssues.filter(i => i.severity === "blocker"); }
-    } else if (url === "/api/admin/blog/images") {if(imageWait)await imageWait;const input=JSON.parse(init.body);body = input.action==="remove-inline"?await removeCmsInlineImage(admin,"current",input.id):await acceptCmsInlineImage(admin, "current",input.id);}
+    } else if (url === "/api/admin/blog/images") {if(imageWait)await imageWait;const input=JSON.parse(init.body);if(input.action==="regenerate-featured"){const job=await startCmsFeaturedImageGeneration(admin,input.slug,input.direction,input.role);const run=async()=>{try{await processCmsFeaturedImageJob(job.jobId)}catch{const current=cms.jobs.find(item=>item.id===job.jobId);if(current?.status==="failed"&&current.attempt_count<current.max_attempts)setTimeout(()=>void run(),10)}};setTimeout(()=>void run(),0);body=job}else if(input.action==="featured-status")body=await getCmsFeaturedImageGeneration(admin,input.slug,input.id);else body = input.action==="remove-inline"?await removeCmsInlineImage(admin,"current",input.id):await acceptCmsInlineImage(admin, "current",input.id);}
     else if (url === "/api/admin/blog/birbal") {if(birbalWait)await birbalWait;if(JSON.parse(init.body).action){body={draft:await getCmsDraft("current")}}else body={reply:"A targeted proposal",proposal:[{type:"replace_text",target:"related reading",replacement:"focused reading",summary:"Improve the selected passage"}]};}
     else if (url === "/api/admin/blog/keyword-research") {if(researchWait)await researchWait;if(researchFailure)return{ok:false,status:researchFailure.status,json:async()=>researchFailure.body};body={keyword:"reading practice",provider:"test",status:"SUCCESS",freshness:"FRESH",data:null,partialErrors:[],error:null};}
     else if (url === "/api/admin/blog/generate") body={jobId:"job-1"};
@@ -60,6 +65,29 @@ async function setup(options) {
   await act(async () => root.render(createElement(BlogStudio)));
 }
 afterEach(async () => { if (root) await act(async () => root.unmount()); root = null; globalThis.fetch = originalFetch; });
+
+test("Write Manually creates and opens a blank CMS draft in the article workspace",async()=>{
+  await setup();await click("Create New Blog");await click("Write Manually");
+  assert.ok(calls.some(call=>call.url==="/api/admin/blog/draft"&&call.method==="POST"));
+  assert.ok(document.querySelector("#draft-review"));
+  assert.ok(document.querySelector('[aria-label="Article content"]'));
+  assert.equal(document.querySelector('[aria-label="Article content"]').value,"");
+  assert.equal(document.querySelector('[aria-label="Article title"]').value,"Untitled article");
+  await editField(document.querySelector('[aria-label="Article content"]'),"## Manual section\n\nSaved manual prose.");
+  await editField(document.querySelector('input[aria-label="Article title"]'),"Untitled article");
+  const tagsInput=[...document.querySelectorAll("label")].find(label=>label.textContent.includes("Tags (comma separated)")).querySelector("input");
+  await editField(tagsInput,"manual creation, featured image, editorial");
+  await editField(document.querySelector("[aria-label=\"SEO title\"]"),"Manual SEO title");
+  await click("Save & Revalidate");
+  assert.deepEqual(cms.row.frontmatter.tags,["manual creation","featured image","editorial"]);
+  await click("Back to Library");
+  const otherRow=[...document.querySelectorAll("tr")].find(row=>row.textContent.includes("Article B"));
+  await act(async()=>otherRow.querySelector("button").click());await click("Back to Library");await click("Review / Edit");await click("Edit Article");
+  assert.ok(calls.some(call=>call.url==="/api/admin/blog/draft/manual-draft"&&!call.method));
+  assert.equal(document.querySelector('[aria-label="Article content"]').value,"## Manual section\n\nSaved manual prose.");
+  assert.equal(document.querySelector('[aria-label="SEO title"]').value,"Manual SEO title");
+  assert.equal(cms.row.frontmatter.seoTitle,"Manual SEO title");
+});
 
 test("one Review/Edit click waits for the draft commit, focuses and scrolls the only panel", async () => {
   await setup();
@@ -344,6 +372,7 @@ test("research completes in Studio without duplicate requests or loss during art
 
 test("generation polling survives context changes and completion does not replace the active article",async()=>{
   await setup();
+  await click("Create New Blog");
   await editField(document.querySelector('textarea[placeholder="Enter a relevant editorial topic"]'),"A new article topic");
   await click("Generate Article");await click("Review / Edit");
   jobResponse={id:"job-1",status:"complete",stages:{},result:{slug:"other"}};
@@ -394,6 +423,22 @@ test("Images show each asset once and discard a proposal through the existing im
   for(const id of ['proposal','human-0','diagram'])assert.equal(manager.querySelectorAll(`[data-image-id="${id}"]`).length,1);
   await act(async()=>[...manager.querySelectorAll("button")].find(b=>b.textContent==="Discard").click());assert.equal(manager.querySelector('[data-image-id="proposal"]'),null);assert.equal(button("Publish").disabled,true);
   const requests=calls.filter(c=>c.url==="/api/admin/blog/images");assert.equal(requests.length,1);assert.equal(JSON.parse(requests[0].body).action,"remove-inline");
+});
+
+test("featured image generation survives the queued worker flow and persists before Keep",async()=>{
+ await setup();await click("Review / Edit");await click("Edit Article");await click("Images");const original=cms.row.content;
+ await click("Generate featured image");await editField(document.querySelector('[aria-label="Replace image"] textarea'),"A learner explaining a reading strategy to a peer");await click("Generate replacement");await waitForImageIdle();
+ assert.ok(cms.row.frontmatter.featuredImageGeneration.id);assert.equal(cms.row.frontmatter.featuredImageGeneration.status,"review_ready");assert.equal(cms.row.content,original);
+ const candidate=cms.row.frontmatter.inlineImages.find(image=>image.target==="featured"&&image.status==="proposed");assert.ok(candidate,JSON.stringify(cms.row.frontmatter));assert.ok(cms.assets.some(asset=>asset.image_key===candidate.id&&asset.public_url===candidate.src));
+ assert.ok(document.body.textContent.includes("Keep and insert"),document.body.textContent.slice(-1400));await click("Keep and insert");assert.equal(cms.row.frontmatter.image,candidate.src);assert.equal(cms.row.frontmatter.featuredImageKey,candidate.id);assert.equal(cms.row.content,original);
+});
+
+test("featured image failure leaves saved content intact and the editor can retry",async()=>{
+ await setup();await click("Review / Edit");await click("Edit Article");await editField(document.querySelector('[aria-label="Article content"]'),"## Kept prose\n\nThis saved blog must survive image failure.");await click("Save & Revalidate");await click("Images");const savedContent=cms.row.content;imageGenerationFailure="persistent";
+ await click("Generate featured image");await editField(document.querySelector('[aria-label="Replace image"] textarea'),"A learner sharing an insight");await click("Generate replacement");await waitForImageIdle();
+ assert.equal(cms.row.frontmatter.featuredImageGeneration.status,"failed");assert.equal(cms.row.content,savedContent);assert.equal(cms.row.status,"draft");assert.match(document.body.textContent,/Retry generation/);
+ imageGenerationFailure="";await click("Retry generation");await editField(document.querySelector('[aria-label="Replace image"] textarea'),"A learner sharing an insight with a study group");await click("Generate replacement");await waitForImageIdle();
+ assert.equal(cms.row.frontmatter.featuredImageGeneration.status,"review_ready");assert.equal(cms.row.content,savedContent);assert.ok(cms.row.frontmatter.inlineImages.some(image=>image.target==="featured"&&image.status==="proposed"));
 });
 
 test("Links show inserted state immediately and require server revalidation after removal",async()=>{
