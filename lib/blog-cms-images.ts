@@ -2,11 +2,12 @@
 import { randomUUID } from "node:crypto";
 import sharp from "sharp";
 import type { BlogAdmin } from "./blog-admin-auth";
-import { claimCmsJob, createCmsFeaturedImageJob, getCmsArticle, getCmsFeaturedImageJob, getCmsJob, heartbeatCmsJob, listCmsAssets, updateCmsJob, uploadBlogAsset } from "./blog-cms-db";
+import { claimCmsJob, createCmsFeaturedImageJob, deleteCmsAsset, getCmsArticle, getCmsFeaturedImageJob, getCmsJob, heartbeatCmsJob, listCmsAssets, updateCmsJob, uploadBlogAsset } from "./blog-cms-db";
 import { saveCmsDraft } from "./blog-cms-actions";
 import { generateImageBytes, validateGeneratedImage, insertInlineImageAtSection, planInlineImages, removeInlineImageFromMdx } from "./blog-engine";
 import { directedImage, sameConcept } from "./blog-image-concepts.mjs";
 import { insertManualImageAt } from "./blog-manual-format.mjs";
+import { inlineImageMarkdownBlock } from "./blog-inline-image.mjs";
 import { classifyGenerationFailure } from "./blog-job-policy.mjs";
 
 type Role = "human" | "supporting_visual";
@@ -189,15 +190,23 @@ export async function uploadManualCmsImage(admin:BlogAdmin,slug:string,file:File
   const bytes=await sharp(Buffer.from(await file.arrayBuffer()),{limitInputPixels:40000000}).rotate().png().toBuffer();
   const id=`manual-${randomUUID()}`,safeAlt=alt.trim().replace(/[\[\]\r\n]/g," ").slice(0,500)||file.name.replace(/\.[^.]+$/g,"").slice(0,200),placement=workingCopy?.placement||imageType,url=await uploadBlogAsset(row.id,id,bytes,{assetType:imageType,prompt:"Manually uploaded by an editor",altText:safeAlt,placement});
   const current=await draft(slug);
-  if(current.updated_at!==row.updated_at)throw new Error("This article changed while the image was uploading. Reload it before trying again.");
+  if(current.updated_at!==row.updated_at){try{await deleteCmsAsset(row.id,id);}catch(cleanupError){console.error("Concurrent inline-image upload cleanup failed",{articleId:row.id,imageKey:id,error:cleanupError instanceof Error?cleanupError.message:String(cleanupError)});}throw new Error("This article changed while the image was uploading. Reload it before trying again.");}
   const data={...(current.frontmatter||{}),...(workingCopy?.data||{})};
   if(imageType==="featured")Object.assign(data,{image:url,imageAlt:safeAlt,featuredImageKey:id});
-  else {const images=Array.isArray(data.inlineImages)?[...data.inlineImages as Record<string,unknown>[]]:[];images.push({id,type:"editorial",role:"human",placement,purpose:safeAlt,visualConceptId:id,prompt:"Manually uploaded by an editor",alt:safeAlt,src:url,status:"generated",source:"uploaded"});data.inlineImages=images;data.inlineImageSummary=imageSummary(images as InlineImage[]);}
+  else {const images=Array.isArray(data.inlineImages)?[...data.inlineImages as Record<string,unknown>[]]:[];images.push({id,type:"editorial",role:"human",placement,purpose:safeAlt,visualConceptId:id,conceptDescription:safeAlt,prompt:"Manually uploaded by an editor",alt:safeAlt,src:url,status:"generated",source:"uploaded"});data.inlineImages=images;data.inlineImageSummary=imageSummary(images as InlineImage[]);}
   let content=baseContent;
   if(imageType==="inline"){
     const image=(data.inlineImages as Record<string,unknown>[]).find(item=>item.id===id)!;
     if(workingCopy?.placement){const placed=insertInlineImageAtSection(baseContent,image as InlineImage);if(!placed.resolved)throw new Error("That section is no longer in the article. Choose it again and retry the upload.");content=placed.content;}
-    else content=insertManualImageAt(baseContent,`![${safeAlt}](${url})`,workingCopy?.insertAt??baseContent.length);
+    else content=insertManualImageAt(baseContent,inlineImageMarkdownBlock({id,alt:safeAlt,src:url}),workingCopy?.insertAt??baseContent.length);
   }
-  return saveCmsDraft(admin,slug,{data,content,expectedUpdatedAt:current.updated_at});
+  try {
+    return await saveCmsDraft(admin,slug,{data,content,expectedUpdatedAt:current.updated_at});
+  } catch(error) {
+    if(error instanceof Error&&error.message.includes("changed in another session")) {
+      try { await deleteCmsAsset(row.id,id); }
+      catch(cleanupError) { console.error("Concurrent inline-image upload cleanup failed",{articleId:row.id,imageKey:id,error:cleanupError instanceof Error?cleanupError.message:String(cleanupError)}); }
+    }
+    throw error;
+  }
 }

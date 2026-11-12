@@ -5,7 +5,7 @@ import ts from "typescript";
 
 // Run the real TSX components and CMS actions under node:test. Only persistence
 // and the published URL catalog are replaced; validation/publish policy are real.
-export const cms = { row: null, assets: [], writes: [], jobs: [], uploads: [] };
+export const cms = { row: null, assets: [], writes: [], jobs: [], uploads: [], cleanups: [], onUpload: null, beforeUpdate: null };
 globalThis.__blogStudioTestCms = cms;
 const root = new URL("../../", import.meta.url);
 registerHooks({
@@ -41,9 +41,11 @@ registerHooks({
       export async function getCmsJob(id){return getCmsFeaturedImageJob(id)}
       export async function archiveCmsArticle(){throw new Error("Unexpected archive")}
       export async function updateBlogAssetMetadata(article,id,changes){const asset=db.assets.find(item=>item.image_key===id);if(!asset)throw new Error("Unknown asset");Object.assign(asset,changes)}
-      export async function uploadBlogAsset(article,id,bytes,metadata){if(!db.imageEngine)throw new Error("Unexpected image generation");const url="https://cdn.test/"+id+".png";db.assets.push({image_key:id,asset_type:metadata.assetType,status:"generated",public_url:url,storage_path:id,alt_text:metadata.altText});db.uploads.push({article,id,bytes,metadata});return url;}
+      export async function uploadBlogAsset(article,id,bytes,metadata){if(!db.imageEngine)throw new Error("Unexpected image generation");const url="https://cdn.test/"+id+".png";db.assets.push({article_id:article,image_key:id,asset_type:metadata.assetType,status:"generated",public_url:url,storage_path:id,alt_text:metadata.altText,placement:metadata.placement});db.uploads.push({article,id,bytes,metadata,deleted:false});if(db.onUpload)await db.onUpload({article,id});return url;}
+      export async function deleteCmsAsset(article,id){db.cleanups.push({article,id});db.assets=db.assets.filter(item=>!(item.article_id===article&&item.image_key===id));const upload=db.uploads.find(item=>item.article===article&&item.id===id);if(upload)upload.deleted=true;}
       export async function updateCmsArticle(admin,slug,changes,version){
-        if(version!==db.row.updated_at)throw new Error("Stale version");
+        if(db.beforeUpdate)await db.beforeUpdate();
+        if(version!==db.row.updated_at)throw new Error("This article changed in another session. Reload it before saving again.");
         db.writes.push(structuredClone(changes));
         db.row={...db.row,...structuredClone(changes),updated_at:String(Number(db.row.updated_at)+1)};
         return structuredClone(db.row);
@@ -67,7 +69,7 @@ registerHooks({
 });
 
 export function fixture({ humans = 2, link = true, supporting = false } = {}) {
-  cms.jobs=[];cms.uploads=[];
+  cms.jobs=[];cms.uploads=[];cms.cleanups=[];cms.onUpload=null;cms.beforeUpdate=null;
   const images = Array.from({ length: humans }, (_, i) => ({ id: `human-${i}`, role: "human", status: "generated", src: `https://cdn.test/human-${i}.png`, placement: "insight", alt: "Learner", purpose: "Human context" }));
   if (supporting) images.push({ id: "diagram", role: "supporting_visual", status: "failed", src: "", placement: "insight" });
   cms.row = { id: "article-1", slug: "current", status: "draft", title: "Reading with purpose", description: "Practical reading methods.", updated_at: "1",
