@@ -15,7 +15,7 @@ const { default: BlogStudio } = await import("../app/admin/blog/studio.tsx");
 const { getCmsDraft, saveCmsDraft, publishCmsDraft } = await import("../lib/blog-cms-actions.ts");
 const { acceptCmsInlineImage, removeCmsInlineImage,startCmsFeaturedImageGeneration,getCmsFeaturedImageGeneration,processCmsFeaturedImageJob } = await import("../lib/blog-cms-images.ts");
 const admin = { id: "test-admin", role: "owner" };
-let draftTransform, root, calls, scrolls, pendingDraft, withoutWarnings, pendingSave, saveFailure, draftWaits, birbalWait, imageWait, researchWait, jobResponse, researchFailure,imageGenerationFailure;
+let draftTransform, root, calls, scrolls, pendingDraft, withoutWarnings, pendingSave, saveFailure, draftWaits, birbalWait, imageWait, researchWait, jobResponse, researchFailure,imageGenerationFailure,manualCreateFailure,manualCreateCount,manualListWait;
 const originalFetch = globalThis.fetch;
 dom.window.HTMLElement.prototype.scrollIntoView = function(options) {
   assert.ok(this.isConnected, "scroll target must already be committed to the DOM");
@@ -29,29 +29,27 @@ function button(label) {
 async function click(label) { await act(async () => button(label).click()); }
 async function waitForImageIdle(){for(let attempt=0;attempt<100&&document.querySelector('[role="status"]');attempt++)await act(async()=>new Promise(resolve=>setTimeout(resolve,25)));}
 async function setup(options) {
-  fixture(options);cms.imageEngine={generate:async()=>{if(imageGenerationFailure){const error=imageGenerationFailure;if(imageGenerationFailure!=="persistent")imageGenerationFailure="";throw new Error(error)}return Buffer.from("fixture")},validate:async()=>{}}; draftTransform=draft=>draft; calls = []; scrolls = []; pendingDraft = null; withoutWarnings = false; pendingSave = null; saveFailure = false; draftWaits=new Map(); birbalWait=null; imageWait=null; researchWait=null; jobResponse=null;researchFailure=null;imageGenerationFailure="";window.scrollTo({top:0});
+  fixture(options);cms.imageEngine={generate:async()=>{if(imageGenerationFailure){const error=imageGenerationFailure;if(imageGenerationFailure!=="persistent")imageGenerationFailure="";throw new Error(error)}return Buffer.from("fixture")},validate:async()=>{}}; draftTransform=draft=>draft; calls = []; scrolls = []; pendingDraft = null; withoutWarnings = false; pendingSave = null; saveFailure = false;manualCreateFailure=false;manualCreateCount=0;manualListWait=null;draftWaits=new Map(); birbalWait=null; imageWait=null; researchWait=null; jobResponse=null;researchFailure=null;imageGenerationFailure="";window.scrollTo({top:0});
   globalThis.confirm = () => true;
   globalThis.fetch = async (url, init = {}) => {
     calls.push({ url, ...init });
     let body;
-    if (url === "/api/admin/blog") body = { posts: [{ slug: cms.row.slug, title: cms.row.title, status: cms.row.status, seoScore: 20 },{slug:"other",title:"Article B",status:"draft"}], topics: [], categories: [], qualityThreshold: 80 };
-    else if(url==="/api/admin/blog/draft"&&init.method==="POST"){cms.row={...cms.row,slug:"manual-draft",title:"Untitled article",description:"",content:"",frontmatter:{...cms.row.frontmatter,title:"Untitled article",description:"",date:"2026-10-02",author:"Auctor Labs Editorial Team",tags:[],seoTitle:"",canonicalUrl:"https://auctorlabs.in/blog/manual-draft"}};body=await getCmsDraft("manual-draft");body={...body,slug:"manual-draft",data:{...body.data,editableSlug:"manual-draft"}};}
+    if (url === "/api/admin/blog") {if(manualListWait)await manualListWait;body = { posts: [{ slug: cms.row.slug, title: cms.row.title, status: cms.row.status, seoScore: 20 },{slug:"other",title:"Article B",status:"draft"}], topics: [], categories: [], qualityThreshold: 80 };}
+    else if(url==="/api/admin/blog/draft"&&init.method==="POST"){if(manualCreateFailure)return{ok:false,status:500,json:async()=>({error:"Draft creation failed. Please retry."})};const previousId=cms.row.id,slug=`untitled-manual-${++manualCreateCount}`;cms.row={id:`manual-article-${manualCreateCount}`,slug,status:"draft",title:"Untitled article",description:"",content:"",updated_at:"1",frontmatter:{title:"Untitled article",description:"",date:"2026-10-02",author:"Auctor Labs Editorial Team",category:"Reading Comprehension",status:"draft",manualDraft:true,primaryKeyword:"",tags:[],seoTitle:"",metaDescription:"",canonicalUrl:`https://auctorlabs.in/blog/${slug}`}};cms.assets=[];cms.writes=[];cms.manualCreated={id:cms.row.id,slug:cms.row.slug,previousId,version:cms.row.updated_at};body=await getCmsDraft(slug);body={...body,slug,data:{...body.data,editableSlug:slug}};}
     else if (url === "/api/admin/blog/search-performance") body = { status: "UNAVAILABLE" };
     else if (url === "/api/admin/blog/draft/other") {
       if(draftWaits.has("other"))await draftWaits.get("other");
       body=await getCmsDraft("current");body={...body,slug:"other",data:{...body.data,title:"Article B"}};
-    } else if (url === "/api/admin/blog/draft/manual-draft") {
-      if(init.method==="PUT"){body=await saveCmsDraft(admin,"manual-draft",JSON.parse(init.body));}
-      else body=await getCmsDraft("manual-draft");
-    } else if (url === "/api/admin/blog/draft/current") {
+    } else if(url.startsWith("/api/admin/blog/draft/")&&[cms.row.slug,"current","manual-draft"].includes(url.split("/").pop())) {
+      const requestedSlug=url.split("/").pop();
       if(draftWaits.has("current"))await draftWaits.get("current");
       if (pendingDraft) await pendingDraft;
       if (init.method === "PUT" && pendingSave) await pendingSave;
-      if (init.method === "PUT" && saveFailure) return {ok:false,json:async()=>({error:"Save rejected: version conflict"})};
-      body = init.method === "PUT" ? await saveCmsDraft(admin, "current", JSON.parse(init.body)) : await getCmsDraft("current");
+      if (init.method === "PUT" && saveFailure) return {ok:false,status:409,json:async()=>({error:"Save rejected: version conflict"})};
+      if(init.method==="PUT") {const input=JSON.parse(init.body);if(input.slug&&input.slug!==cms.row.slug){if(input.expectedUpdatedAt!==cms.row.updated_at)return{ok:false,status:409,json:async()=>({error:"This article changed in another session. Reload it before saving again."})};cms.row={...cms.row,slug:input.slug,updated_at:String(Number(cms.row.updated_at)+1)};input.expectedUpdatedAt=cms.row.updated_at;}body=await saveCmsDraft(admin,cms.row.slug,input);}else body=await getCmsDraft(cms.row.slug);
       body.internalLinkRecommendations = [{ targetArticle: "Published", url: "/blog/published", anchor: "related reading" }];
       if (withoutWarnings) { body.data.publishWarnings = []; body.data.publishEligibilityIssues = body.data.publishEligibilityIssues.filter(i => i.severity === "blocker"); }
-    } else if (url === "/api/admin/blog/images") {if(imageWait)await imageWait;const input=JSON.parse(init.body);if(input.action==="regenerate-featured"){const job=await startCmsFeaturedImageGeneration(admin,input.slug,input.direction,input.role);const run=async()=>{try{await processCmsFeaturedImageJob(job.jobId)}catch{const current=cms.jobs.find(item=>item.id===job.jobId);if(current?.status==="failed"&&current.attempt_count<current.max_attempts)setTimeout(()=>void run(),10)}};setTimeout(()=>void run(),0);body=job}else if(input.action==="featured-status")body=await getCmsFeaturedImageGeneration(admin,input.slug,input.id);else body = input.action==="remove-inline"?await removeCmsInlineImage(admin,"current",input.id):await acceptCmsInlineImage(admin, "current",input.id);}
+    } else if(url==="/api/admin/blog/images"){if(imageWait)await imageWait;if(init.body instanceof FormData){const form=init.body,input={slug:String(form.get("slug")),content:String(form.get("content")),data:JSON.parse(String(form.get("data"))),expectedUpdatedAt:String(form.get("expectedUpdatedAt"))};if(input.expectedUpdatedAt!==cms.row.updated_at)return{ok:false,status:409,json:async()=>({error:"This article changed while the image was uploading."})};const id=`uploaded-${cms.uploads.length+1}`,src=`https://cdn.test/${id}.png`;input.data.inlineImages=[...(input.data.inlineImages||[]),{id,src,alt:String(form.get("alt")),placement:"inline",status:"generated",source:"uploaded"}];input.content+=`\n\n![${String(form.get("alt"))}](${src})`;body=await saveCmsDraft(admin,input.slug,{data:input.data,content:input.content,expectedUpdatedAt:input.expectedUpdatedAt});cms.uploads.push({id,src,content:input.content,version:body.version});}else{const input=JSON.parse(init.body);if(input.action==="regenerate-featured"){const job=await startCmsFeaturedImageGeneration(admin,input.slug,input.direction,input.role);const run=async()=>{try{await processCmsFeaturedImageJob(job.jobId)}catch{const current=cms.jobs.find(item=>item.id===job.jobId);if(current?.status==="failed"&&current.attempt_count<current.max_attempts)setTimeout(()=>void run(),10)}};setTimeout(()=>void run(),0);body=job}else if(input.action==="featured-status")body=await getCmsFeaturedImageGeneration(admin,input.slug,input.id);else body=input.action==="remove-inline"?await removeCmsInlineImage(admin,"current",input.id):await acceptCmsInlineImage(admin,"current",input.id);}}
     else if (url === "/api/admin/blog/birbal") {if(birbalWait)await birbalWait;if(JSON.parse(init.body).action){body={draft:await getCmsDraft("current")}}else body={reply:"A targeted proposal",proposal:[{type:"replace_text",target:"related reading",replacement:"focused reading",summary:"Improve the selected passage"}]};}
     else if (url === "/api/admin/blog/keyword-research") {if(researchWait)await researchWait;if(researchFailure)return{ok:false,status:researchFailure.status,json:async()=>researchFailure.body};body={keyword:"reading practice",provider:"test",status:"SUCCESS",freshness:"FRESH",data:null,partialErrors:[],error:null};}
     else if (url === "/api/admin/blog/generate") body={jobId:"job-1"};
@@ -69,12 +67,13 @@ afterEach(async () => { if (root) await act(async () => root.unmount()); root = 
 test("Write Manually creates and opens a blank CMS draft in the article workspace",async()=>{
   await setup();await click("Create New Blog");await click("Write Manually");
   assert.ok(calls.some(call=>call.url==="/api/admin/blog/draft"&&call.method==="POST"));
+  assert.ok(cms.manualCreated.id);assert.notEqual(cms.manualCreated.id,"article-1");assert.equal(cms.manualCreated.version,"1");
   assert.ok(document.querySelector("#draft-review"));
   assert.ok(document.querySelector('[aria-label="Article content"]'));
   assert.equal(document.querySelector('[aria-label="Article content"]').value,"");
   assert.equal(document.querySelector('[aria-label="Article title"]').value,"Untitled article");
   await editField(document.querySelector('[aria-label="Article content"]'),"## Manual section\n\nSaved manual prose.");
-  await editField(document.querySelector('input[aria-label="Article title"]'),"Untitled article");
+  await editField(document.querySelector('input[aria-label="Article title"]'),"Manual Creation Article");
   const tagsInput=[...document.querySelectorAll("label")].find(label=>label.textContent.includes("Tags (comma separated)")).querySelector("input");
   await editField(tagsInput,"manual creation, featured image, editorial");
   await editField(document.querySelector("[aria-label=\"SEO title\"]"),"Manual SEO title");
@@ -83,10 +82,79 @@ test("Write Manually creates and opens a blank CMS draft in the article workspac
   await click("Back to Library");
   const otherRow=[...document.querySelectorAll("tr")].find(row=>row.textContent.includes("Article B"));
   await act(async()=>otherRow.querySelector("button").click());await click("Back to Library");await click("Review / Edit");await click("Edit Article");
-  assert.ok(calls.some(call=>call.url==="/api/admin/blog/draft/manual-draft"&&!call.method));
+  assert.ok(calls.some(call=>call.url===`/api/admin/blog/draft/${cms.row.slug}`&&!call.method));
+  assert.equal(cms.row.slug,"manual-creation-article","the manual title change must rename the new draft identity");
   assert.equal(document.querySelector('[aria-label="Article content"]').value,"## Manual section\n\nSaved manual prose.");
   assert.equal(document.querySelector('[aria-label="SEO title"]').value,"Manual SEO title");
   assert.equal(cms.row.frontmatter.seoTitle,"Manual SEO title");
+});
+
+test("a new manual draft autosaves rapid edits after the insert response and retrieves the same row",async()=>{
+  await setup();await click("Create New Blog");await click("Write Manually");
+  const draftId=cms.manualCreated.id,initialSlug=cms.manualCreated.slug;
+  const title=document.querySelector('[aria-label="Article title"]'),body=document.querySelector('[aria-label="Article content"]');
+  await editField(title,"My First Manual Article");
+  await editField(body,"## Opening\n\n"+"A careful reader builds meaning from evidence. ".repeat(70));
+  await editField(body,body.value+"\n\nFinal paragraph.");
+  await act(async()=>new Promise(resolve=>setTimeout(resolve,1100)));
+  assert.equal(cms.row.id,draftId);assert.equal(cms.row.slug,"my-first-manual-article");assert.notEqual(cms.row.slug,initialSlug);
+  assert.match(cms.row.content,/Final paragraph/);assert.ok(cms.row.content.split(/\s+/).length>=100);
+  assert.equal(calls.filter(call=>call.method==="PUT").length,1,"rapid initial edits should coalesce into one save");
+  await click("Back to Library");await click("Review / Edit");
+  assert.equal(cms.row.id,draftId);assert.equal(document.querySelector('[aria-label="Article title"]').value,"My First Manual Article");
+  assert.match(document.querySelector('[aria-label="Article content"]').value,/Final paragraph/);
+});
+
+test("edits made during the first manual-draft save are serialized and persisted afterward",async()=>{
+  await setup();await click("Create New Blog");await click("Write Manually");
+  const id=cms.manualCreated.id,title=document.querySelector('[aria-label="Article title"]'),body=document.querySelector('[aria-label="Article content"]');
+  await editField(title,"First Submitted Title");await editField(body,"## Draft\n\nFirst complete version.");
+  let resolveSave;pendingSave=new Promise(resolve=>{resolveSave=resolve});await click("Save & Revalidate");
+  await editField(title,"Latest Manual Title");await editField(body,body.value+"\n\nLatest paragraph survives.");
+  await act(async()=>resolveSave());
+  assert.equal(cms.row.id,id);assert.equal(cms.row.title,"First Submitted Title");
+  await act(async()=>new Promise(resolve=>setTimeout(resolve,1100)));
+  assert.equal(cms.row.id,id);assert.equal(cms.row.title,"Latest Manual Title");
+  assert.equal(cms.row.slug,"latest-manual-title");assert.match(cms.row.content,/Latest paragraph survives/);
+  assert.equal(saveStatus(),"Saved");
+});
+
+test("failed new-draft initialization stays retryable and does not open a phantom article",async()=>{
+  await setup();manualCreateFailure=true;await click("Create New Blog");await click("Write Manually");
+  assert.equal(document.querySelector("#draft-review"),null);assert.match(document.body.textContent,/Draft creation failed/);
+  assert.equal(calls.filter(call=>call.url==="/api/admin/blog/draft"&&call.method==="POST").length,1);
+  manualCreateFailure=false;await click("Write Manually");
+  assert.ok(document.querySelector("#draft-review"));assert.ok(cms.manualCreated.id);
+  assert.equal(calls.filter(call=>call.url==="/api/admin/blog/draft"&&call.method==="POST").length,2);
+});
+
+test("manual draft opens from its create response without waiting for the library refresh",async()=>{
+  await setup();let release;manualListWait=new Promise(resolve=>{release=resolve});
+  await click("Create New Blog");await click("Write Manually");
+  assert.ok(document.querySelector("#draft-review"));
+  assert.equal(document.querySelector('[aria-label="Article content"]').value,"");
+  assert.ok(cms.manualCreated.id);assert.equal(cms.manualCreated.slug,"untitled-manual-1");
+  await act(async()=>{release();await new Promise(resolve=>setTimeout(resolve,10))});manualListWait=null;
+});
+
+test("manual image upload waits for a new draft autosave and uses its latest slug and version",async()=>{
+  await setup();await click("Create New Blog");await click("Write Manually");
+  await editField(document.querySelector('[aria-label="Article title"]'),"Image Test Article");
+  await editField(document.querySelector('[aria-label="Article content"]'),"## First section\n\n"+"Read the evidence before choosing an answer. ".repeat(12));
+  let resolveSave;pendingSave=new Promise(resolve=>{resolveSave=resolve});await click("Save & Revalidate");
+  const upload=[...document.querySelectorAll("label")].find(label=>label.textContent.includes("Insert image in article")).querySelector('input[type="file"]');
+  assert.ok(upload);
+  const file=new File(["image-bytes"],"inline.png",{type:"image/png"});
+  dom.window.prompt=()=>"A learner reviewing a passage";
+  await act(async()=>{Object.defineProperty(upload,"files",{configurable:true,value:[file]});upload.dispatchEvent(new window.Event("change",{bubbles:true}));await new Promise(resolve=>setTimeout(resolve,20))});
+  assert.equal(calls.filter(call=>call.url==="/api/admin/blog/images").length,0,"the upload must wait for the active draft save");
+  await act(async()=>resolveSave());
+  await act(async()=>new Promise(resolve=>setTimeout(resolve,100)));
+  assert.equal(cms.row.slug,"image-test-article");
+  assert.equal(cms.uploads.length,1);assert.equal(cms.uploads[0].version,cms.row.updated_at);
+  assert.match(cms.row.content,/A learner reviewing a passage/);
+  assert.equal(saveStatus(),"Saved");
+  dom.window.prompt=()=>"";
 });
 
 test("one Review/Edit click waits for the draft commit, focuses and scrolls the only panel", async () => {
