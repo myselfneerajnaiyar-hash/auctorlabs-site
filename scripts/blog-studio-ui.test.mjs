@@ -216,7 +216,7 @@ test("header Save uses the existing PUT handler and shows Saving then Saved",asy
   await editField(document.querySelector('[aria-label="Article title"]'),"Saved title");
   let resolve;pendingSave=new Promise(done=>{resolve=done});
   await click("Save & Revalidate");
-  assert.equal(saveStatus(),"Saving\u2026");assert.equal(button("Save & Revalidate").disabled,true);
+  assert.equal(saveStatus(),"Saving\u2026");assert.equal(button("Save & Revalidate").disabled,false);
   await act(async()=>resolve());
   assert.equal(saveStatus(),"Saved");assert.equal(cms.row.title,"Saved title");
   const puts=calls.filter(c=>c.method==="PUT");assert.equal(puts.length,1);
@@ -233,7 +233,7 @@ test("failed Save stays visible and retains local edits for retry",async()=>{
   saveFailure=false;await click("Save & Revalidate");assert.equal(saveStatus(),"Saved");
 });
 
-test("typing during a save remains unsaved after the older response arrives",async()=>{
+test("editing during a save stays enabled and autosaves the newest value after the older response",async()=>{
   await setup();await click("Review / Edit");await click("Edit Article");
   await editField(document.querySelector('[aria-label="Article title"]'),"Submitted title");
   let resolve;pendingSave=new Promise(done=>{resolve=done});await click("Save & Revalidate");
@@ -241,7 +241,77 @@ test("typing during a save remains unsaved after the older response arrives",asy
   await act(async()=>resolve());
   assert.equal(cms.row.title,"Submitted title");assert.equal(saveStatus(),"Unsaved changes");
   assert.equal(header().querySelector("h2").textContent,"Newer local title");
-  await click("Edit Article");assert.equal(document.querySelector('[aria-label="Article title"]').value,"Newer local title");
+  assert.equal(document.querySelector('[aria-label="Article title"]').value,"Newer local title");
+  assert.equal(button("Save & Revalidate").disabled,false);
+  await act(async()=>new Promise(resolve=>setTimeout(resolve,1100)));
+  assert.equal(cms.row.title,"Newer local title");assert.equal(saveStatus(),"Saved");
+});
+
+test("rapid typing is debounced and persisted once after the user pauses",async()=>{
+  await setup();await click("Review / Edit");await click("Edit Article");
+  const title=document.querySelector('[aria-label="Article title"]');
+  await editField(title,"A");await editField(title,"Au");await editField(title,"Aut");await editField(title,"Autosave title");
+  assert.equal(calls.filter(call=>call.method==="PUT").length,0,"typing must not issue a PUT per character");
+  await act(async()=>new Promise(resolve=>setTimeout(resolve,1100)));
+  assert.equal(calls.filter(call=>call.method==="PUT").length,1);
+  assert.equal(cms.row.title,"Autosave title");assert.equal(saveStatus(),"Saved");
+});
+
+test("save failure clears Saving, preserves edits, and Save retries persistence",async()=>{
+  await setup();await click("Review / Edit");await click("Edit Article");
+  await editField(document.querySelector('[aria-label="Article title"]'),"Retry title");
+  saveFailure=true;await click("Save & Revalidate");
+  assert.equal(saveStatus(),"Save failed");assert.equal(document.querySelector('[aria-label="Article title"]').value,"Retry title");
+  saveFailure=false;await click("Save & Revalidate");
+  assert.equal(saveStatus(),"Saved");assert.equal(cms.row.title,"Retry title");
+});
+
+test("a real version conflict preserves local edits and does not overwrite another session",async()=>{
+  await setup();await click("Review / Edit");await click("Edit Article");
+  await editField(document.querySelector('[aria-label="Article title"]'),"My local title");
+  saveFailure=true;draftTransform=draft=>({...draft,version:"2",content:"Other session content"});
+  await click("Save & Revalidate");
+  assert.equal(saveStatus(),"Save failed");
+  assert.match(header().querySelector('[role="alert"]').textContent,/changed in another session/i);
+  assert.equal(document.querySelector('[aria-label="Article title"]').value,"My local title");
+  assert.equal(cms.row.title,"Reading with purpose");
+});
+
+test("a network timeout clears Saving and leaves local edits retryable",async()=>{
+  await setup();await click("Review / Edit");await click("Edit Article");
+  await editField(document.querySelector('[aria-label="Article title"]'),"Timeout title");
+  const original=globalThis.fetch;
+  globalThis.fetch=async(url,init={})=>url==="/api/admin/blog/draft/current"&&init.method==="PUT"?Promise.reject(new DOMException("Network timeout","AbortError")):original(url,init);
+  await click("Save & Revalidate");
+  assert.equal(saveStatus(),"Save failed");assert.match(header().querySelector('[role="alert"]').textContent,/timed out/i);
+  assert.equal(document.querySelector('[aria-label="Article title"]').value,"Timeout title");
+  globalThis.fetch=original;await click("Save & Revalidate");assert.equal(cms.row.title,"Timeout title");assert.equal(saveStatus(),"Saved");
+});
+
+test("tab switching and removing article content remain available during an in-flight save",async()=>{
+  await setup();await click("Review / Edit");await click("Edit Article");
+  const initial=cms.row.content;
+  await editField(document.querySelector('[aria-label="Article content"]'),initial+"\n\nTemporary paragraph to remove.");
+  let resolve;pendingSave=new Promise(done=>{resolve=done});await click("Save & Revalidate");
+  assert.equal(saveStatus(),"Saving\u2026");await click("Images");assert.equal(activeTool(),"Images");
+  await click("Content");assert.ok(document.querySelector('[aria-label="Article content"]'));
+  await editField(document.querySelector('[aria-label="Article content"]'),initial+"\n\n");
+  await act(async()=>resolve());
+  await act(async()=>new Promise(done=>setTimeout(done,1100)));
+  assert.equal(cms.row.content,initial+"\n\n");assert.equal(saveStatus(),"Saved");
+});
+
+test("metadata and body autosave together and survive draft retrieval",async()=>{
+  await setup();await click("Review / Edit");await click("Edit Article");
+  const body=document.querySelector('[aria-label="Article content"]');
+  await editField(body,body.value+"\n\nPersisted body paragraph.");
+  const author=[...document.querySelectorAll("label")].find(label=>label.textContent.includes("Author")).querySelector("input");
+  await editField(author,"Autosave Test Author");
+  await act(async()=>new Promise(resolve=>setTimeout(resolve,1100)));
+  assert.match(cms.row.content,/Persisted body paragraph/);assert.equal(cms.row.frontmatter.author,"Autosave Test Author");
+  await click("Back to Library");await click("Review / Edit");
+  assert.match(document.querySelector('[aria-label="Article content"]').value,/Persisted body paragraph/);
+  assert.equal([...document.querySelectorAll("label")].find(label=>label.textContent.includes("Author")).querySelector("input").value,"Autosave Test Author");
 });
 
 test("Back to Library confirms unsaved navigation and retains the open draft",async()=>{
